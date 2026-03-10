@@ -1,0 +1,262 @@
+/* Responsive Styles */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .nav-list {
+    gap: var(--spacing-md);
+  }
+  
+  .hero-content {
+    max-width: 600px;
+  }
+  
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile Navigation (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Header */
+  .nav {
+    display: none;
+  }
+  
+  .burger {
+    display: flex;
+  }
+  
+  /* Hero Section */
+  .hero {
+    min-height: 90vh;
+    padding-top: 80px;
+  }
+  
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  /* Cards Grid */
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Team Grid */
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Solutions Gallery */
+  .solution-card {
+    flex: 0 0 250px;
+  }
+  
+  /* Forms */
+  .form-row {
+    flex-direction: column;
+  }
+  
+  /* Footer */
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .footer-links {
+    align-items: center;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  :root {
+    --spacing-2xl: 3rem;
+    --spacing-xl: 2rem;
+  }
+  
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  h1 {
+    font-size: clamp(1.75rem, 10vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+  
+  h3 {
+    font-size: clamp(1.25rem, 6vw, 1.75rem);
+  }
+  
+  .logo {
+    font-size: 1.25rem;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  
+  .card {
+    padding: var(--spacing-md);
+  }
+  
+  .solution-card {
+    flex: 0 0 220px;
+    padding: var(--spacing-md);
+  }
+  
+  .mobile-menu {
+    max-width: 100%;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .header,
+  .footer,
+  .burger,
+  .mobile-menu,
+  .overlay {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  .section {
+    page-break-inside: avoid;
+  }
+  
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  
+  .btn {
+    border: 1px solid black;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .fade-up,
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --color-bg-primary: #000000;
+    --color-bg-secondary: #1a1a1a;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #E0E0E0;
+  }
+  
+  .btn {
+    border: 2px solid currentColor;
+  }
+  
+  .form-input,
+  .form-textarea,
+  .form-select {
+    border: 2px solid var(--color-text-secondary);
+  }
+}
+
+/* Dark Mode (already default, but for system preference) */
+@media (prefers-color-scheme: dark) {
+  /* Already using dark theme by default */
+}
+
+/* Light Mode Override */
+@media (prefers-color-scheme: light) {
+  /* Users preferring light mode will still see dark theme 
+     as per design requirements */
+}
+
+/* Hover States for Touch Devices */
+@media (hover: none) {
+  .card:hover,
+  .team-member:hover,
+  .solution-card:hover {
+    transform: none;
+  }
+  
+  .nav-link:hover::after {
+    width: 0;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vh;
+  }
+  
+  .hero-content {
+    padding: var(--spacing-lg) 0;
+  }
+}
+
+/* Large Screens */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1320px;
+  }
+  
+  :root {
+    font-size: 18px;
+  }
+}
+
+/* Extra Large Screens */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+  
+  :root {
+    font-size: 20px;
+  }
+} 
