@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css">
@@ -63,7 +63,6 @@
                 <ul class="nav-list">
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="/solutions" class="nav-link">Solutions</a></li>
-                    <li><a href="/careers" class="nav-link">Careers</a></li>
                     <li><a href="/contact" class="nav-link active">Contact</a></li>
                 </ul>
                 <a href="/contact" class="btn">Get Started</a>
@@ -82,7 +81,6 @@
         <ul class="mobile-nav-list">
             <li><a href="/" class="mobile-nav-link">Home</a></li>
             <li><a href="/solutions" class="mobile-nav-link">Solutions</a></li>
-            <li><a href="/careers" class="mobile-nav-link">Careers</a></li>
             <li><a href="/contact" class="mobile-nav-link active">Contact</a></li>
         </ul>
         <a href="/contact" class="btn" style="margin-top: 2rem;">Get Started</a>
@@ -160,7 +158,6 @@
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
                         <li><a href="/solutions" class="footer-link">Solutions</a></li>
-                        <li><a href="/careers" class="footer-link">Careers</a></li>
                         <li><a href="/contact" class="footer-link">Contact</a></li>
                     </ul>
                 </div>
@@ -179,229 +176,7 @@
             </div>
         </div>
     </footer>
-    
-    <!-- CSS for additional components -->
-    <style>
-        .page-hero {
-            background: var(--color-bg-secondary);
-            padding: calc(var(--spacing-2xl) + 80px) 0 var(--spacing-2xl);
-            text-align: center;
-        }
-        
-        .page-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .page-subtitle {
-            font-size: 1.25rem;
-            color: var(--color-text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .contact-info-centered {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Hero Contact Info Styles */
-        .hero-contact-info {
-            max-width: 700px;
-            margin: 3rem auto 0;
-            text-align: center;
-        }
-        
-        .hero-contact-description {
-            font-size: 1.125rem;
-            margin-bottom: 2.5rem;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-        }
-        
-        .hero-contact-methods {
-            display: flex;
-            gap: var(--spacing-2xl);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .contact-method {
-            display: flex;
-            gap: var(--spacing-md);
-            align-items: center;
-            text-align: left;
-            min-width: 250px;
-        }
-        
-        .contact-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-            color: var(--color-accent-start);
-        }
-        
-        .contact-method h3 {
-            font-size: 1rem;
-            margin-bottom: var(--spacing-xs);
-            color: var(--color-text-primary);
-        }
-        
-        .contact-method a {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-        }
-        
-        .contact-method a:hover {
-            color: var(--color-accent-end);
-        }
-        
 
-        
-        .map-container {
-            margin-top: var(--spacing-xl);
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-        }
-        
-        .map-placeholder {
-            background: var(--gradient-accent);
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .map-content {
-            text-align: center;
-            background: rgba(10, 15, 31, 0.9);
-            padding: var(--spacing-xl);
-            border-radius: var(--border-radius-lg);
-        }
-        
-        .map-content h3 {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .map-address {
-            margin-top: var(--spacing-md);
-            font-weight: 500;
-        }
-        
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: var(--spacing-xl);
-            margin-top: var(--spacing-xl);
-        }
-        
-        .faq-item h3 {
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-text-primary);
-        }
-        
-        .faq-item p {
-            color: var(--color-text-secondary);
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        /* Mobile header spacing */
-        @media (max-width: 768px) {
-            .header {
-                padding: var(--spacing-lg) 0;
-            }
-            
-            .page-hero {
-                padding: calc(var(--spacing-2xl) + 100px) 0 var(--spacing-2xl);
-            }
-            
-            .hero-contact-methods {
-                flex-direction: column;
-                align-items: center;
-                gap: var(--spacing-lg);
-            }
-            
-            .contact-method {
-                min-width: auto;
-            }
-        }
-        
-        /* Mobile menu styles */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background: var(--color-bg-primary);
-            padding: var(--spacing-2xl) var(--spacing-xl);
-            transition: right 0.3s ease;
-            z-index: 1001;
-            border-left: 1px solid var(--color-border);
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-        }
-        
-        .mobile-nav-list {
-            list-style: none;
-            padding: 0;
-            margin: var(--spacing-2xl) 0;
-        }
-        
-        .mobile-nav-list li {
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .mobile-nav-link {
-            display: block;
-            padding: var(--spacing-md) 0;
-            color: var(--color-text-primary);
-            text-decoration: none;
-            font-size: 1.125rem;
-            font-weight: 500;
-            border-bottom: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .mobile-nav-link:hover,
-        .mobile-nav-link.active {
-            color: var(--color-accent-end);
-            border-bottom-color: var(--color-accent-end);
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .menu-open {
-            overflow: hidden;
-        }
-        
-
-        
-
-    </style>
-    
     <!-- JavaScript -->
     <script>
         // Fade-up animation handler

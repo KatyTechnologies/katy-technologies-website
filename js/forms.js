@@ -7,12 +7,6 @@ export function initForms() {
     initContactForm(contactForm);
   }
   
-  // Initialize careers form
-  const careersForm = document.getElementById('careers-form');
-  if (careersForm) {
-    initCareersForm(careersForm);
-  }
-  
   // Initialize all form inputs for real-time validation
   initFormInputs();
 }
@@ -45,59 +39,6 @@ function initContactForm(form) {
       
     } catch (error) {
       showMessage(form, 'error', 'Sorry, there was an error sending your message. Please try again.');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalText;
-    }
-  });
-}
-
-function initCareersForm(form) {
-  // Handle file upload preview
-  const resumeInput = form.querySelector('input[type="file"]');
-  if (resumeInput) {
-    resumeInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const fileInfo = form.querySelector('.file-info');
-        if (fileInfo) {
-          fileInfo.textContent = `Selected: ${file.name} (${formatFileSize(file.size)})`;
-        }
-      }
-    });
-  }
-  
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    if (!validateForm(form)) {
-      return;
-    }
-    
-    const formData = new FormData(form);
-    
-    // Show loading state
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="loading"></span> Submitting...';
-    
-    try {
-      // Simulate form submission
-      await simulateFormSubmit(formData);
-      
-      // Show success message
-      showMessage(form, 'success', 'Thank you for your application! We will review it and get back to you soon.');
-      form.reset();
-      
-      // Clear file info
-      const fileInfo = form.querySelector('.file-info');
-      if (fileInfo) {
-        fileInfo.textContent = '';
-      }
-      
-    } catch (error) {
-      showMessage(form, 'error', 'Sorry, there was an error submitting your application. Please try again.');
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
@@ -274,15 +215,6 @@ function showMessage(form, type, message) {
   messageEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-// Utility functions
-function formatFileSize(bytes) {
-  if (bytes === 0) return '0 Bytes';
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
-
 // Simulate email sending (replace with actual email service)
 async function simulateEmailSend(data, recipient) {
   // In a real implementation, you would use:
@@ -299,15 +231,5 @@ async function simulateEmailSend(data, recipient) {
   });
 }
 
-// Simulate form submission
-async function simulateFormSubmit(formData) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('Form submitted:', Object.fromEntries(formData));
-      resolve();
-    }, 1500);
-  });
-}
-
 // Export validation functions for use in other modules
-export { validateEmail, validatePhone, validateRequired }; 
+export { validateEmail, validatePhone, validateRequired };

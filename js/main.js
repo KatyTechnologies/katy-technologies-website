@@ -102,9 +102,6 @@ function initPageSpecific() {
     case 'about.html':
       initAboutPage();
       break;
-    case 'careers.html':
-      initCareersPage();
-      break;
     case 'contact.html':
       initContactPage();
       break;
@@ -159,11 +156,6 @@ function initSolutionsPage() {
 // About page functionality
 function initAboutPage() {
   console.log('About page initialized');
-}
-
-// Careers page functionality
-function initCareersPage() {
-  console.log('Careers page initialized');
 }
 
 // Contact page functionality
