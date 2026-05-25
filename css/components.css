@@ -48,6 +48,8 @@
   background:
     linear-gradient(180deg, rgba(127, 149, 170, 0.12), transparent 55%),
     repeating-linear-gradient(90deg, transparent 0, transparent 31px, rgba(248, 247, 242, 0.045) 32px);
+  clip-path: inset(0);
+  filter: url("#kt-grain");
   pointer-events: none;
 }
 
@@ -85,6 +87,8 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(140deg, rgba(127, 149, 170, 0.12), transparent 50%, rgba(139, 128, 128, 0.1));
+  clip-path: inset(0);
+  filter: url("#kt-grain");
   opacity: 0;
   transition: opacity var(--transition-fast);
 }

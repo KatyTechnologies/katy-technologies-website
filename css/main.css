@@ -234,6 +234,18 @@ body::after {
   opacity: 0.7;
 }
 
+.kt-grain-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.grainy-gradient {
+  clip-path: inset(0);
+  filter: url("#kt-grain");
+}
+
 img,
 svg,
 video,
@@ -616,6 +628,8 @@ main {
   background:
     linear-gradient(116deg, rgba(127, 149, 170, 0.2) 0%, transparent 36%),
     linear-gradient(150deg, transparent 0%, rgba(111, 102, 102, 0.12) 74%, transparent 100%);
+  clip-path: inset(0);
+  filter: url("#kt-grain");
 }
 
 .hero-bg::after {

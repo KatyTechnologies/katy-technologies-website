@@ -46,6 +46,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
+    <svg class="kt-grain-filter" width="0" height="0" aria-hidden="true" focusable="false">
+        <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
+            <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="3" />
+            <feDisplacementMap in="SourceGraphic" scale="18" xChannelSelector="R" yChannelSelector="G" />
+            <feBlend in2="SourceGraphic" />
+        </filter>
+    </svg>
+    
     <!-- Skip to content link -->
     <a href="#main" class="skip-to-content">Skip to content</a>
     
