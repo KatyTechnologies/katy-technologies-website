@@ -748,6 +748,7 @@
   background:
     linear-gradient(180deg, rgba(6, 25, 45, 0.2), rgba(6, 25, 45, 0.84)),
     repeating-linear-gradient(90deg, transparent 0, transparent 28px, rgba(248, 247, 242, 0.035) 29px);
+  font-family: var(--font-ui);
 }
 
 .footer-content {
@@ -769,6 +770,7 @@
 .footer-links li {
   margin: 0;
   color: var(--color-text-secondary);
+  font-family: var(--font-ui);
 }
 
 .footer-links {
