@@ -1,0 +1,160 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat:wght@500;600;700&family=Covered+By+Your+Grace&family=Gaegu:wght@400;700&family=Patrick+Hand&family=Reenie+Beanie&family=Work+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap');
+
+  .annotation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .annotation-card {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,.045);
+    padding: 22px;
+    cursor: pointer;
+  }
+
+  .sample-frame {
+    min-height: 190px;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 12px;
+    background:
+      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .formal-line {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .58;
+  }
+
+  .formal-title {
+    font-family: 'Literata', serif;
+    font-size: 26px;
+    line-height: 1.05;
+    max-width: 300px;
+    margin-top: 10px;
+  }
+
+  .hand-note {
+    position: absolute;
+    right: 18px;
+    bottom: 20px;
+    max-width: 190px;
+    font-size: 30px;
+    line-height: .95;
+    transform: rotate(-5deg);
+    color: #f3f0e8;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 122px;
+    bottom: 68px;
+    width: 86px;
+    height: 38px;
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: skew(-18deg) rotate(12deg);
+    opacity: .8;
+  }
+
+  .annotation-label {
+    font: 600 12px/1.2 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .66;
+    margin: 16px 0 8px;
+  }
+
+  .annotation-desc {
+    font-family: 'Literata', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: .82;
+  }
+
+  @media (max-width: 900px) {
+    .annotation-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h2>Which Handwritten Layer Feels Right?</h2>
+<p class="subtitle">These are online font options for placeholders or early drafts. The final guide can either license/use one of these or define placeholders for custom handwritten assets.</p>
+
+<div class="annotation-grid">
+  <div class="annotation-card" data-choice="architects-daughter" onclick="toggleSelect(this)">
+    <div class="sample-frame">
+      <div class="formal-line">Workflow Audit</div>
+      <div class="formal-title">Map the process before automating it.</div>
+      <div class="arrow" style="color:#f3f0e8"></div>
+      <div class="hand-note" style="font-family:'Architects Daughter', cursive;">watch this handoff</div>
+    </div>
+    <div class="annotation-label">Architects Daughter</div>
+    <div class="annotation-desc">Most like technical field notes: legible, structured, and diagram-friendly.</div>
+  </div>
+
+  <div class="annotation-card" data-choice="patrick-hand" onclick="toggleSelect(this)">
+    <div class="sample-frame">
+      <div class="formal-line">Workflow Audit</div>
+      <div class="formal-title">Map the process before automating it.</div>
+      <div class="arrow" style="color:#f3f0e8"></div>
+      <div class="hand-note" style="font-family:'Patrick Hand', cursive;">watch this handoff</div>
+    </div>
+    <div class="annotation-label">Patrick Hand</div>
+    <div class="annotation-desc">Clean and personal. Good if annotations should feel human but still restrained.</div>
+  </div>
+
+  <div class="annotation-card" data-choice="caveat" onclick="toggleSelect(this)">
+    <div class="sample-frame">
+      <div class="formal-line">Workflow Audit</div>
+      <div class="formal-title">Map the process before automating it.</div>
+      <div class="arrow" style="color:#f3f0e8"></div>
+      <div class="hand-note" style="font-family:'Caveat', cursive;font-size:34px;">watch this handoff</div>
+    </div>
+    <div class="annotation-label">Caveat</div>
+    <div class="annotation-desc">Expressive and founder-like. Strong human overlay, but less field-note precise.</div>
+  </div>
+
+  <div class="annotation-card" data-choice="reenie-beanie" onclick="toggleSelect(this)">
+    <div class="sample-frame">
+      <div class="formal-line">Workflow Audit</div>
+      <div class="formal-title">Map the process before automating it.</div>
+      <div class="arrow" style="color:#f3f0e8"></div>
+      <div class="hand-note" style="font-family:'Reenie Beanie', cursive;font-size:38px;">watch this handoff</div>
+    </div>
+    <div class="annotation-label">Reenie Beanie</div>
+    <div class="annotation-desc">Loose and notebook-like. Very human, but may feel too casual for enterprise unless used sparingly.</div>
+  </div>
+
+  <div class="annotation-card" data-choice="covered-by-your-grace" onclick="toggleSelect(this)">
+    <div class="sample-frame">
+      <div class="formal-line">Workflow Audit</div>
+      <div class="formal-title">Map the process before automating it.</div>
+      <div class="arrow" style="color:#f3f0e8"></div>
+      <div class="hand-note" style="font-family:'Covered By Your Grace', cursive;font-size:34px;">watch this handoff</div>
+    </div>
+    <div class="annotation-label">Covered By Your Grace</div>
+    <div class="annotation-desc">Bold, imperfect, and energetic. More founder notebook than technical annotation.</div>
+  </div>
+
+  <div class="annotation-card" data-choice="custom-placeholders" onclick="toggleSelect(this)">
+    <div class="sample-frame">
+      <div class="formal-line">Workflow Audit</div>
+      <div class="formal-title">Map the process before automating it.</div>
+      <div class="arrow" style="color:#f3f0e8"></div>
+      <div class="hand-note" style="font-family:'Gaegu', cursive;font-size:34px;">[custom note]</div>
+    </div>
+    <div class="annotation-label">Custom Asset Placeholders</div>
+    <div class="annotation-desc">Use placeholders in the first draft, then replace with your own scanned handwriting and diagram marks.</div>
+  </div>
+</div>

@@ -1,0 +1,195 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap');
+
+  .mono-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .mono-card {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,.045);
+    padding: 18px;
+    cursor: pointer;
+  }
+
+  .mono-stage {
+    min-height: 250px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .navy {
+    background:
+      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+      #071a33;
+    background-size: 28px 28px;
+  }
+
+  .paper {
+    background:
+      linear-gradient(rgba(7,26,51,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,26,51,.05) 1px, transparent 1px),
+      #f8f7f2;
+    background-size: 28px 28px;
+  }
+
+  .slate {
+    background:
+      linear-gradient(rgba(7,26,51,.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,26,51,.07) 1px, transparent 1px),
+      #7f95aa;
+    background-size: 28px 28px;
+  }
+
+  .kt-svg {
+    width: min(230px, 62%);
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .mono-white .k-layer { fill: #f8f7f2; opacity: 1; }
+  .mono-white .t-layer { fill: #f8f7f2; opacity: .42; }
+
+  .mono-navy .k-layer { fill: #071a33; opacity: 1; }
+  .mono-navy .t-layer { fill: #071a33; opacity: .42; }
+
+  .mono-slate .k-layer { fill: #7f95aa; opacity: 1; }
+  .mono-slate .t-layer { fill: #7f95aa; opacity: .42; }
+
+  .full-color .k-layer { fill: #ffffff; opacity: 1; }
+  .full-color .t-layer { fill: #7f95aa; opacity: .62; }
+
+  .layer-chip {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    font: 700 10px/1 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(248,247,242,.74);
+    background: rgba(7,26,51,.5);
+    border: 1px solid rgba(248,247,242,.18);
+    border-radius: 999px;
+    padding: 8px 10px;
+  }
+
+  .paper .layer-chip {
+    color: rgba(7,26,51,.74);
+    background: rgba(248,247,242,.65);
+    border-color: rgba(7,26,51,.12);
+  }
+
+  .mono-label {
+    font: 700 12px/1.2 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .68;
+    margin: 16px 0 8px;
+  }
+
+  .mono-desc {
+    font-family: 'Literata', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: .84;
+  }
+
+  .note {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 12px;
+    font-family: 'Literata', serif;
+    opacity: .84;
+  }
+
+  @media (max-width: 900px) {
+    .mono-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h2>Corrected Logo Layering</h2>
+<p class="subtitle">The T is now explicitly rendered after the K/arrow in every SVG, so it sits on top. The brand guide rule should be: K and arrow are the base layer; T is always the overlay layer.</p>
+
+<div class="mono-grid">
+  <div class="mono-card" data-choice="primary-full-color-layered" onclick="toggleSelect(this)">
+    <div class="mono-stage navy">
+      <div class="layer-chip">Layer order: K/arrow below · T above</div>
+      <svg class="kt-svg full-color" viewBox="0 0 1024 1024" role="img" aria-label="Primary full-color KT mark with T on top">
+        <g class="k-layer">
+          <path d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+          <polygon points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        </g>
+        <g class="t-layer">
+          <path d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+        </g>
+      </svg>
+    </div>
+    <div class="mono-label">Primary Full Color · T Above</div>
+    <div class="mono-desc">The clearest expression of the mark: white K/arrow as base geometry, translucent slate T overlaid on top.</div>
+  </div>
+
+  <div class="mono-card" data-choice="white-translucent-t-layered" onclick="toggleSelect(this)">
+    <div class="mono-stage navy">
+      <div class="layer-chip">Layer order: K/arrow below · T above</div>
+      <svg class="kt-svg mono-white" viewBox="0 0 1024 1024" role="img" aria-label="White monochrome KT mark with translucent T on top">
+        <g class="k-layer">
+          <path d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+          <polygon points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        </g>
+        <g class="t-layer">
+          <path d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+        </g>
+      </svg>
+    </div>
+    <div class="mono-label">White Mono · Translucent T Above</div>
+    <div class="mono-desc">Best dark-surface monochrome candidate. Note: where white translucent T overlaps white opaque K, the overlap is intentionally subtle.</div>
+  </div>
+
+  <div class="mono-card" data-choice="navy-translucent-t-layered" onclick="toggleSelect(this)">
+    <div class="mono-stage paper">
+      <div class="layer-chip">Layer order: K/arrow below · T above</div>
+      <svg class="kt-svg mono-navy" viewBox="0 0 1024 1024" role="img" aria-label="Navy monochrome KT mark with translucent T on top">
+        <g class="k-layer">
+          <path d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+          <polygon points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        </g>
+        <g class="t-layer">
+          <path d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+        </g>
+      </svg>
+    </div>
+    <div class="mono-label">Navy Mono · Translucent T Above</div>
+    <div class="mono-desc">Best light-surface monochrome candidate. Preserves the overlay idea while staying one ink/color.</div>
+  </div>
+
+  <div class="mono-card" data-choice="navy-on-slate-translucent-t-layered" onclick="toggleSelect(this)">
+    <div class="mono-stage slate">
+      <div class="layer-chip">Layer order: K/arrow below · T above</div>
+      <svg class="kt-svg mono-navy" viewBox="0 0 1024 1024" role="img" aria-label="Navy on slate KT mark with translucent T on top">
+        <g class="k-layer">
+          <path d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+          <polygon points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        </g>
+        <g class="t-layer">
+          <path d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+        </g>
+      </svg>
+    </div>
+    <div class="mono-label">Navy On Slate · Translucent T Above</div>
+    <div class="mono-desc">Secondary diagram/panel treatment. The T stays on top, but with reduced opacity so the mark remains layered rather than flat.</div>
+  </div>
+</div>
+
+<div class="note">For production assets, the SVG export order should place the T path after the K and arrow paths. Do not flatten or reorder the mark in a way that puts the T behind the K.</div>

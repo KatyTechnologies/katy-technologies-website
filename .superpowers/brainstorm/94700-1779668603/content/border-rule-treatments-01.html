@@ -1,0 +1,261 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap');
+
+  .treatment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .treatment-card {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,.045);
+    padding: 16px;
+    cursor: pointer;
+  }
+
+  .stage {
+    min-height: 360px;
+    background:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(150deg, #06192d 0%, #0a213a 48%, #263d54 100%);
+    background-size: 28px 28px, 28px 28px, auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ui {
+    position: absolute;
+    inset: 22px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 18px;
+    color: #f8f7f2;
+  }
+
+  .topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-family: 'Work Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-size: 10px;
+    opacity: .72;
+  }
+
+  .headline {
+    font-family: 'Literata', serif;
+    font-size: 24px;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    max-width: 260px;
+    margin-top: 8px;
+  }
+
+  .planes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-content: stretch;
+  }
+
+  .plane {
+    padding: 18px;
+    min-height: 120px;
+    background: rgba(248,247,242,.035);
+  }
+
+  .plane:nth-child(2),
+  .plane:nth-child(3) {
+    background: rgba(127,149,170,.08);
+  }
+
+  .plane-label {
+    font: 700 10px/1 'Work Sans', sans-serif;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    opacity: .68;
+    margin-bottom: 12px;
+  }
+
+  .plane-copy {
+    font: 500 13px/1.35 'Work Sans', sans-serif;
+    opacity: .84;
+  }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  .metric {
+    padding: 14px 16px;
+    background: rgba(248,247,242,.04);
+  }
+
+  .metric strong {
+    display: block;
+    font: 700 20px/1 'Work Sans', sans-serif;
+    letter-spacing: -.04em;
+  }
+
+  .metric span {
+    display: block;
+    margin-top: 7px;
+    font: 600 10px/1.2 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .62;
+  }
+
+  .hairlines .stage {
+    border: 1px solid rgba(248,247,242,.12);
+  }
+
+  .hairlines .plane,
+  .hairlines .metric {
+    border: 1px solid rgba(248,247,242,.08);
+    margin: -1px 0 0 -1px;
+  }
+
+  .strong-lines .stage {
+    border: 1px solid rgba(248,247,242,.28);
+  }
+
+  .strong-lines .topline {
+    border-bottom: 1px solid rgba(248,247,242,.34);
+    padding-bottom: 12px;
+  }
+
+  .strong-lines .plane,
+  .strong-lines .metric {
+    border: 1px solid rgba(248,247,242,.28);
+    margin: -1px 0 0 -1px;
+  }
+
+  .strong-lines .planes {
+    outline: 1px solid rgba(127,149,170,.46);
+  }
+
+  .no-borders .stage {
+    border: 0;
+  }
+
+  .no-borders .topline {
+    padding-bottom: 12px;
+  }
+
+  .no-borders .plane,
+  .no-borders .metric {
+    border: 0;
+  }
+
+  .no-borders .plane:nth-child(1) { background: rgba(248,247,242,.07); }
+  .no-borders .plane:nth-child(2) { background: rgba(248,247,242,.035); }
+  .no-borders .plane:nth-child(3) { background: rgba(127,149,170,.13); }
+  .no-borders .plane:nth-child(4) { background: rgba(127,149,170,.06); }
+  .no-borders .metric:nth-child(1) { background: rgba(248,247,242,.065); }
+  .no-borders .metric:nth-child(2) { background: rgba(248,247,242,.035); }
+  .no-borders .metric:nth-child(3) { background: rgba(127,149,170,.11); }
+
+  .label {
+    font: 700 12px/1.2 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .68;
+    margin: 16px 0 8px;
+  }
+
+  .desc {
+    font-family: 'Literata', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: .84;
+  }
+
+  @media (max-width: 1100px) {
+    .treatment-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h2>Border + Rule Treatments</h2>
+<p class="subtitle">Each option uses sharp modules placed side by side, avoiding obvious nested parent/child card structure.</p>
+
+<div class="treatment-grid">
+  <div class="treatment-card hairlines" data-choice="faint-hairlines" onclick="toggleSelect(this)">
+    <div class="stage">
+      <div class="ui">
+        <div>
+          <div class="topline"><span>Workflow Audit</span><span>01</span></div>
+          <div class="headline">Find the handoffs that slow teams down.</div>
+        </div>
+        <div class="planes">
+          <div class="plane"><div class="plane-label">Input</div><div class="plane-copy">Requests arrive from four systems.</div></div>
+          <div class="plane"><div class="plane-label">Review</div><div class="plane-copy">Manual checks create wait time.</div></div>
+          <div class="plane"><div class="plane-label">Decision</div><div class="plane-copy">Rules are clear but undocumented.</div></div>
+          <div class="plane"><div class="plane-label">Output</div><div class="plane-copy">Status updates happen by hand.</div></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric"><strong>17</strong><span>handoffs</span></div>
+          <div class="metric"><strong>4</strong><span>systems</span></div>
+          <div class="metric"><strong>2</strong><span>risks</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label">A · Very Faint Hairlines</div>
+    <div class="desc">Precise and quiet. Edges are present but recede, keeping the system technical without feeling boxed-in.</div>
+  </div>
+
+  <div class="treatment-card strong-lines" data-choice="strong-technical-lines" onclick="toggleSelect(this)">
+    <div class="stage">
+      <div class="ui">
+        <div>
+          <div class="topline"><span>Workflow Audit</span><span>01</span></div>
+          <div class="headline">Find the handoffs that slow teams down.</div>
+        </div>
+        <div class="planes">
+          <div class="plane"><div class="plane-label">Input</div><div class="plane-copy">Requests arrive from four systems.</div></div>
+          <div class="plane"><div class="plane-label">Review</div><div class="plane-copy">Manual checks create wait time.</div></div>
+          <div class="plane"><div class="plane-label">Decision</div><div class="plane-copy">Rules are clear but undocumented.</div></div>
+          <div class="plane"><div class="plane-label">Output</div><div class="plane-copy">Status updates happen by hand.</div></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric"><strong>17</strong><span>handoffs</span></div>
+          <div class="metric"><strong>4</strong><span>systems</span></div>
+          <div class="metric"><strong>2</strong><span>risks</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label">B · Strong Technical Lines</div>
+    <div class="desc">Most operating-system-like. Clear and rigorous, but risks feeling more industrial and less humanistic.</div>
+  </div>
+
+  <div class="treatment-card no-borders" data-choice="spacing-background-shifts" onclick="toggleSelect(this)">
+    <div class="stage">
+      <div class="ui">
+        <div>
+          <div class="topline"><span>Workflow Audit</span><span>01</span></div>
+          <div class="headline">Find the handoffs that slow teams down.</div>
+        </div>
+        <div class="planes">
+          <div class="plane"><div class="plane-label">Input</div><div class="plane-copy">Requests arrive from four systems.</div></div>
+          <div class="plane"><div class="plane-label">Review</div><div class="plane-copy">Manual checks create wait time.</div></div>
+          <div class="plane"><div class="plane-label">Decision</div><div class="plane-copy">Rules are clear but undocumented.</div></div>
+          <div class="plane"><div class="plane-label">Output</div><div class="plane-copy">Status updates happen by hand.</div></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric"><strong>17</strong><span>handoffs</span></div>
+          <div class="metric"><strong>4</strong><span>systems</span></div>
+          <div class="metric"><strong>2</strong><span>risks</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label">C · Spacing + Background Shifts</div>
+    <div class="desc">Least boxed-in. Uses adjacent tonal planes instead of borders, but may need occasional rules for precision.</div>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap');
+
+  .texture-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .texture-card {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,.045);
+    padding: 18px;
+    cursor: pointer;
+  }
+
+  .stage {
+    min-height: 310px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.14);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blueprint {
+    background:
+      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(150deg, #06192d 0%, #0a213a 36%, #263d54 65%, #536b80 100%);
+    background-size: 28px 28px, 28px 28px, auto;
+  }
+
+  .paper {
+    background:
+      linear-gradient(rgba(7,26,51,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,26,51,.05) 1px, transparent 1px),
+      #f8f7f2;
+    background-size: 28px 28px;
+  }
+
+  .diagram {
+    position: absolute;
+    inset: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+  }
+
+  .kt {
+    position: absolute;
+    width: 240px;
+    height: auto;
+    right: -24px;
+    bottom: -34px;
+    opacity: .24;
+    overflow: visible;
+  }
+
+  .kt-feature {
+    width: 190px;
+    right: 28px;
+    bottom: 24px;
+    opacity: .42;
+  }
+
+  .kt-dark-base { fill: #071a33; }
+  .kt-light-base { fill: #f8f7f2; }
+  .kt-slate-t { fill: #7f95aa; opacity: .72; }
+  .kt-dark-t { fill: #071a33; opacity: .42; }
+
+  .chip {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    font: 700 10px/1 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 8px 10px;
+    color: rgba(248,247,242,.76);
+    background: rgba(7,26,51,.58);
+    border: 1px solid rgba(248,247,242,.18);
+  }
+
+  .paper .chip {
+    color: rgba(7,26,51,.72);
+    background: rgba(248,247,242,.74);
+    border-color: rgba(7,26,51,.12);
+  }
+
+  .label {
+    font: 700 12px/1.2 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .68;
+    margin: 16px 0 8px;
+  }
+
+  .desc {
+    font-family: 'Literata', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: .84;
+  }
+
+  .rule {
+    margin-top: 10px;
+    font: 600 12px/1.45 'Work Sans', sans-serif;
+    opacity: .62;
+  }
+
+  @media (max-width: 900px) {
+    .texture-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h2>Background Brand Textures With K Cutout</h2>
+<p class="subtitle">Updated rule: when the mark becomes a background texture or watermark, cut the K/arrow underneath the T so the T remains visibly on top.</p>
+
+<div class="texture-grid">
+  <div class="texture-card" data-choice="slide-watermark-cutout" onclick="toggleSelect(this)">
+    <div class="stage paper">
+      <div class="chip">Presentation watermark · cutout under T</div>
+      <svg class="diagram" viewBox="0 0 600 340" fill="none">
+        <path d="M36 76 H190 V132 H36 Z" stroke="#071a33" opacity=".25"/>
+        <path d="M232 76 H386 V132 H232 Z" stroke="#071a33" opacity=".25"/>
+        <path d="M428 76 H564 V132 H428 Z" stroke="#071a33" opacity=".25"/>
+        <path d="M190 104 H232 M386 104 H428" stroke="#071a33" stroke-width="2" opacity=".34"/>
+        <path d="M112 132 C112 190 292 160 292 224 C292 256 404 260 482 224" stroke="#071a33" stroke-width="2" stroke-linecap="round" opacity=".34"/>
+        <path d="M96 236 C168 202 226 250 312 210 C372 182 438 212 520 184" stroke="#071a33" stroke-width="2" stroke-linecap="round" opacity=".24"/>
+      </svg>
+      <svg class="kt" viewBox="0 0 1024 1024" role="img" aria-label="KT background watermark with K cut out beneath T">
+        <defs>
+          <mask id="paper-cutout-mask">
+            <rect width="1024" height="1024" fill="white" />
+            <path d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" fill="black" opacity=".82" />
+          </mask>
+        </defs>
+        <g class="kt-dark-base" mask="url(#paper-cutout-mask)">
+          <path d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+          <polygon points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        </g>
+        <path class="kt-dark-t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+      </svg>
+    </div>
+    <div class="label">A · Presentation Watermark</div>
+    <div class="desc">For slide decks and presentation backgrounds. The mark is decorative, low-opacity, and uses a cutout below the T.</div>
+    <div class="rule">Rule: watermark only; never the only identifying logo on a slide.</div>
+  </div>
+
+  <div class="texture-card" data-choice="website-decorative-cutout" onclick="toggleSelect(this)">
+    <div class="stage blueprint">
+      <div class="chip">Website decorative diagram · cutout under T</div>
+      <svg class="diagram" viewBox="0 0 600 340" fill="none">
+        <path d="M34 96 C126 42 188 58 250 114 C323 180 407 174 548 82" stroke="#f8f7f2" stroke-width="3" stroke-linecap="round" opacity=".32"/>
+        <path d="M62 236 C172 190 210 244 306 194 C388 152 430 226 540 184" stroke="#f8f7f2" stroke-width="2" stroke-linecap="round" opacity=".24"/>
+        <rect x="54" y="78" width="94" height="44" rx="8" stroke="#f8f7f2" opacity=".22"/>
+        <rect x="240" y="96" width="116" height="44" rx="8" stroke="#f8f7f2" opacity=".22"/>
+        <rect x="456" y="62" width="94" height="44" rx="8" stroke="#f8f7f2" opacity=".22"/>
+      </svg>
+      <svg class="kt kt-feature" viewBox="0 0 1024 1024" role="img" aria-label="KT website decorative texture with K cut out beneath T">
+        <defs>
+          <mask id="blueprint-cutout-mask">
+            <rect width="1024" height="1024" fill="white" />
+            <path d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" fill="black" opacity=".82" />
+          </mask>
+        </defs>
+        <g class="kt-light-base" mask="url(#blueprint-cutout-mask)">
+          <path d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+          <polygon points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        </g>
+        <path class="kt-slate-t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+      </svg>
+    </div>
+    <div class="label">B · Website Decorative Texture</div>
+    <div class="desc">For decorative website diagrams. The logo can sit directly over the diagram only when the diagram is quiet and non-informational.</div>
+    <div class="rule">Rule: allowed for decorative web surfaces; avoid over functional diagrams or dense process content.</div>
+  </div>
+</div>

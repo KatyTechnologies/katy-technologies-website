@@ -1,0 +1,276 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap');
+
+  .variant-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .variant-card {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,.045);
+    padding: 18px;
+    cursor: pointer;
+  }
+
+  .variant-stage {
+    min-height: 230px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .navy { background: #06192d; }
+  .paper { background: #f8f7f2; }
+  .slate { background: #536b80; }
+  .grid-bg {
+    background:
+      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+      #06192d;
+    background-size: 28px 28px;
+  }
+
+  .kt-mark {
+    position: relative;
+    width: 138px;
+    height: 138px;
+  }
+
+  .kt-k-stem,
+  .kt-k-arm,
+  .kt-k-leg,
+  .kt-t-top,
+  .kt-t-stem,
+  .kt-arrow {
+    position: absolute;
+  }
+
+  .kt-k-stem {
+    left: 14px;
+    top: 30px;
+    width: 25px;
+    height: 86px;
+    background: var(--k);
+  }
+
+  .kt-k-arm {
+    left: 34px;
+    top: 34px;
+    width: 84px;
+    height: 26px;
+    background: var(--k);
+    transform: skewX(-36deg) rotate(-49deg);
+    transform-origin: left center;
+  }
+
+  .kt-k-leg {
+    left: 41px;
+    top: 76px;
+    width: 78px;
+    height: 25px;
+    background: var(--k);
+    transform: skewX(34deg) rotate(50deg);
+    transform-origin: left center;
+  }
+
+  .kt-arrow {
+    right: 12px;
+    top: 18px;
+    width: 0;
+    height: 0;
+    border-left: 34px solid transparent;
+    border-right: 34px solid transparent;
+    border-bottom: 70px solid var(--k);
+    transform: rotate(29deg);
+  }
+
+  .kt-t-top {
+    left: 70px;
+    top: 58px;
+    width: 92px;
+    height: 25px;
+    background: var(--t);
+  }
+
+  .kt-t-stem {
+    left: 105px;
+    top: 82px;
+    width: 27px;
+    height: 86px;
+    background: var(--t);
+  }
+
+  .full-color { --k: #f8f7f2; --t: rgba(83,107,128,.86); }
+  .one-color-white { --k: #f8f7f2; --t: #f8f7f2; }
+  .one-color-navy { --k: #06192d; --t: #06192d; }
+  .reversed-slate { --k: #06192d; --t: rgba(6,25,45,.72); }
+
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .lockup .kt-mark {
+    width: 92px;
+    height: 92px;
+    transform: scale(.67);
+    transform-origin: center;
+    margin: -24px;
+  }
+
+  .wordmark {
+    color: #f8f7f2;
+  }
+
+  .wordmark strong {
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -.04em;
+  }
+
+  .wordmark span {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Literata', serif;
+    font-size: 14px;
+    opacity: .72;
+  }
+
+  .clearspace {
+    position: absolute;
+    inset: 34px;
+    border: 1px dashed rgba(248,247,242,.46);
+  }
+
+  .variant-label {
+    font: 700 12px/1.2 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .68;
+    margin: 16px 0 8px;
+  }
+
+  .variant-desc {
+    font-family: 'Literata', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: .84;
+  }
+
+  @media (max-width: 900px) {
+    .variant-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h2>Derived Logo Variant System</h2>
+<p class="subtitle">These are approval mockups for the brand guide. They define the allowed variant set; final assets should be exported as clean SVG/PNG files from the approved logo geometry.</p>
+
+<div class="variant-grid">
+  <div class="variant-card" data-choice="full-color-primary" onclick="toggleSelect(this)">
+    <div class="variant-stage navy">
+      <div class="kt-mark full-color">
+        <div class="kt-k-stem"></div>
+        <div class="kt-k-arm"></div>
+        <div class="kt-k-leg"></div>
+        <div class="kt-arrow"></div>
+        <div class="kt-t-top"></div>
+        <div class="kt-t-stem"></div>
+      </div>
+    </div>
+    <div class="variant-label">Primary Full-Color Mark</div>
+    <div class="variant-desc">White K/arrow with muted blue-gray T on deep navy. Default for covers, website hero, and high-control brand moments.</div>
+  </div>
+
+  <div class="variant-card" data-choice="one-color-white" onclick="toggleSelect(this)">
+    <div class="variant-stage grid-bg">
+      <div class="kt-mark one-color-white">
+        <div class="kt-k-stem"></div>
+        <div class="kt-k-arm"></div>
+        <div class="kt-k-leg"></div>
+        <div class="kt-arrow"></div>
+        <div class="kt-t-top"></div>
+        <div class="kt-t-stem"></div>
+      </div>
+    </div>
+    <div class="variant-label">One-Color White</div>
+    <div class="variant-desc">For busy grid, grain, or diagram backgrounds where the full-color T loses contrast.</div>
+  </div>
+
+  <div class="variant-card" data-choice="one-color-navy" onclick="toggleSelect(this)">
+    <div class="variant-stage paper">
+      <div class="kt-mark one-color-navy">
+        <div class="kt-k-stem"></div>
+        <div class="kt-k-arm"></div>
+        <div class="kt-k-leg"></div>
+        <div class="kt-arrow"></div>
+        <div class="kt-t-top"></div>
+        <div class="kt-t-stem"></div>
+      </div>
+    </div>
+    <div class="variant-label">One-Color Navy</div>
+    <div class="variant-desc">For light pages, internal docs, printed collateral, and monochrome reproduction.</div>
+  </div>
+
+  <div class="variant-card" data-choice="reversed-slate" onclick="toggleSelect(this)">
+    <div class="variant-stage slate">
+      <div class="kt-mark reversed-slate">
+        <div class="kt-k-stem"></div>
+        <div class="kt-k-arm"></div>
+        <div class="kt-k-leg"></div>
+        <div class="kt-arrow"></div>
+        <div class="kt-t-top"></div>
+        <div class="kt-t-stem"></div>
+      </div>
+    </div>
+    <div class="variant-label">Reversed Dark On Slate</div>
+    <div class="variant-desc">A secondary reversed treatment for blue-gray panels, diagrams, and restrained internal brand moments.</div>
+  </div>
+
+  <div class="variant-card" data-choice="horizontal-lockup" onclick="toggleSelect(this)">
+    <div class="variant-stage navy">
+      <div class="lockup">
+        <div class="kt-mark full-color">
+          <div class="kt-k-stem"></div>
+          <div class="kt-k-arm"></div>
+          <div class="kt-k-leg"></div>
+          <div class="kt-arrow"></div>
+          <div class="kt-t-top"></div>
+          <div class="kt-t-stem"></div>
+        </div>
+        <div class="wordmark">
+          <strong>Katy Technologies</strong>
+          <span>Workflow automation consulting</span>
+        </div>
+      </div>
+    </div>
+    <div class="variant-label">Horizontal Lockup</div>
+    <div class="variant-desc">Recommended for navigation, document headers, proposals, and footer identity. Tagline can be omitted for small sizes.</div>
+  </div>
+
+  <div class="variant-card" data-choice="clearspace-sizing" onclick="toggleSelect(this)">
+    <div class="variant-stage navy">
+      <div class="clearspace"></div>
+      <div class="kt-mark full-color">
+        <div class="kt-k-stem"></div>
+        <div class="kt-k-arm"></div>
+        <div class="kt-k-leg"></div>
+        <div class="kt-arrow"></div>
+        <div class="kt-t-top"></div>
+        <div class="kt-t-stem"></div>
+      </div>
+    </div>
+    <div class="variant-label">Clearspace + Minimum Size Rule</div>
+    <div class="variant-desc">Guide should specify clearspace using the T-stem width and define minimum sizes for web, print, favicon, and small UI use.</div>
+  </div>
+</div>

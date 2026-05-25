@@ -1,0 +1,91 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=IBM+Plex+Serif:wght@400;500;600&family=Instrument+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Manrope:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Work+Sans:wght@500;600;700&display=swap');
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .type-card {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,.045);
+    padding: 22px;
+    cursor: pointer;
+  }
+
+  .type-label {
+    font: 600 12px/1.2 system-ui, sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .66;
+    margin-bottom: 18px;
+  }
+
+  .type-headline {
+    font-size: 34px;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    margin-bottom: 14px;
+  }
+
+  .type-body {
+    font-size: 16px;
+    line-height: 1.55;
+    opacity: .82;
+  }
+
+  .type-note {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    font-size: 13px;
+    opacity: .68;
+  }
+
+  @media (max-width: 900px) {
+    .type-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h2>Typography Pairings To Consider</h2>
+<p class="subtitle">Your current instinct is included first. Click the pairing that feels most like “technical field notes with founder annotations” for enterprise executives.</p>
+
+<div class="type-grid">
+  <div class="type-card" data-choice="montserrat-source-serif" onclick="toggleSelect(this)">
+    <div class="type-label">Current Direction · Montserrat + Source Serif 4</div>
+    <div class="type-headline" style="font-family:'Montserrat', sans-serif;">Automation that feels governed, not generic.</div>
+    <div class="type-body" style="font-family:'Source Serif 4', serif;">We map the workflow, remove the drag, and leave teams with systems they can trust, understand, and improve.</div>
+    <div class="type-note">Clean and familiar. Strong if you want approachable enterprise polish with a classic editorial body voice.</div>
+  </div>
+
+  <div class="type-card" data-choice="instrument-source-serif" onclick="toggleSelect(this)">
+    <div class="type-label">Option A · Instrument Sans + Source Serif 4</div>
+    <div class="type-headline" style="font-family:'Instrument Sans', sans-serif;">Automation that feels governed, not generic.</div>
+    <div class="type-body" style="font-family:'Source Serif 4', serif;">We map the workflow, remove the drag, and leave teams with systems they can trust, understand, and improve.</div>
+    <div class="type-note">Sleeker and more current than Montserrat, while keeping Source Serif’s credibility and warmth.</div>
+  </div>
+
+  <div class="type-card" data-choice="ibm-plex" onclick="toggleSelect(this)">
+    <div class="type-label">Option B · IBM Plex Sans + IBM Plex Serif</div>
+    <div class="type-headline" style="font-family:'IBM Plex Sans', sans-serif;">Automation that feels governed, not generic.</div>
+    <div class="type-body" style="font-family:'IBM Plex Serif', serif;">We map the workflow, remove the drag, and leave teams with systems they can trust, understand, and improve.</div>
+    <div class="type-note">Most “technical field notes.” Systematic, engineered, credible, and internally cohesive.</div>
+  </div>
+
+  <div class="type-card" data-choice="manrope-newsreader" onclick="toggleSelect(this)">
+    <div class="type-label">Option C · Manrope + Newsreader</div>
+    <div class="type-headline" style="font-family:'Manrope', sans-serif;">Automation that feels governed, not generic.</div>
+    <div class="type-body" style="font-family:'Newsreader', serif;">We map the workflow, remove the drag, and leave teams with systems they can trust, understand, and improve.</div>
+    <div class="type-note">Human and editorial. Strong for reassurance, but a little less technical than IBM Plex.</div>
+  </div>
+
+  <div class="type-card" data-choice="work-literata" onclick="toggleSelect(this)">
+    <div class="type-label">Option D · Work Sans + Literata</div>
+    <div class="type-headline" style="font-family:'Work Sans', sans-serif;">Automation that feels governed, not generic.</div>
+    <div class="type-body" style="font-family:'Literata', serif;">We map the workflow, remove the drag, and leave teams with systems they can trust, understand, and improve.</div>
+    <div class="type-note">Clear, humane, and readable. Slightly softer, good if the handwritten system is already doing the heavy personality work.</div>
+  </div>
+</div>

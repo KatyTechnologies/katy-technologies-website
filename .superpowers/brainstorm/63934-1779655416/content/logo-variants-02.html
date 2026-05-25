@@ -1,0 +1,220 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap');
+
+  .variant-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .variant-card {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(255,255,255,.045);
+    padding: 18px;
+    cursor: pointer;
+  }
+
+  .variant-stage {
+    min-height: 230px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .navy { background: #071a33; }
+  .paper { background: #f8f7f2; }
+  .slate { background: #7f95aa; }
+  .grid-bg {
+    background:
+      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+      #071a33;
+    background-size: 28px 28px;
+  }
+
+  .kt-svg {
+    width: min(210px, 60%);
+    height: auto;
+    display: block;
+  }
+
+  .kt-full .k,
+  .kt-full .arrow { fill: #ffffff; opacity: 1; }
+  .kt-full .t { fill: #7f95aa; opacity: .62; }
+
+  .kt-white .k,
+  .kt-white .arrow,
+  .kt-white .t { fill: #f8f7f2; opacity: 1; }
+
+  .kt-navy .k,
+  .kt-navy .arrow,
+  .kt-navy .t { fill: #071a33; opacity: 1; }
+
+  .kt-reversed .k,
+  .kt-reversed .arrow,
+  .kt-reversed .t { fill: #071a33; opacity: .86; }
+
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 20px;
+  }
+
+  .lockup .kt-svg {
+    width: 112px;
+    flex: 0 0 auto;
+  }
+
+  .wordmark {
+    color: #f8f7f2;
+  }
+
+  .wordmark strong {
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -.04em;
+  }
+
+  .wordmark span {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Literata', serif;
+    font-size: 14px;
+    opacity: .72;
+  }
+
+  .clearspace {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border: 1px dashed rgba(248,247,242,.52);
+  }
+
+  .variant-label {
+    font: 700 12px/1.2 'Work Sans', sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .68;
+    margin: 16px 0 8px;
+  }
+
+  .variant-desc {
+    font-family: 'Literata', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: .84;
+  }
+
+  .source-note {
+    margin-top: 12px;
+    font: 500 12px/1.45 'Work Sans', sans-serif;
+    opacity: .6;
+  }
+
+  @media (max-width: 900px) {
+    .variant-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h2>Logo Variant System From Outlined SVG</h2>
+<p class="subtitle">These variants now reuse the actual KT geometry from <code>assets/logos/KT_Logo_Final.svg</code>. The live T text has been converted to an outlined path before deriving treatments.</p>
+
+<template id="kt-mark-template">
+  <svg class="kt-svg" viewBox="0 0 1024 1024" role="img" aria-label="Katy Technologies KT mark">
+    <path class="k" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+    <polygon class="arrow" points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+    <path class="t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+  </svg>
+</template>
+
+<div class="variant-grid">
+  <div class="variant-card" data-choice="full-color-primary" onclick="toggleSelect(this)">
+    <div class="variant-stage navy">
+      <svg class="kt-svg kt-full" viewBox="0 0 1024 1024" role="img" aria-label="Primary full-color KT mark">
+        <path class="k" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+        <polygon class="arrow" points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        <path class="t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+      </svg>
+    </div>
+    <div class="variant-label">Primary Full-Color Mark</div>
+    <div class="variant-desc">White K/arrow with translucent blue-gray T on deep navy. Default for covers, hero moments, and high-control identity use.</div>
+  </div>
+
+  <div class="variant-card" data-choice="one-color-white" onclick="toggleSelect(this)">
+    <div class="variant-stage grid-bg">
+      <svg class="kt-svg kt-white" viewBox="0 0 1024 1024" role="img" aria-label="One-color white KT mark">
+        <path class="k" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+        <polygon class="arrow" points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        <path class="t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+      </svg>
+    </div>
+    <div class="variant-label">One-Color White</div>
+    <div class="variant-desc">For dense grid, grain, or diagram backgrounds where the translucent T would lose definition.</div>
+  </div>
+
+  <div class="variant-card" data-choice="one-color-navy" onclick="toggleSelect(this)">
+    <div class="variant-stage paper">
+      <svg class="kt-svg kt-navy" viewBox="0 0 1024 1024" role="img" aria-label="One-color navy KT mark">
+        <path class="k" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+        <polygon class="arrow" points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        <path class="t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+      </svg>
+    </div>
+    <div class="variant-label">One-Color Navy</div>
+    <div class="variant-desc">For light pages, internal documents, print, and monochrome reproduction.</div>
+  </div>
+
+  <div class="variant-card" data-choice="reversed-slate" onclick="toggleSelect(this)">
+    <div class="variant-stage slate">
+      <svg class="kt-svg kt-reversed" viewBox="0 0 1024 1024" role="img" aria-label="Reversed dark-on-slate KT mark">
+        <path class="k" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+        <polygon class="arrow" points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        <path class="t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+      </svg>
+    </div>
+    <div class="variant-label">Reversed Dark On Slate</div>
+    <div class="variant-desc">A secondary treatment for muted blue-gray panels, diagrams, and quiet internal brand moments.</div>
+  </div>
+
+  <div class="variant-card" data-choice="horizontal-lockup" onclick="toggleSelect(this)">
+    <div class="variant-stage navy">
+      <div class="lockup">
+        <svg class="kt-svg kt-full" viewBox="0 0 1024 1024" role="img" aria-label="Primary full-color KT mark">
+          <path class="k" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+          <polygon class="arrow" points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+          <path class="t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+        </svg>
+        <div class="wordmark">
+          <strong>Katy Technologies</strong>
+          <span>Workflow automation consulting</span>
+        </div>
+      </div>
+    </div>
+    <div class="variant-label">Horizontal Lockup</div>
+    <div class="variant-desc">For navigation, document headers, proposals, and footer identity. The wordmark should be exported to outlines for production logo assets.</div>
+  </div>
+
+  <div class="variant-card" data-choice="clearspace-sizing" onclick="toggleSelect(this)">
+    <div class="variant-stage navy">
+      <div class="clearspace"></div>
+      <svg class="kt-svg kt-full" viewBox="0 0 1024 1024" role="img" aria-label="KT mark clearspace example">
+        <path class="k" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z" />
+        <polygon class="arrow" points="691.72,344.79 695.52,205.49 570,266" transform="translate(-96.944969,-14.540185)" />
+        <path class="t" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" />
+      </svg>
+    </div>
+    <div class="variant-label">Clearspace + Minimum Size Rule</div>
+    <div class="variant-desc">The guide should define clearspace from the T-stem width and minimum sizes for web, print, favicon, and small UI use.</div>
+  </div>
+</div>
+
+<p class="source-note">Moved files: <code>assets/logos/KT_Logo_Final.png</code>, <code>assets/logos/KT_Logo_Final.svg</code>. The live-text source is retained as <code>KT_Logo_Final.source.svg</code>.</p>
