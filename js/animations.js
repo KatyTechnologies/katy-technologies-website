@@ -106,17 +106,6 @@ function initCardAnimations() {
         duration: 300,
         easing: 'easeOutCubic'
       });
-      
-      // Animate card icon
-      const icon = card.querySelector('.card-icon');
-      if (icon) {
-        anime({
-          targets: icon,
-          rotate: 360,
-          duration: 600,
-          easing: 'easeOutCubic'
-        });
-      }
     });
     
     card.addEventListener('mouseleave', () => {
@@ -127,16 +116,6 @@ function initCardAnimations() {
         duration: 300,
         easing: 'easeOutCubic'
       });
-      
-      const icon = card.querySelector('.card-icon');
-      if (icon) {
-        anime({
-          targets: icon,
-          rotate: 0,
-          duration: 600,
-          easing: 'easeOutCubic'
-        });
-      }
     });
   });
 }
@@ -163,16 +142,6 @@ function initSolutionAnimations() {
     }, { threshold: 0.2 });
     
     observer.observe(card);
-    
-    // Hover pulse animation
-    card.addEventListener('mouseenter', () => {
-      anime({
-        targets: card.querySelector('.solution-icon'),
-        scale: [1, 1.2, 1],
-        duration: 600,
-        easing: 'easeInOutQuad'
-      });
-    });
   });
 }
 
