@@ -18,40 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize intersection observer for fade-in animations
   initIntersectionObserver();
   
-  // Initialize team member expandable bios
-  initTeamMembers();
-  
   // Add smooth scroll behavior for anchor links
   initSmoothScroll();
   
   // Initialize page-specific functionality
   initPageSpecific();
 });
-
-// Team member expandable bios
-function initTeamMembers() {
-  const teamMembers = document.querySelectorAll('.team-member');
-  
-  teamMembers.forEach(member => {
-    member.addEventListener('click', () => {
-      member.classList.toggle('expanded');
-      
-      // Update aria-expanded attribute for accessibility
-      const isExpanded = member.classList.contains('expanded');
-      member.setAttribute('aria-expanded', isExpanded);
-    });
-    
-    // Add keyboard support
-    member.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        member.classList.toggle('expanded');
-        const isExpanded = member.classList.contains('expanded');
-        member.setAttribute('aria-expanded', isExpanded);
-      }
-    });
-  });
-}
 
 // Smooth scroll for anchor links
 function initSmoothScroll() {

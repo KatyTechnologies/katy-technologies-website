@@ -15,13 +15,14 @@
   .cards-grid,
   .content-grid,
   .faq-grid,
+  .values-grid,
   .industry-grid,
   .benefits-grid {
     grid-template-columns: 1fr;
   }
 
-  .team-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  .solutions-gallery {
+    grid-template-columns: 1fr;
   }
 
   .footer-content {
@@ -49,7 +50,7 @@
   }
 
   .hero {
-    padding-top: calc(var(--header-height) + 60px);
+    padding-top: 60px;
   }
 
   .hero-content,
@@ -74,7 +75,7 @@
 
   .hero {
     min-height: auto;
-    padding-top: calc(var(--header-height) + 48px);
+    padding-top: 48px;
     padding-bottom: 56px;
   }
 
@@ -96,15 +97,11 @@
   }
 
   .page-hero {
-    padding-top: calc(var(--header-height) + 52px);
+    padding-top: 52px;
   }
 
   .cards-grid {
     grid-template-columns: 1fr;
-  }
-
-  .solution-card {
-    flex-basis: min(300px, 80vw);
   }
 
   .hero-contact-methods {
@@ -149,10 +146,9 @@
     font-size: 12px;
   }
 
-  .logo-icon {
+  .logo-mark {
     width: 28px;
     height: 28px;
-    font-size: 11px;
   }
 
   .card,
@@ -164,11 +160,6 @@
   .faq-item,
   .contact-method {
     padding: var(--space-14);
-  }
-
-  .team-member-image {
-    min-height: 170px;
-    font-size: 30px;
   }
 
   .mobile-menu {
@@ -199,7 +190,6 @@
 
   .card,
   .solution-card,
-  .team-member,
   .value-card,
   .benefit-card,
   .industry-card,
@@ -247,7 +237,6 @@
 
   .card,
   .solution-card,
-  .team-member,
   .value-card,
   .benefit-card,
   .industry-card,
@@ -273,7 +262,6 @@
 @media (hover: none) {
   .card:hover,
   .solution-card:hover,
-  .team-member:hover,
   .value-card:hover,
   .benefit-card:hover,
   .industry-card:hover,

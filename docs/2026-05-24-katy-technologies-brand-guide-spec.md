@@ -337,7 +337,7 @@ Grid opacity rules:
 
 Approved type pairing:
 
-- Work Sans for all headers/headings, UI labels, captions, navigation, buttons, and technical metadata.
+- Work Sans for all headers/headings, website header and footer text, UI labels, captions, navigation, buttons, and technical metadata.
 - Literata for body copy, explanatory text, advisory voice, long-form guide content, and editorial warmth.
 
 Why:
@@ -351,6 +351,8 @@ Why:
 Work Sans:
 
 - Use for every header and heading.
+- Use for website header and footer text.
+- All button controls must use Work Sans, including links styled as buttons, native `<button>` elements, and button-like form inputs.
 - Use for short, precise, operational language.
 - Use uppercase sparingly for labels and section metadata.
 - Use tight but readable letter spacing for labels.
