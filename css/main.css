@@ -561,6 +561,14 @@ main {
 }
 
 /* Buttons */
+button,
+.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  font-family: var(--font-ui);
+}
+
 .btn {
   --btn-bg: rgba(127, 149, 170, 0.22);
 

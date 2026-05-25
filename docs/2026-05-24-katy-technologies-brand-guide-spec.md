@@ -352,6 +352,7 @@ Work Sans:
 
 - Use for every header and heading.
 - Use for website header and footer text.
+- All button controls must use Work Sans, including links styled as buttons, native `<button>` elements, and button-like form inputs.
 - Use for short, precise, operational language.
 - Use uppercase sparingly for labels and section metadata.
 - Use tight but readable letter spacing for labels.

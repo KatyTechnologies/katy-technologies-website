@@ -284,6 +284,7 @@ Work Sans usage:
 - Captions.
 - Navigation.
 - Buttons.
+- All button controls must use Work Sans, including links styled as buttons, native `<button>` elements, and button-like form inputs.
 - Technical metadata.
 
 Literata usage:
