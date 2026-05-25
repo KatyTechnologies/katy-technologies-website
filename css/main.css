@@ -183,6 +183,7 @@
 }
 
 html {
+  background: var(--color-bg-primary);
   font-size: 14px;
   line-height: 1.5;
   min-height: 100%;
@@ -191,9 +192,10 @@ html {
 
 body {
   position: relative;
-  min-height: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
   background: var(--gradient-ambient);
+  background-attachment: fixed;
   color: var(--color-text-primary);
   font-family: var(--font-body);
   line-height: 1.5;
@@ -212,8 +214,10 @@ body::after {
 
 body::before {
   background:
-    linear-gradient(115deg, rgba(127, 149, 170, 0.14) 0%, transparent 34%),
-    linear-gradient(155deg, transparent 0%, rgba(111, 102, 102, 0.1) 58%, transparent 100%);
+    linear-gradient(116deg, rgba(127, 149, 170, 0.2) 0%, transparent 36%),
+    linear-gradient(150deg, transparent 0%, rgba(111, 102, 102, 0.12) 74%, transparent 100%);
+  clip-path: inset(0);
+  filter: url("#kt-grain");
 }
 
 body::after {
@@ -626,13 +630,7 @@ main {
 }
 
 .hero-bg::before {
-  position: fixed;
-  inset: 0;
-  background:
-    linear-gradient(116deg, rgba(127, 149, 170, 0.2) 0%, transparent 36%),
-    linear-gradient(150deg, transparent 0%, rgba(111, 102, 102, 0.12) 74%, transparent 100%);
-  clip-path: inset(0);
-  filter: url("#kt-grain");
+  content: none;
 }
 
 .hero-bg::after {
