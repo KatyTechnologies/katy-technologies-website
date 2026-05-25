@@ -742,7 +742,7 @@
 
 /* Footer */
 .footer {
-  margin-top: clamp(64px, 8vw, 96px);
+  margin-top: 0;
   padding: var(--space-28) 0 var(--space-20);
   border-top: 1px solid rgba(127, 149, 170, 0.24);
   background:
