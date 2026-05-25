@@ -49,7 +49,7 @@
   }
 
   .hero {
-    padding-top: calc(var(--header-height) + 60px);
+    padding-top: 60px;
   }
 
   .hero-content,
@@ -74,7 +74,7 @@
 
   .hero {
     min-height: auto;
-    padding-top: calc(var(--header-height) + 48px);
+    padding-top: 48px;
     padding-bottom: 56px;
   }
 
@@ -96,7 +96,7 @@
   }
 
   .page-hero {
-    padding-top: calc(var(--header-height) + 52px);
+    padding-top: 52px;
   }
 
   .cards-grid {

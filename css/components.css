@@ -36,7 +36,7 @@
 /* Page heroes */
 .page-hero {
   position: relative;
-  padding-top: calc(var(--header-height) + 76px);
+  padding-top: 76px;
   padding-bottom: clamp(40px, 6vw, 72px);
   text-align: center;
 }
