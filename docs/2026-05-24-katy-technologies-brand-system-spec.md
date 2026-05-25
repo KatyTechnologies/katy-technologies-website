@@ -156,8 +156,9 @@ Minimum sizes:
 Palette rule:
 
 - Stay strictly within logo colors plus neutrals.
-- Tints, shades, and opacity variations are allowed.
-- Do not introduce new accent hues.
+- Warm Gray / Taupe is the only approved secondary neutral.
+- Tints, shades, and opacity variations of approved colors are allowed.
+- Do not introduce additional accent hues.
 
 Core colors:
 
@@ -167,6 +168,10 @@ Core colors:
 - Deep Slate: `#263D54`
 - Soft Slate: `#536B80`
 - Muted Blue-Gray: `#7F95AA`
+- Warm Gray / Taupe: `#8B8080`
+- Warm Gray / Taupe Shade: `#6F6666`
+- Warm Gray / Taupe Tint: `#AFA7A7`
+- Warm Gray / Taupe Pale Tint: `#D1CCCC`
 - White: `#FFFFFF`
 - Warm Paper: `#F8F7F2`
 
@@ -174,6 +179,7 @@ Allowed contrast methods:
 
 - Navy shades.
 - Blue-gray tints.
+- Warm Gray / Taupe tints and shades.
 - White and warm paper neutrals.
 - Opacity steps.
 - Line style, marker shape, labels, and pattern.
@@ -185,6 +191,7 @@ Do not use:
 - Orange/yellow warning.
 - Purple or cyan technology gradients.
 - Rainbow chart palettes.
+- Additional warm accent hues beyond Warm Gray / Taupe.
 
 Recommended opacity ladder:
 

@@ -184,10 +184,12 @@ Minimum-size rules to define in the PDF:
 The palette must stay strictly within:
 
 - Logo colors.
+- Warm Gray / Taupe as the only approved secondary neutral.
 - Tints, shades, and opacity steps of logo colors.
+- Tints, shades, and opacity steps of Warm Gray / Taupe.
 - Neutral paper/off-white values.
 
-No additional accent hues are allowed for the first brand guide.
+No additional accent hues are allowed for the first brand guide beyond Warm Gray / Taupe.
 
 Do not introduce:
 
@@ -196,11 +198,13 @@ Do not introduce:
 - Orange/yellow warning colors.
 - Purple or cyan technology gradients.
 - Rainbow chart palettes.
+- Additional warm accent hues beyond Warm Gray / Taupe.
 
 Status states, charts, diagrams, and emphasis must use:
 
 - Navy shades.
 - Blue-gray tints.
+- Warm Gray / Taupe tints and shades.
 - White/off-white.
 - Opacity differences.
 - Pattern, label, or shape differences where color alone is insufficient.
@@ -213,6 +217,10 @@ Use these as starting tokens:
 - White: `#FFFFFF`
 - Warm Paper: `#F8F7F2`
 - Muted Blue-Gray: `#7F95AA`
+- Warm Gray / Taupe: `#8B8080`
+- Warm Gray / Taupe Shade: `#6F6666`
+- Warm Gray / Taupe Tint: `#AFA7A7`
+- Warm Gray / Taupe Pale Tint: `#D1CCCC`
 - Dark Blueprint Navy: `#06192D`
 - Mid Blueprint Navy: `#0A213A`
 - Deep Slate: `#263D54`
@@ -811,7 +819,7 @@ Cover must not include:
 
 - Version label.
 - Photography.
-- Extra accent colors.
+- Extra accent colors beyond Warm Gray / Taupe.
 - Generic abstract tech art.
 
 ## 14. Open Implementation Notes

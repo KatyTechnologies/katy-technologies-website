@@ -34,6 +34,10 @@ MID_NAVY = "#0A213A"
 DEEP_SLATE = "#263D54"
 SOFT_SLATE = "#536B80"
 BLUE_GRAY = "#7F95AA"
+WARM_TAUPE = "#8B8080"
+WARM_TAUPE_SHADE = "#6F6666"
+WARM_TAUPE_TINT = "#AFA7A7"
+WARM_TAUPE_PALE = "#D1CCCC"
 PAPER = "#F8F7F2"
 WHITE = "#FFFFFF"
 
@@ -302,10 +306,18 @@ def page_logo(c: canvas.Canvas) -> None:
 def page_visual_language(c: canvas.Canvas) -> None:
     draw_page_header(c, "Color, Grain, and Grid", "03")
     y = PAGE_H - 130
-    colors = [(NAVY, "Deep Navy"), (DARK_NAVY, "Blueprint Navy"), (DEEP_SLATE, "Deep Slate"), (SOFT_SLATE, "Soft Slate"), (BLUE_GRAY, "Blue-Gray"), (PAPER, "Warm Paper")]
-    sw = 76
+    colors = [
+        (NAVY, "Deep Navy"),
+        (DARK_NAVY, "Blueprint Navy"),
+        (DEEP_SLATE, "Deep Slate"),
+        (SOFT_SLATE, "Soft Slate"),
+        (BLUE_GRAY, "Blue-Gray"),
+        (WARM_TAUPE, "Warm Taupe"),
+        (PAPER, "Warm Paper"),
+    ]
+    sw = 68
     for i, (color, label) in enumerate(colors):
-        x = MARGIN + i * 84
+        x = MARGIN + i * 74
         set_fill(c, color)
         c.rect(x, y - 62, sw, 48, fill=1, stroke=0)
         set_stroke(c, NAVY, 0.16)
@@ -313,10 +325,10 @@ def page_visual_language(c: canvas.Canvas) -> None:
         draw_text(c, label, x, y - 76, sw, 6.7, 8.5, FONT_SANS, NAVY, 0.75)
         draw_text(c, color, x, y - 88, sw, 6.5, 8, FONT_SANS, NAVY, 0.62)
     y -= 140
-    draw_module(c, MARGIN, y, 248, 138, "Palette Rule", "Stay within logo colors plus neutrals. Use tints, shades, opacity, line style, labels, and pattern. Do not add green, red, orange, purple, or rainbow accents.")
+    draw_module(c, MARGIN, y, 248, 138, "Palette Rule", "Stay within logo colors plus neutrals. Warm Gray / Taupe is the only secondary neutral. Use tints, shades, opacity, line style, labels, and pattern.")
     draw_module(c, MARGIN + 270, y, 248, 138, "Blueprint Fade", "Use directional linear gradients with fine dense grain. Avoid radial glows and generic AI gradients.")
     y -= 178
-    draw_module(c, MARGIN, y, 248, 120, "Grid Role", "Use grids rarely: diagrams, selected openers, and technical examples. Content grids generally stay below 12% opacity.")
+    draw_module(c, MARGIN, y, 248, 120, "Secondary Neutral", "Use Warm Gray / Taupe (#8B8080) plus #6F6666, #AFA7A7, and #D1CCCC for warmth, secondary notes, and quiet contrast. Do not introduce additional warm accent hues.")
     draw_module(c, MARGIN + 270, y, 248, 120, "Grain Rule", "Fine photo grain only. It should reduce banding and add atmosphere without lowering contrast or muddying colors.")
     finish_page(c)
 
