@@ -1,28 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="kt-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1d4ed8"/>
-      <stop offset="72%" stop-color="#60a5fa"/>
-      <stop offset="100%" stop-color="#f59e0b"/>
-    </linearGradient>
-    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blurred"/>
-      <feMerge>
-        <feMergeNode in="blurred"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  <rect x="32" y="32" width="448" height="448" rx="104" fill="url(#kt-grad)"/>
-  <rect x="32" y="32" width="448" height="448" rx="104" fill="none" stroke="#ffffff" stroke-opacity="0.32"/>
-  <text
-    x="256"
-    y="314"
-    text-anchor="middle"
-    font-size="226"
-    font-family="Inter, Arial, sans-serif"
-    font-weight="700"
-    fill="#f0f2f5"
-    filter="url(#soft-glow)"
-  >KT</text>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Katy Technologies navy slate tonal transparent logo">
+  <path id="kt-k-arrow" d="M 612.99316,629.08496 H 498.00293 L 389.36035,483.57715 367.3877,510.18848 v 118.89648 h -93.75 V 265.55957 h 93.75 V 430.11035 L 497.27051,265.55957 h 50.44545 26.18563 l 19.56882,10.64309 -129.64717,157.5698 z M 594.775031,330.249815 L 598.575031,190.949815 L 473.055031,251.459815 Z" fill="#071A33" aria-label="K and arrow symbol" />
+  <path id="kt-t-overlay" d="M219 0V543H4V700H631V543H417V0Z" transform="translate(430.200000,788.760000) scale(0.560000,-0.560000)" fill="#7F95AA" opacity="0.58" aria-label="T overlay" />
 </svg>

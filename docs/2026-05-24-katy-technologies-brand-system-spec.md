@@ -279,6 +279,7 @@ Approved type pairing:
 Work Sans usage:
 
 - All headers and headings.
+- Website header and footer text.
 - UI labels.
 - Captions.
 - Navigation.
