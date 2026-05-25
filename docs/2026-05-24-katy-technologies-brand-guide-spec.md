@@ -281,9 +281,37 @@ Required characteristics:
 
 Technical implementation guidance:
 
-- Prefer SVG filter displacement/noise techniques or high-quality generated grain overlays.
-- If using CSS/SVG filters, use fine `fractalNoise` and keep the effect subtle enough that text remains legible.
-- Avoid simply placing a high-opacity noise image over the design if it changes the palette too aggressively.
+- Follow the Frontend Masters "Grainy Gradients" approach: use generated noise as a displacement map rather than simply layering a noisy image over the gradient.
+- Prefer an inline zero-dimension SVG filter for web implementations.
+- Set `color-interpolation-filters="sRGB"` on the SVG filter so RGB channel behavior preserves expected brand color appearance.
+- Use `<feTurbulence type="fractalNoise">` for fine-grained noise.
+- Use higher `baseFrequency` values for smaller/finer speckles; avoid integer values because they can produce blank results.
+- Use `numOctaves` values no higher than `3` or `4`; higher values add performance cost without enough visible improvement.
+- Feed the turbulence result into `<feDisplacementMap in="SourceGraphic">` so the noise displaces the gradient pixels instead of sitting as a visible noise layer on top.
+- Use absolute pixel displacement rather than `primitiveUnits="objectBoundingBox"` for non-square surfaces, because relative displacement is inconsistent across browsers.
+- Add `<feBlend in2="SourceGraphic">` after the displacement map so the original gradient sits underneath the displaced gradient and covers transparent internal gaps.
+- Restrict the filter region with `x="0" y="0" width="1" height="1"` and/or apply `clip-path: inset(0)` so displaced pixels do not extend outside the gradient box.
+- Keep the effect subtle enough that text remains legible and the palette still reads as Katy Technologies navy, slate, taupe, and paper.
+
+Reference implementation pattern:
+
+```html
+<svg width="0" height="0" aria-hidden="true">
+  <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
+    <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="3" />
+    <feDisplacementMap in="SourceGraphic" scale="80" xChannelSelector="R" yChannelSelector="G" />
+    <feBlend in2="SourceGraphic" />
+  </filter>
+</svg>
+```
+
+```css
+.kt-grainy-gradient {
+  background: linear-gradient(135deg, #06192D 0%, #0A213A 42%, #536B80 100%);
+  clip-path: inset(0);
+  filter: url("#kt-grain");
+}
+```
 
 ### 4.3 Grid Rule
 

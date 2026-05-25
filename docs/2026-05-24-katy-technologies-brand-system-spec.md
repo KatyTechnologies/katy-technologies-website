@@ -228,6 +228,40 @@ Grain:
 - Must not muddy brand colors.
 - Should reduce banding and create atmosphere.
 
+Implementation instructions based on the Frontend Masters "Grainy Gradients" technique:
+
+- Prefer noise-as-displacement instead of placing a noisy bitmap over the gradient.
+- Use an inline zero-dimension SVG filter for web implementations.
+- Set `color-interpolation-filters="sRGB"` on the SVG filter so RGB channel behavior is consistent with expected brand colors.
+- Use `<feTurbulence type="fractalNoise">` to generate fine-grained noise.
+- Use higher `baseFrequency` values for smaller/finer speckles; avoid integer values because they can produce blank results.
+- Use `numOctaves` values no higher than `3` or `4`; higher values add cost without enough visual gain.
+- Feed the turbulence result into `<feDisplacementMap in="SourceGraphic">` so the noise displaces the gradient pixels instead of sitting visibly on top of the gradient.
+- Use absolute pixel displacement rather than `primitiveUnits="objectBoundingBox"` for non-square surfaces, because relative displacement is inconsistent across browsers.
+- Add `<feBlend in2="SourceGraphic">` after the displacement map so the original gradient sits underneath the displaced version and covers transparent internal gaps.
+- Restrict the filter region with `x="0" y="0" width="1" height="1"` and/or apply `clip-path: inset(0)` to prevent displaced pixels from extending outside the gradient box.
+- Keep the visible effect subtle enough that the palette still reads as Katy Technologies navy, slate, taupe, and paper rather than a darkened/noisy overlay.
+
+Reference implementation pattern:
+
+```html
+<svg width="0" height="0" aria-hidden="true">
+  <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
+    <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="3" />
+    <feDisplacementMap in="SourceGraphic" scale="80" xChannelSelector="R" yChannelSelector="G" />
+    <feBlend in2="SourceGraphic" />
+  </filter>
+</svg>
+```
+
+```css
+.kt-grainy-gradient {
+  background: linear-gradient(135deg, #06192D 0%, #0A213A 42%, #536B80 100%);
+  clip-path: inset(0);
+  filter: url("#kt-grain");
+}
+```
+
 Grid:
 
 - Use rarely.
