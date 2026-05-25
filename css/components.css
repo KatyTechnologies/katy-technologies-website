@@ -38,6 +38,7 @@
   position: relative;
   padding-top: 76px;
   padding-bottom: clamp(40px, 6vw, 72px);
+  background: transparent;
   text-align: center;
 }
 
