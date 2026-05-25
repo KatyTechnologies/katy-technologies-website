@@ -42,15 +42,7 @@
 }
 
 .page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(127, 149, 170, 0.12), transparent 55%),
-    repeating-linear-gradient(90deg, transparent 0, transparent 31px, rgba(248, 247, 242, 0.045) 32px);
-  clip-path: inset(0);
-  filter: url("#kt-grain");
-  pointer-events: none;
+  content: none;
 }
 
 .page-hero .container {
