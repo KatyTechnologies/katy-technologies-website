@@ -146,84 +146,6 @@
             </div>
         </section>
         
-        <!-- Team Section -->
-        <section class="section" id="team">
-            <div class="container">
-                <h2 class="text-center fade-up">Advisory Leadership</h2>
-                <p class="text-center fade-up" style="max-width: 600px; margin: 0 auto 3rem;">
-                    Experienced operators and engineers focused on workflow automation that teams can trust.
-                </p>
-                
-                <div class="team-grid">
-                    <div class="team-member fade-up" tabindex="0" role="button" aria-expanded="false">
-                        <div class="team-member-image">JD</div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">Jane Doe</h3>
-                            <p class="team-member-role">CEO & Founder</p>
-                            <div class="team-member-bio">
-                                <p>Jane guides client engagements from operational problem to practical software plan, keeping trust and explainability visible from the first workflow map.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member fade-up" tabindex="0" role="button" aria-expanded="false" data-delay="100">
-                        <div class="team-member-image">JS</div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">John Smith</h3>
-                            <p class="team-member-role">CTO</p>
-                            <div class="team-member-bio">
-                                <p>John shapes the technical systems behind each engagement, focusing on durable software patterns, careful AI integration, and operational reliability.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member fade-up" tabindex="0" role="button" aria-expanded="false" data-delay="200">
-                        <div class="team-member-image">SC</div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">Sarah Chen</h3>
-                            <p class="team-member-role">VP of Engineering</p>
-                            <div class="team-member-bio">
-                                <p>Sarah leads implementation with a focus on clear handoffs, maintainable architecture, and systems that fit into the client team responsible for the work.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member fade-up" tabindex="0" role="button" aria-expanded="false" data-delay="300">
-                        <div class="team-member-image">MJ</div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">Michael Johnson</h3>
-                            <p class="team-member-role">VP of Sales</p>
-                            <div class="team-member-bio">
-                                <p>Michael helps teams frame the business case around bottlenecks, review queues, and the measurable cost of repeat manual work.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member fade-up" tabindex="0" role="button" aria-expanded="false" data-delay="400">
-                        <div class="team-member-image">EW</div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">Emily Williams</h3>
-                            <p class="team-member-role">VP of Product</p>
-                            <div class="team-member-bio">
-                                <p>Emily translates workflow findings into product decisions, making sure every interface supports the people who need to trust the outcome.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="team-member fade-up" tabindex="0" role="button" aria-expanded="false" data-delay="500">
-                        <div class="team-member-image">RB</div>
-                        <div class="team-member-info">
-                            <h3 class="team-member-name">Robert Brown</h3>
-                            <p class="team-member-role">VP of Operations</p>
-                            <div class="team-member-bio">
-                                <p>Robert keeps delivery grounded in operating realities, from project cadence to rollout planning and governance checkpoints.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
         <!-- CTA Section -->
         <section class="section">
             <div class="container text-center">
@@ -355,31 +277,6 @@
           requestAnimationFrame(updateCounter);
         }
         
-        // Team member expandable bios
-        function initTeamMembers() {
-          const teamMembers = document.querySelectorAll('.team-member');
-          
-          teamMembers.forEach(member => {
-            member.addEventListener('click', () => {
-              member.classList.toggle('expanded');
-              
-              // Update aria-expanded attribute for accessibility
-              const isExpanded = member.classList.contains('expanded');
-              member.setAttribute('aria-expanded', isExpanded);
-            });
-            
-            // Add keyboard support
-            member.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                member.classList.toggle('expanded');
-                const isExpanded = member.classList.contains('expanded');
-                member.setAttribute('aria-expanded', isExpanded);
-              }
-            });
-          });
-        }
-        
         // Mobile menu functionality
         function initMobileMenu() {
           const burger = document.querySelector('.burger');
@@ -439,7 +336,6 @@
         document.addEventListener('DOMContentLoaded', () => {
           initFadeUpAnimations();
           initNumberCounters();
-          initTeamMembers();
           initMobileMenu();
         });
     </script>

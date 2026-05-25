@@ -21,10 +21,6 @@
     grid-template-columns: 1fr;
   }
 
-  .team-grid {
-    grid-template-columns: 1fr;
-  }
-
   .solutions-gallery {
     grid-template-columns: 1fr;
   }
@@ -166,11 +162,6 @@
     padding: var(--space-14);
   }
 
-  .team-member-image {
-    min-height: 170px;
-    font-size: 30px;
-  }
-
   .mobile-menu {
     width: 100%;
   }
@@ -199,7 +190,6 @@
 
   .card,
   .solution-card,
-  .team-member,
   .value-card,
   .benefit-card,
   .industry-card,
@@ -247,7 +237,6 @@
 
   .card,
   .solution-card,
-  .team-member,
   .value-card,
   .benefit-card,
   .industry-card,
@@ -273,7 +262,6 @@
 @media (hover: none) {
   .card:hover,
   .solution-card:hover,
-  .team-member:hover,
   .value-card:hover,
   .benefit-card:hover,
   .industry-card:hover,
