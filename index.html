@@ -48,9 +48,11 @@
 <body>
     <svg class="kt-grain-filter" width="0" height="0" aria-hidden="true" focusable="false">
         <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
-            <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="3" />
-            <feDisplacementMap in="SourceGraphic" scale="18" xChannelSelector="R" yChannelSelector="G" />
-            <feBlend in2="SourceGraphic" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="3" result="grainNoise" />
+            <feDisplacementMap in="SourceGraphic" in2="grainNoise" scale="80" xChannelSelector="R" yChannelSelector="G" result="grainDisplacement" />
+            <feBlend in="grainDisplacement" in2="SourceGraphic" result="grainBase" />
+            <feColorMatrix in="grainNoise" type="matrix" values="0.95 0 0 0 0 0 0.97 0 0 0 0 0 1 0 0 0 0 0 0.28 0" result="grainSpeckle" />
+            <feBlend in="grainSpeckle" in2="grainBase" mode="overlay" />
         </filter>
     </svg>
     
@@ -130,6 +132,7 @@
                             <div class="card-icon diagram-icon diagram-icon--control" aria-hidden="true"></div>
                             <h3 class="card-title">Governed by your process</h3>
                             <p class="card-description">We design automation around the reviews, approvals, and risk controls your team already depends on.</p>
+                            <p class="annotation-placeholder">[USER-ASSET NEEDED: handwritten background icon showing governance checkpoints]</p>
                         </div>
                     </div>
                     
@@ -138,6 +141,7 @@
                             <div class="card-icon diagram-icon diagram-icon--systems" aria-hidden="true"></div>
                             <h3 class="card-title">Practical systems experience</h3>
                             <p class="card-description">Our work combines software engineering, operational analysis, and careful implementation for teams that need results they can explain.</p>
+                            <p class="annotation-placeholder">[USER-ASSET NEEDED: handwritten background icon showing connected internal systems]</p>
                         </div>
                     </div>
                 </div>
@@ -180,6 +184,7 @@
                     <ul class="footer-links">
                         <li><a href="mailto:sales@katytechnologies.com" class="footer-link">sales@katytechnologies.com</a></li>
                         <li><a href="tel:+12819613396" class="footer-link">(281) 961-3396</a></li>
+                        <li><a href="https://www.linkedin.com/company/katy-technologies" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
                     </ul>
                 </div>
             </div>

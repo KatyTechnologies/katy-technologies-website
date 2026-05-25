@@ -15,13 +15,18 @@
   .cards-grid,
   .content-grid,
   .faq-grid,
+  .values-grid,
   .industry-grid,
   .benefits-grid {
     grid-template-columns: 1fr;
   }
 
   .team-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
+  }
+
+  .solutions-gallery {
+    grid-template-columns: 1fr;
   }
 
   .footer-content {
@@ -101,10 +106,6 @@
 
   .cards-grid {
     grid-template-columns: 1fr;
-  }
-
-  .solution-card {
-    flex-basis: min(300px, 80vw);
   }
 
   .hero-contact-methods {
