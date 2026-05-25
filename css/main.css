@@ -622,11 +622,11 @@ main {
 .hero-bg::before,
 .hero-bg::after {
   content: '';
-  position: absolute;
   opacity: 1;
 }
 
 .hero-bg::before {
+  position: fixed;
   inset: 0;
   background:
     linear-gradient(116deg, rgba(127, 149, 170, 0.2) 0%, transparent 36%),
@@ -636,13 +636,7 @@ main {
 }
 
 .hero-bg::after {
-  inset: 8% 8% auto auto;
-  width: min(440px, 50vw);
-  height: 260px;
-  background:
-    repeating-linear-gradient(0deg, transparent 0, transparent 19px, rgba(248, 247, 242, 0.08) 20px),
-    repeating-linear-gradient(90deg, transparent 0, transparent 19px, rgba(248, 247, 242, 0.06) 20px);
-  opacity: 0.44;
+  content: none;
 }
 
 .hero-content {
