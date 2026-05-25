@@ -1,7 +1,6 @@
 /* Shared panel archetype */
 .card,
 .solution-card,
-.team-member,
 .value-card,
 .benefit-card,
 .industry-card,
@@ -20,7 +19,6 @@
 
 .card:hover,
 .solution-card:hover,
-.team-member:hover,
 .value-card:hover,
 .benefit-card:hover,
 .industry-card:hover,
@@ -391,83 +389,6 @@
 .benefit-card p,
 .industry-card p {
   margin: 0;
-}
-
-/* Team */
-.team-grid {
-  margin-top: var(--space-24);
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-16);
-}
-
-.team-member {
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.team-member-image {
-  position: relative;
-  min-height: 200px;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-ui);
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--color-warm-paper);
-  background: rgba(6, 25, 45, 0.88);
-  border-bottom: 1px solid rgba(127, 149, 170, 0.24);
-  overflow: hidden;
-}
-
-.team-member-image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(127, 149, 170, 0.26), transparent 48%),
-    repeating-linear-gradient(90deg, transparent 0, transparent 18px, rgba(248, 247, 242, 0.055) 19px),
-    linear-gradient(145deg, rgba(38, 61, 84, 0.62), rgba(6, 25, 45, 0.88));
-  clip-path: inset(0);
-  filter: url("#kt-grain");
-}
-
-.team-member-image > * {
-  position: relative;
-  z-index: 1;
-}
-
-.team-member-info {
-  padding: var(--space-16);
-}
-
-.team-member-name {
-  margin-bottom: var(--space-6);
-  font-size: 16px;
-}
-
-.team-member-role {
-  margin-bottom: var(--space-12);
-  color: var(--color-taupe-pale);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.team-member-bio {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height var(--transition-normal);
-}
-
-.team-member-bio p {
-  margin: 0;
-  color: var(--color-text-secondary);
-}
-
-.team-member.expanded .team-member-bio {
-  max-height: 300px;
 }
 
 /* Solutions page */
