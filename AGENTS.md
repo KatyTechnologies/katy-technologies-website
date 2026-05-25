@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Codex GitHub PR Review Branch Rule
+
+When asked to code-review a GitHub PR, check out the PR actual head branch locally and keep the local branch name the same as the PR branch. Do not create convenience branches like `pr-697`. If a temporary local branch already exists, rename it to the PR head branch and set its upstream to the matching remote branch before committing or pushing follow-up work.
+
 ## Project Overview
 - This is a static multi-page marketing site for Katy Technologies.
 - Primary pages: `index.html`, `about.html`, `solutions.html`, `contact.html`.
@@ -17,6 +21,7 @@
 
 ## Editing Guidelines
 - Keep changes consistent with the existing glass/dashboard design language.
+- For frontend changes, use `docs/2026-05-24-katy-technologies-brand-system-spec.md` as the brand/design reference.
 - Prefer editing shared CSS files over page-specific inline styles.
 - Preserve accessibility basics:
   - `aria-*` attributes for menu controls
