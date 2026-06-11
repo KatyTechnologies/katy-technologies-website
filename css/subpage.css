@@ -16,10 +16,19 @@
   position:absolute;inset:0;z-index:0;
   background:linear-gradient(160deg,#020812 0%,#0A213A 55%,#263D54 100%);
   clip-path:inset(0);
-  filter:url('#kt-grain');
+}
+.page-static-canvas{
+  position:fixed;inset:0;z-index:1;
+  width:100%;height:100%;
+  pointer-events:none;
+  mix-blend-mode:screen;
+  opacity:0;visibility:hidden;
+}
+.page-static-canvas.is-visible{
+  opacity:.38;visibility:visible;
 }
 .page-hero .hero-display{font-size:clamp(2.4rem,10.8vw,10.4rem)}
-.page-hero .hero-display,.page-hero .hero-foot{z-index:2}
+.page-hero .hero-display,.page-hero .hero-foot{position:relative;z-index:2}
 
 /* ---- index rows: feature chips under the copy (solutions) ---- */
 .svc-feats{
