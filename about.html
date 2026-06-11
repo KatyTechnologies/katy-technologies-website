@@ -29,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="css/landing.css?v=hamburger-menu">
+    <link rel="stylesheet" href="css/landing.css?v=hero-entry-directions">
     <link rel="stylesheet" href="css/subpage.css?v=subpage-clean-gradient">
 
     <script>document.documentElement.classList.replace('no-js', 'js');</script>
@@ -61,7 +61,7 @@
             <a href="/">Home</a>
             <a href="/about" aria-current="page">About</a>
             <a href="/solutions">Solutions</a>
-            <a href="/contact">Contact</a>
+            <a href="mailto:tedkb@sas.upenn.edu" class="nav-email">Email us</a>
         </nav>
     </header>
 
@@ -72,28 +72,11 @@
             <div class="page-atmo" aria-hidden="true"></div>
             <canvas class="page-static-canvas" aria-hidden="true"></canvas>
             <h1 class="hero-display">
-                <span class="mask"><span class="ln">About</span></span>
-                <span class="mask"><span class="ln">Katy</span></span>
-                <span class="mask"><span class="ln">Technologies.</span></span>
+                <span class="mask enter-left"><span class="ln">Workflow</span></span>
+                <span class="mask no-indent enter-left"><span class="ln">first.</span></span>
+                <span class="mask indent enter-right"><span class="ln">Tech stack</span></span>
+                <span class="mask enter-right"><span class="ln">second.</span></span>
             </h1>
-            <div class="hero-foot">
-                <p class="micro">About</p>
-                <p class="hero-sub prose">Practical, governed automation for teams that need trust as much as speed.</p>
-                <div class="hero-cta">
-                    <a href="/contact" class="btn btn-solid">Talk through a bottleneck</a>
-                    <a href="#how" class="btn btn-line">How we work</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- POSITION — pull-quote -->
-        <section class="manifesto" aria-label="Position">
-            <div class="cols">
-                <p class="micro" data-reveal>Position</p>
-                <blockquote>
-                    <p class="manifesto-line" data-manifesto>Workflow first. Tool second.</p>
-                </blockquote>
-            </div>
         </section>
 
         <!-- HOW WE WORK -->
@@ -101,7 +84,7 @@
             <div class="cols">
                 <p class="micro" data-reveal>How we work</p>
                 <div class="duo-body" data-reveal>
-                    <p>We map how work actually moves through your organization, then build the software and AI support that removes repeat manual steps without creating new risk.</p>
+                    <p>We map how work actually moves through your organization, then build the software and AI support that removes repeat manual steps without creating new risk and <strong>without adding new costs</strong>.</p>
                     <p>Katy Technologies partners with operational leaders who need automation to feel practical, explainable, and human.</p>
                 </div>
             </div>
@@ -143,12 +126,7 @@
         <!-- CTA — shock panel -->
         <section class="cta" aria-label="Contact">
             <h2><span class="tmask"><span class="tline">You think,</span></span><span class="tmask"><span class="tline">we build.</span></span></h2>
-            <p data-reveal><a class="btn-shock" href="/contact">Talk through a bottleneck</a></p>
-            <div class="fine" data-reveal>
-                <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
-                <a href="tel:+12819613396">(281) 961-3396</a>
-                <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LINKEDIN</a>
-            </div>
+            <p data-reveal><a class="btn-shock" href="mailto:tedkb@sas.upenn.edu">Talk through a bottleneck</a></p>
         </section>
 
     </main>
@@ -157,15 +135,14 @@
         <div class="foot-grid">
             <div class="foot-brand">
                 <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="Katy Technologies logo" width="44" height="44">
-                <p class="micro">You think, we build.</p>
                 <ul class="foot-contact-list">
-                    <li><a class="foot-icon-link" href="mailto:sales@katytechnologies.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
+                    <li><a class="foot-icon-link" href="mailto:tedkb@sas.upenn.edu" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
                     <li><a class="foot-icon-link" href="tel:+12819613396" aria-label="Phone"><i class="fa-solid fa-phone" aria-hidden="true"></i></a></li>
                     <li><a class="foot-icon-link" href="https://www.linkedin.com/company/katy-technologies" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
-        <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true">© 2026 Katy Technologies</p></div>
+        <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true">© 2026 Kat<span class="foot-mark-y">y</span> Technologies</p></div>
     </footer>
 
     <!-- GSAP + Lenis -->
@@ -173,6 +150,6 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
     <script src="js/nav.js?v=animated-menu"></script>
-    <script src="js/site.js?v=subpage-clean-gradient"></script>
+    <script src="js/site.js?v=hero-entry-directions"></script>
 </body>
 </html>

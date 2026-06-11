@@ -168,7 +168,12 @@
 
     /* ---------- hero intro: lines slide in from alternating sides ---------- */
     gsap.set('.hero-display .ln', {
-      xPercent: function (i) { return i % 2 === 0 ? -110 : 110; },
+      xPercent: function (i, target) {
+        var mask = target.closest('.mask');
+        if (mask && mask.classList.contains('enter-left')) return -110;
+        if (mask && mask.classList.contains('enter-right')) return 110;
+        return i % 2 === 0 ? -110 : 110;
+      },
       x: 0
     });
     var intro = gsap.timeline();
