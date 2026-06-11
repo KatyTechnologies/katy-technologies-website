@@ -43,7 +43,6 @@
     tl.to('.hero-display .ln', {
       xPercent: 0,
       x: 0,
-      skewX: 0,
       duration: 1.15,
       ease: 'power4.out',
       stagger: 0.09,
@@ -59,7 +58,6 @@
     if (hasGsap && !reduced) {
       gsap.set('.hero-display .ln', {
         xPercent: function (i) { return i % 2 === 0 ? -110 : 110; },
-        skewX: function (i) { return i % 2 === 0 ? 8 : -8; },
         x: 0
       });
     }
@@ -191,8 +189,8 @@
         scrollTrigger: { trigger: chapter, start: 'top 85%', end: 'top 20%', scrub: 0.5 }
       });
       inTl.fromTo(lines,
-        { yPercent: 120, skewY: 7 },
-        { yPercent: 0, skewY: 0, stagger: 0.12, ease: 'power2.out' }, 0)
+        { yPercent: 120 },
+        { yPercent: 0, stagger: 0.12, ease: 'power2.out' }, 0)
         .fromTo(aux,
           { y: 70, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, stagger: 0.1, ease: 'power2.out' }, 0.15);
@@ -231,7 +229,6 @@
     /* ---------- CTA: shock-panel words rise once ---------- */
     gsap.from('#contact .tline', {
       yPercent: 120,
-      skewY: 6,
       duration: 1.0,
       ease: 'power4.out',
       stagger: 0.1,

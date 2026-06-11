@@ -1,7 +1,7 @@
 /* ==========================================================================
    Katy Technologies — Swiss Glow subpages (solutions / contact / about)
    Loads AFTER css/landing.css and reuses its tokens + components
-   (micro, btn, site-head, foot, marquee, sec-num, tmask/tline, svc rows,
+   (micro, btn, site-head, foot, marquee, tmask/tline, svc rows,
    notes table, manifesto, cta). This file adds only subpage patterns.
    ========================================================================== */
 
@@ -19,7 +19,6 @@
   filter:url('#kt-grain');
 }
 .page-hero .hero-display{font-size:clamp(2.4rem,10.8vw,10.4rem)}
-.page-hero .sec-num{z-index:1}
 .page-hero .hero-display,.page-hero .hero-foot{z-index:2}
 
 /* ---- index rows: feature chips under the copy (solutions) ---- */

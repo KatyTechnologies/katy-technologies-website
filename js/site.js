@@ -47,14 +47,12 @@
     /* ---------- hero intro: lines slide in from alternating sides ---------- */
     gsap.set('.hero-display .ln', {
       xPercent: function (i) { return i % 2 === 0 ? -110 : 110; },
-      skewX: function (i) { return i % 2 === 0 ? 8 : -8; },
       x: 0
     });
     var intro = gsap.timeline();
     intro.to('.hero-display .ln', {
       xPercent: 0,
       x: 0,
-      skewX: 0,
       duration: 1.15,
       ease: 'power4.out',
       stagger: 0.09,
@@ -81,37 +79,6 @@
         if (lenis) lenis.scrollTo(target, { offset: 0 });
         else target.scrollIntoView({ behavior: 'smooth' });
       });
-    });
-
-    /* ---------- oversized numerals parallax at their own speed ---------- */
-    gsap.utils.toArray('.sec-num, .step-num').forEach(function (num) {
-      var host = num.closest('section, footer, article');
-      gsap.to(num, {
-        yPercent: -42,
-        ease: 'none',
-        scrollTrigger: { trigger: host, start: 'top bottom', end: 'bottom top', scrub: true }
-      });
-    });
-
-    /* ---------- scroll-velocity skew on the big type ---------- */
-    gsap.set('[data-skew]', { transformOrigin: 'center center', force3D: true });
-    var skewSetter = gsap.quickSetter('[data-skew]', 'skewY', 'deg');
-    var skewClamp = gsap.utils.clamp(-4, 4);
-    var skewProxy = { v: 0 };
-    ScrollTrigger.create({
-      onUpdate: function (self) {
-        var s = skewClamp(self.getVelocity() / -400);
-        if (Math.abs(s) > Math.abs(skewProxy.v)) {
-          skewProxy.v = s;
-          gsap.to(skewProxy, {
-            v: 0,
-            duration: 0.9,
-            ease: 'power3',
-            overwrite: true,
-            onUpdate: function () { skewSetter(skewProxy.v); }
-          });
-        }
-      }
     });
 
     /* ---------- marquee rushes with scroll velocity ---------- */
@@ -157,7 +124,6 @@
     /* ---------- CTA: shock-panel words rise once ---------- */
     gsap.from('.cta .tline', {
       yPercent: 120,
-      skewY: 6,
       duration: 1.0,
       ease: 'power4.out',
       stagger: 0.1,

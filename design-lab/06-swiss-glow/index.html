@@ -477,7 +477,7 @@ a{color:inherit}
     <!-- 01 · HERO -->
     <section class="hero sec-grid" id="method-intro" aria-label="Introduction">
       <span class="sec-num" aria-hidden="true">01</span>
-      <h1 class="hero-display" data-skew>
+      <h1 class="hero-display">
         <span class="mask"><span class="ln">Automate</span></span>
         <span class="mask"><span class="ln">The&nbsp;Work</span></span>
         <span class="mask"><span class="ln">That&nbsp;Slows</span></span>
@@ -501,7 +501,7 @@ a{color:inherit}
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 01</p>
         <div class="panel-main">
-          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Map the work</span></span><span class="tmask"><span class="tline">as it moves</span></span></h2>
+          <h2 class="panel-title"><span class="tmask"><span class="tline">Map the work</span></span><span class="tmask"><span class="tline">as it moves</span></span></h2>
           <p class="panel-copy">We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -536,7 +536,7 @@ a{color:inherit}
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 02</p>
         <div class="panel-main">
-          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Name the step</span></span><span class="tmask"><span class="tline">worth improving</span></span></h2>
+          <h2 class="panel-title"><span class="tmask"><span class="tline">Name the step</span></span><span class="tmask"><span class="tline">worth improving</span></span></h2>
           <p class="panel-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly — the bottleneck, on the record.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -574,7 +574,7 @@ a{color:inherit}
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 03</p>
         <div class="panel-main">
-          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Route the repeat</span></span><span class="tmask"><span class="tline">work around it</span></span></h2>
+          <h2 class="panel-title"><span class="tmask"><span class="tline">Route the repeat</span></span><span class="tmask"><span class="tline">work around it</span></span></h2>
           <p class="panel-copy">Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the permissions and controls your team already trusts.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -604,7 +604,7 @@ a{color:inherit}
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 04</p>
         <div class="panel-main">
-          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Keep review</span></span><span class="tmask"><span class="tline">visible</span></span></h2>
+          <h2 class="panel-title"><span class="tmask"><span class="tline">Keep review</span></span><span class="tmask"><span class="tline">visible</span></span></h2>
           <p class="panel-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on. Results your team can explain.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -721,7 +721,7 @@ a{color:inherit}
   <!-- 06 · CTA — shock panel -->
   <section id="contact" class="cta" aria-label="Contact">
     <span class="sec-num" aria-hidden="true">06</span>
-    <h2 data-skew><span class="tmask"><span class="tline">Ready to find</span></span><span class="tmask"><span class="tline">the slow</span></span><span class="tmask"><span class="tline">handoff?</span></span></h2>
+    <h2><span class="tmask"><span class="tline">Ready to find</span></span><span class="tmask"><span class="tline">the slow</span></span><span class="tmask"><span class="tline">handoff?</span></span></h2>
     <p data-reveal><a class="btn-shock" href="/contact">Talk through a bottleneck</a></p>
     <div class="fine" data-reveal>
       <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
@@ -758,7 +758,7 @@ a{color:inherit}
     </div>
   </div>
   <p class="legal">© 2026 Katy Technologies. All rights reserved.</p>
-  <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true" data-skew>Katy Technologies</p></div>
+  <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true">Katy Technologies</p></div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -808,7 +808,6 @@ a{color:inherit}
     tl.to('.hero-display .ln', {
       xPercent: 0,
       x: 0,
-      skewX: 0,
       duration: 1.15,
       ease: 'power4.out',
       stagger: 0.09,
@@ -824,7 +823,6 @@ a{color:inherit}
     if (hasGsap && !reduced) {
       gsap.set('.hero-display .ln', {
         xPercent: function (i) { return i % 2 === 0 ? -110 : 110; },
-        skewX: function (i) { return i % 2 === 0 ? 8 : -8; },
         x: 0
       });
     }
@@ -913,27 +911,6 @@ a{color:inherit}
       });
     });
 
-    /* ---------- scroll-velocity skew on the big type ---------- */
-    gsap.set('[data-skew]', { transformOrigin: 'center center', force3D: true });
-    var skewSetter = gsap.quickSetter('[data-skew]', 'skewY', 'deg');
-    var skewClamp = gsap.utils.clamp(-4, 4);
-    var skewProxy = { v: 0 };
-    ScrollTrigger.create({
-      onUpdate: function (self) {
-        var s = skewClamp(self.getVelocity() / -400);
-        if (Math.abs(s) > Math.abs(skewProxy.v)) {
-          skewProxy.v = s;
-          gsap.to(skewProxy, {
-            v: 0,
-            duration: 0.9,
-            ease: 'power3',
-            overwrite: true,
-            onUpdate: function () { skewSetter(skewProxy.v); }
-          });
-        }
-      }
-    });
-
     /* ---------- marquee rushes with scroll velocity ---------- */
     var track = document.querySelector('.mq-track');
     if (track) {
@@ -987,8 +964,8 @@ a{color:inherit}
         scrollTrigger: { trigger: chapter, start: 'top 85%', end: 'top 20%', scrub: 0.5 }
       });
       inTl.fromTo(lines,
-        { yPercent: 120, skewY: 7 },
-        { yPercent: 0, skewY: 0, stagger: 0.12, ease: 'power2.out' }, 0)
+        { yPercent: 120 },
+        { yPercent: 0, stagger: 0.12, ease: 'power2.out' }, 0)
         .fromTo(aux,
           { y: 70, autoAlpha: 0 },
           { y: 0, autoAlpha: 1, stagger: 0.1, ease: 'power2.out' }, 0.15);
@@ -1027,7 +1004,6 @@ a{color:inherit}
     /* ---------- CTA: shock-panel words rise once ---------- */
     gsap.from('#contact .tline', {
       yPercent: 120,
-      skewY: 6,
       duration: 1.0,
       ease: 'power4.out',
       stagger: 0.1,
