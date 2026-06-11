@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katy Technologies — Swiss Ops</title>
+<meta name="description" content="We help enterprise teams automate manual workflows with practical AI and custom software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&family=Literata:opsz@7..72&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET / TOKENS ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F8F7F2;
+  --white:#FFFFFF;
+  --navy:#071A33;
+  --blue:#2E7CFF;
+  --hair-dark:rgba(7,26,51,.08);
+  --hair-light:rgba(255,255,255,.08);
+  --pad:clamp(1rem,3vw,3rem);
+  --micro:clamp(.625rem,.55rem + .25vw,.75rem);
+}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto}
+body{
+  font-family:"Work Sans",system-ui,sans-serif;
+  font-weight:300;
+  background:var(--paper);
+  color:var(--navy);
+  line-height:1.5;
+  min-width:320px;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.skip-link{
+  position:absolute;left:-9999px;top:0;z-index:300;
+  background:var(--navy);color:var(--white);
+  padding:.75rem 1.25rem;font-weight:500;text-decoration:none;
+}
+.skip-link:focus-visible{left:0}
+
+/* ============ SHARED TYPE ============ */
+.micro{
+  font-size:var(--micro);
+  font-weight:500;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.prose{font-family:"Literata",Georgia,serif;font-weight:400}
+
+/* ============ SURFACES + EXPOSED GRID ============ */
+.sec{position:relative;overflow:hidden}
+.sec--paper{background:var(--paper);color:var(--navy);--hair:var(--hair-dark)}
+.sec--white{background:var(--white);color:var(--navy);--hair:var(--hair-dark)}
+.sec--navy{background:var(--navy);color:var(--white);--hair:var(--hair-light)}
+.sec--blue{background:var(--blue);color:var(--white);--hair:rgba(255,255,255,.14)}
+.sec::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-linear-gradient(90deg,var(--hair) 0,var(--hair) 1px,transparent 1px,transparent calc(100%/12)),
+    linear-gradient(90deg,transparent calc(100% - 1px),var(--hair) calc(100% - 1px));
+}
+.sec>*{position:relative;z-index:1}
+
+/* oversized half-cropped section numerals */
+.sec-num{
+  position:absolute;z-index:0;pointer-events:none;
+  font-weight:700;line-height:.78;
+  font-size:clamp(9rem,26vw,24rem);
+  top:-.12em;right:-.14em;
+  opacity:.07;user-select:none;
+}
+.sec--navy .sec-num,.sec--blue .sec-num{opacity:.09}
+
+/* 12-col content grid that lines up with the hairlines */
+.cols{display:grid;grid-template-columns:repeat(12,1fr);width:100%}
+
+/* ============ PRELOADER ============ */
+#preloader{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--navy);
+}
+#preloader img{width:clamp(72px,12vw,128px);height:auto}
+#preloader .pl-dark{display:none}
+#preloader.s-blue{background:var(--blue)}
+#preloader.s-paper{background:var(--paper)}
+#preloader.s-paper .pl-light{display:none}
+#preloader.s-paper .pl-dark{display:block}
+@media (prefers-reduced-motion:reduce){#preloader{display:none}}
+
+/* ============ HEADER ============ */
+.site-head{
+  position:absolute;top:0;left:0;right:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(var(--pad)*.6) var(--pad);
+  border-bottom:1px solid var(--hair-dark);
+}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.brand img{width:38px;height:38px}
+.site-head nav{display:flex;gap:clamp(.9rem,2.5vw,2.25rem)}
+.site-head nav a{text-decoration:none}
+.site-head nav a:hover{color:var(--blue)}
+@media (max-width:560px){.site-head nav a:nth-child(4){display:none}}
+
+/* ============ HERO ============ */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--pad)*3) var(--pad) var(--pad)}
+.hero-display{
+  font-weight:700;text-transform:uppercase;
+  font-size:clamp(2.7rem,12.2vw,12.2rem);
+  line-height:.92;letter-spacing:-.01em;
+  margin-bottom:clamp(1.5rem,4vh,3rem);
+}
+.hero-display .mask{display:block;overflow:hidden}
+.hero-display .ln{display:inline-block;will-change:transform}
+.hero-display .mask:nth-child(2) .ln,
+.hero-display .mask:nth-child(4) .ln{margin-left:8.333%}
+.hero-foot{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;border-top:1px solid var(--hair-dark);padding-top:1rem;align-items:start}
+.hero-foot .micro{grid-column:1/span 3}
+.hero-foot .prose{grid-column:5/span 6;font-size:clamp(1rem,1.05rem + .4vw,1.4rem)}
+.hero-foot .scroll-cue{grid-column:12/span 1;justify-self:end;font-size:var(--micro);font-weight:500;letter-spacing:.22em;writing-mode:vertical-rl}
+@media (max-width:760px){
+  .hero-foot{grid-template-columns:1fr}
+  .hero-foot .micro,.hero-foot .prose,.hero-foot .scroll-cue{grid-column:auto}
+  .hero-foot .scroll-cue{writing-mode:horizontal-tb;justify-self:start}
+}
+
+/* ============ MANIFESTO ============ */
+.manifesto{padding:clamp(5rem,14vh,9rem) var(--pad)}
+.manifesto .cols{gap:1rem 0}
+.manifesto .micro{grid-column:1/span 3}
+.manifesto blockquote{grid-column:4/span 8;font-size:clamp(1.6rem,1rem + 2.8vw,2.9rem);line-height:1.3}
+@media (max-width:760px){.manifesto .micro,.manifesto blockquote{grid-column:1/-1}}
+
+/* ============ MARQUEE ============ */
+.marquee{overflow:hidden;padding:1rem 0;border-block:1px solid rgba(7,26,51,.15)}
+.marquee--blue{background:var(--blue);color:var(--navy)}
+.marquee--navy{background:var(--navy);color:var(--blue)}
+.mq-track{display:flex;width:max-content;will-change:transform;animation:mq 38s linear infinite}
+.mq-track span{
+  white-space:nowrap;font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.25rem,2.6vw,2.1rem);letter-spacing:.08em;
+}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.mq-track{animation:none}}
+
+/* ============ METHOD WIPE STACK ============ */
+.wipe-panel{
+  position:relative;overflow:hidden;
+  min-height:100svh;display:flex;align-items:center;
+  padding:clamp(4rem,10vh,6rem) var(--pad);
+}
+.wipe-panel.sec--paper,.wipe-panel.sec--white{--hairline:var(--hair-dark)}
+.wipe-panel.sec--navy{--hairline:var(--hair-light)}
+.step-num{
+  position:absolute;left:-.14em;top:-.1em;z-index:0;pointer-events:none;
+  font-weight:700;line-height:.8;font-size:clamp(11rem,42vh,26rem);
+  opacity:.08;user-select:none;
+}
+.wipe-panel.sec--navy .step-num{opacity:.1}
+.panel-inner{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem 0;width:100%;position:relative;z-index:1}
+.panel-meta{grid-column:1/span 3}
+.panel-main{grid-column:4/span 6}
+.panel-diagram{grid-column:4/span 8;margin-top:clamp(1.5rem,4vh,3rem)}
+.panel-title{
+  font-weight:700;text-transform:uppercase;
+  font-size:clamp(2.1rem,1rem + 5.4vw,5.6rem);
+  line-height:.95;letter-spacing:-.01em;margin-bottom:1.25rem;
+}
+.panel-copy{font-size:clamp(1rem,.95rem + .45vw,1.3rem);max-width:34em}
+@media (max-width:899.98px){
+  .panel-meta,.panel-main,.panel-diagram{grid-column:1/-1}
+  .panel-inner{gap:1.25rem 0}
+}
+
+/* MAP diagram: flow of stations */
+.d-map{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem}
+.d-map .node{
+  border:1px solid currentColor;padding:.6rem .9rem;
+  font-size:var(--micro);font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+}
+.d-map .link{width:clamp(1.25rem,4vw,3.5rem);height:1px;background:currentColor;flex:none}
+
+/* NAME diagram: identical bars, one twice as tall */
+.d-name{display:flex;align-items:flex-end;gap:clamp(.4rem,1.2vw,.9rem);height:170px;border-bottom:1px solid var(--hair-light);position:relative}
+.d-name .bar{flex:1;height:72px;background:rgba(255,255,255,.34);will-change:transform}
+.d-name .bar.is-slow{height:150px;background:var(--blue);position:relative}
+.d-name .bar.is-slow::after{
+  content:"THE SLOW STEP";position:absolute;bottom:calc(100% + .55rem);left:0;
+  white-space:nowrap;font-size:var(--micro);font-weight:500;letter-spacing:.2em;color:var(--white);
+}
+
+/* ROUTE diagram: line draws across and forks */
+.d-route{position:relative;height:180px}
+.d-route .seg{position:absolute;height:6px;background:var(--navy);transform-origin:left center;will-change:transform}
+.route-main{left:0;top:50%;width:55%}
+.route-a{left:55%;top:50%;width:42%;background:var(--blue);transform:rotate(-16deg)}
+.route-b{left:55%;top:50%;width:34%;opacity:.25;transform:rotate(14deg)}
+.d-route .tag{position:absolute;font-size:var(--micro);font-weight:500;letter-spacing:.2em;text-transform:uppercase}
+.d-route .tag-a{right:0;top:8%;color:var(--blue)}
+.d-route .tag-b{right:12%;bottom:6%;opacity:.55}
+.d-route .tag-0{left:0;top:calc(50% + 1rem)}
+
+/* TRUST diagram: visible review log */
+.d-trust{border-top:1px solid var(--hair-light)}
+.d-trust .log-row{
+  display:flex;justify-content:space-between;gap:1rem;
+  padding:.8rem 0;border-bottom:1px solid var(--hair-light);
+  font-size:var(--micro);font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+}
+.d-trust .log-row strong{font-weight:700}
+.d-trust .log-row.is-human{background:var(--blue);padding-inline:.8rem}
+
+/* ============ SERVICES ============ */
+.services{padding-top:clamp(4rem,10vh,7rem)}
+.services .sec-head{padding:0 var(--pad) clamp(2rem,5vh,3.5rem)}
+.svc-list{list-style:none;border-top:1px solid rgba(7,26,51,.25)}
+.svc{
+  display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;align-items:baseline;
+  padding:clamp(1.4rem,3.5vh,2.4rem) var(--pad);
+  border-bottom:1px solid rgba(7,26,51,.25);
+}
+.svc:hover{background:var(--blue);color:var(--white)} /* hard cut — no transition, deliberately */
+.svc .idx{grid-column:1/span 1;font-size:var(--micro);font-weight:500;letter-spacing:.22em}
+.svc h3{grid-column:2/span 5;font-weight:700;text-transform:uppercase;font-size:clamp(1.35rem,1rem + 2vw,2.6rem);line-height:1.02;letter-spacing:-.01em}
+.svc p{grid-column:8/span 5;font-size:clamp(.95rem,.9rem + .3vw,1.1rem);max-width:34em}
+@media (max-width:760px){
+  .svc{grid-template-columns:auto 1fr;gap:.35rem 1rem}
+  .svc .idx{grid-column:1;grid-row:1}
+  .svc h3{grid-column:2;grid-row:1}
+  .svc p{grid-column:1/-1;grid-row:2}
+}
+
+/* ============ FIELD NOTES ============ */
+.notes{padding:clamp(4rem,10vh,7rem) var(--pad)}
+.notes .sec-head{margin-bottom:clamp(2rem,5vh,3.5rem)}
+.notes table{width:100%;border-collapse:collapse;border-top:1px solid rgba(7,26,51,.25)}
+.notes th{
+  text-align:left;font-size:var(--micro);font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  padding:.8rem .75rem .8rem 0;border-bottom:1px solid rgba(7,26,51,.25);
+}
+.notes td{
+  vertical-align:top;padding:clamp(1rem,2.5vh,1.6rem) .75rem clamp(1rem,2.5vh,1.6rem) 0;
+  border-bottom:1px solid var(--hair-dark);
+}
+.notes td.yr{font-weight:700;white-space:nowrap;width:10%}
+.notes td.cl{font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:.85rem;width:22%}
+.notes td.nt{font-size:clamp(1rem,.95rem + .3vw,1.2rem);max-width:46em}
+@media (max-width:640px){
+  .notes table,.notes tbody,.notes tr,.notes td{display:block;width:100%}
+  .notes thead{position:absolute;left:-9999px}
+  .notes td{border:0;padding:.25rem 0}
+  .notes tr{border-bottom:1px solid rgba(7,26,51,.25);padding:1.1rem 0}
+}
+
+/* ============ CTA (shock panel) ============ */
+.cta{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(4rem,10vh,6rem) var(--pad)}
+.cta h2{
+  font-weight:700;text-transform:uppercase;color:var(--white);
+  font-size:clamp(2.4rem,9vw,8.6rem);line-height:.94;letter-spacing:-.01em;
+  margin-bottom:clamp(2rem,5vh,3.5rem);
+}
+.btn{
+  display:inline-block;border:2px solid var(--white);color:var(--white);
+  text-decoration:none;font-weight:700;font-size:clamp(1.25rem,1.1rem + .6vw,1.6rem);
+  letter-spacing:.04em;text-transform:uppercase;padding:1.1rem 2.2rem;
+}
+.btn:hover{background:var(--white);color:var(--navy)} /* hard cut */
+.cta .fine{margin-top:clamp(2.5rem,6vh,4rem);display:flex;flex-wrap:wrap;gap:1rem 3rem;color:var(--navy)}
+.cta .fine a{color:var(--navy);font-weight:500;text-decoration-thickness:1px;text-underline-offset:3px;font-size:.95rem;letter-spacing:.04em}
+
+/* ============ FOOTER ============ */
+.foot{padding:clamp(3.5rem,9vh,6rem) var(--pad) 0}
+.foot-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem 0;padding-bottom:clamp(3rem,8vh,5rem);border-bottom:1px solid var(--hair-light)}
+.foot-brand{grid-column:1/span 4;display:flex;align-items:flex-start;gap:1rem}
+.foot-brand img{width:44px;height:44px}
+.foot-col{grid-column:span 2}
+.foot-col:first-of-type{grid-column:7/span 2}
+.foot-col ul{list-style:none;margin-top:1rem}
+.foot-col li{margin-bottom:.6rem}
+.foot-col a{text-decoration:none;font-weight:500;font-size:.95rem}
+.foot-col a:hover{color:var(--blue)}
+.foot .legal{padding:1.25rem 0;font-size:var(--micro);font-weight:500;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+.foot-mark{
+  font-weight:700;text-transform:uppercase;white-space:nowrap;
+  font-size:clamp(4rem,11.5vw,12rem);line-height:.8;letter-spacing:-.02em;
+  transform:translateY(.28em);opacity:.92;user-select:none;
+}
+@media (max-width:760px){
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+  .foot-col,.foot-col:first-of-type{grid-column:auto}
+}
+
+/* ============ DESKTOP PINNED WIPE LAYOUT ============ */
+@media (min-width:900px) and (prefers-reduced-motion:no-preference){
+  .wipe-stack{position:relative;height:100vh;overflow:hidden}
+  .wipe-panel{position:absolute;inset:0;min-height:0;height:100%}
+}
+</style>
+<noscript><style>#preloader{display:none}</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="preloader" aria-hidden="true">
+  <img class="pl-light" src="logo-light.svg" alt="" width="128" height="128">
+  <img class="pl-dark" src="logo-dark.svg" alt="" width="128" height="128">
+</div>
+
+<header class="site-head">
+  <a class="brand" href="#main" aria-label="Katy Technologies — home">
+    <img src="logo-dark.svg" alt="" width="38" height="38">
+    <span class="micro">Katy Technologies</span>
+  </a>
+  <nav class="micro" aria-label="Site">
+    <a href="#method">Method</a>
+    <a href="#services">Services</a>
+    <a href="#notes">Notes</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- 01 · HERO -->
+  <section class="sec sec--paper hero" aria-label="Introduction">
+    <span class="sec-num" aria-hidden="true">01</span>
+    <h1 class="hero-display">
+      <span class="mask"><span class="ln">Automate</span></span>
+      <span class="mask"><span class="ln">The&nbsp;Work</span></span>
+      <span class="mask"><span class="ln">That&nbsp;Slows</span></span>
+      <span class="mask"><span class="ln">Your&nbsp;Team</span></span>
+      <span class="mask"><span class="ln">Down.</span></span>
+    </h1>
+    <div class="hero-foot">
+      <p class="micro">01 — What we do</p>
+      <p class="prose">We help enterprise teams automate manual workflows with practical AI and custom software.</p>
+      <p class="scroll-cue" aria-hidden="true">Scroll</p>
+    </div>
+  </section>
+
+  <!-- 02 · MANIFESTO -->
+  <section class="sec sec--navy manifesto" aria-label="Position">
+    <span class="sec-num" aria-hidden="true">02</span>
+    <div class="cols">
+      <p class="micro" data-reveal>02 — Position</p>
+      <blockquote class="prose" data-reveal>
+        <p>Automation should make work easier to trust, not harder to explain.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <div class="marquee marquee--blue" aria-hidden="true">
+    <div class="mq-track">
+      <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+      <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- 03 · METHOD — pinned curtain-wipe stack -->
+  <section id="method" class="wipe-stack" aria-label="Method">
+
+    <article class="sec sec--paper wipe-panel">
+      <span class="step-num" aria-hidden="true">01</span>
+      <span class="sec-num" aria-hidden="true">03</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">03 — Method / Step 01</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Map the work<br>as it moves</h2>
+          <p class="panel-copy">We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
+        </div>
+        <div class="panel-diagram d-map" aria-hidden="true">
+          <span class="node">Intake</span><span class="link"></span>
+          <span class="node">Triage</span><span class="link"></span>
+          <span class="node">Review</span><span class="link"></span>
+          <span class="node">Approval</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="sec sec--navy wipe-panel">
+      <span class="step-num" aria-hidden="true">02</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">03 — Method / Step 02</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Name the step<br>worth improving</h2>
+          <p class="panel-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly.</p>
+        </div>
+        <div class="panel-diagram d-name" aria-hidden="true">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+          <span class="bar is-slow"></span>
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="sec sec--white wipe-panel">
+      <span class="step-num" aria-hidden="true">03</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">03 — Method / Step 03</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Route the repeat<br>work around it</h2>
+          <p class="panel-copy">Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the controls your team already trusts.</p>
+        </div>
+        <div class="panel-diagram d-route" aria-hidden="true">
+          <span class="seg route-main"></span>
+          <span class="seg route-a"></span>
+          <span class="seg route-b"></span>
+          <span class="tag tag-0">The work</span>
+          <span class="tag tag-a">Repeat steps — routed</span>
+          <span class="tag tag-b">The old wait</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="sec sec--navy wipe-panel">
+      <span class="step-num" aria-hidden="true">04</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">03 — Method / Step 04</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Keep review<br>visible</h2>
+          <p class="panel-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on.</p>
+        </div>
+        <div class="panel-diagram d-trust" aria-hidden="true">
+          <p class="log-row"><strong>Drafted</strong><span>Automated — logged</span></p>
+          <p class="log-row"><strong>Sorted</strong><span>Automated — logged</span></p>
+          <p class="log-row is-human"><strong>Reviewed</strong><span>Human — always visible</span></p>
+          <p class="log-row"><strong>Approved</strong><span>Human — recorded</span></p>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- 04 · SERVICES -->
+  <section id="services" class="sec sec--white services" aria-label="Services">
+    <span class="sec-num" aria-hidden="true">04</span>
+    <div class="sec-head">
+      <p class="micro" data-reveal>04 — Services</p>
+    </div>
+    <ul class="svc-list">
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">01</span>
+        <h3>Internal systems foundations</h3>
+        <p>Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">02</span>
+        <h3>Practical AI support</h3>
+        <p>AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">03</span>
+        <h3>Custom workflow software</h3>
+        <p>Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">04</span>
+        <h3>Risk-aware automation</h3>
+        <p>Automation patterns that keep permissions, auditability, and human review visible.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">05</span>
+        <h3>Operational visibility</h3>
+        <p>Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">06</span>
+        <h3>Workflow modernization</h3>
+        <p>Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
+      </li>
+    </ul>
+  </section>
+
+  <div class="marquee marquee--navy" aria-hidden="true">
+    <div class="mq-track">
+      <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+      <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- 05 · FIELD NOTES -->
+  <section id="notes" class="sec sec--paper notes" aria-label="Field notes">
+    <span class="sec-num" aria-hidden="true">05</span>
+    <div class="sec-head">
+      <p class="micro" data-reveal>05 — Field notes</p>
+    </div>
+    <table data-reveal>
+      <thead>
+        <tr><th scope="col">Year</th><th scope="col">Client</th><th scope="col">Note</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="yr">2023</td>
+          <td class="cl">Economic consulting</td>
+          <td class="nt prose">Deployed an internal document-supported assistant for a Boston-area consulting firm that helped analysts move reports faster while protecting data privacy requirements.</td>
+        </tr>
+        <tr>
+          <td class="yr">2025</td>
+          <td class="cl">Ticket vendors</td>
+          <td class="nt prose">Worked with a California ticket vendor to create custom email annotation software that reduced repeat review work for management.</td>
+        </tr>
+        <tr>
+          <td class="yr">Now</td>
+          <td class="cl">Hospitality</td>
+          <td class="nt prose">Working with a high-end hotel chain based in Southern California to automate pricing, labor assignment, and reporting workflows.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 06 · CTA — shock panel -->
+  <section id="contact" class="sec sec--blue cta" aria-label="Contact">
+    <span class="sec-num" aria-hidden="true">06</span>
+    <h2 data-reveal>Ready to find<br>the slow<br>handoff?</h2>
+    <p data-reveal><a class="btn" href="/contact">Talk through a bottleneck</a></p>
+    <div class="fine" data-reveal>
+      <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+      <a href="tel:+12819613396">(281) 961-3396</a>
+      <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sec sec--navy foot">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="logo-light.svg" alt="Katy Technologies logo" width="44" height="44">
+      <p class="micro">Katy Technologies<br>Enterprise workflow automation</p>
+    </div>
+    <nav class="foot-col" aria-label="Footer">
+      <p class="micro">Index</p>
+      <ul>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#notes">Field notes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot-col">
+      <p class="micro">Reach</p>
+      <ul>
+        <li><a href="mailto:sales@katytechnologies.com">Email</a></li>
+        <li><a href="tel:+12819613396">(281) 961-3396</a></li>
+        <li><a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a></li>
+        <li><a href="/contact">Talk through a bottleneck</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="legal">© 2026 Katy Technologies. All rights reserved.</p>
+  <p class="foot-mark" aria-hidden="true">Katy Technologies</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+
+  /* ---------- Preloader: hard-cut flashes navy -> blue -> paper ---------- */
+  var pre = document.getElementById("preloader");
+  var heroIntro = function () {
+    if (!hasGsap || reduced) return;
+    gsap.to(".hero-display .ln", {
+      xPercent: 0,
+      duration: 1.05,
+      ease: "power4.out",
+      stagger: 0.09,
+      overwrite: "auto"
+    });
+  };
+
+  if (hasGsap && !reduced) {
+    gsap.set(".hero-display .ln", {
+      xPercent: function (i) { return i % 2 === 0 ? -110 : 110; }
+    });
+  }
+
+  function endPreloader() {
+    if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+    heroIntro();
+  }
+
+  if (!pre || reduced) {
+    if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+    heroIntro();
+  } else {
+    var stages = ["s-blue", "s-paper"];
+    var step = 0;
+    var timer = window.setInterval(function () {
+      if (step >= stages.length) {
+        window.clearInterval(timer);
+        endPreloader();
+        return;
+      }
+      pre.className = stages[step];
+      step += 1;
+    }, 150);
+  }
+
+  if (!hasGsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis smooth scroll, wired to ScrollTrigger ---------- */
+  var lenis = null;
+  if (!reduced && typeof window.Lenis !== "undefined") {
+    lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* ---------- In-page anchors ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      var id = link.getAttribute("href");
+      if (!id || id === "#") return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      event.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(target);
+      } else {
+        target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+      }
+    });
+  });
+
+  var mm = gsap.matchMedia();
+
+  /* ---------- Motion (any width) ---------- */
+  mm.add("(prefers-reduced-motion: no-preference)", function () {
+
+    /* Headline tracking tightens as the hero scrolls past */
+    gsap.fromTo(".hero-display",
+      { letterSpacing: "-0.01em" },
+      {
+        letterSpacing: "-0.045em",
+        ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+      });
+
+    /* Oversized numerals parallax at their own speed */
+    gsap.utils.toArray(".sec-num").forEach(function (num) {
+      var host = num.closest("section, footer, article");
+      gsap.to(num, {
+        yPercent: -28,
+        ease: "none",
+        scrollTrigger: { trigger: host, start: "top bottom", end: "bottom top", scrub: true }
+      });
+    });
+
+    /* Generic reveals */
+    gsap.utils.toArray("[data-reveal]").forEach(function (el) {
+      gsap.from(el, {
+        y: 44,
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 88%" }
+      });
+    });
+  });
+
+  /* ---------- Pinned curtain-wipe stack (desktop, motion ok) ---------- */
+  mm.add("(min-width: 900px) and (prefers-reduced-motion: no-preference)", function () {
+    var panels = gsap.utils.toArray(".wipe-panel");
+    if (panels.length < 2) return;
+
+    gsap.set(panels.slice(1), { clipPath: "inset(100% 0% 0% 0%)" });
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".wipe-stack",
+        start: "top top",
+        end: "+=" + (panels.length - 1) * 100 + "%",
+        pin: true,
+        scrub: true,
+        anticipatePin: 1
+      }
+    });
+
+    panels.slice(1).forEach(function (panel, i) {
+      tl.to(panel, { clipPath: "inset(0% 0% 0% 0%)", ease: "none", duration: 1 }, i);
+      tl.from(panel.querySelector(".panel-inner"), { yPercent: 14, ease: "none", duration: 1 }, i);
+    });
+
+    /* Diagram beats, timed to each panel's reveal window */
+    tl.from(".d-name .bar", {
+      scaleY: 0, transformOrigin: "bottom center", stagger: 0.05, duration: 0.35, ease: "power2.out"
+    }, 0.55);
+
+    tl.from(".route-main", { scaleX: 0, duration: 0.3, ease: "none" }, 1.55);
+    tl.from(".route-a", { scaleX: 0, duration: 0.25, ease: "none" }, 1.85);
+    tl.from(".route-b", { scaleX: 0, duration: 0.2, ease: "none" }, 1.85);
+
+    tl.from(".d-trust .log-row", {
+      xPercent: -6, autoAlpha: 0, stagger: 0.07, duration: 0.3, ease: "power2.out"
+    }, 2.6);
+  });
+
+  /* ---------- Mobile / no-pin: simple panel reveals ---------- */
+  mm.add("(max-width: 899.98px) and (prefers-reduced-motion: no-preference)", function () {
+    gsap.utils.toArray(".wipe-panel .panel-inner").forEach(function (inner) {
+      gsap.from(inner, {
+        y: 50,
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: inner, start: "top 85%" }
+      });
+    });
+  });
+
+  window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+}());
+</script>
+</body>
+</html>

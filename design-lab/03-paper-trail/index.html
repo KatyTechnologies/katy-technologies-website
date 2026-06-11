@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katy Technologies — Paper Trail</title>
+<meta name="description" content="We help enterprise teams automate manual workflows with practical AI and custom software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500;1,7..72,600;1,7..72,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PAPER TRAIL — Katy Technologies
+   Warm editorial document theatre
+   ============================================================ */
+:root{
+  --paper:#F8F7F2;
+  --paper-2:#FFFEFB;
+  --ink:#071A33;
+  --ink-soft:rgba(7,26,51,.72);
+  --taupe:#8B8080;
+  --taupe-2:#AFA7A7;
+  --taupe-text:#6E6363;
+  --blue:#2E7CFF;
+  --rule:rgba(7,26,51,.13);
+  --rule-soft:rgba(7,26,51,.07);
+  --shadow-card:0 1px 2px rgba(7,26,51,.06), 0 10px 30px -12px rgba(7,26,51,.22);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:
+    radial-gradient(1200px 600px at 85% -5%, rgba(139,128,128,.07), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(139,128,128,.05), transparent 55%),
+    var(--paper);
+  color:var(--ink);
+  font-family:'Literata', Georgia, serif;
+  font-optical-sizing:auto;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+/* paper grain over everything */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:var(--grain);
+  background-size:280px 280px;
+  opacity:.055;
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:90;
+}
+::selection{background:var(--ink);color:var(--paper)}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
+
+.skip-link{
+  position:absolute;left:1rem;top:-3.5rem;z-index:200;
+  background:var(--ink);color:var(--paper);
+  font:600 .8rem/1 'Work Sans',sans-serif;letter-spacing:.06em;
+  padding:.7rem 1rem;text-decoration:none;border-radius:3px;
+  transition:top .2s ease;
+}
+.skip-link:focus{top:1rem}
+
+.label{
+  font:600 .68rem/1.2 'Work Sans',sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.folio{
+  display:flex;align-items:center;gap:.6rem;
+  color:var(--taupe-text);
+  font:500 .68rem/1 'Work Sans',sans-serif;
+  letter-spacing:.16em;text-transform:uppercase;
+}
+.folio::before{content:"";width:2.2rem;height:1px;background:var(--taupe-2)}
+
+.wrap{width:min(1240px,92vw);margin-inline:auto}
+
+/* ---------------- PRELOADER ---------------- */
+#preloader{
+  position:fixed;inset:0;z-index:300;
+  background:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+}
+.pre-slot{
+  width:min(340px,80vw);
+  position:relative;
+}
+.pre-slot::after{ /* the printer slot line */
+  content:"";position:absolute;left:-8%;right:-8%;bottom:-2px;height:3px;
+  background:var(--ink);border-radius:2px;
+}
+.pre-window{overflow:hidden;padding-top:1rem}
+.pre-sheet{
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  border-bottom:none;
+  box-shadow:var(--shadow-card);
+  padding:1.6rem 1.5rem 1.2rem;
+  transform:translateY(105%);
+}
+.pre-sheet .pre-brand{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.pre-sheet img{width:34px;height:34px}
+.pre-sheet .pre-name{font:600 1.05rem/1.1 'Literata',serif;letter-spacing:.01em}
+.pre-rule{height:1px;background:var(--rule);margin:.55rem 0}
+.pre-rule.short{width:62%}
+.pre-label{
+  position:absolute;left:0;top:calc(100% + .9rem);
+  color:var(--taupe-text);
+  font:500 .62rem/1 'Work Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;
+}
+@media (prefers-reduced-motion:reduce){
+  #preloader{display:none}
+}
+/* fallback if JS never runs: feed the sheet + fade the loader with CSS only */
+html:not(.anim-ok) .pre-sheet{animation:preFeed .55s cubic-bezier(.3,.7,.3,1) .15s forwards}
+html:not(.anim-ok) #preloader{animation:preGone .35s ease 1.15s forwards}
+@keyframes preFeed{to{transform:translateY(0)}}
+@keyframes preGone{to{opacity:0;visibility:hidden}}
+
+/* ---------------- HEADER ---------------- */
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  background:rgba(248,247,242,.9);
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule-soft);
+}
+.site-header .bar{
+  width:min(1240px,92vw);margin-inline:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.brand img{width:30px;height:30px}
+.brand b{font:600 1rem/1 'Literata',serif;letter-spacing:.01em}
+.site-nav{display:flex;align-items:center;gap:1.6rem}
+.site-nav a{
+  font:500 .78rem/1 'Work Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);
+  padding:.4rem 0;position:relative;
+}
+.site-nav a:not(.btn)::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:var(--ink);transition:width .3s ease;
+}
+.site-nav a:not(.btn):hover::after{width:100%}
+@media (max-width:760px){.site-nav a:not(.btn){display:none}}
+
+/* ---------------- BUTTONS ---------------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font:600 .8rem/1 'Work Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;border-radius:3px;
+  padding:.95rem 1.5rem;border:1px solid var(--ink);
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(7,26,51,.5)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn-paper{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-paper:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(0,0,0,.5)}
+.btn .arrow{font-family:'Literata',serif;font-weight:400;font-size:1rem;line-height:0}
+.site-nav .btn{padding:.6rem 1rem}
+
+/* ---------------- STAMPS ---------------- */
+.stamp{
+  display:inline-block;
+  font:700 .8rem/1.05 'Work Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;
+  border:3px solid currentColor;border-radius:6px;
+  padding:.45em .75em;
+  transform:rotate(-6deg);
+  -webkit-mask-image:var(--grain);
+  mask-image:var(--grain);
+  -webkit-mask-size:190px 190px;
+  mask-size:190px 190px;
+}
+.stamp.blue{color:var(--blue)}
+.stamp.navy{color:var(--ink)}
+.stamp.taupe{color:var(--taupe)}
+
+/* ---------------- HERO ---------------- */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;align-items:center;
+  padding:8.5rem 0 5rem;
+  background-image:repeating-linear-gradient(to bottom, transparent 0 51px, var(--rule-soft) 51px 52px);
+}
+.hero .wrap{position:relative;z-index:2}
+.hero-meta{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  margin-bottom:2.6rem;color:var(--taupe-text);
+}
+.hero h1{
+  font-family:'Literata',serif;font-weight:600;
+  font-size:clamp(2.7rem, 7.1vw, 7rem);
+  line-height:1.02;letter-spacing:-.022em;
+  max-width:14ch;
+}
+.hero h1 em{font-style:italic;font-weight:500}
+.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.wi{display:inline-block;will-change:transform}
+.hero-sub{
+  margin-top:2.2rem;
+  font-size:clamp(1.02rem,1.4vw,1.25rem);
+  color:var(--ink-soft);
+  max-width:46ch;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem}
+.hero-foot{
+  margin-top:5rem;display:flex;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--rule);padding-top:1rem;
+  color:var(--taupe-text);
+}
+.hero-foot .label{font-weight:500}
+/* floating paper card behind the headline */
+.hero-float{
+  position:absolute;z-index:1;
+  right:4vw;top:16vh;
+  width:min(280px,26vw);
+  pointer-events:none;
+}
+.hero-float-inner{
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  box-shadow:var(--shadow-card);
+  transform:rotate(4deg);
+  padding:1.1rem 1.2rem 1.3rem;
+}
+.hero-float .label{color:var(--taupe-text);display:block;margin-bottom:.8rem}
+.hero-float .frow{display:flex;justify-content:space-between;gap:.8rem;border-bottom:1px dotted var(--taupe-2);padding:.45rem 0;font-size:.74rem;font-family:'Work Sans',sans-serif;color:var(--ink-soft)}
+.hero-float .frow b{font-weight:600;color:var(--ink)}
+.hero-float .stamp{font-size:.55rem;margin-top:1rem;border-width:2px}
+@media (max-width:980px){.hero-float{display:none}}
+
+/* ---------------- MANIFESTO ---------------- */
+.manifesto{padding:11rem 0 10rem;border-top:1px solid var(--rule)}
+.manifesto .folio{margin-bottom:3rem}
+.manifesto p.big{
+  font-family:'Literata',serif;font-weight:500;
+  font-size:clamp(1.7rem,3.6vw,3.4rem);
+  line-height:1.22;letter-spacing:-.014em;
+  max-width:24ch;
+}
+.manifesto .mw{display:inline}
+.manifesto p.big em{font-style:italic}
+
+/* ---------------- METHOD / DOCUMENT STACK ---------------- */
+.method{border-top:1px solid var(--rule);position:relative}
+.method-stage{position:relative;padding:6rem 0}
+.method-head{margin-bottom:3.5rem;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap}
+.method-head h2{font:600 clamp(1.9rem,3.4vw,3rem)/1.08 'Literata',serif;letter-spacing:-.015em;max-width:16ch}
+.method-grid{display:block}
+.method-copy{display:none} /* desktop narration column — enabled under anim-ok desktop */
+.beat-copy .beat-num{
+  font:600 .72rem/1 'Work Sans',sans-serif;letter-spacing:.2em;color:var(--taupe-text);
+  display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem;text-transform:uppercase;
+}
+.beat-copy .beat-num::after{content:"";flex:0 0 2rem;height:1px;background:var(--taupe-2)}
+.beat-copy h3{font:600 clamp(1.5rem,2.4vw,2.3rem)/1.15 'Literata',serif;letter-spacing:-.012em;margin-bottom:1rem;max-width:16ch}
+.beat-copy p{color:var(--ink-soft);max-width:38ch;font-size:1.02rem}
+
+/* the deck of documents */
+.deck{position:relative}
+.deck-item{margin:0 0 3.2rem}
+.beat-copy-m{margin-bottom:1.2rem}
+.beat-copy-m .beat-num{font:600 .7rem/1 'Work Sans',sans-serif;letter-spacing:.2em;color:var(--taupe-text);text-transform:uppercase;margin-bottom:.6rem}
+.beat-copy-m h3{font:600 1.45rem/1.2 'Literata',serif;margin-bottom:.5rem}
+.beat-copy-m p{color:var(--ink-soft);font-size:.98rem;max-width:46ch}
+
+.doc-card{
+  position:relative;
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  box-shadow:var(--shadow-card);
+  padding:clamp(1.2rem,2vw,1.8rem);
+  display:flex;flex-direction:column;gap:1rem;
+  will-change:transform;
+}
+.doc-card::before{ /* punched margin line */
+  content:"";position:absolute;top:0;bottom:0;left:1.05rem;width:1px;
+  background:rgba(46,124,255,.16);
+}
+.doc-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  border-bottom:2px solid var(--ink);padding-bottom:.7rem;
+}
+.doc-head .doc-type{font:600 .66rem/1.3 'Work Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe-text)}
+.doc-head .doc-ref{font:600 clamp(1.15rem,1.6vw,1.5rem)/1 'Literata',serif;letter-spacing:-.01em;white-space:nowrap}
+.doc-rows{display:flex;flex-direction:column}
+.doc-row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:.55rem 0;border-bottom:1px dotted var(--taupe-2);
+  font-family:'Work Sans',sans-serif;font-size:.8rem;
+}
+.doc-row .k{color:var(--taupe-text);letter-spacing:.08em;text-transform:uppercase;font-size:.66rem;font-weight:600}
+.doc-row .v{font-weight:500;color:var(--ink);text-align:right}
+.doc-row .v.blue{color:#1A66E8;font-weight:600}
+.doc-fig{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:120px}
+.doc-fig svg{width:100%;height:auto;display:block}
+.doc-foot{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
+  border-top:1px solid var(--rule);padding-top:.9rem;margin-top:auto;
+}
+.barcode{
+  width:118px;height:30px;
+  background:repeating-linear-gradient(90deg,
+    var(--ink) 0 2px, transparent 2px 4px,
+    var(--ink) 4px 7px, transparent 7px 9px,
+    var(--ink) 9px 10px, transparent 10px 14px,
+    var(--ink) 14px 16px, transparent 16px 17px);
+}
+.barcode-cap{font:500 .58rem/1 'Work Sans',sans-serif;letter-spacing:.22em;color:var(--taupe-text);margin-top:.35rem}
+.datebox{
+  border:2px dashed var(--taupe-2);color:var(--taupe-text);
+  font:600 .6rem/1.3 'Work Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;
+  padding:.45rem .6rem;transform:rotate(-2.5deg);text-align:center;
+}
+.doc-stamp{position:absolute;right:6%;bottom:18%;z-index:3;font-size:clamp(.8rem,1.3vw,1.05rem)}
+.doc-stamp.navy{right:8%;bottom:24%;transform:rotate(5deg)}
+
+/* NAME card — bottleneck diamond + duplicate queue */
+.bottleneck-wrap{position:relative;width:100%;display:flex;align-items:center;justify-content:center;min-height:170px}
+.queue-card{
+  position:absolute;width:92px;height:58px;background:var(--paper);
+  border:1px solid var(--taupe-2);box-shadow:0 4px 10px -6px rgba(7,26,51,.25);
+  font:600 .55rem/1 'Work Sans',sans-serif;letter-spacing:.12em;color:var(--taupe-text);
+  display:flex;align-items:flex-start;justify-content:flex-start;padding:.45rem;
+}
+.queue-card.q1{transform:translate(-118px,-26px) rotate(-7deg)}
+.queue-card.q2{transform:translate(-96px,8px) rotate(-3deg)}
+.queue-card.q3{transform:translate(108px,-12px) rotate(6deg)}
+.diamond{
+  position:relative;z-index:2;
+  width:118px;height:118px;border:2.5px solid var(--taupe);
+  transform:rotate(45deg);background:var(--paper-2);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 24px -12px rgba(7,26,51,.3);
+}
+.diamond span{
+  transform:rotate(-45deg);
+  font:700 .58rem/1 'Work Sans',sans-serif;letter-spacing:.18em;color:var(--taupe);
+}
+
+/* signature */
+.sig-block{display:flex;flex-direction:column;gap:.2rem}
+.sig-block svg{width:200px;height:54px}
+.sig-line{border-top:1px solid var(--ink);width:200px;padding-top:.3rem;
+  font:500 .6rem/1.3 'Work Sans',sans-serif;letter-spacing:.14em;color:var(--taupe-text);text-transform:uppercase}
+
+/* desktop pinned layout — only when JS confirmed + wide + motion OK */
+@media (min-width:900px) and (prefers-reduced-motion:no-preference){
+  html.anim-ok .method-stage{
+    height:100vh;padding:0;
+    display:flex;align-items:center;
+  }
+  html.anim-ok .method-head{
+    position:absolute;top:2.2rem;left:50%;transform:translateX(-50%);
+    width:min(1240px,92vw);margin:0;z-index:5;
+  }
+  html.anim-ok .method-grid{
+    width:min(1240px,92vw);margin-inline:auto;
+    display:grid;grid-template-columns:1fr minmax(420px,520px);
+    gap:clamp(2rem,6vw,7rem);align-items:center;
+  }
+  html.anim-ok .method-copy{display:block;position:relative;min-height:360px}
+  html.anim-ok .beat-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center}
+  html.anim-ok .deck{height:min(620px,74vh);width:100%}
+  html.anim-ok .deck-item{position:absolute;inset:0;margin:0}
+  html.anim-ok .deck-item .doc-card{height:100%}
+  html.anim-ok .beat-copy-m{display:none}
+}
+
+/* ---------------- SERVICES ---------------- */
+.services{padding:9rem 0;border-top:1px solid var(--rule)}
+.services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.services-head h2{font:600 clamp(1.9rem,3.4vw,3rem)/1.08 'Literata',serif;letter-spacing:-.015em;max-width:18ch}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media (max-width:1020px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.svc-grid{grid-template-columns:1fr}}
+.svc{
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  padding:1.7rem 1.6rem 2rem;
+  position:relative;
+  display:flex;flex-direction:column;gap:1rem;
+  box-shadow:0 1px 2px rgba(7,26,51,.05);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+}
+.svc::after{ /* index-card top rule */
+  content:"";position:absolute;left:0;right:0;top:3.4rem;height:1px;background:rgba(46,124,255,.14);
+}
+.svc:hover{transform:rotate(1deg) translateY(-7px);box-shadow:0 18px 40px -16px rgba(7,26,51,.3)}
+.svc:nth-child(even):hover{transform:rotate(-1deg) translateY(-7px)}
+.svc-no{
+  align-self:flex-start;
+  font:700 .62rem/1 'Work Sans',sans-serif;letter-spacing:.18em;color:var(--taupe);
+  border:2px solid var(--taupe-2);border-radius:50%;
+  width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;
+  transform:rotate(-8deg);
+}
+.svc h3{font:600 1.25rem/1.25 'Literata',serif;letter-spacing:-.01em;margin-top:.6rem}
+.svc p{color:var(--ink-soft);font-size:.93rem;line-height:1.65}
+.svc .svc-rule{margin-top:auto;border-top:1px dotted var(--taupe-2);padding-top:.8rem;
+  font:500 .62rem/1 'Work Sans',sans-serif;letter-spacing:.2em;color:var(--taupe-text);text-transform:uppercase}
+
+/* ---------------- FIELD NOTES (ledger) ---------------- */
+.notes{padding:9rem 0;border-top:1px solid var(--rule)}
+.notes-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.notes-head h2{font:600 clamp(1.9rem,3.4vw,3rem)/1.08 'Literata',serif;letter-spacing:-.015em}
+.ledger{list-style:none;border-top:2px solid var(--ink);margin-top:2.5rem}
+.ledger li{
+  display:grid;grid-template-columns:minmax(140px,1fr) 2.2fr minmax(120px,.7fr);
+  gap:2rem;align-items:center;
+  padding:2.6rem 0;border-bottom:1px solid var(--rule);
+  position:relative;
+}
+.ledger .year{
+  font:600 clamp(2.4rem,5vw,4.4rem)/1 'Literata',serif;letter-spacing:-.02em;
+}
+.ledger .year .now{font-style:italic;font-weight:500}
+.ledger .entry h3{font:600 1.25rem/1.3 'Literata',serif;margin-bottom:.5rem}
+.ledger .entry p{color:var(--ink-soft);font-size:.96rem;max-width:62ch}
+.ledger .filed{justify-self:end;opacity:0;transform:rotate(-8deg) scale(1.18);transition:opacity .3s ease, transform .3s cubic-bezier(.2,.8,.3,1.3)}
+.ledger li:hover .filed,.ledger li:focus-within .filed{opacity:1;transform:rotate(-8deg) scale(1)}
+@media (max-width:760px){
+  .ledger li{grid-template-columns:1fr;gap:.8rem;padding:2rem 0}
+  .ledger .filed{justify-self:start;opacity:1;transform:rotate(-4deg) scale(1);font-size:.65rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .ledger .filed{opacity:1;transform:rotate(-8deg) scale(1)}
+}
+
+/* ---------------- CTA (navy panel) ---------------- */
+.cta{padding:5rem 0 6rem}
+.cta-panel{
+  position:relative;
+  background:var(--ink);
+  color:var(--paper);
+  padding:clamp(3rem,7vw,6.5rem) clamp(1.6rem,5vw,5rem);
+  overflow:hidden;
+}
+.cta-panel::after{
+  content:"";position:absolute;inset:0;background-image:var(--grain);
+  background-size:280px 280px;opacity:.08;pointer-events:none;
+}
+.cta-grain-rule{position:absolute;inset:1.1rem;border:1px solid rgba(248,247,242,.18);pointer-events:none}
+.cta-panel .folio{color:rgba(248,247,242,.65)}
+.cta-panel .folio::before{background:rgba(248,247,242,.4)}
+.cta-panel h2{
+  font:600 clamp(2.1rem,4.6vw,4.2rem)/1.08 'Literata',serif;letter-spacing:-.018em;
+  max-width:18ch;margin:1.6rem 0 1.4rem;
+}
+.cta-panel h2 em{font-style:italic;font-weight:500}
+.cta-panel p{color:rgba(248,247,242,.82);max-width:52ch;font-size:1.05rem}
+.cta-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.6rem;margin-top:2.6rem;position:relative;z-index:2}
+.cta-alt{font:500 .82rem/1.5 'Work Sans',sans-serif;color:rgba(248,247,242,.75)}
+.cta-alt a{color:var(--paper);text-decoration-color:rgba(248,247,242,.4);text-underline-offset:3px}
+.cta-logo{position:absolute;right:clamp(1.5rem,5vw,4rem);top:clamp(1.5rem,5vw,4rem);width:54px;height:54px;opacity:.9}
+@media (max-width:640px){.cta-logo{width:38px;height:38px}}
+
+/* ---------------- FOOTER ---------------- */
+.site-footer{border-top:1px solid var(--rule);padding-top:4.5rem;overflow:hidden}
+.foot-grid{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;
+  padding-bottom:4rem;
+}
+@media (max-width:820px){.foot-grid{grid-template-columns:1fr;gap:2.2rem}}
+.foot-grid h4{font:600 .68rem/1 'Work Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe-text);margin-bottom:1.1rem}
+.foot-grid ul{list-style:none}
+.foot-grid li{padding:.3rem 0}
+.foot-grid a{font:500 .92rem/1.5 'Work Sans',sans-serif;text-decoration:none;color:var(--ink)}
+.foot-grid a:hover{text-decoration:underline;text-underline-offset:4px}
+.foot-brand{display:flex;align-items:flex-start;gap:.8rem}
+.foot-brand img{width:34px;height:34px}
+.foot-brand p{font-size:.95rem;color:var(--ink-soft);max-width:34ch;margin-top:.2rem}
+.foot-legal{
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  border-top:1px solid var(--rule);padding:1.2rem 0;
+  font:400 .78rem/1.5 'Work Sans',sans-serif;color:var(--taupe-text);
+}
+.wordmark-crop{height:clamp(3.4rem,8.6vw,8.6rem);overflow:hidden;position:relative}
+.wordmark{
+  font:600 clamp(4.6rem,12vw,12rem)/0.82 'Literata',serif;
+  letter-spacing:-.03em;white-space:nowrap;
+  color:var(--ink);opacity:.2;
+  transform:translateY(6%);
+  user-select:none;
+}
+
+/* ---------------- misc reveals default-visible ---------------- */
+.deck .doc-card,.svc,.ledger li{opacity:1}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-slot">
+    <div class="pre-window">
+      <div class="pre-sheet">
+        <div class="pre-brand">
+          <img src="logo-dark.svg" alt="">
+          <span class="pre-name">Katy Technologies</span>
+        </div>
+        <div class="pre-rule"></div>
+        <div class="pre-rule"></div>
+        <div class="pre-rule short"></div>
+      </div>
+    </div>
+    <span class="pre-label">Printing&hellip; fol. 01</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Katy Technologies — home">
+      <img src="logo-dark.svg" alt="">
+      <b>Katy Technologies</b>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#method">Method</a>
+      <a href="#services">Services</a>
+      <a href="#notes">Field notes</a>
+      <a class="btn btn-ink" href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-label="Introduction">
+    <div class="hero-float" aria-hidden="true">
+      <div class="hero-float-inner">
+        <span class="label">Review request</span>
+        <div class="frow"><span>Ref</span><b>RR-1042</b></div>
+        <div class="frow"><span>Step</span><b>Manual review</b></div>
+        <div class="frow"><span>Waiting</span><b>11 days</b></div>
+        <span class="stamp taupe">In queue</span>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="hero-meta">
+        <span class="folio">fol. 01 &mdash; Opening entry</span>
+        <span class="label" style="color:var(--taupe-text)">Katy, Texas</span>
+      </div>
+      <h1>
+        <span class="w"><span class="wi">Automate</span></span>
+        <span class="w"><span class="wi">the</span></span>
+        <span class="w"><span class="wi">work</span></span>
+        <span class="w"><span class="wi">that</span></span>
+        <span class="w"><span class="wi"><em>slows</em></span></span>
+        <span class="w"><span class="wi">your</span></span>
+        <span class="w"><span class="wi">team</span></span>
+        <span class="w"><span class="wi">down.</span></span>
+      </h1>
+      <p class="hero-sub">We help enterprise teams automate manual workflows with practical AI and custom software.</p>
+      <div class="hero-actions">
+        <a class="btn btn-ink" href="/contact">Talk through a bottleneck <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-ghost" href="#method">Read the method</a>
+      </div>
+      <div class="hero-foot">
+        <span class="label">Enterprise workflow automation</span>
+        <span class="label">Practical AI &middot; Custom software</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto" aria-label="Point of view">
+    <div class="wrap">
+      <p class="folio">fol. 02 &mdash; Marginal note</p>
+      <p class="big" id="manifesto-line">
+        <span class="mw">Automation</span> <span class="mw">should</span> <span class="mw">make</span>
+        <span class="mw">work</span> <span class="mw">easier</span> <span class="mw">to</span>
+        <span class="mw"><em>trust,</em></span> <span class="mw">not</span> <span class="mw">harder</span>
+        <span class="mw">to</span> <span class="mw"><em>explain.</em></span>
+      </p>
+    </div>
+  </section>
+
+  <!-- METHOD — THE DOCUMENT STACK -->
+  <section class="method" id="method" aria-label="Method">
+    <div class="method-stage" id="method-stage">
+      <div class="method-head wrap">
+        <h2>One request, followed all the way through.</h2>
+        <span class="folio">fol. 03 &mdash; The method</span>
+      </div>
+
+      <div class="method-grid wrap">
+        <!-- Desktop narration column (crossfades in sync with the deck) -->
+        <div class="method-copy" aria-hidden="true">
+          <div class="beat-copy" data-beat="0">
+            <p class="beat-num">Exhibit A</p>
+            <h3>A review request enters the building.</h3>
+            <p>RR-1042 is ordinary paperwork &mdash; and an honest record of where a team&rsquo;s week actually goes. Scroll to follow it.</p>
+          </div>
+          <div class="beat-copy" data-beat="1">
+            <p class="beat-num">01 &mdash; Map</p>
+            <h3>Map the work as it moves</h3>
+            <p>We chart how requests actually travel through your organization &mdash; intake, triage, review, approval &mdash; before any tool enters the conversation.</p>
+          </div>
+          <div class="beat-copy" data-beat="2">
+            <p class="beat-num">02 &mdash; Name</p>
+            <h3>Name the step worth improving</h3>
+            <p>Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly.</p>
+          </div>
+          <div class="beat-copy" data-beat="3">
+            <p class="beat-num">03 &mdash; Route</p>
+            <h3>Route the repeat work around it</h3>
+            <p>Software and practical AI take on the repeat steps &mdash; drafting, sorting, reconciling &mdash; under the controls your team already trusts.</p>
+          </div>
+          <div class="beat-copy" data-beat="4">
+            <p class="beat-num">04 &mdash; Trust</p>
+            <h3>Keep review visible</h3>
+            <p>Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on.</p>
+          </div>
+        </div>
+
+        <!-- The deck -->
+        <div class="deck" id="deck">
+
+          <!-- CARD 0 — cover: the review request -->
+          <div class="deck-item">
+            <div class="beat-copy-m">
+              <p class="beat-num">Exhibit A</p>
+              <h3>A review request enters the building.</h3>
+              <p>RR-1042 is ordinary paperwork &mdash; and an honest record of where a team&rsquo;s week actually goes.</p>
+            </div>
+            <article class="doc-card" aria-label="Document: review request RR-1042">
+              <header class="doc-head">
+                <span class="doc-type">Review request<br>Internal routing copy</span>
+                <span class="doc-ref">RR-1042</span>
+              </header>
+              <div class="doc-rows">
+                <div class="doc-row"><span class="k">Requested by</span><span class="v">M. Alvarez &mdash; Operations</span></div>
+                <div class="doc-row"><span class="k">Department</span><span class="v">Claims &middot; Region West</span></div>
+                <div class="doc-row"><span class="k">Subject</span><span class="v">Vendor invoice over threshold</span></div>
+                <div class="doc-row"><span class="k">Priority</span><span class="v">Standard &middot; 5-day SLA</span></div>
+                <div class="doc-row"><span class="k">Status</span><span class="v">In queue</span></div>
+              </div>
+              <footer class="doc-foot">
+                <div>
+                  <div class="barcode" aria-hidden="true"></div>
+                  <p class="barcode-cap">RR&middot;1042&middot;W</p>
+                </div>
+                <span class="datebox">Received<br>02 Jun 2026</span>
+              </footer>
+            </article>
+          </div>
+
+          <!-- CARD 1 — 01 MAP -->
+          <div class="deck-item">
+            <div class="beat-copy-m">
+              <p class="beat-num">01 &mdash; Map</p>
+              <h3>Map the work as it moves</h3>
+              <p>We chart how requests actually travel through your organization &mdash; intake, triage, review, approval &mdash; before any tool enters the conversation.</p>
+            </div>
+            <article class="doc-card" aria-label="Document: routing record">
+              <header class="doc-head">
+                <span class="doc-type">Routing record<br>As observed</span>
+                <span class="doc-ref">RR-1042</span>
+              </header>
+              <div class="doc-fig">
+                <svg viewBox="0 0 420 150" role="img" aria-label="Diagram: a request moves through intake, triage, review, and approval">
+                  <line x1="40" y1="62" x2="380" y2="62" stroke="#AFA7A7" stroke-width="1.5" stroke-dasharray="2 6"/>
+                  <g fill="none" stroke="#071A33" stroke-width="2">
+                    <circle cx="40" cy="62" r="9"/>
+                    <circle cx="153" cy="62" r="9"/>
+                    <circle cx="266" cy="62" r="9"/>
+                    <circle cx="380" cy="62" r="9"/>
+                  </g>
+                  <circle cx="40" cy="62" r="3.5" fill="#071A33"/>
+                  <g font-family="Work Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="1.5" fill="#6E6363" text-anchor="middle">
+                    <text x="40" y="95">INTAKE</text>
+                    <text x="153" y="95">TRIAGE</text>
+                    <text x="266" y="95">REVIEW</text>
+                    <text x="380" y="95">APPROVAL</text>
+                  </g>
+                  <g font-family="Work Sans, sans-serif" font-size="9" font-weight="500" letter-spacing="1" fill="#8B8080" text-anchor="middle">
+                    <text x="96" y="48">2 hrs</text>
+                    <text x="209" y="48">1 day</text>
+                    <text x="323" y="48">11 days</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="doc-rows">
+                <div class="doc-row"><span class="k">Stations charted</span><span class="v">Four</span></div>
+                <div class="doc-row"><span class="k">Tools discussed</span><span class="v">None yet &mdash; on purpose</span></div>
+              </div>
+              <footer class="doc-foot">
+                <div>
+                  <div class="barcode" aria-hidden="true"></div>
+                  <p class="barcode-cap">SURVEY&middot;01</p>
+                </div>
+                <span class="datebox">Charted<br>03 Jun 2026</span>
+              </footer>
+            </article>
+          </div>
+
+          <!-- CARD 2 — 02 NAME -->
+          <div class="deck-item">
+            <div class="beat-copy-m">
+              <p class="beat-num">02 &mdash; Name</p>
+              <h3>Name the step worth improving</h3>
+              <p>Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly.</p>
+            </div>
+            <article class="doc-card" aria-label="Document: exception notice naming the bottleneck">
+              <header class="doc-head">
+                <span class="doc-type">Exception notice<br>Step under review</span>
+                <span class="doc-ref">RR-1042</span>
+              </header>
+              <div class="doc-fig">
+                <div class="bottleneck-wrap" aria-hidden="true">
+                  <span class="queue-card q1">RR-1043</span>
+                  <span class="queue-card q2">RR-1044</span>
+                  <span class="queue-card q3">RR-1045</span>
+                  <div class="diamond"><span>Bottleneck</span></div>
+                </div>
+              </div>
+              <div class="doc-rows">
+                <div class="doc-row"><span class="k">Step named</span><span class="v">Manual review</span></div>
+                <div class="doc-row"><span class="k">Waiting</span><span class="v">11 days &middot; and counting</span></div>
+                <div class="doc-row"><span class="k">Same step, this week</span><span class="v">Forty-one requests</span></div>
+              </div>
+              <footer class="doc-foot">
+                <div>
+                  <div class="barcode" aria-hidden="true"></div>
+                  <p class="barcode-cap">EXC&middot;0042</p>
+                </div>
+                <span class="datebox">Named<br>04 Jun 2026</span>
+              </footer>
+            </article>
+          </div>
+
+          <!-- CARD 3 — 03 ROUTE -->
+          <div class="deck-item">
+            <div class="beat-copy-m">
+              <p class="beat-num">03 &mdash; Route</p>
+              <h3>Route the repeat work around it</h3>
+              <p>Software and practical AI take on the repeat steps &mdash; drafting, sorting, reconciling &mdash; under the controls your team already trusts.</p>
+            </div>
+            <article class="doc-card" aria-label="Document: reroute order with automated stamp">
+              <header class="doc-head">
+                <span class="doc-type">Reroute order<br>Repeat steps</span>
+                <span class="doc-ref">RR-1042</span>
+              </header>
+              <div class="doc-fig">
+                <svg viewBox="0 0 420 170" role="img" aria-label="Diagram: a new route is drawn around the bottleneck">
+                  <defs>
+                    <clipPath id="routeClip"><rect id="routeClipRect" x="0" y="0" width="420" height="170"/></clipPath>
+                  </defs>
+                  <!-- old straight path through the diamond -->
+                  <line x1="14" y1="112" x2="406" y2="112" stroke="#AFA7A7" stroke-width="1.5" stroke-dasharray="2 6"/>
+                  <g transform="translate(210 112) rotate(45)" fill="#F8F7F2" stroke="#8B8080" stroke-width="2">
+                    <rect x="-26" y="-26" width="52" height="52"/>
+                  </g>
+                  <text x="210" y="160" font-family="Work Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#8B8080" text-anchor="middle">MANUAL REVIEW</text>
+                  <!-- new blue route, drawn on scroll -->
+                  <g clip-path="url(#routeClip)">
+                    <path d="M14 112 C 90 112 110 30 210 30 C 310 30 330 112 406 112"
+                          fill="none" stroke="#2E7CFF" stroke-width="2.5" stroke-dasharray="8 7" stroke-linecap="round"/>
+                    <circle cx="14" cy="112" r="4" fill="#2E7CFF"/>
+                    <circle cx="406" cy="112" r="4" fill="#2E7CFF"/>
+                    <text x="210" y="18" font-family="Work Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#2E7CFF" text-anchor="middle">NEW ROUTE</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="doc-rows">
+                <div class="doc-row"><span class="k">Drafting</span><span class="v blue">Routed</span></div>
+                <div class="doc-row"><span class="k">Sorting</span><span class="v blue">Routed</span></div>
+                <div class="doc-row"><span class="k">Reconciling</span><span class="v blue">Routed</span></div>
+              </div>
+              <footer class="doc-foot">
+                <div>
+                  <div class="barcode" aria-hidden="true"></div>
+                  <p class="barcode-cap">RTE&middot;77</p>
+                </div>
+                <span class="datebox">Rerouted<br>05 Jun 2026</span>
+              </footer>
+              <span class="stamp blue doc-stamp" id="stamp-automated">Automated</span>
+            </article>
+          </div>
+
+          <!-- CARD 4 — 04 TRUST -->
+          <div class="deck-item">
+            <div class="beat-copy-m">
+              <p class="beat-num">04 &mdash; Trust</p>
+              <h3>Keep review visible</h3>
+              <p>Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on.</p>
+            </div>
+            <article class="doc-card" aria-label="Document: review ledger with human-reviewed stamp and signature">
+              <header class="doc-head">
+                <span class="doc-type">Review ledger<br>Final record</span>
+                <span class="doc-ref">RR-1042</span>
+              </header>
+              <div class="doc-rows">
+                <div class="doc-row"><span class="k">Automated</span><span class="v">Six repeat steps &middot; all logged</span></div>
+                <div class="doc-row"><span class="k">Judgment call</span><span class="v">Stayed with the team</span></div>
+                <div class="doc-row"><span class="k">Record</span><span class="v">Complete &middot; auditable</span></div>
+                <div class="doc-row"><span class="k">Time at review</span><span class="v">11 days &rarr; same morning</span></div>
+              </div>
+              <div class="doc-fig" style="align-items:flex-end;justify-content:flex-start">
+                <div class="sig-block">
+                  <svg viewBox="0 0 200 54" aria-hidden="true">
+                    <path id="sig-path" d="M8 38 C 20 8 30 46 44 28 C 56 13 60 40 76 30 C 94 19 96 42 116 26 C 130 15 138 38 158 24 C 170 16 180 30 192 22"
+                          fill="none" stroke="#071A33" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                  <span class="sig-line">J. Okafor &mdash; Operations review</span>
+                </div>
+              </div>
+              <footer class="doc-foot">
+                <div>
+                  <div class="barcode" aria-hidden="true"></div>
+                  <p class="barcode-cap">LEDGER&middot;FIN</p>
+                </div>
+                <span class="datebox">Closed<br>09 Jun 2026</span>
+              </footer>
+              <span class="stamp navy doc-stamp navy" id="stamp-human">Human reviewed</span>
+            </article>
+          </div>
+
+        </div><!-- /deck -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services" aria-label="Services">
+    <div class="wrap">
+      <div class="services-head">
+        <h2>The catalogue of things we actually do.</h2>
+        <span class="folio">fol. 04 &mdash; Services index</span>
+      </div>
+      <div class="svc-grid">
+        <article class="svc">
+          <span class="svc-no">No. 01</span>
+          <h3>Internal systems foundations</h3>
+          <p>Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
+          <span class="svc-rule">Filed under &middot; Foundations</span>
+        </article>
+        <article class="svc">
+          <span class="svc-no">No. 02</span>
+          <h3>Practical AI support</h3>
+          <p>AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
+          <span class="svc-rule">Filed under &middot; Assistance</span>
+        </article>
+        <article class="svc">
+          <span class="svc-no">No. 03</span>
+          <h3>Custom workflow software</h3>
+          <p>Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
+          <span class="svc-rule">Filed under &middot; Tooling</span>
+        </article>
+        <article class="svc">
+          <span class="svc-no">No. 04</span>
+          <h3>Risk-aware automation</h3>
+          <p>Automation patterns that keep permissions, auditability, and human review visible.</p>
+          <span class="svc-rule">Filed under &middot; Controls</span>
+        </article>
+        <article class="svc">
+          <span class="svc-no">No. 05</span>
+          <h3>Operational visibility</h3>
+          <p>Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
+          <span class="svc-rule">Filed under &middot; Reporting</span>
+        </article>
+        <article class="svc">
+          <span class="svc-no">No. 06</span>
+          <h3>Workflow modernization</h3>
+          <p>Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
+          <span class="svc-rule">Filed under &middot; Process</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELD NOTES -->
+  <section class="notes" id="notes" aria-label="Field notes">
+    <div class="wrap">
+      <div class="notes-head">
+        <h2>Field notes.</h2>
+        <span class="folio">fol. 05 &mdash; Filed work</span>
+      </div>
+      <ul class="ledger">
+        <li>
+          <span class="year">2023</span>
+          <div class="entry">
+            <h3>Economic consulting</h3>
+            <p>Deployed an internal document-supported assistant for a Boston-area consulting firm that helped analysts move reports faster while protecting data privacy requirements.</p>
+          </div>
+          <span class="stamp taupe filed" aria-hidden="true">Filed</span>
+        </li>
+        <li>
+          <span class="year">2025</span>
+          <div class="entry">
+            <h3>Ticket vendors</h3>
+            <p>Worked with a California ticket vendor to create custom email annotation software that reduced repeat review work for management.</p>
+          </div>
+          <span class="stamp taupe filed" aria-hidden="true">Filed</span>
+        </li>
+        <li>
+          <span class="year"><span class="now">Now</span></span>
+          <div class="entry">
+            <h3>Hospitality</h3>
+            <p>Working with a high-end hotel chain based in Southern California to automate pricing, labor assignment, and reporting workflows.</p>
+          </div>
+          <span class="stamp taupe filed" aria-hidden="true">Filed</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact" aria-label="Contact">
+    <div class="wrap">
+      <div class="cta-panel">
+        <span class="cta-grain-rule" aria-hidden="true"></span>
+        <img class="cta-logo" src="logo-light.svg" alt="">
+        <p class="folio">fol. 06 &mdash; Correspondence</p>
+        <h2>Somewhere in your org, a request is on day eleven of review. <em>Tell us about it.</em></h2>
+        <p>Thirty minutes, no deck, no pitch. Bring the workflow that wears your team down and we&rsquo;ll talk through what&rsquo;s worth automating &mdash; and what isn&rsquo;t.</p>
+        <div class="cta-actions">
+          <a class="btn btn-paper" href="/contact">Talk through a bottleneck <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <p class="cta-alt">or write to <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="logo-dark.svg" alt="">
+        <p>We help enterprise teams automate manual workflows with practical AI and custom software.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h4>Index</h4>
+        <ul>
+          <li><a href="#method">Method</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#notes">Field notes</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h4>Correspondence</h4>
+        <ul>
+          <li><a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a></li>
+          <li><a href="tel:+12819613396">(281) 961-3396</a></li>
+          <li><a href="https://www.linkedin.com/company/katy-technologies" rel="noopener" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>&copy; 2026 Katy Technologies. All rights reserved.</span>
+      <span>Paper Trail &mdash; design lab, fol. 03</span>
+    </div>
+  </div>
+  <div class="wordmark-crop" aria-hidden="true">
+    <p class="wordmark" id="wordmark">Katy Technologies</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pre = document.getElementById('preloader');
+
+  // If GSAP failed to load, leave the CSS-only fallbacks in place and bail.
+  if (!window.gsap || !window.ScrollTrigger) { return; }
+  document.documentElement.classList.add('anim-ok');
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Reduced motion: show everything, no scroll theatre ---------- */
+  if (prefersReduce) {
+    if (pre) { pre.style.display = 'none'; }
+    return; // default CSS layout is fully visible & stacked
+  }
+
+  /* ---------- Lenis smooth scroll, driven by GSAP's ticker ---------- */
+  var lenis = null;
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: 0.11 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // Anchor navigation through Lenis (with header offset)
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id.length < 2) { return; }
+      var target = document.querySelector(id);
+      if (!target) { return; }
+      e.preventDefault();
+      if (lenis) { lenis.scrollTo(target, { offset: -64 }); }
+      else { target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  /* ---------- Preloader: a sheet feeds out of the printer ---------- */
+  var heroIntro = gsap.timeline({ paused: true });
+  heroIntro
+    .from('.site-header', { yPercent: -100, autoAlpha: 0, duration: 0.5, ease: 'power2.out' })
+    .from('.hero .wi', { yPercent: 112, duration: 0.7, ease: 'power3.out', stagger: 0.055 }, 0.05)
+    .from('.hero-meta, .hero-sub, .hero-actions, .hero-foot', { autoAlpha: 0, y: 18, duration: 0.55, ease: 'power2.out', stagger: 0.08 }, 0.4)
+    .from('.hero-float', { autoAlpha: 0, y: 36, rotation: 8, duration: 0.7, ease: 'power2.out' }, 0.5);
+
+  if (pre) {
+    var preTl = gsap.timeline({
+      onComplete: function () { pre.style.display = 'none'; }
+    });
+    preTl
+      .to('.pre-sheet', { y: 0, duration: 0.5, ease: 'power2.inOut', delay: 0.1 })
+      .to('.pre-label', { autoAlpha: 0, duration: 0.2 }, '-=0.15')
+      .to(pre, { autoAlpha: 0, duration: 0.35, ease: 'power1.out' }, '+=0.1')
+      .add(function () { heroIntro.play(); }, '-=0.3');
+  } else {
+    heroIntro.play();
+  }
+
+  /* ---------- Hero: floating card parallax + idle drift ---------- */
+  gsap.to('.hero-float', {
+    yPercent: -22, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+  gsap.to('.hero-float-inner', { y: -12, duration: 3.2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+  /* ---------- Manifesto: word-by-word opacity ladder ---------- */
+  gsap.fromTo('#manifesto-line .mw',
+    { opacity: 0.13 },
+    {
+      opacity: 1, ease: 'none', stagger: 0.08,
+      scrollTrigger: { trigger: '.manifesto', start: 'top 72%', end: 'center 42%', scrub: true }
+    });
+
+  /* ---------- Services + ledger + CTA reveals ---------- */
+  gsap.utils.toArray('.svc').forEach(function (card, i) {
+    gsap.from(card, {
+      autoAlpha: 0, y: 30, rotation: i % 2 ? 1.5 : -1.5, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: card, start: 'top 88%' }
+    });
+  });
+  gsap.utils.toArray('.ledger li').forEach(function (row) {
+    gsap.from(row, {
+      autoAlpha: 0, y: 26, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: row, start: 'top 88%' }
+    });
+  });
+  gsap.from('.cta-panel', {
+    autoAlpha: 0, y: 50, duration: 0.9, ease: 'power2.out',
+    scrollTrigger: { trigger: '.cta', start: 'top 78%' }
+  });
+  gsap.from('#wordmark', {
+    yPercent: 60, ease: 'none',
+    scrollTrigger: { trigger: '.wordmark-crop', start: 'top bottom', end: 'bottom bottom', scrub: true }
+  });
+
+  /* ---------- THE DOCUMENT STACK ---------- */
+  var items = gsap.utils.toArray('#deck .deck-item');
+  var copies = gsap.utils.toArray('.method-copy .beat-copy');
+  var stampAuto = document.getElementById('stamp-automated');
+  var stampHuman = document.getElementById('stamp-human');
+  var routeRect = document.getElementById('routeClipRect');
+  var sigPath = document.getElementById('sig-path');
+  var sigLen = sigPath ? sigPath.getTotalLength() : 0;
+
+  // resting transform for a card at stack position p (0 = top)
+  var ROT = [0, 1.2, -1, 0.9, -0.8];
+  function restPose(p) {
+    return { x: p * 6, y: p * 14, rotation: ROT[Math.min(p, ROT.length - 1)], scale: 1 - p * 0.022 };
+  }
+
+  function primeStamp(el) {
+    gsap.set(el, { autoAlpha: 0, scale: 1.6, rotation: -16, transformOrigin: '50% 50%' });
+  }
+  function stampIn(tl, el, card, pos) {
+    tl.to(el, { autoAlpha: 1, scale: 1, rotation: -6, duration: 0.28, ease: 'power4.in' }, pos);
+    // shadow thump: the card flinches under the stamp
+    tl.to(card, { y: '+=7', duration: 0.07 }, '>-0.04')
+      .to(card, { y: '-=7', duration: 0.16 });
+  }
+
+  var mm = gsap.matchMedia();
+
+  /* ----- Desktop: pinned theatre ----- */
+  mm.add('(min-width: 900px)', function () {
+    // initial poses
+    items.forEach(function (item, i) {
+      gsap.set(item, restPose(i));
+      gsap.set(item, { zIndex: 20 - i });
+    });
+    gsap.set(copies, { autoAlpha: 0, y: 16 });
+    gsap.set(copies[0], { autoAlpha: 1, y: 0 });
+    primeStamp(stampAuto);
+    primeStamp(stampHuman);
+    gsap.set(routeRect, { attr: { width: 0 } });
+    gsap.set(sigPath, { strokeDasharray: sigLen, strokeDashoffset: sigLen });
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: '#method-stage',
+        start: 'top top',
+        end: '+=420%',
+        scrub: 0.7,
+        pin: true,
+        anticipatePin: 1
+      }
+    });
+
+    tl.to({}, { duration: 0.45 }); // settle
+
+    for (var k = 0; k < 4; k++) {
+      (function (k) {
+        var dir = (k % 2 === 0) ? 1 : -1;
+        // top card lifts, rotates ~8deg, slides away
+        tl.to(items[k], {
+          yPercent: -155,
+          rotation: '+=' + (8 * dir),
+          x: '+=' + (40 * dir),
+          duration: 1,
+          ease: 'power1.in'
+        });
+        // cards behind shuffle forward
+        for (var j = k + 1; j < items.length; j++) {
+          tl.to(items[j], Object.assign(restPose(j - k - 1), { duration: 1 }), '<');
+        }
+        // narration crossfade
+        tl.to(copies[k], { autoAlpha: 0, y: -14, duration: 0.35 }, '<');
+        tl.to(copies[k + 1], { autoAlpha: 1, y: 0, duration: 0.45 }, '<+=0.3');
+
+        // beat-specific theatre once the new top card is seated
+        if (k === 2) { // ROUTE card now on top
+          tl.to(routeRect, { attr: { width: 420 }, duration: 0.7 }, '>+=0.1');
+          stampIn(tl, stampAuto, items[3].querySelector('.doc-card'), '>-0.05');
+        }
+        if (k === 3) { // TRUST card now on top
+          tl.to(sigPath, { strokeDashoffset: 0, duration: 0.6 }, '>+=0.1');
+          stampIn(tl, stampHuman, items[4].querySelector('.doc-card'), '>-0.05');
+        }
+        tl.to({}, { duration: 0.35 }); // hold between beats
+      })(k);
+    }
+
+    tl.to({}, { duration: 0.5 }); // final hold on the closed ledger
+
+    return function () { // cleanup on breakpoint change
+      gsap.set(items, { clearProps: 'all' });
+      gsap.set(copies, { clearProps: 'all' });
+      gsap.set([stampAuto, stampHuman], { clearProps: 'all' });
+      gsap.set(routeRect, { attr: { width: 420 } });
+      gsap.set(sigPath, { clearProps: 'strokeDasharray,strokeDashoffset' });
+    };
+  });
+
+  /* ----- Mobile / narrow: stacked cards, individual reveals ----- */
+  mm.add('(max-width: 899px)', function () {
+    primeStamp(stampAuto);
+    primeStamp(stampHuman);
+    gsap.set(routeRect, { attr: { width: 0 } });
+    gsap.set(sigPath, { strokeDasharray: sigLen, strokeDashoffset: sigLen });
+
+    items.forEach(function (item, i) {
+      var card = item.querySelector('.doc-card');
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: item, start: 'top 78%' }
+      });
+      tl.from(item, { autoAlpha: 0, y: 44, rotation: i % 2 ? 1.5 : -1.5, duration: 0.7, ease: 'power2.out' });
+      if (i === 3) {
+        tl.to(routeRect, { attr: { width: 420 }, duration: 0.8, ease: 'power1.inOut' }, '>-0.1');
+        stampIn(tl, stampAuto, card, '>');
+      }
+      if (i === 4) {
+        tl.to(sigPath, { strokeDashoffset: 0, duration: 0.8, ease: 'power1.inOut' }, '>-0.1');
+        stampIn(tl, stampHuman, card, '>');
+      }
+    });
+
+    return function () {
+      gsap.set([stampAuto, stampHuman], { clearProps: 'all' });
+      gsap.set(routeRect, { attr: { width: 420 } });
+      gsap.set(sigPath, { clearProps: 'strokeDasharray,strokeDashoffset' });
+    };
+  });
+
+  // Keep pin distances honest after fonts load
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+  }
+})();
+</script>
+</body>
+</html>

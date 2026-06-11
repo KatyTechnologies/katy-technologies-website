@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katy Technologies — Assembly Line</title>
+<meta name="description" content="We help enterprise teams automate manual workflows with practical AI and custom software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   KATY TECHNOLOGIES — 01 ASSEMBLY LINE
+   Light industrial-editorial. Paper, navy ink, engineering
+   linework, one electric-blue accent for automated elements.
+   ============================================================ */
+:root{
+  --paper:#F8F7F2;
+  --paper-dim:#F1EFE7;
+  --ink:#071A33;
+  --navy:#06192D;
+  --navy-2:#0A213A;
+  --slate:#263D54;
+  --slate-soft:#536B80;
+  --bluegray:#7F95AA;
+  --taupe:#8B8080;
+  --taupe-tint:#AFA7A7;
+  --accent:#2E7CFF;
+  --accent-soft:#7CC4FF;
+  --hair:rgba(7,26,51,.18);
+  --hair-soft:rgba(7,26,51,.10);
+  --sans:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Literata",Georgia,serif;
+  --pad:clamp(20px,4.2vw,72px);
+  --header-h:72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:#fff}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.skip-link{
+  position:absolute;left:var(--pad);top:-60px;z-index:300;
+  background:var(--ink);color:var(--paper);padding:10px 18px;
+  font-size:13px;font-weight:600;letter-spacing:.04em;
+  transition:top .2s ease;
+}
+.skip-link:focus-visible{top:12px}
+
+/* ---------- shared text utilities ---------- */
+.label{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--slate-soft);
+}
+.label--accent{color:var(--accent)}
+.serif{font-family:var(--serif)}
+.tick-dash{display:inline-block;width:26px;height:1px;background:var(--slate-soft);vertical-align:middle;margin-right:10px}
+
+/* ---------- preloader ---------- */
+#preloader{
+  position:fixed;inset:0;z-index:200;
+  background:var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+  transition:opacity .45s ease,visibility .45s ease;
+}
+#preloader.is-done{opacity:0;visibility:hidden;pointer-events:none}
+#preloader img{width:64px;height:64px}
+.pre-line{position:relative;width:min(220px,50vw);height:1px;background:var(--hair-soft);overflow:hidden}
+.pre-line::after{
+  content:"";position:absolute;inset:0;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  animation:preFill .9s cubic-bezier(.7,0,.3,1) forwards;
+}
+.pre-ticks{font-size:10px;letter-spacing:.3em;color:var(--bluegray);font-weight:500}
+@keyframes preFill{to{transform:scaleX(1)}}
+
+/* ---------- header ---------- */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  height:var(--header-h);padding:0 var(--pad);
+  background:rgba(248,247,242,0);
+  border-bottom:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease;
+}
+.site-header.is-scrolled{
+  background:rgba(248,247,242,.92);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border-bottom-color:var(--hair-soft);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:38px;height:38px}
+.brand-name{font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.site-nav{display:flex;align-items:center;gap:clamp(16px,2.4vw,34px)}
+.site-nav a{
+  font-size:13px;font-weight:500;letter-spacing:.05em;color:var(--slate);
+  position:relative;padding:4px 0;
+}
+.site-nav a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:var(--accent);transform:scaleX(0);transform-origin:right;
+  transition:transform .3s cubic-bezier(.7,0,.3,1);
+}
+.site-nav a:hover::after,.site-nav a:focus-visible::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{
+  border:1px solid var(--ink);padding:9px 18px;font-size:13px;font-weight:600;
+  letter-spacing:.04em;color:var(--ink);
+  transition:background .25s ease,color .25s ease;
+}
+.nav-cta:hover,.nav-cta:focus-visible{background:var(--ink);color:var(--paper)}
+.nav-cta::after{display:none}
+@media (max-width:760px){
+  .site-nav a:not(.nav-cta){display:none}
+  .brand-name{display:none}
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  font-weight:600;font-size:15px;letter-spacing:.02em;
+  padding:16px 28px;border:1px solid var(--ink);color:var(--ink);
+  transition:background .25s ease,color .25s ease,border-color .25s ease;
+}
+.btn .arr{transition:transform .25s ease}
+.btn:hover .arr,.btn:focus-visible .arr{transform:translateX(5px)}
+.btn--solid{background:var(--ink);color:var(--paper)}
+.btn--solid:hover,.btn--solid:focus-visible{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn--ghost:hover,.btn--ghost:focus-visible{background:var(--ink);color:var(--paper)}
+.btn--accent{background:var(--accent);border-color:var(--accent);color:#fff;font-size:16px}
+.btn--accent:hover,.btn--accent:focus-visible{background:var(--accent-soft);border-color:var(--accent-soft);color:var(--navy)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:calc(var(--header-h) + 28px) var(--pad) 0;
+  overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--hair-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--hair-soft) 1px,transparent 1px);
+  background-size:120px 120px;
+  -webkit-mask-image:radial-gradient(120% 90% at 50% 0%,rgba(0,0,0,.55),transparent 72%);
+  mask-image:radial-gradient(120% 90% at 50% 0%,rgba(0,0,0,.55),transparent 72%);
+}
+.hero-meta{
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  border-bottom:1px solid var(--hair-soft);padding-bottom:14px;margin-bottom:clamp(28px,5vh,64px);
+}
+.hero-headline{
+  font-weight:600;
+  font-size:clamp(2.35rem,8vw,7.1rem);
+  line-height:1.02;letter-spacing:-.025em;
+  text-wrap:balance;
+  max-width:14em;
+}
+.h-line{display:block;overflow:hidden}
+.h-line>span{display:block}
+.hero-sub{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;
+  margin-top:clamp(26px,4.5vh,52px);
+}
+.hero-sub p{
+  font-family:var(--serif);font-size:clamp(1.02rem,1.4vw,1.22rem);
+  color:var(--slate);max-width:34em;line-height:1.65;
+}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-schematic{margin-top:clamp(30px,6vh,72px)}
+.hero-schematic svg{width:100%;height:auto}
+.hero-scrollcue{
+  display:flex;align-items:center;gap:14px;
+  padding:18px 0 22px;border-top:1px solid var(--hair-soft);margin-top:26px;
+}
+.cue-tick{width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;position:relative}
+.cue-tick::after{
+  content:"";position:absolute;inset:2px;border-radius:50%;background:var(--accent);
+  animation:cuePulse 1.8s ease-in-out infinite;
+}
+@keyframes cuePulse{0%,100%{transform:scale(.4);opacity:.4}50%{transform:scale(1);opacity:1}}
+
+/* ---------- method intro ---------- */
+.method-intro{
+  padding:clamp(90px,15vh,170px) var(--pad);
+  border-top:1px solid var(--hair-soft);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(28px,5vw,90px);
+  align-items:end;
+}
+.method-intro .intro-left{display:flex;flex-direction:column;gap:18px}
+.fig-mark{
+  font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--bluegray);
+}
+.method-intro h2{
+  font-weight:600;font-size:clamp(1.9rem,4.6vw,4rem);line-height:1.06;letter-spacing:-.02em;
+  text-wrap:balance;
+}
+.method-intro .intro-prose{
+  font-family:var(--serif);color:var(--slate);font-size:clamp(1rem,1.25vw,1.15rem);
+  line-height:1.7;max-width:36em;
+}
+@media (max-width:900px){
+  .method-intro{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   THE LINE — pinned horizontal journey (desktop ≥900px)
+   ============================================================ */
+.line{position:relative;background:var(--paper)}
+.line-viewport{position:relative;height:100vh;overflow:hidden}
+.line-track{
+  display:flex;height:100%;width:max-content;position:relative;
+  will-change:transform;
+}
+.station{
+  position:relative;flex:0 0 92vw;height:100%;
+  padding:calc(var(--header-h) + 30px) clamp(34px,4.5vw,84px) 0;
+  border-right:1px dashed var(--hair);
+}
+/* ruler along the top of the track */
+.ruler{
+  position:absolute;top:calc(var(--header-h) - 6px);left:0;height:30px;width:100%;
+  border-bottom:1px solid var(--hair);
+  background-image:repeating-linear-gradient(90deg,
+    var(--hair) 0 1px,transparent 1px 25px),
+    repeating-linear-gradient(90deg,
+    var(--slate-soft) 0 1px,transparent 1px 125px);
+  background-position:bottom;
+  background-size:100% 8px,100% 16px;
+  background-repeat:repeat-x;
+  pointer-events:none;
+}
+.ruler-label{
+  position:absolute;top:0;transform:translateX(4px);
+  font-size:9px;font-weight:500;letter-spacing:.12em;color:var(--bluegray);
+}
+/* the conveyor itself */
+.conveyor{
+  position:absolute;left:0;top:66%;width:100%;height:0;
+  border-top:2px solid var(--ink);
+  pointer-events:none;
+}
+.conveyor::before{
+  content:"";position:absolute;left:0;top:4px;width:100%;height:7px;
+  background-image:repeating-linear-gradient(90deg,var(--hair) 0 1px,transparent 1px 36px);
+}
+.conveyor::after{
+  content:"";position:absolute;left:0;top:-7px;width:100%;height:5px;
+  background-image:repeating-linear-gradient(90deg,var(--taupe-tint) 0 1px,transparent 1px 72px);
+}
+/* work items riding the line */
+.work-layer{position:absolute;inset:0;pointer-events:none;z-index:3}
+.work-item{
+  position:absolute;top:calc(66% - 64px);
+  width:52px;height:62px;background:#fff;
+  border:1px solid var(--slate);
+  box-shadow:0 1px 0 var(--hair-soft),2px 3px 0 rgba(7,26,51,.07);
+  transform:rotate(var(--r,0deg));
+  display:flex;align-items:flex-end;
+  padding:5px;
+}
+.work-item::before{
+  content:"";position:absolute;top:7px;left:7px;right:7px;height:26px;
+  background-image:repeating-linear-gradient(var(--taupe-tint) 0 1px,transparent 1px 5px);
+}
+.work-item span{font-size:7px;font-weight:600;letter-spacing:.1em;color:var(--slate-soft)}
+.work-item--auto{border-color:var(--accent);border-left-width:3px}
+.work-item--auto::after{
+  content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+}
+/* queue pile at station 02 */
+.queue{position:absolute;top:calc(66% - 66px);left:34%;width:300px;height:70px;pointer-events:none;z-index:4}
+.q-card{
+  position:absolute;bottom:2px;width:50px;height:60px;background:#fff;
+  border:1px solid var(--slate);box-shadow:2px 3px 0 rgba(7,26,51,.08);
+}
+.q-card::before{
+  content:"";position:absolute;top:7px;left:7px;right:7px;height:24px;
+  background-image:repeating-linear-gradient(var(--taupe-tint) 0 1px,transparent 1px 5px);
+}
+.q-count{
+  position:absolute;top:-44px;left:0;
+  font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ink);
+  text-transform:uppercase;white-space:nowrap;
+}
+.q-count strong{color:var(--accent);font-weight:700}
+.bottleneck-mark{
+  position:absolute;top:38%;left:34%;height:28%;width:0;
+  border-left:1.5px dashed var(--taupe);pointer-events:none;
+}
+.bottleneck-mark::before{
+  content:"BOTTLENECK";position:absolute;top:-22px;left:-6px;
+  font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--taupe);
+}
+.bottleneck-mark::after{
+  content:"";position:absolute;left:-5px;bottom:-5px;width:9px;height:9px;
+  border:1.5px solid var(--taupe);border-radius:50%;background:var(--paper);
+}
+/* split: automated lane (SVG arc) spanning stations 03–04 */
+.split-wrap{
+  position:absolute;left:58%;top:34%;width:39%;height:32%;
+  pointer-events:none;z-index:2;
+}
+.split-wrap svg{width:100%;height:100%;overflow:visible}
+.lane-path{
+  fill:none;stroke:var(--accent);stroke-width:2.5;
+  stroke-dasharray:10 9;
+}
+.lane-node{fill:var(--paper);stroke:var(--accent);stroke-width:2}
+.lane-label{
+  position:absolute;top:-30px;left:24%;
+  font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--accent);
+  text-transform:uppercase;white-space:nowrap;
+}
+.lane-sublabel{
+  position:absolute;bottom:-46px;left:24%;
+  font-size:10px;font-weight:600;letter-spacing:.18em;color:var(--slate-soft);
+  text-transform:uppercase;white-space:nowrap;
+}
+.lane-item{
+  position:absolute;left:-2%;bottom:-26px;width:40px;height:48px;
+  background:#fff;border:1.5px solid var(--accent);
+  box-shadow:2px 3px 0 rgba(46,124,255,.18);
+}
+.lane-item::before{
+  content:"";position:absolute;top:6px;left:6px;right:6px;height:18px;
+  background-image:repeating-linear-gradient(var(--accent-soft) 0 1px,transparent 1px 5px);
+  opacity:.8;
+}
+/* human-review checkpoint at station 04 */
+.checkpoint{
+  position:absolute;top:calc(66% - 86px);left:88.5%;width:90px;height:86px;
+  pointer-events:none;z-index:5;
+}
+.checkpoint .gate{
+  position:absolute;inset:0 auto 0 50%;width:54px;transform:translateX(-50%);
+  border:1.5px solid var(--ink);border-bottom:0;
+  background:rgba(248,247,242,.6);
+}
+.checkpoint .gate::after{
+  content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  width:18px;height:18px;border:1.5px solid var(--ink);border-radius:50%;
+}
+.checkpoint-label{
+  position:absolute;top:-46px;left:50%;transform:translateX(-50%);
+  font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--ink);
+  text-transform:uppercase;white-space:nowrap;
+}
+.stamp{
+  position:absolute;top:6px;right:-58px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--accent);
+  border:2px solid var(--accent);padding:5px 9px;border-radius:3px;
+  transform:rotate(-8deg);
+}
+/* station content */
+.station-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:8px}
+.station-num{
+  font-weight:700;line-height:.82;letter-spacing:-.03em;
+  font-size:clamp(7rem,17vw,15rem);
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--bluegray);
+}
+.station--accent .station-num{-webkit-text-stroke:1.5px var(--accent)}
+@supports not (-webkit-text-stroke:1px black){
+  .station-num{color:var(--bluegray)}
+  .station--accent .station-num{color:var(--accent)}
+}
+.station-key{
+  font-size:clamp(1rem,1.6vw,1.4rem);font-weight:700;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--ink);
+}
+.station-body{max-width:30em;margin-top:clamp(14px,2.5vh,30px)}
+.station-body h3{
+  font-weight:600;font-size:clamp(1.5rem,2.7vw,2.4rem);line-height:1.12;
+  letter-spacing:-.015em;margin-bottom:14px;text-wrap:balance;
+}
+.station-body p{
+  font-family:var(--serif);color:var(--slate);font-size:clamp(.98rem,1.15vw,1.1rem);
+  line-height:1.7;
+}
+.station-fig{
+  position:absolute;bottom:8%;left:clamp(34px,4.5vw,84px);
+  display:flex;align-items:center;gap:14px;
+}
+.station-fig .crosshair{
+  width:15px;height:15px;position:relative;
+}
+.station-fig .crosshair::before,.station-fig .crosshair::after{
+  content:"";position:absolute;background:var(--bluegray);
+}
+.station-fig .crosshair::before{left:50%;top:0;bottom:0;width:1px}
+.station-fig .crosshair::after{top:50%;left:0;right:0;height:1px}
+/* HUD inside the pinned viewport */
+.line-hud{
+  position:absolute;left:var(--pad);right:var(--pad);bottom:22px;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  pointer-events:none;
+}
+.hud-readout{font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--slate-soft);text-transform:uppercase}
+.hud-readout strong{color:var(--ink);font-weight:700}
+.hud-dots{display:flex;gap:8px}
+.hud-dots i{
+  width:7px;height:7px;border-radius:50%;border:1.5px solid var(--bluegray);
+  transition:background .3s ease,border-color .3s ease;
+}
+.hud-dots i.is-on{background:var(--accent);border-color:var(--accent)}
+
+/* mobile layout for the line (<900px): vertical stack, no pin */
+@media (max-width:899px){
+  .line-viewport{height:auto;overflow:visible}
+  .line-track{flex-direction:column;width:100%;height:auto}
+  .station{
+    flex:0 0 auto;width:100%;height:auto;min-height:0;
+    padding:64px 22px 64px 46px;
+    border-right:0;border-bottom:1px dashed var(--hair);
+    border-left:2px solid var(--ink);
+  }
+  .station::before{
+    content:"";position:absolute;left:-6px;top:72px;width:10px;height:10px;
+    border-radius:50%;background:var(--paper);border:2px solid var(--ink);
+  }
+  .station--accent{border-left-color:var(--accent)}
+  .station--accent::before{border-color:var(--accent)}
+  .ruler,.conveyor,.work-layer,.split-wrap,.checkpoint,.bottleneck-mark,.line-hud{display:none}
+  .queue{position:static;width:auto;height:auto;margin-top:26px;display:flex;gap:0;pointer-events:auto}
+  .q-card{position:relative;bottom:auto;left:0!important;margin-right:-30px;transform:rotate(-2deg)}
+  .q-card:nth-child(odd){transform:rotate(2.5deg)}
+  .q-count{position:static;display:block;margin-top:14px}
+  .station-fig{position:static;margin-top:30px}
+  .station-num{font-size:clamp(5rem,22vw,8rem)}
+}
+
+/* ---------- services ---------- */
+.services{
+  padding:clamp(100px,16vh,190px) var(--pad);
+  border-top:1px solid var(--hair-soft);
+  background:
+    linear-gradient(var(--paper) 0 0) padding-box,
+    var(--paper);
+}
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;
+  margin-bottom:clamp(44px,7vh,80px);
+}
+.section-head h2{
+  font-weight:600;font-size:clamp(1.9rem,4.2vw,3.6rem);line-height:1.08;letter-spacing:-.02em;
+  max-width:16em;text-wrap:balance;
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--hair);border-left:1px solid var(--hair);
+}
+.svc{
+  position:relative;
+  border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:clamp(24px,2.6vw,40px);min-height:240px;
+  display:flex;flex-direction:column;justify-content:space-between;gap:26px;
+  transition:background .3s ease;
+  background:var(--paper);
+}
+.svc:hover{background:#fff}
+.svc::after{
+  content:"";position:absolute;left:0;top:0;width:100%;height:2px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform .35s cubic-bezier(.7,0,.3,1);
+}
+.svc:hover::after{transform:scaleX(1)}
+.svc-idx{font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--bluegray)}
+.svc h3{font-weight:600;font-size:clamp(1.1rem,1.5vw,1.35rem);letter-spacing:-.01em;margin:14px 0 12px}
+.svc p{font-family:var(--serif);font-size:.95rem;line-height:1.65;color:var(--slate)}
+@media (max-width:1020px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.services-grid{grid-template-columns:1fr}.svc{min-height:0}}
+
+/* ---------- field notes ---------- */
+.field-notes{padding:clamp(100px,16vh,190px) var(--pad);border-top:1px solid var(--hair-soft)}
+.note-row{
+  display:grid;grid-template-columns:minmax(90px,.6fr) minmax(0,1fr) minmax(0,1.8fr);
+  gap:clamp(18px,3vw,56px);align-items:baseline;
+  padding:clamp(28px,4.5vh,46px) 0;
+  border-bottom:1px solid var(--hair);
+  position:relative;
+}
+.note-row:first-of-type{border-top:1px solid var(--hair)}
+.note-year{
+  font-weight:700;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.02em;
+  color:transparent;-webkit-text-stroke:1.2px var(--slate);
+}
+@supports not (-webkit-text-stroke:1px black){.note-year{color:var(--slate)}}
+.note-row--now .note-year{color:var(--accent);-webkit-text-stroke:0}
+.note-sector{font-weight:600;font-size:clamp(1.15rem,1.8vw,1.5rem);letter-spacing:-.01em}
+.note-sector .label{display:block;margin-bottom:8px}
+.note-prose{font-family:var(--serif);color:var(--slate);line-height:1.7;font-size:clamp(.98rem,1.15vw,1.08rem);max-width:42em}
+@media (max-width:760px){
+  .note-row{grid-template-columns:1fr;gap:10px}
+}
+
+/* ---------- CTA panel ---------- */
+.cta-panel{
+  background:var(--navy);color:var(--paper);
+  padding:clamp(110px,18vh,210px) var(--pad);
+  position:relative;overflow:hidden;
+}
+.cta-panel::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(124,196,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,196,255,.05) 1px,transparent 1px);
+  background-size:120px 120px;
+  pointer-events:none;
+}
+.cta-inner{position:relative;max-width:1180px}
+.cta-panel .label{color:var(--accent-soft)}
+.cta-manifesto{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.65rem,3.8vw,3.3rem);line-height:1.25;letter-spacing:-.01em;
+  max-width:22em;margin:26px 0 clamp(40px,7vh,64px);text-wrap:balance;
+}
+.cta-manifesto em{font-style:italic;color:var(--accent-soft)}
+.cta-row{display:flex;align-items:center;gap:clamp(20px,3vw,44px);flex-wrap:wrap}
+.cta-contacts{display:flex;flex-direction:column;gap:6px}
+.cta-contacts a{
+  font-size:14px;font-weight:500;letter-spacing:.03em;color:var(--bluegray);
+  width:fit-content;border-bottom:1px solid transparent;
+  transition:color .25s ease,border-color .25s ease;
+}
+.cta-contacts a:hover,.cta-contacts a:focus-visible{color:var(--accent-soft);border-bottom-color:var(--accent-soft)}
+
+/* ---------- footer ---------- */
+.site-footer{
+  background:var(--navy-2);color:var(--paper);
+  padding:clamp(60px,9vh,100px) var(--pad) 0;
+  overflow:hidden;
+}
+.footer-top{
+  display:flex;justify-content:space-between;gap:34px;flex-wrap:wrap;
+  padding-bottom:clamp(40px,7vh,70px);
+  border-bottom:1px solid rgba(124,196,255,.14);
+}
+.footer-brand{display:flex;align-items:center;gap:14px}
+.footer-brand img{width:44px;height:44px}
+.footer-brand span{font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.footer-cols{display:flex;gap:clamp(34px,6vw,110px);flex-wrap:wrap}
+.footer-col{display:flex;flex-direction:column;gap:10px}
+.footer-col .label{color:var(--slate-soft);margin-bottom:4px}
+.footer-col a{
+  font-size:14px;color:var(--bluegray);width:fit-content;
+  border-bottom:1px solid transparent;
+  transition:color .25s ease,border-color .25s ease;
+}
+.footer-col a:hover,.footer-col a:focus-visible{color:var(--accent-soft);border-bottom-color:var(--accent-soft)}
+.footer-legal{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:26px 0 8px;font-size:12.5px;color:var(--bluegray);letter-spacing:.04em;
+}
+.footer-mark{
+  font-weight:700;letter-spacing:-.04em;line-height:.74;
+  font-size:clamp(7rem,26vw,24rem);
+  color:#0E2A47;
+  text-transform:uppercase;
+  margin-bottom:-0.16em;
+  user-select:none;pointer-events:none;
+  white-space:nowrap;
+}
+
+/* ---------- reveal helpers (JS adds motion; default fully visible) ---------- */
+.will-reveal{will-change:transform,opacity}
+
+/* ---------- reduced motion: everything visible, nothing moves ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;transition:none!important;
+    scroll-behavior:auto!important;
+  }
+  #preloader{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- preloader -->
+<div id="preloader" aria-hidden="true">
+  <img src="logo-dark.svg" alt="" width="64" height="64">
+  <div class="pre-line"></div>
+  <div class="pre-ticks">CALIBRATING THE LINE</div>
+</div>
+
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="Katy Technologies — home">
+    <img src="logo-dark.svg" alt="" width="38" height="38">
+    <span class="brand-name">Katy Technologies</span>
+  </a>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="#method">Method</a>
+    <a href="#services">Services</a>
+    <a href="#field-notes">Field notes</a>
+    <a class="nav-cta" href="/contact">Talk with us</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ======================= HERO ======================= -->
+  <section class="hero" id="top" aria-label="Introduction">
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <div class="hero-meta">
+      <span class="label"><span class="tick-dash" aria-hidden="true"></span>Enterprise workflow automation</span>
+      <span class="label" aria-hidden="true">Fig. 01 — Overview</span>
+      <span class="label" aria-hidden="true">Scale 1 : 1</span>
+    </div>
+
+    <h1 class="hero-headline">
+      <span class="h-line"><span>Automate the</span></span>
+      <span class="h-line"><span>work that slows</span></span>
+      <span class="h-line"><span>your team down.</span></span>
+    </h1>
+
+    <div class="hero-sub">
+      <p>We help enterprise teams automate manual workflows with practical AI and custom software.</p>
+      <div class="hero-ctas">
+        <a class="btn btn--solid" href="/contact">Talk through a bottleneck <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="#method">Map a workflow <span class="arr" aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+
+    <div class="hero-schematic" aria-hidden="true">
+      <svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <line class="schem-line" x1="20" y1="70" x2="1180" y2="70" stroke="#071A33" stroke-width="2"/>
+        <g class="schem-node" font-family="Work Sans,sans-serif" font-size="13" font-weight="600" letter-spacing="3">
+          <circle cx="160" cy="70" r="8" fill="#F8F7F2" stroke="#071A33" stroke-width="2"/>
+          <text x="160" y="34" text-anchor="middle" fill="#536B80">01 MAP</text>
+        </g>
+        <g class="schem-node" font-family="Work Sans,sans-serif" font-size="13" font-weight="600" letter-spacing="3">
+          <circle cx="450" cy="70" r="8" fill="#F8F7F2" stroke="#071A33" stroke-width="2"/>
+          <text x="450" y="34" text-anchor="middle" fill="#536B80">02 NAME</text>
+        </g>
+        <g class="schem-node" font-family="Work Sans,sans-serif" font-size="13" font-weight="600" letter-spacing="3">
+          <circle cx="740" cy="70" r="8" fill="#F8F7F2" stroke="#2E7CFF" stroke-width="2"/>
+          <text x="740" y="34" text-anchor="middle" fill="#2E7CFF">03 ROUTE</text>
+        </g>
+        <g class="schem-node" font-family="Work Sans,sans-serif" font-size="13" font-weight="600" letter-spacing="3">
+          <circle cx="1030" cy="70" r="8" fill="#F8F7F2" stroke="#071A33" stroke-width="2"/>
+          <text x="1030" y="34" text-anchor="middle" fill="#536B80">04 TRUST</text>
+        </g>
+        <path class="schem-lane" d="M748 64 C 820 18, 950 18, 1022 64" fill="none" stroke="#2E7CFF" stroke-width="1.8" stroke-dasharray="7 6"/>
+        <g font-family="Work Sans,sans-serif" font-size="10" font-weight="500" letter-spacing="2" fill="#7F95AA">
+          <text x="20" y="104">0000</text>
+          <text x="590" y="104" text-anchor="middle">DIRECTION OF WORK →</text>
+          <text x="1180" y="104" text-anchor="end">3500</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-scrollcue" aria-hidden="true">
+      <span class="cue-tick"></span>
+      <span class="label">Scroll — the line begins</span>
+    </div>
+  </section>
+
+  <!-- ======================= METHOD INTRO ======================= -->
+  <section class="method-intro" id="method" aria-label="Method introduction">
+    <div class="intro-left">
+      <span class="fig-mark">FIG. 02 — THE METHOD, FOUR STATIONS</span>
+      <h2>Start with the bottleneck, not the tool.</h2>
+    </div>
+    <p class="intro-prose">
+      Every engagement runs the same line. We walk the work from intake to sign-off,
+      find the step where it piles up, and only then decide what software or AI should
+      carry. Four stations, in order, every time.
+    </p>
+  </section>
+
+  <!-- ======================= THE LINE (pinned horizontal) ======================= -->
+  <section class="line" aria-label="The four stations of the method">
+    <div class="line-viewport">
+      <div class="line-track">
+
+        <div class="ruler" aria-hidden="true"></div>
+        <div class="conveyor" aria-hidden="true"></div>
+
+        <div class="work-layer" aria-hidden="true">
+          <div class="work-item" data-speed="0.82" style="left:5%;  --r:-2deg"><span>REQ-0114</span></div>
+          <div class="work-item" data-speed="1.12" style="left:11%; --r:1.5deg"><span>INV-2208</span></div>
+          <div class="work-item" data-speed="0.70" style="left:17%; --r:-1deg"><span>TKT-0931</span></div>
+          <div class="work-item" data-speed="1.22" style="left:24%; --r:2deg"><span>DOC-4410</span></div>
+          <div class="work-item" data-speed="0.90" style="left:48%; --r:-2.5deg"><span>REQ-0188</span></div>
+          <div class="work-item" data-speed="1.08" style="left:54%; --r:1deg"><span>PO-7731</span></div>
+          <div class="work-item work-item--auto" data-speed="0.78" style="left:62%; --r:-1.5deg"><span>AUT-0001</span></div>
+          <div class="work-item work-item--auto" data-speed="1.18" style="left:67%; --r:2deg"><span>AUT-0002</span></div>
+          <div class="work-item" data-speed="0.95" style="left:84%; --r:-1deg"><span>REV-0042</span></div>
+        </div>
+
+        <!-- STATION 01 — MAP -->
+        <article class="station" data-station="1">
+          <div class="station-head">
+            <span class="station-num" aria-hidden="true">01</span>
+            <span class="station-key">Map</span>
+          </div>
+          <div class="station-body">
+            <h3>Map the work as it moves</h3>
+            <p>We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
+          </div>
+          <div class="station-fig" aria-hidden="true">
+            <span class="crosshair"></span>
+            <span class="fig-mark">STATION 01 / INTAKE SURVEY</span>
+          </div>
+        </article>
+
+        <!-- STATION 02 — NAME -->
+        <article class="station" data-station="2">
+          <div class="station-head">
+            <span class="station-num" aria-hidden="true">02</span>
+            <span class="station-key">Name</span>
+          </div>
+          <div class="station-body">
+            <h3>Name the step worth improving</h3>
+            <p>Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly.</p>
+          </div>
+          <div class="bottleneck-mark" aria-hidden="true"></div>
+          <div class="queue" aria-hidden="true">
+            <span class="q-count"><strong class="q-num">12</strong> items waiting at this step</span>
+            <div class="q-card" style="left:0"></div>
+            <div class="q-card" style="left:64px"></div>
+            <div class="q-card" style="left:132px"></div>
+            <div class="q-card" style="left:204px"></div>
+          </div>
+          <div class="station-fig" aria-hidden="true">
+            <span class="crosshair"></span>
+            <span class="fig-mark">STATION 02 / DELAY ABSORBED HERE</span>
+          </div>
+        </article>
+
+        <!-- STATION 03 — ROUTE -->
+        <article class="station station--accent" data-station="3">
+          <div class="station-head">
+            <span class="station-num" aria-hidden="true">03</span>
+            <span class="station-key">Route</span>
+          </div>
+          <div class="station-body">
+            <h3>Route the repeat work around it</h3>
+            <p>Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the controls your team already trusts.</p>
+          </div>
+          <div class="station-fig" aria-hidden="true">
+            <span class="crosshair"></span>
+            <span class="fig-mark">STATION 03 / LINE SPLITS HERE</span>
+          </div>
+        </article>
+
+        <!-- STATION 04 — TRUST -->
+        <article class="station" data-station="4">
+          <div class="station-head">
+            <span class="station-num" aria-hidden="true">04</span>
+            <span class="station-key">Trust</span>
+          </div>
+          <div class="station-body">
+            <h3>Keep review visible</h3>
+            <p>Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on.</p>
+          </div>
+          <div class="station-fig" aria-hidden="true">
+            <span class="crosshair"></span>
+            <span class="fig-mark">STATION 04 / LANES REJOIN</span>
+          </div>
+        </article>
+
+        <!-- automated lane: dashed blue arc spanning stations 03–04 -->
+        <div class="split-wrap" aria-hidden="true">
+          <span class="lane-label">Automated lane — draft · sort · reconcile</span>
+          <svg viewBox="0 0 1000 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="lane-path" d="M0 320 C 120 320, 150 60, 320 60 L 680 60 C 850 60, 880 320, 1000 320"/>
+            <circle class="lane-node" cx="0" cy="320" r="7"/>
+            <circle class="lane-node" cx="1000" cy="320" r="7"/>
+          </svg>
+          <span class="lane-sublabel">Main line continues — human review below</span>
+          <div class="lane-item li-1"></div>
+          <div class="lane-item li-2"></div>
+          <div class="lane-item li-3"></div>
+        </div>
+
+        <!-- human review checkpoint on the main line at station 04 -->
+        <div class="checkpoint" aria-hidden="true">
+          <span class="checkpoint-label">Human review</span>
+          <span class="gate"></span>
+          <span class="stamp">Reviewed</span>
+        </div>
+
+      </div><!-- /.line-track -->
+
+      <div class="line-hud" aria-hidden="true">
+        <span class="hud-readout">Line position <strong class="hud-mm">0000</strong> / 3500</span>
+        <div class="hud-dots"><i class="is-on"></i><i></i><i></i><i></i></div>
+        <span class="hud-readout">Station <strong class="hud-station">01</strong> / 04</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SERVICES ======================= -->
+  <section class="services" id="services" aria-label="Services">
+    <div class="section-head">
+      <h2>What we build along the line</h2>
+      <span class="fig-mark">FIG. 03 — CAPABILITIES, SIX UNITS</span>
+    </div>
+    <div class="services-grid">
+      <article class="svc">
+        <span class="svc-idx">UNIT 01</span>
+        <div>
+          <h3>Internal systems foundations</h3>
+          <p>Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <span class="svc-idx">UNIT 02</span>
+        <div>
+          <h3>Practical AI support</h3>
+          <p>AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <span class="svc-idx">UNIT 03</span>
+        <div>
+          <h3>Custom workflow software</h3>
+          <p>Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <span class="svc-idx">UNIT 04</span>
+        <div>
+          <h3>Risk-aware automation</h3>
+          <p>Automation patterns that keep permissions, auditability, and human review visible.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <span class="svc-idx">UNIT 05</span>
+        <div>
+          <h3>Operational visibility</h3>
+          <p>Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <span class="svc-idx">UNIT 06</span>
+        <div>
+          <h3>Workflow modernization</h3>
+          <p>Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======================= FIELD NOTES ======================= -->
+  <section class="field-notes" id="field-notes" aria-label="Field notes">
+    <div class="section-head">
+      <h2>Field notes from the floor</h2>
+      <span class="fig-mark">FIG. 04 — SELECTED ENGAGEMENTS</span>
+    </div>
+
+    <article class="note-row">
+      <span class="note-year" aria-label="2023">2023</span>
+      <h3 class="note-sector"><span class="label">Sector</span>Economic consulting</h3>
+      <p class="note-prose">Deployed an internal document-supported assistant for a Boston-area consulting firm that helped analysts move reports faster while protecting data privacy requirements.</p>
+    </article>
+
+    <article class="note-row">
+      <span class="note-year" aria-label="2025">2025</span>
+      <h3 class="note-sector"><span class="label">Sector</span>Ticket vendors</h3>
+      <p class="note-prose">Worked with a California ticket vendor to create custom email annotation software that reduced repeat review work for management.</p>
+    </article>
+
+    <article class="note-row note-row--now">
+      <span class="note-year">Now</span>
+      <h3 class="note-sector"><span class="label">Sector</span>Hospitality</h3>
+      <p class="note-prose">Working with a high-end hotel chain based in Southern California to automate pricing, labor assignment, and reporting workflows.</p>
+    </article>
+  </section>
+
+  <!-- ======================= CTA PANEL ======================= -->
+  <section class="cta-panel" id="contact" aria-label="Contact">
+    <div class="cta-inner">
+      <span class="label"><span class="tick-dash" style="background:#7CC4FF" aria-hidden="true"></span>The standard we hold</span>
+      <p class="cta-manifesto">Automation should make work <em>easier to trust</em>, not harder to explain.</p>
+      <div class="cta-row">
+        <a class="btn btn--accent" href="/contact">Talk through a bottleneck <span class="arr" aria-hidden="true">→</span></a>
+        <div class="cta-contacts">
+          <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+          <a href="tel:+12819613396">(281) 961-3396</a>
+          <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener" target="_blank">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo-light.svg" alt="Katy Technologies logo" width="44" height="44">
+        <span>Katy Technologies</span>
+      </div>
+      <div class="footer-cols">
+        <nav class="footer-col" aria-label="Footer — site">
+          <span class="label">Site</span>
+          <a href="#method">Method</a>
+          <a href="#services">Services</a>
+          <a href="#field-notes">Field notes</a>
+        </nav>
+        <div class="footer-col">
+          <span class="label">Contact</span>
+          <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+          <a href="tel:+12819613396">(281) 961-3396</a>
+          <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>© 2026 Katy Technologies. All rights reserved.</span>
+      <span>Fig. 05 — End of line</span>
+    </div>
+    <div class="footer-mark" aria-hidden="true">Katy</div>
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+/* KATY TECHNOLOGIES — Assembly Line interactions */
+(function () {
+  "use strict";
+
+  var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var preloader = document.getElementById("preloader");
+  var header = document.querySelector(".site-header");
+
+  /* ---------- preloader (always resolves under ~1.2s) ---------- */
+  function hidePreloader() {
+    if (preloader && !preloader.classList.contains("is-done")) {
+      preloader.classList.add("is-done");
+    }
+  }
+  if (prefersReduced) {
+    hidePreloader();
+  } else {
+    window.setTimeout(hidePreloader, 1050);
+    window.addEventListener("load", function () {
+      window.setTimeout(hidePreloader, 250);
+    });
+  }
+
+  /* ---------- header scrolled state (cheap, rAF-throttled) ---------- */
+  var headerTicking = false;
+  function updateHeader() {
+    headerTicking = false;
+    if (!header) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+  }
+  window.addEventListener("scroll", function () {
+    if (!headerTicking) {
+      headerTicking = true;
+      window.requestAnimationFrame(updateHeader);
+    }
+  }, { passive: true });
+  updateHeader();
+
+  /* ---------- reduced motion or missing CDN: stop here, page is fully usable ---------- */
+  if (prefersReduced || !window.gsap || !window.ScrollTrigger) {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis smooth scroll, integrated with ScrollTrigger ---------- */
+  var lenis = null;
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: 0.11 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* anchor links scroll smoothly through Lenis */
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var id = link.getAttribute("href");
+      if (id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(target, { offset: -8 });
+      } else {
+        target.scrollIntoView();
+      }
+    });
+  });
+
+  /* ---------- hero entrance ---------- */
+  var heroTl = gsap.timeline({ delay: prefersReduced ? 0 : 1.05 });
+  heroTl
+    .from(".hero-meta .label", { y: 14, opacity: 0, duration: 0.6, stagger: 0.08, ease: "power3.out" })
+    .from(".h-line > span", { yPercent: 112, duration: 0.9, stagger: 0.09, ease: "power4.out" }, "-=0.3")
+    .from(".hero-sub p, .hero-ctas .btn", { y: 22, opacity: 0, duration: 0.7, stagger: 0.08, ease: "power3.out" }, "-=0.45")
+    .from(".hero-scrollcue", { opacity: 0, duration: 0.6 }, "-=0.2");
+
+  var schemLine = document.querySelector(".schem-line");
+  if (schemLine) {
+    var schemLen = 1160;
+    gsap.set(schemLine, { strokeDasharray: schemLen, strokeDashoffset: schemLen });
+    heroTl.to(schemLine, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, "-=0.7");
+    heroTl.from(".schem-node", { opacity: 0, duration: 0.4, stagger: 0.1 }, "-=0.7");
+    heroTl.from(".schem-lane", { opacity: 0, duration: 0.5 }, "-=0.2");
+  }
+
+  /* ---------- generic section reveals (any width) ---------- */
+  function reveal(targets, vars) {
+    gsap.utils.toArray(targets).forEach(function (el) {
+      gsap.from(el, Object.assign({
+        scrollTrigger: { trigger: el, start: "top 86%" },
+        y: 34, opacity: 0, duration: 0.85, ease: "power3.out"
+      }, vars || {}));
+    });
+  }
+  reveal(".method-intro h2");
+  reveal(".method-intro .intro-prose", { y: 24 });
+  reveal(".section-head");
+  reveal(".note-row", { y: 28 });
+  reveal(".cta-manifesto", { y: 30 });
+  reveal(".cta-row", { y: 24 });
+
+  /* services grid: staggered reveal as a group */
+  var svcCards = gsap.utils.toArray(".svc");
+  if (svcCards.length) {
+    gsap.from(svcCards, {
+      scrollTrigger: { trigger: ".services-grid", start: "top 82%" },
+      y: 38, opacity: 0, duration: 0.8, ease: "power3.out",
+      stagger: { each: 0.09, grid: "auto", from: "start" }
+    });
+  }
+
+  /* footer wordmark drift */
+  var mark = document.querySelector(".footer-mark");
+  if (mark) {
+    gsap.from(mark, {
+      scrollTrigger: { trigger: ".site-footer", start: "top 90%", end: "bottom bottom", scrub: 0.6 },
+      yPercent: 34, ease: "none"
+    });
+  }
+
+  /* ---------- THE LINE ---------- */
+  var lineSection = document.querySelector(".line");
+  var track = document.querySelector(".line-track");
+  var mm = gsap.matchMedia();
+
+  mm.add("(min-width: 900px)", function () {
+    if (!lineSection || !track) return;
+
+    /* ruler labels every 250px of track */
+    var ruler = track.querySelector(".ruler");
+    var builtLabels = [];
+    function buildRuler() {
+      builtLabels.forEach(function (n) { n.remove(); });
+      builtLabels = [];
+      if (!ruler) return;
+      var w = track.scrollWidth;
+      for (var x = 0; x <= w; x += 250) {
+        var lab = document.createElement("span");
+        lab.className = "ruler-label";
+        lab.style.left = x + "px";
+        lab.textContent = ("0000" + x).slice(-4);
+        ruler.appendChild(lab);
+        builtLabels.push(lab);
+      }
+    }
+    buildRuler();
+
+    var getScroll = function () {
+      return Math.max(0, track.scrollWidth - window.innerWidth);
+    };
+
+    var hudMm = document.querySelector(".hud-mm");
+    var hudStation = document.querySelector(".hud-station");
+    var hudDots = gsap.utils.toArray(".hud-dots i");
+
+    var DIST = 3500; /* generous pin distance */
+    var D = 10;      /* master timeline duration units */
+
+    var tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: lineSection,
+        start: "top top",
+        end: "+=" + DIST,
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onRefresh: buildRuler,
+        onUpdate: function (self) {
+          var p = self.progress;
+          if (hudMm) hudMm.textContent = ("0000" + Math.round(p * DIST)).slice(-4);
+          var st = Math.min(3, Math.floor(p * 4));
+          if (hudStation) hudStation.textContent = "0" + (st + 1);
+          hudDots.forEach(function (dot, i) {
+            dot.classList.toggle("is-on", i <= st);
+          });
+        }
+      }
+    });
+
+    /* 1) the conveyor: scrub the whole track left */
+    tl.to(track, { x: function () { return -getScroll(); }, duration: D }, 0);
+
+    /* 2) work items in parallax — each rides at its own speed */
+    gsap.utils.toArray(".work-item").forEach(function (item) {
+      var speed = parseFloat(item.getAttribute("data-speed")) || 1;
+      tl.to(item, {
+        x: function () { return -(speed - 1) * getScroll() * 0.45; },
+        duration: D
+      }, 0);
+    });
+
+    /* 3) station 02: items pile up at the bottleneck */
+    var qCards = gsap.utils.toArray(".q-card");
+    qCards.forEach(function (card, i) {
+      tl.to(card, {
+        x: function () { return -i * 50; }, /* converge into a stack */
+        rotation: (i % 2 ? 3 : -2.5) * (i * 0.5 + 1),
+        duration: 1.6,
+        ease: "power2.inOut"
+      }, 1.7 + i * 0.18);
+    });
+    var qNum = document.querySelector(".q-num");
+    if (qNum) {
+      qNum.textContent = "00"; /* desktop counts up with the scrub; static "12" elsewhere */
+      var counter = { v: 0 };
+      tl.to(counter, {
+        v: 12, duration: 1.8, ease: "none",
+        onUpdate: function () {
+          qNum.textContent = ("00" + Math.round(counter.v)).slice(-2);
+        }
+      }, 1.7);
+    }
+
+    /* 4) the split: dashed automated lane crawls + items take the bypass */
+    var lanePath = document.querySelector(".lane-path");
+    if (lanePath) {
+      tl.to(lanePath, { strokeDashoffset: -340, duration: D }, 0);
+    }
+    var splitWrap = document.querySelector(".split-wrap");
+    gsap.utils.toArray(".lane-item").forEach(function (item, i) {
+      var t0 = 5.6 + i * 0.7;
+      tl.to(item, {
+        duration: 2.6,
+        ease: "power1.inOut",
+        keyframes: [
+          { x: function () { return splitWrap.offsetWidth * 0.22; }, y: function () { return -splitWrap.offsetHeight * 0.82; }, rotation: -4 },
+          { x: function () { return splitWrap.offsetWidth * 0.58; }, y: function () { return -splitWrap.offsetHeight * 0.82; }, rotation: 2 },
+          { x: function () { return splitWrap.offsetWidth * 0.92; }, y: 0, rotation: 0 }
+        ]
+      }, t0);
+    });
+
+    /* 5) station 04: the human-review stamp lands near the end */
+    var stamp = document.querySelector(".stamp");
+    if (stamp) {
+      tl.fromTo(stamp,
+        { scale: 2.4, opacity: 0, rotation: -24 },
+        { scale: 1, opacity: 1, rotation: -8, duration: 0.5, ease: "power3.out" },
+        8.4
+      );
+    }
+
+    /* 6) station copy slides in as each station arrives
+       (explicit fromTo — .from() would lose its end values when
+       invalidateOnRefresh re-captures state while hidden) */
+    gsap.utils.toArray(".station").forEach(function (station, i) {
+      if (i === 0) return; /* first station is visible at pin start */
+      var bits = station.querySelectorAll(".station-num, .station-key, .station-body h3, .station-body p, .station-fig");
+      tl.fromTo(bits,
+        { y: 36, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.07, ease: "power3.out", immediateRender: true },
+        i * 2.32 - 0.7
+      );
+    });
+
+    return function () {
+      builtLabels.forEach(function (n) { n.remove(); });
+      builtLabels = [];
+      if (qNum) qNum.textContent = "12";
+    };
+  });
+
+  /* mobile: stations stack vertically with simple reveals */
+  mm.add("(max-width: 899px)", function () {
+    gsap.utils.toArray(".station").forEach(function (station) {
+      gsap.from(station.querySelectorAll(".station-head, .station-body, .queue, .station-fig"), {
+        scrollTrigger: { trigger: station, start: "top 84%" },
+        y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out"
+      });
+    });
+  });
+
+  /* keep measurements honest after fonts/images settle */
+  window.addEventListener("load", function () {
+    ScrollTrigger.refresh();
+  });
+}());
+</script>
+</body>
+</html>

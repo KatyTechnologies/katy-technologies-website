@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katy Technologies — Flow Field</title>
+<meta name="description" content="Katy Technologies helps enterprise teams automate manual workflows with practical AI and custom software.">
+<meta name="theme-color" content="#050D1A">
+<link rel="icon" type="image/svg+xml" href="logo-light.svg">
+
+<!-- Reduced-motion users get the static treatment before first paint -->
+<script>
+try {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('no-webgl');
+  }
+} catch (e) {}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Literata:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+
+<style>
+  :root{
+    --bg:#050D1A;
+    --bg-2:#071226;
+    --ink:#E8EFF7;
+    --muted:#9DAFC4;
+    --slate:#7F95AA;
+    --sky:#7CC4FF;
+    --ele:#2E7CFF;
+    --taupe:#AFA7A7;
+    --line:rgba(127,149,170,.16);
+    --sans:'Work Sans',system-ui,-apple-system,sans-serif;
+    --serif:'Literata',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body.loading{overflow:hidden}
+  ::selection{background:rgba(46,124,255,.45);color:#fff}
+  a{color:inherit;text-decoration:none}
+  img{display:block}
+  :focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:2px}
+
+  .skip-link{
+    position:fixed;top:-3rem;left:1rem;z-index:300;
+    background:var(--sky);color:#04101F;font-weight:600;
+    padding:.55rem 1rem;border-radius:4px;transition:top .2s;
+  }
+  .skip-link:focus{top:1rem}
+
+  /* ---------- canvas ---------- */
+  #scene{
+    position:fixed;inset:0;width:100%;height:100%;
+    z-index:0;pointer-events:none;display:block;
+  }
+  html.no-webgl #scene{display:none}
+  html.no-webgl .story{
+    background:
+      radial-gradient(120% 80% at 72% 8%, rgba(46,124,255,.13), transparent 60%),
+      radial-gradient(90% 70% at 18% 92%, rgba(124,196,255,.09), transparent 60%),
+      linear-gradient(180deg,#071226 0%,#050D1A 55%,#040B16 100%);
+  }
+
+  /* ---------- preloader ---------- */
+  #preloader{
+    position:fixed;inset:0;z-index:200;
+    background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .7s ease,visibility .7s;
+  }
+  #preloader.done{opacity:0;visibility:hidden}
+  .pre-inner{text-align:center}
+  #preNum{
+    display:block;font-size:clamp(4rem,14vw,8rem);font-weight:300;
+    letter-spacing:-.02em;line-height:1;color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .pre-label{
+    display:block;margin-top:1rem;font-size:.78rem;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--slate);
+  }
+
+  /* ---------- header ---------- */
+  .site-head{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;gap:2rem;
+    padding:1.1rem clamp(1.25rem,4vw,3rem);
+    transition:background .35s,backdrop-filter .35s;
+  }
+  .site-head.scrolled{
+    background:rgba(5,13,26,.72);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:.7rem;font-weight:500;letter-spacing:.02em}
+  .brand img{width:34px;height:34px}
+  .brand span{font-size:.95rem}
+  .head-nav{display:flex;gap:1.8rem;margin-left:auto}
+  .head-nav a{
+    font-size:.85rem;font-weight:400;color:var(--muted);
+    letter-spacing:.04em;transition:color .25s;
+  }
+  .head-nav a:hover{color:var(--ink)}
+  .head-cta{
+    font-size:.82rem;font-weight:600;color:var(--sky);
+    border:1px solid rgba(124,196,255,.4);border-radius:99px;
+    padding:.5rem 1.15rem;letter-spacing:.03em;
+    transition:background .25s,color .25s;
+    white-space:nowrap;
+  }
+  .head-cta:hover{background:var(--sky);color:#04101F}
+  @media (max-width:760px){
+    .head-nav{display:none}
+    .head-cta{margin-left:auto}
+    .brand span{display:none}
+  }
+
+  /* ---------- story panels ---------- */
+  .story{position:relative;z-index:1}
+  .panel{
+    min-height:100vh;min-height:100svh;
+    display:grid;place-items:center;
+    position:relative;
+    padding:6rem clamp(1.25rem,5vw,3rem);
+  }
+  .panel-inner{
+    position:relative;max-width:760px;text-align:center;
+  }
+  /* soft dark veil band for readability over particles */
+  .panel-inner::before{
+    content:"";position:absolute;inset:-14% -22%;z-index:-1;
+    background:radial-gradient(62% 58% at 50% 50%, rgba(4,10,21,.78), rgba(4,10,21,0) 74%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:.74rem;font-weight:500;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--sky);margin-bottom:1.4rem;
+  }
+  .panel h1{
+    font-size:clamp(2.5rem,7vw,5.2rem);
+    font-weight:300;line-height:1.06;letter-spacing:-.02em;
+    margin-bottom:1.6rem;
+  }
+  .panel h2{
+    font-size:clamp(2.1rem,5.4vw,3.9rem);
+    font-weight:300;line-height:1.1;letter-spacing:-.018em;
+    margin-bottom:1.5rem;
+  }
+  .lede,.phase-copy{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(1.02rem,1.6vw,1.2rem);line-height:1.75;
+    color:var(--muted);max-width:34em;margin:0 auto;
+  }
+  .cta-row{
+    display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.4rem;
+  }
+  .btn{
+    display:inline-block;border-radius:99px;
+    padding:.85rem 1.7rem;font-size:.92rem;font-weight:600;letter-spacing:.02em;
+    transition:transform .25s,background .25s,color .25s,border-color .25s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--sky);color:#04101F}
+  .btn-primary:hover{background:#A3D6FF}
+  .btn-ghost{
+    color:var(--ink);border:1px solid rgba(127,149,170,.45);
+  }
+  .btn-ghost:hover{border-color:var(--sky);color:var(--sky)}
+
+  .scroll-hint{
+    position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+    font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--slate);
+  }
+  .scroll-hint::after{
+    content:"";display:block;width:1px;height:42px;margin:.8rem auto 0;
+    background:linear-gradient(180deg,var(--slate),transparent);
+    animation:hintDrop 2.2s ease-in-out infinite;
+    transform-origin:top;
+  }
+  @keyframes hintDrop{
+    0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(0);opacity:0}
+  }
+
+  /* ---------- progress rail ---------- */
+  .rail{
+    position:fixed;right:2.2rem;top:50%;transform:translateY(-50%);
+    z-index:90;display:flex;flex-direction:column;gap:1.5rem;
+  }
+  .rail a{
+    position:relative;display:block;width:9px;height:9px;border-radius:50%;
+    background:rgba(127,149,170,.35);
+    transition:background .3s,transform .3s,box-shadow .3s;
+  }
+  .rail a:hover{background:var(--slate)}
+  .rail a.is-active{
+    background:var(--sky);transform:scale(1.35);
+    box-shadow:0 0 12px rgba(124,196,255,.7);
+  }
+  .rail-label{
+    position:absolute;right:1.6rem;top:50%;transform:translateY(-50%) translateX(6px);
+    font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+    opacity:0;transition:opacity .3s,transform .3s;white-space:nowrap;pointer-events:none;
+  }
+  .rail a:hover .rail-label,.rail a.is-active .rail-label{
+    opacity:1;transform:translateY(-50%) translateX(0);
+  }
+  @media (max-width:1100px){.rail{display:none}}
+
+  /* ---------- solid sections (canvas hand-off) ---------- */
+  .solid{
+    position:relative;z-index:2;
+    background:var(--bg);
+    padding:clamp(5rem,10vw,8.5rem) clamp(1.25rem,5vw,3rem);
+  }
+  .solid:first-of-type{
+    border-top:1px solid var(--line);
+    background:linear-gradient(180deg,var(--bg-2),var(--bg) 22%);
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  .section-head{margin-bottom:clamp(2.5rem,6vw,4.5rem);max-width:640px}
+  .section-head h2{
+    font-size:clamp(1.9rem,4.5vw,3.1rem);font-weight:300;
+    letter-spacing:-.015em;line-height:1.12;margin-top:1.1rem;
+  }
+  .section-sub{
+    font-family:var(--serif);color:var(--muted);margin-top:1.1rem;
+    font-size:1.02rem;line-height:1.7;
+  }
+
+  /* services */
+  .svc-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:0 clamp(2rem,5vw,4.5rem);
+    border-top:1px solid var(--line);
+  }
+  .svc{
+    padding:2.1rem 0 2.3rem;border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:baseline;
+  }
+  .svc-num{
+    font-size:.78rem;color:var(--slate);font-variant-numeric:tabular-nums;
+    letter-spacing:.12em;
+  }
+  .svc h3{font-size:1.18rem;font-weight:500;letter-spacing:-.005em;margin-bottom:.6rem}
+  .svc p{
+    font-family:var(--serif);font-size:.96rem;line-height:1.7;color:var(--muted);
+  }
+  @media (max-width:820px){.svc-grid{grid-template-columns:1fr}}
+
+  /* field notes */
+  .note{
+    display:grid;grid-template-columns:7rem 1fr;gap:1.5rem;
+    padding:2.2rem 0;border-top:1px solid var(--line);
+  }
+  .note:last-of-type{border-bottom:1px solid var(--line)}
+  .note-year{
+    font-size:.85rem;color:var(--sky);letter-spacing:.18em;font-weight:500;
+    font-variant-numeric:tabular-nums;padding-top:.3rem;
+  }
+  .note h3{font-size:1.22rem;font-weight:500;margin-bottom:.55rem}
+  .note p{
+    font-family:var(--serif);font-size:.98rem;line-height:1.72;color:var(--muted);
+    max-width:46em;
+  }
+  @media (max-width:620px){.note{grid-template-columns:1fr;gap:.5rem}}
+
+  /* cta band */
+  .cta-band{text-align:center}
+  .cta-band h2{
+    font-size:clamp(2.1rem,5.5vw,3.8rem);font-weight:300;letter-spacing:-.02em;
+    line-height:1.1;max-width:18em;margin:0 auto 1.4rem;
+  }
+  .cta-band .section-sub{margin:0 auto 2.6rem;max-width:36em}
+  .cta-meta{
+    margin-top:2.6rem;display:flex;gap:2.2rem;justify-content:center;flex-wrap:wrap;
+    font-size:.92rem;color:var(--muted);
+  }
+  .cta-meta a{color:var(--muted);border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
+  .cta-meta a:hover{color:var(--sky);border-color:var(--sky)}
+
+  /* footer */
+  .site-foot{
+    position:relative;z-index:2;background:#040B16;
+    border-top:1px solid var(--line);
+    padding:3rem clamp(1.25rem,5vw,3rem);
+  }
+  .foot-row{
+    max-width:1180px;margin:0 auto;
+    display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;
+  }
+  .foot-row img{width:30px;height:30px}
+  .foot-copy{font-size:.84rem;color:var(--slate)}
+  .foot-links{margin-left:auto;display:flex;gap:1.6rem;font-size:.84rem}
+  .foot-links a{color:var(--muted);transition:color .25s}
+  .foot-links a:hover{color:var(--sky)}
+  @media (max-width:620px){.foot-links{margin-left:0}}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms!important;animation-iteration-count:1!important;
+      transition-duration:.01ms!important;scroll-behavior:auto!important;
+    }
+  }
+</style>
+
+<noscript>
+  <style>
+    #scene,#preloader{display:none}
+    .story{
+      background:
+        radial-gradient(120% 80% at 72% 8%, rgba(46,124,255,.13), transparent 60%),
+        linear-gradient(180deg,#071226,#050D1A 55%,#040B16);
+    }
+  </style>
+</noscript>
+</head>
+<body class="loading">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<canvas id="scene" aria-hidden="true"></canvas>
+
+<div id="preloader" aria-hidden="true">
+  <div class="pre-inner">
+    <span id="preNum">0</span>
+    <span class="pre-label">Flow Field</span>
+  </div>
+</div>
+
+<header class="site-head" id="siteHead">
+  <a class="brand" href="#hero" aria-label="Katy Technologies — home">
+    <img src="logo-light.svg" alt="" width="34" height="34">
+    <span>Katy Technologies</span>
+  </a>
+  <nav class="head-nav" aria-label="Primary">
+    <a href="#services">Services</a>
+    <a href="#notes">Field notes</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="head-cta" href="/contact">Talk through a bottleneck</a>
+</header>
+
+<nav class="rail" aria-label="Story progress">
+  <a href="#hero" class="rail-dot is-active" data-panel="hero"><span class="rail-label">Flow</span></a>
+  <a href="#phase-map" class="rail-dot" data-panel="phase-map"><span class="rail-label">Map</span></a>
+  <a href="#phase-name" class="rail-dot" data-panel="phase-name"><span class="rail-label">Name</span></a>
+  <a href="#phase-route" class="rail-dot" data-panel="phase-route"><span class="rail-label">Route</span></a>
+  <a href="#phase-trust" class="rail-dot" data-panel="phase-trust"><span class="rail-label">Trust</span></a>
+</nav>
+
+<main id="main">
+  <div class="story" id="story">
+
+    <section class="panel" id="hero" aria-labelledby="t-hero">
+      <div class="panel-inner">
+        <p class="eyebrow hero-item">Enterprise workflow automation</p>
+        <h1 id="t-hero" class="hero-item">Automate the work that slows your team down.</h1>
+        <p class="lede hero-item">We help enterprise teams automate manual workflows with practical AI and custom software.</p>
+        <div class="cta-row hero-item">
+          <a class="btn btn-primary" href="/contact">Talk through a bottleneck</a>
+          <a class="btn btn-ghost" href="#phase-map">Follow the flow</a>
+        </div>
+      </div>
+      <p class="scroll-hint" aria-hidden="true">Scroll</p>
+    </section>
+
+    <section class="panel" id="phase-map" aria-labelledby="t-map">
+      <div class="panel-inner">
+        <p class="eyebrow" data-reveal>Phase 01 · Map</p>
+        <h2 id="t-map" data-reveal>Map the work as it moves</h2>
+        <p class="phase-copy" data-reveal>We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
+      </div>
+    </section>
+
+    <section class="panel" id="phase-name" aria-labelledby="t-name">
+      <div class="panel-inner">
+        <p class="eyebrow" data-reveal>Phase 02 · Name</p>
+        <h2 id="t-name" data-reveal>Name the step worth improving</h2>
+        <p class="phase-copy" data-reveal>Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly.</p>
+      </div>
+    </section>
+
+    <section class="panel" id="phase-route" aria-labelledby="t-route">
+      <div class="panel-inner">
+        <p class="eyebrow" data-reveal>Phase 03 · Route</p>
+        <h2 id="t-route" data-reveal>Route the repeat work around it</h2>
+        <p class="phase-copy" data-reveal>Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the controls your team already trusts.</p>
+      </div>
+    </section>
+
+    <section class="panel" id="phase-trust" aria-labelledby="t-trust">
+      <div class="panel-inner">
+        <p class="eyebrow" data-reveal>Phase 04 · Trust</p>
+        <h2 id="t-trust" data-reveal>Keep review visible</h2>
+        <p class="phase-copy" data-reveal>Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="solid" id="services" aria-labelledby="t-services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>What we build</p>
+        <h2 id="t-services" data-reveal>Services, in plain terms</h2>
+      </div>
+      <div class="svc-grid">
+        <article class="svc" data-reveal>
+          <span class="svc-num">01</span>
+          <div>
+            <h3>Internal systems foundations</h3>
+            <p>Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
+          </div>
+        </article>
+        <article class="svc" data-reveal>
+          <span class="svc-num">02</span>
+          <div>
+            <h3>Practical AI support</h3>
+            <p>AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
+          </div>
+        </article>
+        <article class="svc" data-reveal>
+          <span class="svc-num">03</span>
+          <div>
+            <h3>Custom workflow software</h3>
+            <p>Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
+          </div>
+        </article>
+        <article class="svc" data-reveal>
+          <span class="svc-num">04</span>
+          <div>
+            <h3>Risk-aware automation</h3>
+            <p>Automation patterns that keep permissions, auditability, and human review visible.</p>
+          </div>
+        </article>
+        <article class="svc" data-reveal>
+          <span class="svc-num">05</span>
+          <div>
+            <h3>Operational visibility</h3>
+            <p>Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
+          </div>
+        </article>
+        <article class="svc" data-reveal>
+          <span class="svc-num">06</span>
+          <div>
+            <h3>Workflow modernization</h3>
+            <p>Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="solid" id="notes" aria-labelledby="t-notes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal>Field notes</p>
+        <h2 id="t-notes" data-reveal>Recent work, briefly</h2>
+      </div>
+      <article class="note" data-reveal>
+        <span class="note-year">2023</span>
+        <div>
+          <h3>Economic consulting</h3>
+          <p>Deployed an internal document-supported assistant for a Boston-area consulting firm that helped analysts move reports faster while protecting data privacy requirements.</p>
+        </div>
+      </article>
+      <article class="note" data-reveal>
+        <span class="note-year">2025</span>
+        <div>
+          <h3>Ticket vendors</h3>
+          <p>Worked with a California ticket vendor to create custom email annotation software that reduced repeat review work for management.</p>
+        </div>
+      </article>
+      <article class="note" data-reveal>
+        <span class="note-year">Now</span>
+        <div>
+          <h3>Hospitality</h3>
+          <p>Working with a high-end hotel chain based in Southern California to automate pricing, labor assignment, and reporting workflows.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="solid cta-band" id="contact" aria-labelledby="t-contact">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Start here</p>
+      <h2 id="t-contact" data-reveal>Bring us the step everyone routes around.</h2>
+      <p class="section-sub" data-reveal>Walk us through where work stalls. We will tell you honestly whether automation helps — and where review should stay human.</p>
+      <div class="cta-row" data-reveal>
+        <a class="btn btn-primary" href="/contact">Talk through a bottleneck</a>
+        <a class="btn btn-ghost" href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+      </div>
+      <div class="cta-meta" data-reveal>
+        <a href="tel:+12819613396">(281) 961-3396</a>
+        <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-row">
+    <img src="logo-light.svg" alt="Katy Technologies logo" width="30" height="30">
+    <p class="foot-copy">© 2026 Katy Technologies. All rights reserved.</p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+      <a href="tel:+12819613396">(281) 961-3396</a>
+      <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener" target="_blank">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- libs -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<!-- UI (classic) -->
+<script>
+(function () {
+  'use strict';
+
+  var docEl = document.documentElement;
+  var reduced = false;
+  try {
+    reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) {}
+  if (reduced) docEl.classList.add('no-webgl');
+
+  /* ---------- preloader: 0 → 100 ---------- */
+  var pre = document.getElementById('preloader');
+  var preNum = document.getElementById('preNum');
+  function finishPreloader() {
+    document.body.classList.remove('loading');
+    if (pre) {
+      pre.classList.add('done');
+      setTimeout(function () {
+        if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+      }, 900);
+    }
+  }
+  if (reduced || !pre || !preNum) {
+    finishPreloader();
+  } else {
+    var t0 = null;
+    var DURATION = 1400;
+    var step = function (now) {
+      if (t0 === null) t0 = now;
+      var k = Math.min(1, (now - t0) / DURATION);
+      var eased = 1 - Math.pow(1 - k, 3);
+      preNum.textContent = String(Math.round(eased * 100));
+      if (k < 1) requestAnimationFrame(step);
+      else finishPreloader();
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- WebGL watchdog: fallback if scene never renders ---------- */
+  if (!reduced) {
+    setTimeout(function () {
+      if (!window.__flowSceneReady && !window.__flowSceneFailed) {
+        window.__autoFallback = true;
+        docEl.classList.add('no-webgl');
+      }
+    }, 6500);
+  }
+
+  /* ---------- Lenis smooth scroll + GSAP wiring ---------- */
+  var lenis = null;
+  var hasGsap = !!(window.gsap && window.ScrollTrigger);
+  if (!reduced && window.Lenis) {
+    try { lenis = new window.Lenis({ duration: 1.15 }); } catch (e) { lenis = null; }
+  }
+  if (hasGsap) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    if (lenis) {
+      lenis.on('scroll', window.ScrollTrigger.update);
+      window.gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+      window.gsap.ticker.lagSmoothing(0);
+    }
+  } else if (lenis) {
+    var rafLenis = function (t) { lenis.raf(t); requestAnimationFrame(rafLenis); };
+    requestAnimationFrame(rafLenis);
+  }
+
+  /* ---------- text reveals ---------- */
+  if (hasGsap && !reduced) {
+    window.gsap.from('.hero-item', {
+      y: 42, autoAlpha: 0, duration: 1.1, stagger: 0.12, delay: 1.3, ease: 'power3.out'
+    });
+    var reveals = window.gsap.utils.toArray('[data-reveal]');
+    reveals.forEach(function (el) {
+      window.gsap.from(el, {
+        y: 36, autoAlpha: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 84%' }
+      });
+    });
+  }
+
+  /* ---------- header state ---------- */
+  var head = document.getElementById('siteHead');
+  var onScrollHead = function () {
+    if (!head) return;
+    if (window.scrollY > 40) head.classList.add('scrolled');
+    else head.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScrollHead, { passive: true });
+  onScrollHead();
+
+  /* ---------- progress rail active state ---------- */
+  var dots = {};
+  Array.prototype.forEach.call(document.querySelectorAll('.rail-dot'), function (d) {
+    dots[d.getAttribute('data-panel')] = d;
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        Object.keys(dots).forEach(function (k) {
+          dots[k].classList.toggle('is-active', k === en.target.id);
+        });
+      });
+    }, { threshold: 0.55 });
+    Array.prototype.forEach.call(document.querySelectorAll('.panel'), function (p) {
+      io.observe(p);
+    });
+  }
+
+  /* ---------- in-page anchors via Lenis ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var id = a.getAttribute('href');
+    if (!id || id === '#') return;
+    var el = document.querySelector(id);
+    if (!el) return;
+    e.preventDefault();
+    if (lenis) lenis.scrollTo(el, { offset: 0 });
+    else el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+
+<!-- WebGL particle theatre (module) -->
+<script type="module" src="scene.js"></script>
+
+</body>
+</html>
