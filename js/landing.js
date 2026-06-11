@@ -138,38 +138,6 @@
         scrollTrigger: { trigger: '.hero', start: '15% top', end: 'bottom 35%', scrub: true }
       });
 
-    /* ---------- oversized numerals parallax at their own speed ---------- */
-    gsap.utils.toArray('.sec-num, .step-num').forEach(function (num) {
-      var host = num.closest('section, footer, article');
-      var isMethodNum = num.classList.contains('step-num');
-      gsap.to(num, {
-        yPercent: isMethodNum ? -10 : -14,
-        ease: 'none',
-        scrollTrigger: { trigger: host, start: 'top bottom', end: 'bottom top', scrub: true }
-      });
-    });
-
-    /* ---------- scroll-velocity skew on the big type ---------- */
-    gsap.set('[data-skew]', { transformOrigin: 'center center', force3D: true });
-    var skewSetter = gsap.quickSetter('[data-skew]', 'skewY', 'deg');
-    var skewClamp = gsap.utils.clamp(-4, 4);
-    var skewProxy = { v: 0 };
-    ScrollTrigger.create({
-      onUpdate: function (self) {
-        var s = skewClamp(self.getVelocity() / -400);
-        if (Math.abs(s) > Math.abs(skewProxy.v)) {
-          skewProxy.v = s;
-          gsap.to(skewProxy, {
-            v: 0,
-            duration: 0.9,
-            ease: 'power3',
-            overwrite: true,
-            onUpdate: function () { skewSetter(skewProxy.v); }
-          });
-        }
-      }
-    });
-
     /* ---------- marquee rushes with scroll velocity ---------- */
     var track = document.querySelector('.mq-track');
     if (track) {
