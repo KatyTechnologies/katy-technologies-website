@@ -427,6 +427,7 @@ a{color:inherit}
   -webkit-text-fill-color:transparent;
   transform:translateY(.2em);opacity:.92;user-select:none;
 }
+.foot-mark-y{display:inline-block;margin-left:.055em}
 @media (max-width:760px){
   .foot-grid{grid-template-columns:1fr 1fr}
   .foot-brand{grid-column:1/-1}
