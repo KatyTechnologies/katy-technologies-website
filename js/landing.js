@@ -176,38 +176,29 @@
     });
   }
 
-  /* ---------- Chapters: giant word slide + fragment draw ---------- */
+  /* ---------- Chapters: content drift + fragment draw ---------- */
   function initChapters() {
     gsap.utils.toArray('.chapter').forEach(function (chapter) {
-      var word = chapter.querySelector('.chapter-word');
-      var slide = parseFloat(word.dataset.wordSlide || '-10');
+      var inner = chapter.querySelector('.chapter-inner');
 
-      gsap.fromTo(word,
-        { xPercent: slide },
+      // content floats slightly against the camera move
+      gsap.fromTo(inner,
+        { yPercent: 6, opacity: 0 },
         {
-          xPercent: -slide,
+          yPercent: -6,
+          opacity: 1,
           ease: 'none',
           scrollTrigger: {
             trigger: chapter,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 0.5
+            start: 'top 86%',
+            end: 'bottom 30%',
+            scrub: 0.4
           }
         });
 
-      var info = chapter.querySelector('.chapter-info');
-      gsap.from(info.children, {
-        opacity: 0,
-        y: 34,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.1,
-        scrollTrigger: { trigger: chapter, start: 'top 64%', once: true }
-      });
-
       var frag = chapter.querySelector('.frag-svg');
       var tl = gsap.timeline({
-        scrollTrigger: { trigger: frag, start: 'top 82%', once: true }
+        scrollTrigger: { trigger: frag, start: 'top 86%', once: true }
       });
       tl.to(frag.querySelectorAll('.draw'), {
         strokeDashoffset: 0,
@@ -221,6 +212,31 @@
           ease: 'power1.out',
           stagger: 0.1
         }, '-=0.4');
+    });
+  }
+
+  /* ---------- Story rail: visibility + active chapter ---------- */
+  function initStoryNav() {
+    var rail = document.querySelector('.story-nav');
+    var story = document.querySelector('.story');
+    if (!rail || !story) return;
+
+    ScrollTrigger.create({
+      trigger: story,
+      start: 'top top-=1',
+      end: 'bottom 70%',
+      onToggle: function (self) { rail.classList.toggle('visible', self.isActive); }
+    });
+
+    gsap.utils.toArray('.chapter').forEach(function (chapter) {
+      var link = rail.querySelector('[data-chapter="' + chapter.id + '"]');
+      if (!link) return;
+      ScrollTrigger.create({
+        trigger: chapter,
+        start: 'top 55%',
+        end: 'bottom 45%',
+        onToggle: function (self) { link.classList.toggle('active', self.isActive); }
+      });
     });
   }
 
@@ -252,6 +268,7 @@
     initReveals();
     initManifesto();
     initChapters();
+    initStoryNav();
     initFooterWord();
   });
 })();

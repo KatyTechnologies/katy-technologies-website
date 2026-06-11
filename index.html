@@ -96,165 +96,161 @@
     <div class="scrim"></div>
 
     <main id="main">
-        <!-- ============ HERO (navy) ============ -->
-        <section class="hero" data-theme="dark">
-            <div class="hero-atmo" aria-hidden="true"></div>
-            <canvas id="field-canvas" aria-hidden="true"></canvas>
-            <div class="hero-fade" aria-hidden="true"></div>
+        <!-- ============ STORY: cinematic scroll block ============ -->
+        <div class="story">
+            <canvas id="story-canvas" aria-hidden="true"></canvas>
 
-            <div class="container hero-inner">
-                <p class="hero-kicker"><span class="kicker-tick" aria-hidden="true"></span>Enterprise workflow automation</p>
-                <h1 class="hero-title">
-                    <span class="line"><span class="line-inner">Automate the work</span></span>
-                    <span class="line"><span class="line-inner">that slows your</span></span>
-                    <span class="line"><span class="line-inner">team down<span class="title-dot">.</span></span></span>
-                </h1>
-                <div class="hero-row">
-                    <p class="hero-sub">We help enterprise teams automate manual workflows with practical&nbsp;AI and custom software &mdash; governed by the reviews and approvals you already depend&nbsp;on.</p>
-                    <div class="hero-cta">
-                        <a href="/contact" class="btn btn-primary">Talk through a bottleneck</a>
-                        <a href="#manifesto" class="btn btn-ghost">See how we work</a>
+            <!-- chapter rail (desktop) -->
+            <nav class="story-nav" aria-label="Method chapters">
+                <a href="#map" class="story-nav-link" data-chapter="map"><span class="story-nav-dot" aria-hidden="true"></span>Map</a>
+                <a href="#name" class="story-nav-link" data-chapter="name"><span class="story-nav-dot" aria-hidden="true"></span>Name</a>
+                <a href="#route" class="story-nav-link" data-chapter="route"><span class="story-nav-dot" aria-hidden="true"></span>Route</a>
+                <a href="#trust" class="story-nav-link" data-chapter="trust"><span class="story-nav-dot" aria-hidden="true"></span>Trust</a>
+            </nav>
+
+            <!-- HERO -->
+            <section class="hero" data-theme="dark">
+                <div class="container hero-inner">
+                    <p class="hero-kicker"><span class="kicker-tick" aria-hidden="true"></span>Enterprise workflow automation</p>
+                    <h1 class="hero-title">
+                        <span class="line"><span class="line-inner">Automate the work</span></span>
+                        <span class="line"><span class="line-inner">that slows your</span></span>
+                        <span class="line"><span class="line-inner">team down<span class="title-dot">.</span></span></span>
+                    </h1>
+                    <div class="hero-row">
+                        <p class="hero-sub">We help enterprise teams automate manual workflows with practical&nbsp;AI and custom software &mdash; governed by the reviews and approvals you already depend&nbsp;on.</p>
+                        <div class="hero-cta">
+                            <a href="/contact" class="btn btn-primary">Talk through a bottleneck</a>
+                            <a href="#map" class="btn btn-ghost">Follow the path</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="hero-meta" aria-hidden="true">
+                    <span class="meta-item">Practical AI &middot; Custom software</span>
+                    <span class="meta-rule"></span>
+                    <span class="meta-item meta-scroll">Scroll</span>
+                </div>
+            </section>
 
-            <div class="hero-meta" aria-hidden="true">
-                <span class="meta-item">Practical AI &middot; Custom software</span>
-                <span class="meta-rule"></span>
-                <span class="meta-item meta-scroll">Scroll</span>
-            </div>
-        </section>
+            <!-- CHAPTERS -->
+            <section class="chapter" id="map" data-theme="dark">
+                <div class="container chapter-inner">
+                    <p class="sec-index sec-index-center">01 &mdash; The method</p>
+                    <h2 class="chapter-title">Map the work as it moves.</h2>
+                    <p class="chapter-copy">We chart how requests actually travel through your organization &mdash; intake, triage, review, approval &mdash; before any tool enters the conversation.</p>
+                    <div class="chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: intake, triage and review nodes connected in sequence.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M20 50 H150 V114 H20 Z"/>
+                                <path class="draw" pathLength="1" d="M215 50 H345 V114 H215 Z"/>
+                                <path class="draw" pathLength="1" d="M410 50 H540 V114 H410 Z"/>
+                                <path class="draw" pathLength="1" d="M150 82 H215"/>
+                                <path class="draw" pathLength="1" d="M345 82 H410"/>
+                            </g>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                                <text x="85" y="87">INTAKE</text>
+                                <text x="280" y="87">TRIAGE</text>
+                                <text x="475" y="87">REVIEW</text>
+                            </g>
+                            <g class="fade" stroke="#7F95AA" stroke-opacity="0.6" stroke-width="1">
+                                <line x1="20" y1="22" x2="20" y2="32"/>
+                                <line x1="280" y1="22" x2="280" y2="32"/>
+                                <line x1="540" y1="22" x2="540" y2="32"/>
+                                <line x1="20" y1="27" x2="540" y2="27" stroke-opacity="0.3"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chapter" id="name" data-theme="dark">
+                <div class="container chapter-inner">
+                    <p class="sec-index sec-index-center">02 &mdash; The method</p>
+                    <h2 class="chapter-title">Name the step worth improving.</h2>
+                    <p class="chapter-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly &mdash; the bottleneck, on the record.</p>
+                    <div class="chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: the manual review node marked as the bottleneck.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M215 96 H345 V160 H215 Z"/>
+                            </g>
+                            <g stroke="#AFA7A7" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M280 16 L297 42 L280 68 L263 42 Z"/>
+                                <path class="draw" pathLength="1" d="M280 68 V96"/>
+                            </g>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                                <text x="280" y="125">MANUAL</text>
+                                <text x="280" y="145">REVIEW</text>
+                            </g>
+                            <g class="fade" fill="#AFA7A7" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em">
+                                <text x="312" y="47">BOTTLENECK</text>
+                            </g>
+                            <g class="fade" stroke="#AFA7A7" stroke-opacity="0.55" stroke-width="1">
+                                <line x1="228" y1="172" x2="240" y2="184"/>
+                                <line x1="252" y1="172" x2="264" y2="184"/>
+                                <line x1="276" y1="172" x2="288" y2="184"/>
+                                <line x1="300" y1="172" x2="312" y2="184"/>
+                                <line x1="324" y1="172" x2="336" y2="184"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chapter" id="route" data-theme="dark">
+                <div class="container chapter-inner">
+                    <p class="sec-index sec-index-center">03 &mdash; The method</p>
+                    <h2 class="chapter-title">Route the repeat work around it.</h2>
+                    <p class="chapter-copy">Software and practical AI take on the repeat steps &mdash; drafting, sorting, reconciling &mdash; under the permissions and controls your team already trusts.</p>
+                    <div class="chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: a dashed automation path routes repeat steps from triage to approval.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M20 40 H150 V104 H20 Z"/>
+                                <path class="draw" pathLength="1" d="M410 40 H540 V104 H410 Z"/>
+                                <path class="draw" pathLength="1" d="M150 72 H410" stroke-opacity="0.4"/>
+                            </g>
+                            <path class="draw" pathLength="1" d="M85 104 V168 H475 V104" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                                <text x="85" y="77">TRIAGE</text>
+                                <text x="475" y="77">APPROVAL</text>
+                            </g>
+                            <g class="fade" fill="#7CC4FF" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em" text-anchor="middle">
+                                <text x="280" y="196">REPEAT STEPS, AUTOMATED</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chapter" id="trust" data-theme="dark">
+                <div class="container chapter-inner">
+                    <p class="sec-index sec-index-center">04 &mdash; The method</p>
+                    <h2 class="chapter-title">Keep review visible.</h2>
+                    <p class="chapter-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on. Results your team can explain.</p>
+                    <div class="chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: human review stays tied into the automated path.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M215 24 H345 V88 H215 Z"/>
+                            </g>
+                            <path class="draw" pathLength="1" d="M280 88 V160" stroke="#F8F7F2" stroke-width="1.5"/>
+                            <path class="draw" pathLength="1" d="M85 160 H475" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
+                            <circle class="fade" cx="280" cy="160" r="5.5" fill="#06192D" stroke="#F8F7F2" stroke-width="1.5"/>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                                <text x="280" y="53">REVIEW</text>
+                            </g>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em" text-anchor="middle">
+                                <text x="280" y="194">HUMAN REVIEW STAYS IN THE LOOP</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <!-- ============ MANIFESTO (paper) ============ -->
         <section class="manifesto" id="manifesto" data-theme="light">
             <div class="container">
                 <p class="sec-index">The position</p>
                 <p class="manifesto-line" data-manifesto>Automation should make work easier to trust, not harder to explain.</p>
-            </div>
-        </section>
-
-        <!-- ============ CHAPTERS: the method (paper) ============ -->
-        <section class="chapter" id="map" data-theme="light">
-            <div class="chapter-word" aria-hidden="true" data-word-slide="-10">Map</div>
-            <div class="container chapter-grid">
-                <div class="chapter-info">
-                    <p class="sec-index">01 &mdash; The method</p>
-                    <h2 class="chapter-title">Map the work as it moves.</h2>
-                    <p class="chapter-copy">We chart how requests actually travel through your organization &mdash; intake, triage, review, approval &mdash; before any tool enters the conversation.</p>
-                </div>
-                <div class="chapter-frag">
-                    <svg class="frag-svg" viewBox="0 0 560 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: intake, triage and review nodes connected in sequence.">
-                        <g stroke="#263D54" stroke-width="1.5">
-                            <path class="draw" pathLength="1" d="M20 50 H150 V114 H20 Z"/>
-                            <path class="draw" pathLength="1" d="M215 50 H345 V114 H215 Z"/>
-                            <path class="draw" pathLength="1" d="M410 50 H540 V114 H410 Z"/>
-                            <path class="draw" pathLength="1" d="M150 82 H215"/>
-                            <path class="draw" pathLength="1" d="M345 82 H410"/>
-                        </g>
-                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
-                            <text x="85" y="87">INTAKE</text>
-                            <text x="280" y="87">TRIAGE</text>
-                            <text x="475" y="87">REVIEW</text>
-                        </g>
-                        <g class="fade" stroke="#7F95AA" stroke-opacity="0.6" stroke-width="1">
-                            <line x1="20" y1="22" x2="20" y2="32"/>
-                            <line x1="280" y1="22" x2="280" y2="32"/>
-                            <line x1="540" y1="22" x2="540" y2="32"/>
-                            <line x1="20" y1="27" x2="540" y2="27" stroke-opacity="0.3"/>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <section class="chapter chapter-alt" id="name" data-theme="light">
-            <div class="chapter-word" aria-hidden="true" data-word-slide="10">Name</div>
-            <div class="container chapter-grid">
-                <div class="chapter-info">
-                    <p class="sec-index">02 &mdash; The method</p>
-                    <h2 class="chapter-title">Name the step worth improving.</h2>
-                    <p class="chapter-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly &mdash; the bottleneck, on the record.</p>
-                </div>
-                <div class="chapter-frag">
-                    <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: the manual review node marked as the bottleneck.">
-                        <g stroke="#263D54" stroke-width="1.5">
-                            <path class="draw" pathLength="1" d="M215 96 H345 V160 H215 Z"/>
-                        </g>
-                        <g stroke="#6F6666" stroke-width="1.5">
-                            <path class="draw" pathLength="1" d="M280 16 L297 42 L280 68 L263 42 Z"/>
-                            <path class="draw" pathLength="1" d="M280 68 V96"/>
-                        </g>
-                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
-                            <text x="280" y="125">MANUAL</text>
-                            <text x="280" y="145">REVIEW</text>
-                        </g>
-                        <g class="fade" fill="#6F6666" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em">
-                            <text x="312" y="47">BOTTLENECK</text>
-                        </g>
-                        <g class="fade" stroke="#6F6666" stroke-opacity="0.55" stroke-width="1">
-                            <line x1="228" y1="172" x2="240" y2="184"/>
-                            <line x1="252" y1="172" x2="264" y2="184"/>
-                            <line x1="276" y1="172" x2="288" y2="184"/>
-                            <line x1="300" y1="172" x2="312" y2="184"/>
-                            <line x1="324" y1="172" x2="336" y2="184"/>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <section class="chapter" id="route" data-theme="light">
-            <div class="chapter-word" aria-hidden="true" data-word-slide="-10">Route</div>
-            <div class="container chapter-grid">
-                <div class="chapter-info">
-                    <p class="sec-index">03 &mdash; The method</p>
-                    <h2 class="chapter-title">Route the repeat work around it.</h2>
-                    <p class="chapter-copy">Software and practical AI take on the repeat steps &mdash; drafting, sorting, reconciling &mdash; under the permissions and controls your team already trusts.</p>
-                </div>
-                <div class="chapter-frag">
-                    <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: a dashed automation path routes repeat steps from triage to approval.">
-                        <g stroke="#263D54" stroke-width="1.5">
-                            <path class="draw" pathLength="1" d="M20 40 H150 V104 H20 Z"/>
-                            <path class="draw" pathLength="1" d="M410 40 H540 V104 H410 Z"/>
-                            <path class="draw" pathLength="1" d="M150 72 H410" stroke-opacity="0.4"/>
-                        </g>
-                        <path class="draw" pathLength="1" d="M85 104 V168 H475 V104" stroke="#536B80" stroke-width="1.5" stroke-dasharray="6 5"/>
-                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
-                            <text x="85" y="77">TRIAGE</text>
-                            <text x="475" y="77">APPROVAL</text>
-                        </g>
-                        <g class="fade" fill="#536B80" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em" text-anchor="middle">
-                            <text x="280" y="196">REPEAT STEPS, AUTOMATED</text>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <section class="chapter chapter-alt" id="trust" data-theme="light">
-            <div class="chapter-word" aria-hidden="true" data-word-slide="10">Trust</div>
-            <div class="container chapter-grid">
-                <div class="chapter-info">
-                    <p class="sec-index">04 &mdash; The method</p>
-                    <h2 class="chapter-title">Keep review visible.</h2>
-                    <p class="chapter-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on. Results your team can explain.</p>
-                </div>
-                <div class="chapter-frag">
-                    <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: human review stays tied into the automated path.">
-                        <g stroke="#263D54" stroke-width="1.5">
-                            <path class="draw" pathLength="1" d="M215 24 H345 V88 H215 Z"/>
-                        </g>
-                        <path class="draw" pathLength="1" d="M280 88 V160" stroke="#071A33" stroke-width="1.5"/>
-                        <path class="draw" pathLength="1" d="M85 160 H475" stroke="#536B80" stroke-width="1.5" stroke-dasharray="6 5"/>
-                        <circle class="fade" cx="280" cy="160" r="5.5" fill="#F8F7F2" stroke="#071A33" stroke-width="1.5"/>
-                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
-                            <text x="280" y="53">REVIEW</text>
-                        </g>
-                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em">
-                            <text x="300" y="135">HUMAN REVIEW STAYS IN THE LOOP</text>
-                        </g>
-                    </svg>
-                </div>
             </div>
         </section>
 
@@ -390,14 +386,15 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
     <script src="js/landing.js"></script>
 
-    <!-- Three.js hero field -->
+    <!-- Three.js cinematic story background -->
     <script type="importmap">
     {
         "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
         }
     }
     </script>
-    <script type="module" src="js/hero-field.js"></script>
+    <script type="module" src="js/story-field.js"></script>
 </body>
 </html>
