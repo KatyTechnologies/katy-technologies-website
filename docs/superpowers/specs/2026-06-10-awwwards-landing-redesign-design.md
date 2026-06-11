@@ -67,3 +67,28 @@ bottleneck while human review stays visible. The story the company tells, told a
 
 About/solutions/contact page restyles (would follow in a second pass once this direction
 is approved).
+
+---
+
+## V2 — "Hubtown" direction (2026-06-10, same day)
+
+Harsha pointed at https://hubtown.co.in/ ("make something like this, something crazy good").
+Reference fingerprint (from source): GSAP + ScrollTrigger + Lenis + SplitText; light grotesk
+display + mono labels; strict two-tone (pale tint surface / near-black ink); 0→100% preloader;
+single-word full-screen chapters (Future/Innovation/Collaboration/Excellence/Purpose/Legacy);
+giant footer wordmark.
+
+Translation into the Katy brand system:
+
+- **Two-tone inversion**: Warm Paper #F8F7F2 + navy ink for the method chapters
+  (inverted blueprint — drawing on paper); deep navy for hero, capabilities, field notes,
+  CTA, footer. No new hues.
+- **Chapters**: MAP → NAME → ROUTE → TRUST, each 100vh+: giant light Work Sans word with
+  scroll parallax, stage copy, and a small navy diagram fragment that draws on enter.
+  These replace the V1 pinned diagram scene (same narrative, more theatrical).
+- **Manifesto scrub**: "Automation should make work easier to trust, not harder to explain."
+  revealed word-by-word on scroll (opacity ladder) on paper.
+- **Lenis smooth scroll** (skipped under prefers-reduced-motion), 0→100 counter preloader,
+  capabilities as full-width index rows, giant cropped "Katy Technologies" footer wordmark.
+- Header swaps to navy-ink treatment over light sections (one-ink navy knockout logo variant).
+- Principles section dropped (lives on /about; chapters carry the same weight now).

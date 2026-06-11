@@ -29,11 +29,16 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+    <!-- Work Sans light weights for display type (300) come from Google; Literata stays local -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/landing.css">
 
     <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
-<body>
+<body data-theme="dark">
     <!-- Brand grain filter (displacement technique per brand spec) -->
     <svg class="kt-grain-filter" width="0" height="0" aria-hidden="true" focusable="false">
         <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
@@ -47,18 +52,21 @@
 
     <a href="#main" class="skip-to-content">Skip to content</a>
 
-    <!-- Preloader -->
+    <!-- Preloader: 0 → 100 -->
     <div class="preloader" aria-hidden="true">
         <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" class="preloader-mark">
-        <div class="preloader-track"><span class="preloader-tick"></span></div>
-        <span class="preloader-label">Katy Technologies &mdash; Operations</span>
+        <div class="preloader-foot">
+            <span class="preloader-label">Katy Technologies &mdash; Operations</span>
+            <span class="preloader-count"><span class="count-num">0</span>%</span>
+        </div>
     </div>
 
     <!-- Header -->
     <header class="site-head">
         <div class="head-inner">
             <a href="/" class="logo">
-                <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" class="logo-mark">
+                <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" class="logo-mark logo-mark-dark">
+                <img src="assets/logos/brand-guide/2026-05-24-kt-logo-one-ink-navy-knockout-transparent.svg" alt="" class="logo-mark logo-mark-light">
                 <span class="logo-word">Katy Technologies</span>
             </a>
             <nav class="nav" aria-label="Main navigation">
@@ -88,8 +96,8 @@
     <div class="scrim"></div>
 
     <main id="main">
-        <!-- ============ HERO ============ -->
-        <section class="hero">
+        <!-- ============ HERO (navy) ============ -->
+        <section class="hero" data-theme="dark">
             <div class="hero-atmo" aria-hidden="true"></div>
             <canvas id="field-canvas" aria-hidden="true"></canvas>
             <div class="hero-fade" aria-hidden="true"></div>
@@ -99,12 +107,14 @@
                 <h1 class="hero-title">
                     <span class="line"><span class="line-inner">Automate the work</span></span>
                     <span class="line"><span class="line-inner">that slows your</span></span>
-                    <span class="line"><span class="line-inner">team down.</span></span>
+                    <span class="line"><span class="line-inner">team down<span class="title-dot">.</span></span></span>
                 </h1>
-                <p class="hero-sub">We help enterprise teams automate manual workflows with practical&nbsp;AI and custom software &mdash; governed by the reviews and approvals you already depend&nbsp;on.</p>
-                <div class="hero-cta">
-                    <a href="/contact" class="btn btn-primary">Talk through a bottleneck</a>
-                    <a href="#diagnosis" class="btn btn-ghost">See how we work</a>
+                <div class="hero-row">
+                    <p class="hero-sub">We help enterprise teams automate manual workflows with practical&nbsp;AI and custom software &mdash; governed by the reviews and approvals you already depend&nbsp;on.</p>
+                    <div class="hero-cta">
+                        <a href="/contact" class="btn btn-primary">Talk through a bottleneck</a>
+                        <a href="#manifesto" class="btn btn-ghost">See how we work</a>
+                    </div>
                 </div>
             </div>
 
@@ -115,169 +125,186 @@
             </div>
         </section>
 
-        <!-- ============ 01 / DIAGNOSIS — pinned diagram ============ -->
-        <section class="diagram-sec" id="diagnosis">
-            <div class="diagram-pin">
-                <div class="container">
-                    <header class="sec-head" data-reveal>
-                        <p class="sec-index">01 &mdash; Diagnosis</p>
-                        <h2 class="sec-title">Start with the bottleneck,<br>not the tool.</h2>
-                    </header>
-                    <div class="diagram-stage">
-                        <div class="diagram-canvas">
-                            <svg class="flow-svg" viewBox="0 0 1200 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workflow diagram: intake, triage, manual review, approval, output. The manual review step is marked as the bottleneck. An automation layer routes repeat steps from triage to approval while human review stays in the loop.">
-                                <!-- faint reference grid -->
-                                <g class="svg-grid" stroke="#536B80" stroke-opacity="0.1" stroke-width="1">
-                                    <line x1="0" y1="135" x2="1200" y2="135"/>
-                                    <line x1="0" y1="270" x2="1200" y2="270"/>
-                                    <line x1="0" y1="405" x2="1200" y2="405"/>
-                                    <line x1="300" y1="0" x2="300" y2="540"/>
-                                    <line x1="600" y1="0" x2="600" y2="540"/>
-                                    <line x1="900" y1="0" x2="900" y2="540"/>
-                                </g>
-                                <!-- measurement ticks -->
-                                <g class="svg-ticks" stroke="#7F95AA" stroke-opacity="0.35" stroke-width="1">
-                                    <line x1="40" y1="40" x2="40" y2="52"/>
-                                    <line x1="330" y1="40" x2="330" y2="52"/>
-                                    <line x1="620" y1="40" x2="620" y2="52"/>
-                                    <line x1="910" y1="40" x2="910" y2="52"/>
-                                    <line x1="1180" y1="40" x2="1180" y2="52"/>
-                                    <line x1="40" y1="46" x2="1180" y2="46" stroke-opacity="0.18"/>
-                                </g>
+        <!-- ============ MANIFESTO (paper) ============ -->
+        <section class="manifesto" id="manifesto" data-theme="light">
+            <div class="container">
+                <p class="sec-index">The position</p>
+                <p class="manifesto-line" data-manifesto>Automation should make work easier to trust, not harder to explain.</p>
+            </div>
+        </section>
 
-                                <!-- main flow nodes -->
-                                <g class="g-nodes" stroke="#7F95AA" stroke-width="1.5">
-                                    <path class="draw" pathLength="1" d="M40 228 H190 V292 H40 Z"/>
-                                    <path class="draw" pathLength="1" d="M300 228 H450 V292 H300 Z"/>
-                                    <path class="draw draw-bneck" pathLength="1" d="M560 228 H710 V292 H560 Z" stroke="#AFA7A7"/>
-                                    <path class="draw" pathLength="1" d="M820 228 H970 V292 H820 Z"/>
-                                    <path class="draw" pathLength="1" d="M1030 228 H1180 V292 H1030 Z"/>
-                                </g>
-                                <g class="g-node-labels" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="19" font-weight="600" letter-spacing="0.06em" text-anchor="middle">
-                                    <text class="fade" x="115" y="265">INTAKE</text>
-                                    <text class="fade" x="375" y="265">TRIAGE</text>
-                                    <text class="fade" x="635" y="258">MANUAL</text>
-                                    <text class="fade" x="635" y="278">REVIEW</text>
-                                    <text class="fade" x="895" y="265">APPROVAL</text>
-                                    <text class="fade" x="1105" y="265">OUTPUT</text>
-                                </g>
-
-                                <!-- connectors -->
-                                <g class="g-links" stroke="#536B80" stroke-width="1.5">
-                                    <path class="draw" pathLength="1" d="M190 260 H300"/>
-                                    <path class="draw" pathLength="1" d="M450 260 H560"/>
-                                    <path class="draw" pathLength="1" d="M710 260 H820"/>
-                                    <path class="draw" pathLength="1" d="M970 260 H1030"/>
-                                </g>
-
-                                <!-- bottleneck marker -->
-                                <g class="g-bneck">
-                                    <path class="draw" pathLength="1" d="M635 168 L651 192 L635 216 L619 192 Z" stroke="#AFA7A7" stroke-width="1.5"/>
-                                    <path class="draw" pathLength="1" d="M635 216 V228" stroke="#AFA7A7" stroke-width="1.5"/>
-                                    <g class="fade" fill="#AFA7A7" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
-                                        <text x="635" y="150">BOTTLENECK</text>
-                                    </g>
-                                    <g class="g-hatch fade" stroke="#AFA7A7" stroke-opacity="0.5" stroke-width="1">
-                                        <line x1="572" y1="304" x2="584" y2="316"/>
-                                        <line x1="596" y1="304" x2="608" y2="316"/>
-                                        <line x1="620" y1="304" x2="632" y2="316"/>
-                                        <line x1="644" y1="304" x2="656" y2="316"/>
-                                        <line x1="668" y1="304" x2="680" y2="316"/>
-                                    </g>
-                                </g>
-
-                                <!-- automation layer -->
-                                <g class="g-auto">
-                                    <path class="draw auto-path" pathLength="1" d="M375 292 V420 H895 V292" stroke="#7F95AA" stroke-width="1.5" stroke-dasharray="6 5"/>
-                                    <g class="fade" fill="#7F95AA" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
-                                        <text x="635" y="448">REPEAT STEPS, AUTOMATED</text>
-                                    </g>
-                                </g>
-
-                                <!-- human review stays -->
-                                <g class="g-human">
-                                    <path class="draw" pathLength="1" d="M635 326 V420" stroke="#F8F7F2" stroke-opacity="0.8" stroke-width="1.5"/>
-                                    <circle class="fade" cx="635" cy="420" r="5" fill="#06192D" stroke="#F8F7F2" stroke-width="1.5"/>
-                                    <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.12em">
-                                        <text x="660" y="395">HUMAN REVIEW STAYS IN THE LOOP</text>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="beats">
-                            <article class="beat" data-beat="0">
-                                <p class="beat-index">1 / 4</p>
-                                <h3 class="beat-title">Map the work as it moves</h3>
-                                <p class="beat-copy">We chart how requests actually travel through your organization &mdash; intake, triage, review, approval &mdash; before any tool enters the conversation.</p>
-                            </article>
-                            <article class="beat" data-beat="1">
-                                <p class="beat-index">2 / 4</p>
-                                <h3 class="beat-title">Name the step worth improving</h3>
-                                <p class="beat-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly.</p>
-                            </article>
-                            <article class="beat" data-beat="2">
-                                <p class="beat-index">3 / 4</p>
-                                <h3 class="beat-title">Route the repeat work around it</h3>
-                                <p class="beat-copy">Software and practical AI take on the repeat steps &mdash; drafting, sorting, reconciling &mdash; under the controls your team already trusts.</p>
-                            </article>
-                            <article class="beat" data-beat="3">
-                                <p class="beat-index">4 / 4</p>
-                                <h3 class="beat-title">Keep review visible</h3>
-                                <p class="beat-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on.</p>
-                            </article>
-                        </div>
-                    </div>
+        <!-- ============ CHAPTERS: the method (paper) ============ -->
+        <section class="chapter" id="map" data-theme="light">
+            <div class="chapter-word" aria-hidden="true" data-word-slide="-10">Map</div>
+            <div class="container chapter-grid">
+                <div class="chapter-info">
+                    <p class="sec-index">01 &mdash; The method</p>
+                    <h2 class="chapter-title">Map the work as it moves.</h2>
+                    <p class="chapter-copy">We chart how requests actually travel through your organization &mdash; intake, triage, review, approval &mdash; before any tool enters the conversation.</p>
+                </div>
+                <div class="chapter-frag">
+                    <svg class="frag-svg" viewBox="0 0 560 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: intake, triage and review nodes connected in sequence.">
+                        <g stroke="#263D54" stroke-width="1.5">
+                            <path class="draw" pathLength="1" d="M20 50 H150 V114 H20 Z"/>
+                            <path class="draw" pathLength="1" d="M215 50 H345 V114 H215 Z"/>
+                            <path class="draw" pathLength="1" d="M410 50 H540 V114 H410 Z"/>
+                            <path class="draw" pathLength="1" d="M150 82 H215"/>
+                            <path class="draw" pathLength="1" d="M345 82 H410"/>
+                        </g>
+                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                            <text x="85" y="87">INTAKE</text>
+                            <text x="280" y="87">TRIAGE</text>
+                            <text x="475" y="87">REVIEW</text>
+                        </g>
+                        <g class="fade" stroke="#7F95AA" stroke-opacity="0.6" stroke-width="1">
+                            <line x1="20" y1="22" x2="20" y2="32"/>
+                            <line x1="280" y1="22" x2="280" y2="32"/>
+                            <line x1="540" y1="22" x2="540" y2="32"/>
+                            <line x1="20" y1="27" x2="540" y2="27" stroke-opacity="0.3"/>
+                        </g>
+                    </svg>
                 </div>
             </div>
         </section>
 
-        <!-- ============ 02 / CAPABILITIES ============ -->
-        <section class="services-sec" id="work">
+        <section class="chapter chapter-alt" id="name" data-theme="light">
+            <div class="chapter-word" aria-hidden="true" data-word-slide="10">Name</div>
+            <div class="container chapter-grid">
+                <div class="chapter-info">
+                    <p class="sec-index">02 &mdash; The method</p>
+                    <h2 class="chapter-title">Name the step worth improving.</h2>
+                    <p class="chapter-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly &mdash; the bottleneck, on the record.</p>
+                </div>
+                <div class="chapter-frag">
+                    <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: the manual review node marked as the bottleneck.">
+                        <g stroke="#263D54" stroke-width="1.5">
+                            <path class="draw" pathLength="1" d="M215 96 H345 V160 H215 Z"/>
+                        </g>
+                        <g stroke="#6F6666" stroke-width="1.5">
+                            <path class="draw" pathLength="1" d="M280 16 L297 42 L280 68 L263 42 Z"/>
+                            <path class="draw" pathLength="1" d="M280 68 V96"/>
+                        </g>
+                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                            <text x="280" y="125">MANUAL</text>
+                            <text x="280" y="145">REVIEW</text>
+                        </g>
+                        <g class="fade" fill="#6F6666" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em">
+                            <text x="312" y="47">BOTTLENECK</text>
+                        </g>
+                        <g class="fade" stroke="#6F6666" stroke-opacity="0.55" stroke-width="1">
+                            <line x1="228" y1="172" x2="240" y2="184"/>
+                            <line x1="252" y1="172" x2="264" y2="184"/>
+                            <line x1="276" y1="172" x2="288" y2="184"/>
+                            <line x1="300" y1="172" x2="312" y2="184"/>
+                            <line x1="324" y1="172" x2="336" y2="184"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter" id="route" data-theme="light">
+            <div class="chapter-word" aria-hidden="true" data-word-slide="-10">Route</div>
+            <div class="container chapter-grid">
+                <div class="chapter-info">
+                    <p class="sec-index">03 &mdash; The method</p>
+                    <h2 class="chapter-title">Route the repeat work around it.</h2>
+                    <p class="chapter-copy">Software and practical AI take on the repeat steps &mdash; drafting, sorting, reconciling &mdash; under the permissions and controls your team already trusts.</p>
+                </div>
+                <div class="chapter-frag">
+                    <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: a dashed automation path routes repeat steps from triage to approval.">
+                        <g stroke="#263D54" stroke-width="1.5">
+                            <path class="draw" pathLength="1" d="M20 40 H150 V104 H20 Z"/>
+                            <path class="draw" pathLength="1" d="M410 40 H540 V104 H410 Z"/>
+                            <path class="draw" pathLength="1" d="M150 72 H410" stroke-opacity="0.4"/>
+                        </g>
+                        <path class="draw" pathLength="1" d="M85 104 V168 H475 V104" stroke="#536B80" stroke-width="1.5" stroke-dasharray="6 5"/>
+                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                            <text x="85" y="77">TRIAGE</text>
+                            <text x="475" y="77">APPROVAL</text>
+                        </g>
+                        <g class="fade" fill="#536B80" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em" text-anchor="middle">
+                            <text x="280" y="196">REPEAT STEPS, AUTOMATED</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter chapter-alt" id="trust" data-theme="light">
+            <div class="chapter-word" aria-hidden="true" data-word-slide="10">Trust</div>
+            <div class="container chapter-grid">
+                <div class="chapter-info">
+                    <p class="sec-index">04 &mdash; The method</p>
+                    <h2 class="chapter-title">Keep review visible.</h2>
+                    <p class="chapter-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on. Results your team can explain.</p>
+                </div>
+                <div class="chapter-frag">
+                    <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: human review stays tied into the automated path.">
+                        <g stroke="#263D54" stroke-width="1.5">
+                            <path class="draw" pathLength="1" d="M215 24 H345 V88 H215 Z"/>
+                        </g>
+                        <path class="draw" pathLength="1" d="M280 88 V160" stroke="#071A33" stroke-width="1.5"/>
+                        <path class="draw" pathLength="1" d="M85 160 H475" stroke="#536B80" stroke-width="1.5" stroke-dasharray="6 5"/>
+                        <circle class="fade" cx="280" cy="160" r="5.5" fill="#F8F7F2" stroke="#071A33" stroke-width="1.5"/>
+                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="15" font-weight="600" letter-spacing="0.1em" text-anchor="middle">
+                            <text x="280" y="53">REVIEW</text>
+                        </g>
+                        <g class="fade" fill="#071A33" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" letter-spacing="0.14em">
+                            <text x="300" y="135">HUMAN REVIEW STAYS IN THE LOOP</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CAPABILITIES (navy, index rows) ============ -->
+        <section class="services-sec" id="work" data-theme="dark">
             <div class="container">
                 <header class="sec-head" data-reveal>
-                    <p class="sec-index">02 &mdash; Capabilities</p>
+                    <p class="sec-index">05 &mdash; Capabilities</p>
                     <h2 class="sec-title">Ways we help.</h2>
                 </header>
-                <div class="services-grid">
-                    <article class="service" data-reveal>
-                        <p class="service-num">01</p>
-                        <h3 class="service-title">Internal systems foundations</h3>
-                        <p class="service-copy">Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
+                <div class="rows">
+                    <article class="row" data-reveal>
+                        <p class="row-num">01</p>
+                        <h3 class="row-title">Internal systems foundations</h3>
+                        <p class="row-copy">Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
                     </article>
-                    <article class="service" data-reveal>
-                        <p class="service-num">02</p>
-                        <h3 class="service-title">Practical AI support</h3>
-                        <p class="service-copy">AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
+                    <article class="row" data-reveal>
+                        <p class="row-num">02</p>
+                        <h3 class="row-title">Practical AI support</h3>
+                        <p class="row-copy">AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
                     </article>
-                    <article class="service" data-reveal>
-                        <p class="service-num">03</p>
-                        <h3 class="service-title">Custom workflow software</h3>
-                        <p class="service-copy">Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
+                    <article class="row" data-reveal>
+                        <p class="row-num">03</p>
+                        <h3 class="row-title">Custom workflow software</h3>
+                        <p class="row-copy">Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
                     </article>
-                    <article class="service" data-reveal>
-                        <p class="service-num">04</p>
-                        <h3 class="service-title">Risk-aware automation</h3>
-                        <p class="service-copy">Automation patterns that keep permissions, auditability, and human review visible.</p>
+                    <article class="row" data-reveal>
+                        <p class="row-num">04</p>
+                        <h3 class="row-title">Risk-aware automation</h3>
+                        <p class="row-copy">Automation patterns that keep permissions, auditability, and human review visible.</p>
                     </article>
-                    <article class="service" data-reveal>
-                        <p class="service-num">05</p>
-                        <h3 class="service-title">Operational visibility</h3>
-                        <p class="service-copy">Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
+                    <article class="row" data-reveal>
+                        <p class="row-num">05</p>
+                        <h3 class="row-title">Operational visibility</h3>
+                        <p class="row-copy">Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
                     </article>
-                    <article class="service" data-reveal>
-                        <p class="service-num">06</p>
-                        <h3 class="service-title">Workflow modernization</h3>
-                        <p class="service-copy">Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
+                    <article class="row" data-reveal>
+                        <p class="row-num">06</p>
+                        <h3 class="row-title">Workflow modernization</h3>
+                        <p class="row-copy">Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- ============ 03 / FIELD NOTES ============ -->
-        <section class="cases-sec" id="field-notes">
+        <!-- ============ FIELD NOTES (navy) ============ -->
+        <section class="cases-sec" id="field-notes" data-theme="dark">
             <div class="container">
                 <header class="sec-head" data-reveal>
-                    <p class="sec-index">03 &mdash; Field notes</p>
+                    <p class="sec-index">06 &mdash; Field notes</p>
                     <h2 class="sec-title">Recent engagements.</h2>
                 </header>
                 <div class="cases-list">
@@ -309,47 +336,20 @@
             </div>
         </section>
 
-        <!-- ============ 04 / PRINCIPLES ============ -->
-        <section class="principles-sec" id="principles">
-            <div class="container">
-                <header class="sec-head" data-reveal>
-                    <p class="sec-index">04 &mdash; Principles</p>
-                    <h2 class="sec-title">What guides the work.</h2>
-                </header>
-                <ol class="principles-list">
-                    <li class="principle" data-reveal>
-                        <h3 class="principle-title">Clarity</h3>
-                        <p class="principle-copy">We make the current workflow visible before recommending a tool.</p>
-                    </li>
-                    <li class="principle" data-reveal>
-                        <h3 class="principle-title">Practicality</h3>
-                        <p class="principle-copy">We use AI and software where they remove repeat work without adding confusion.</p>
-                    </li>
-                    <li class="principle" data-reveal>
-                        <h3 class="principle-title">Integrity</h3>
-                        <p class="principle-copy">We design around governance, handoffs, and the people responsible for the outcome.</p>
-                    </li>
-                    <li class="principle" data-reveal>
-                        <h3 class="principle-title">Throughput</h3>
-                        <p class="principle-copy">We measure success by the manual steps removed and the decisions made easier to explain.</p>
-                    </li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- ============ CTA ============ -->
-        <section class="cta-sec">
+        <!-- ============ CTA (navy grain) ============ -->
+        <section class="cta-sec" data-theme="dark">
             <div class="cta-atmo" aria-hidden="true"></div>
             <div class="container cta-inner" data-reveal>
-                <h2 class="cta-title">Automation should make work easier to trust, not harder to explain.</h2>
+                <p class="sec-index">07 &mdash; Start here</p>
+                <h2 class="cta-title">Ready to find the slow handoff?</h2>
                 <p class="cta-copy">Talk with us about the handoffs, reviews, and repeat steps slowing your team down.</p>
                 <a href="/contact" class="btn btn-primary btn-large">Talk through a bottleneck</a>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Footer (navy, giant wordmark) -->
+    <footer class="footer" data-theme="dark">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col footer-brand">
@@ -381,11 +381,13 @@
                 <p class="footer-micro">Workflow automation &middot; Practical AI</p>
             </div>
         </div>
+        <div class="footer-word" aria-hidden="true"><span>Katy Technologies</span></div>
     </footer>
 
-    <!-- GSAP -->
+    <!-- GSAP + Lenis -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
     <script src="js/landing.js"></script>
 
     <!-- Three.js hero field -->

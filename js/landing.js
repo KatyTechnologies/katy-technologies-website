@@ -1,4 +1,4 @@
-/* Katy Technologies — landing page choreography (GSAP + ScrollTrigger) */
+/* Katy Technologies — landing V2 choreography (Lenis + GSAP + ScrollTrigger) */
 (function () {
   'use strict';
 
@@ -32,21 +32,51 @@
     });
   }
 
-  /* ---------- Header scroll state ---------- */
+  /* ---------- Header: scrolled state + light/dark theme ---------- */
   function initHeader() {
     var head = document.querySelector('.site-head');
     if (!head) return;
+
+    var themed = Array.prototype.slice.call(document.querySelectorAll('section[data-theme], footer[data-theme]'));
+
     function onScroll() {
       head.classList.toggle('scrolled', window.scrollY > 24);
+
+      // theme: which section sits under the header bar right now?
+      var probeY = 40;
+      var light = false;
+      for (var i = 0; i < themed.length; i++) {
+        var r = themed[i].getBoundingClientRect();
+        if (r.top <= probeY && r.bottom > probeY) {
+          light = themed[i].dataset.theme === 'light';
+          break;
+        }
+      }
+      head.classList.toggle('head-light', light);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  }
+
+  /* ---------- Split helpers (hand-rolled, no SplitText dependency) ---------- */
+  function splitWords(el) {
+    var words = el.textContent.trim().split(/\s+/);
+    el.textContent = '';
+    words.forEach(function (w, i) {
+      var span = document.createElement('span');
+      span.className = 'w';
+      span.textContent = w;
+      el.appendChild(span);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+    return el.querySelectorAll('.w');
   }
 
   /* ---------- No-GSAP / reduced-motion fallback ---------- */
   function showEverything() {
     var preloader = document.querySelector('.preloader');
     if (preloader) preloader.remove();
+    document.body.classList.add('static-page');
     document.querySelectorAll('[data-reveal]').forEach(function (el) {
       el.style.opacity = '1';
       el.style.transform = 'none';
@@ -58,30 +88,56 @@
       var el = document.querySelector(sel);
       if (el) el.style.opacity = '1';
     });
-    document.body.classList.add('static-diagram');
   }
 
-  /* ---------- Preloader + hero intro ---------- */
+  /* ---------- Lenis smooth scroll ---------- */
+  function initLenis() {
+    if (typeof window.Lenis === 'undefined') return null;
+    var lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    // anchor links route through lenis
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: 0 });
+      });
+    });
+    return lenis;
+  }
+
+  /* ---------- Preloader 0→100 + hero intro ---------- */
   function initIntro() {
     var preloader = document.querySelector('.preloader');
     var tl = gsap.timeline();
 
     if (preloader) {
-      tl.to('.preloader-tick', { scaleX: 1, duration: 0.7, ease: 'power2.inOut' })
+      var num = preloader.querySelector('.count-num');
+      var counter = { v: 0 };
+      tl.to(counter, {
+        v: 100,
+        duration: 1.1,
+        ease: 'power2.inOut',
+        onUpdate: function () { num.textContent = Math.round(counter.v); }
+      })
         .to(preloader, {
-          autoAlpha: 0,
-          duration: 0.45,
-          ease: 'power1.out',
+          yPercent: -100,
+          duration: 0.7,
+          ease: 'power3.inOut',
           onComplete: function () { preloader.remove(); }
-        });
+        }, '+=0.1');
     }
 
     tl.to('.hero-title .line-inner', {
       y: 0,
-      duration: 1.05,
+      duration: 1.1,
       ease: 'power4.out',
       stagger: 0.09
-    }, preloader ? '-=0.15' : 0)
+    }, preloader ? '-=0.35' : 0)
       .to('.hero-kicker', { opacity: 1, duration: 0.7, ease: 'power1.out' }, '<0.25')
       .to('.hero-sub', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '<0.15')
       .to('.hero-cta', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '<0.15')
@@ -96,92 +152,87 @@
         y: 0,
         duration: 0.9,
         ease: 'power3.out',
-        delay: (i % 3) * 0.08,
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          once: true
-        }
+        delay: (i % 3) * 0.07,
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
       });
     });
   }
 
-  /* ---------- Diagram: pinned scrub on desktop, simple draw on mobile ---------- */
-  function buildDiagramTimeline(tl) {
-    // 1) nodes + connectors draw
-    tl.to('.g-nodes .draw', {
-      strokeDashoffset: 0, duration: 1.6, ease: 'none', stagger: 0.25
-    }, 0)
-      .to('.g-links .draw', {
-        strokeDashoffset: 0, duration: 1.2, ease: 'none', stagger: 0.3
-      }, 0.4)
-      .to('.g-node-labels .fade', {
-        opacity: 1, duration: 0.5, ease: 'none', stagger: 0.12
-      }, 0.6);
-
-    // 2) bottleneck marker
-    tl.to('.g-bneck .draw', {
-      strokeDashoffset: 0, duration: 0.8, ease: 'none', stagger: 0.2
-    }, 2.6)
-      .to('.g-bneck .fade', { opacity: 1, duration: 0.5, ease: 'none' }, 3.1);
-
-    // 3) automation layer
-    tl.to('.g-auto .draw', { strokeDashoffset: 0, duration: 1.6, ease: 'none' }, 4.0)
-      .to('.g-auto .fade', { opacity: 1, duration: 0.5, ease: 'none' }, 5.2);
-
-    // 4) human review stays
-    tl.to('.g-human .draw', { strokeDashoffset: 0, duration: 0.8, ease: 'none' }, 5.8)
-      .to('.g-human .fade', { opacity: 1, duration: 0.5, ease: 'none' }, 6.3);
-
-    return tl;
-  }
-
-  var BEAT_MARKS = [0, 2.6, 4.0, 5.8]; // timeline positions where each beat begins
-  var TL_END = 7.0;
-
-  function initDiagram() {
-    var mm = gsap.matchMedia();
-
-    mm.add('(min-width: 901px)', function () {
-      var beats = gsap.utils.toArray('.beat');
-      gsap.set(beats[0], { opacity: 1 });
-
-      var tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.diagram-sec',
-          start: 'top top',
-          end: '+=2800',
-          pin: '.diagram-pin',
-          pinSpacing: true,
-          scrub: 0.6,
-          anticipatePin: 1
-        }
-      });
-
-      buildDiagramTimeline(tl);
-
-      // beat crossfades synced to stages
-      for (var i = 1; i < beats.length; i++) {
-        tl.to(beats[i - 1], { opacity: 0, y: -16, duration: 0.35, ease: 'none' }, BEAT_MARKS[i] - 0.2)
-          .fromTo(beats[i], { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: 'none' }, BEAT_MARKS[i] + 0.1);
+  /* ---------- Manifesto: word-by-word opacity scrub ---------- */
+  function initManifesto() {
+    var line = document.querySelector('[data-manifesto]');
+    if (!line) return;
+    var words = splitWords(line);
+    gsap.to(words, {
+      opacity: 1,
+      stagger: 0.06,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: line,
+        start: 'top 78%',
+        end: 'bottom 42%',
+        scrub: 0.4
       }
-      tl.to({}, { duration: TL_END - tl.duration() > 0 ? TL_END - tl.duration() : 0.2 }); // tail room
-
-      return function () {}; // cleanup handled by matchMedia
     });
+  }
 
-    mm.add('(max-width: 900px)', function () {
-      // No pin: draw the whole diagram once when it enters
-      var tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.diagram-canvas',
-          start: 'top 78%',
-          once: true
-        }
+  /* ---------- Chapters: giant word slide + fragment draw ---------- */
+  function initChapters() {
+    gsap.utils.toArray('.chapter').forEach(function (chapter) {
+      var word = chapter.querySelector('.chapter-word');
+      var slide = parseFloat(word.dataset.wordSlide || '-10');
+
+      gsap.fromTo(word,
+        { xPercent: slide },
+        {
+          xPercent: -slide,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: chapter,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.5
+          }
+        });
+
+      var info = chapter.querySelector('.chapter-info');
+      gsap.from(info.children, {
+        opacity: 0,
+        y: 34,
+        duration: 0.9,
+        ease: 'power3.out',
+        stagger: 0.1,
+        scrollTrigger: { trigger: chapter, start: 'top 64%', once: true }
       });
-      buildDiagramTimeline(tl);
-      tl.timeScale(2.4);
-      return function () {};
+
+      var frag = chapter.querySelector('.frag-svg');
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: frag, start: 'top 82%', once: true }
+      });
+      tl.to(frag.querySelectorAll('.draw'), {
+        strokeDashoffset: 0,
+        duration: 1.1,
+        ease: 'power1.inOut',
+        stagger: 0.18
+      })
+        .to(frag.querySelectorAll('.fade'), {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power1.out',
+          stagger: 0.1
+        }, '-=0.4');
+    });
+  }
+
+  /* ---------- Footer wordmark rise ---------- */
+  function initFooterWord() {
+    var word = document.querySelector('.footer-word span');
+    if (!word) return;
+    gsap.from(word, {
+      yPercent: 100,
+      duration: 1.1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.footer-word', start: 'top 96%', once: true }
     });
   }
 
@@ -196,8 +247,11 @@
     }
 
     gsap.registerPlugin(ScrollTrigger);
+    initLenis();
     initIntro();
     initReveals();
-    initDiagram();
+    initManifesto();
+    initChapters();
+    initFooterWord();
   });
 })();
