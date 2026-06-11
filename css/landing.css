@@ -177,19 +177,16 @@ h1, h2, h3, h4 {
   .preloader { display: none; }
 }
 
-/* ---- Header (theme-aware) ---- */
+/* ---- Header (blends into the page — soft fade, no bar) ---- */
 .site-head {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  transition: background-color 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
-  border-bottom: 1px solid transparent;
+  background: linear-gradient(180deg, rgba(2, 8, 18, 0.78) 0%, rgba(2, 8, 18, 0.38) 60%, rgba(2, 8, 18, 0) 100%);
+  transition: opacity 0.35s var(--ease-out);
 }
 .site-head.scrolled {
-  background: rgba(6, 25, 45, 0.82);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border-bottom-color: var(--hairline-faint);
+  background: linear-gradient(180deg, rgba(2, 8, 18, 0.92) 0%, rgba(2, 8, 18, 0.5) 60%, rgba(2, 8, 18, 0) 100%);
 }
 .head-inner {
   max-width: var(--container);
@@ -234,25 +231,6 @@ h1, h2, h3, h4 {
 }
 .nav-link:hover, .nav-link.active { color: var(--paper); }
 .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: left; }
-
-/* header over light sections */
-.site-head.head-light:not(.menu-open-head) {
-  --head-ink: var(--navy);
-}
-.site-head.head-light.scrolled {
-  background: rgba(248, 247, 242, 0.85);
-  border-bottom-color: var(--hairline-ink);
-}
-.site-head.head-light .logo-word,
-.site-head.head-light .nav-link { color: var(--ink-2); }
-.site-head.head-light .nav-link:hover,
-.site-head.head-light .nav-link.active { color: var(--ink-1); }
-.site-head.head-light .nav-link::after { background: var(--deep-slate); }
-.site-head.head-light .btn-ghost { border-color: rgba(7, 26, 51, 0.35); color: var(--ink-1); }
-.site-head.head-light .btn-ghost:hover { border-color: var(--navy); background: rgba(7, 26, 51, 0.05); }
-.site-head.head-light .logo-mark-dark { display: none; }
-.site-head.head-light .logo-mark-light { display: block; }
-.site-head.head-light .burger-line { background: var(--navy); }
 
 .burger {
   display: none;
@@ -489,14 +467,14 @@ section { position: relative; }
   .js [data-reveal] { opacity: 1; transform: none; }
 }
 
-/* ---- Manifesto (paper) ---- */
+/* ---- Manifesto (dark, blends out of the story) ---- */
 .manifesto {
-  background: var(--paper);
-  color: var(--ink-1);
+  position: relative;
+  background: linear-gradient(180deg, #020812 0%, var(--blueprint-dark) 30%, var(--navy) 100%);
+  color: var(--text-1);
   padding-block: clamp(8rem, 18vw, 16rem);
+  overflow: hidden;
 }
-.manifesto .sec-index { color: var(--ink-micro); }
-.manifesto .sec-index::before { background: var(--deep-slate); }
 .manifesto-line {
   font-family: var(--font-body);
   font-weight: 400;
@@ -504,7 +482,7 @@ section { position: relative; }
   line-height: 1.25;
   letter-spacing: -0.01em;
   max-width: 24ch;
-  color: var(--ink-1);
+  color: var(--text-1);
 }
 .manifesto-line .w { opacity: 0.14; }
 .no-js .manifesto-line .w, .static-page .manifesto-line .w { opacity: 1; }
@@ -518,7 +496,21 @@ section { position: relative; }
   overflow: hidden;
   padding-block: clamp(5rem, 9vw, 8rem);
 }
+/* readability band: dims the scene behind the copy, clears out at the
+   section edges so the path shows clean between chapters */
+.chapter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(2, 8, 18, 0) 0%,
+    rgba(2, 8, 18, 0.66) 28%,
+    rgba(2, 8, 18, 0.66) 72%,
+    rgba(2, 8, 18, 0) 100%);
+  pointer-events: none;
+}
 .chapter-inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -535,7 +527,7 @@ section { position: relative; }
   text-shadow: 0 2px 36px rgba(2, 8, 18, 0.9);
 }
 .chapter-copy {
-  color: var(--text-2);
+  color: rgba(248, 247, 242, 0.94);
   max-width: 36rem;
   margin-bottom: clamp(2rem, 4vw, 3rem);
   text-shadow: 0 1px 22px rgba(2, 8, 18, 0.95);
@@ -543,7 +535,7 @@ section { position: relative; }
 .chapter-frag {
   width: min(30rem, 100%);
   border: 1px solid var(--hairline);
-  background: rgba(4, 13, 26, 0.55);
+  background: rgba(4, 13, 26, 0.72);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   padding: clamp(1.2rem, 2.4vw, 2rem);

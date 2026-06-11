@@ -41,10 +41,11 @@ async function init() {
     new THREE.Vector3(-5, 0.9, -62),
     new THREE.Vector3(3.5, 0.7, -86),
     new THREE.Vector3(-2.5, 0.8, -110),
-    new THREE.Vector3(0, 1.1, -134)
+    new THREE.Vector3(0, 0.4, -138)
   ]);
 
-  // bright core
+  // bright core — fog on, so the path fades into the dark instead of
+  // streaking white to the horizon
   const core = new THREE.Mesh(
     new THREE.TubeGeometry(curve, 360, 0.11, 12, false),
     new THREE.MeshBasicMaterial({
@@ -53,7 +54,7 @@ async function init() {
       opacity: 0.9,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      fog: false
+      fog: true
     })
   );
   scene.add(core);
@@ -67,7 +68,7 @@ async function init() {
       opacity: 0.12,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      fog: false
+      fog: true
     })
   );
   scene.add(halo);
@@ -104,10 +105,11 @@ async function init() {
   flowGeo.setAttribute('position', new THREE.BufferAttribute(flowPos, 3));
   const flow = new THREE.Points(flowGeo, new THREE.PointsMaterial({
     color: 0xa8d8ff,
-    size: 0.07,
+    size: 0.055,
     map: sprite,
+    alphaTest: 0.01,
     transparent: true,
-    opacity: 0.8,
+    opacity: 0.65,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true
@@ -178,7 +180,7 @@ async function init() {
   /* ---------- post-processing: bloom ---------- */
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), isMobile ? 0.6 : 0.75, 0.7, 0.18);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), isMobile ? 0.55 : 0.68, 0.7, 0.24);
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
 
@@ -239,10 +241,13 @@ async function init() {
     // ease toward scroll target
     progress += (target - progress) * Math.min(1, dt * 5);
 
-    // camera rides beside/above the path so the glow sweeps ahead, not underfoot
+    // camera rides beside/above the path so the glow sweeps ahead, not
+    // underfoot; on narrow (portrait) viewports keep it nearly centered or
+    // the path leaves the frame entirely
+    const side = camera.aspect < 1 ? 1.0 : 3.4;
     const ct = THREE.MathUtils.clamp(progress * 0.86, 0, 0.86);
     curve.getPointAt(ct, camPos);
-    camPos.x += 3.4 + px * 1.4;
+    camPos.x += side + px * 1.4;
     camPos.y += 3.0 + Math.sin(t * 0.5) * 0.08;
     camera.position.copy(camPos);
 
@@ -265,7 +270,7 @@ async function init() {
 
     // restore camera position (camPos was reused for particle math)
     curve.getPointAt(ct, camPos);
-    camPos.x += 3.4 + px * 1.4;
+    camPos.x += side + px * 1.4;
     camPos.y += 3.0 + Math.sin(t * 0.5) * 0.08;
     camera.position.copy(camPos);
 
