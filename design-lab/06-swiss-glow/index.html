@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katy Technologies — Swiss Glow</title>
+<meta name="description" content="We help enterprise teams automate manual workflows with practical AI and custom software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&family=Literata:opsz@7..72&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET / TOKENS ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F8F7F2;
+  --navy:#071A33;
+  --bp-dark:#06192D;
+  --bp-black:#020812;
+  --blue:#2E7CFF;
+  --glow:#7CC4FF;
+  --text-2:rgba(248,247,242,.86);
+  --text-3:rgba(209,204,204,.72);
+  --micro-c:rgba(127,149,170,.85);
+  --hair:rgba(248,247,242,.1);
+  --hair-glow:rgba(124,196,255,.1);
+  --pad:clamp(1rem,3vw,3rem);
+  --micro:clamp(.625rem,.55rem + .25vw,.75rem);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+body{
+  font-family:"Work Sans",system-ui,sans-serif;
+  font-weight:300;
+  background:var(--bp-black);
+  color:var(--paper);
+  line-height:1.5;
+  min-width:320px;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--blue);color:var(--paper)}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+.skip-link{
+  position:absolute;left:-9999px;top:0;z-index:300;
+  background:var(--navy);color:var(--paper);
+  padding:.75rem 1.25rem;font-weight:500;text-decoration:none;
+}
+.skip-link:focus-visible{left:0}
+
+/* ============ SHARED TYPE ============ */
+.micro{
+  font-size:var(--micro);
+  font-weight:500;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.prose{font-family:"Literata",Georgia,serif;font-weight:400}
+
+/* ============ EXPOSED GRID (blue-tinted over the scene) ============ */
+.sec-grid::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-linear-gradient(90deg,var(--hair-glow) 0,var(--hair-glow) 1px,transparent 1px,transparent calc(100%/12)),
+    linear-gradient(90deg,transparent calc(100% - 1px),var(--hair-glow) calc(100% - 1px));
+}
+
+/* oversized half-cropped numerals */
+.sec-num{
+  position:absolute;z-index:0;pointer-events:none;
+  font-weight:700;line-height:.78;
+  font-size:clamp(9rem,26vw,24rem);
+  top:-.12em;right:-.14em;
+  color:var(--glow);opacity:.07;user-select:none;
+}
+.step-num{
+  position:absolute;z-index:0;pointer-events:none;
+  font-weight:700;line-height:.8;
+  font-size:clamp(10rem,38vh,24rem);
+  color:var(--glow);opacity:.08;user-select:none;
+}
+.step-num--left{left:-.1em;top:-.06em}
+.step-num--right{right:-.1em;top:-.06em}
+
+/* ============ PRELOADER — Swiss 3-flash ============ */
+#preloader{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--navy);
+}
+#preloader img{width:clamp(72px,12vw,128px);height:auto}
+#preloader .pl-dark{display:none}
+#preloader.s-blue{background:var(--blue)}
+#preloader.s-paper{background:var(--paper)}
+#preloader.s-paper .pl-light{display:none}
+#preloader.s-paper .pl-dark{display:block}
+#preloader .pl-tag{
+  position:absolute;left:var(--pad);bottom:calc(var(--pad)*.8);
+  color:var(--paper);opacity:.7;
+}
+#preloader.s-paper .pl-tag{color:var(--navy)}
+.no-js #preloader{display:none}
+@media (prefers-reduced-motion:reduce){#preloader{display:none}}
+
+/* ============ HEADER — soft fade, no bar ============ */
+.site-head{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(var(--pad)*.6) var(--pad) calc(var(--pad)*1.4);
+  background:linear-gradient(180deg,rgba(2,8,18,.82) 0%,rgba(2,8,18,.4) 55%,rgba(2,8,18,0) 100%);
+  pointer-events:none;
+}
+.site-head a{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.brand img{width:38px;height:38px}
+.site-head nav{display:flex;gap:clamp(.9rem,2.5vw,2.25rem)}
+.site-head nav a{text-decoration:none;color:var(--text-2)}
+.site-head nav a:hover{color:var(--glow)}
+@media (max-width:560px){.site-head nav a:nth-child(4){display:none}}
+
+/* ============ STORY: fixed canvas + transparent sections ============ */
+.story{position:relative}
+#story-canvas{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;opacity:0;pointer-events:none;
+}
+.js #story-canvas{transition:opacity 1.4s ease}
+#story-canvas.is-on{opacity:1}
+.story>section,.story>article{position:relative;z-index:1;background:transparent}
+.no-webgl .story{
+  background:linear-gradient(160deg,#020812 0%,#0A213A 55%,#263D54 100%);
+  clip-path:inset(0);
+  filter:url('#kt-grain');
+}
+
+/* chapter rail */
+.story-nav{
+  position:fixed;left:clamp(1.1rem,2.4vw,2.2rem);top:50%;
+  transform:translateY(-50%);z-index:60;
+  display:flex;flex-direction:column;gap:1.1rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s var(--ease-out);
+}
+.story-nav.visible{opacity:1;pointer-events:auto}
+.story-nav-link{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.6875rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  text-decoration:none;color:rgba(248,247,242,.38);
+  transition:color .3s var(--ease-out);
+}
+.story-nav-dot{width:7px;height:7px;border:1px solid currentColor;transition:background-color .3s}
+.story-nav-link:hover{color:rgba(248,247,242,.75)}
+.story-nav-link.active{color:var(--paper)}
+.story-nav-link.active .story-nav-dot{background:var(--glow);border-color:var(--glow)}
+@media (max-width:1100px){.story-nav{display:none}}
+
+/* ============ HERO — Swiss display over the valley ============ */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:calc(var(--pad)*3) var(--pad) var(--pad);
+  overflow:hidden;
+}
+.hero-display{
+  position:relative;z-index:1;
+  font-weight:700;text-transform:uppercase;
+  font-size:clamp(2.6rem,11.6vw,11.6rem);
+  line-height:.92;letter-spacing:-.01em;
+  margin-bottom:clamp(1.5rem,4vh,3rem);
+  text-shadow:0 2px 44px rgba(2,8,18,.85);
+}
+.hero-display .mask{display:block;overflow:hidden}
+.hero-display .ln{display:inline-block;will-change:transform}
+.js .hero-display .mask:nth-child(odd) .ln{transform:translateX(-110%)}
+.js .hero-display .mask:nth-child(even) .ln{transform:translateX(110%)}
+.hero-display .mask:nth-child(2) .ln,
+.hero-display .mask:nth-child(4) .ln{margin-left:8.333%}
+.hero-foot{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;
+  border-top:1px solid var(--hair);padding-top:1rem;align-items:start;
+}
+.hero-foot .micro{grid-column:1/span 3;color:var(--micro-c)}
+.hero-foot .hero-sub{grid-column:4/span 4;font-size:clamp(1rem,1rem + .35vw,1.3rem);color:var(--text-2)}
+.hero-foot .hero-cta{grid-column:9/span 4;justify-self:end;display:flex;flex-direction:column;align-items:flex-end;gap:.7rem}
+.js .hero-foot{opacity:0}
+@media (max-width:760px){
+  .hero-foot{grid-template-columns:1fr}
+  .hero-foot .micro,.hero-foot .hero-sub,.hero-foot .hero-cta{grid-column:auto}
+  .hero-foot .hero-cta{align-items:flex-start;justify-self:start}
+}
+
+/* Swiss buttons — hard cut hovers */
+.btn{
+  display:inline-block;text-decoration:none;
+  font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.8rem 1.3rem;white-space:nowrap;max-width:100%;
+}
+.btn-solid{background:var(--blue);color:var(--paper);border:2px solid var(--blue)}
+.btn-solid:hover{background:var(--paper);color:var(--navy);border-color:var(--paper)} /* hard cut */
+.btn-line{border:2px solid rgba(248,247,242,.45);color:var(--paper)}
+.btn-line:hover{border-color:var(--paper);background:rgba(248,247,242,.08)}
+
+/* ============ METHOD PANELS — Swiss type in the fly-through ============ */
+.chapter{
+  position:relative;min-height:100svh;
+  display:flex;align-items:center;
+  padding:clamp(5rem,9vw,8rem) var(--pad);
+  overflow:hidden;
+}
+/* readability veil: dims the scene behind the copy, clears at edges
+   so the path shows clean between chapters */
+.chapter::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(2,8,18,0) 0%,
+    rgba(2,8,18,.66) 28%,
+    rgba(2,8,18,.66) 72%,
+    rgba(2,8,18,0) 100%);
+}
+.panel-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem 0;width:100%;
+}
+.panel-meta{grid-column:2/span 3;color:var(--micro-c)}
+.panel-main{grid-column:5/span 7}
+.panel-diagram{grid-column:5/span 6;margin-top:clamp(1.25rem,3.5vh,2.5rem)}
+.panel-title{
+  font-weight:700;text-transform:uppercase;
+  font-size:clamp(2.2rem,1rem + 5.6vw,5.8rem);
+  line-height:.95;letter-spacing:-.01em;margin-bottom:1.25rem;
+  text-shadow:0 2px 36px rgba(2,8,18,.9);
+}
+.panel-copy{
+  font-family:"Literata",Georgia,serif;
+  font-size:clamp(1rem,.95rem + .4vw,1.25rem);
+  line-height:1.6;max-width:32em;color:var(--text-2);
+  text-shadow:0 1px 22px rgba(2,8,18,.95);
+}
+.chapter-frag{
+  border:1px solid rgba(124,196,255,.22);
+  background:rgba(4,13,26,.72);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  padding:clamp(1.2rem,2.4vw,2rem);
+  max-width:30rem;
+}
+.frag-svg{width:100%;height:auto}
+.frag-svg .draw{stroke-dasharray:1;stroke-dashoffset:1}
+.frag-svg .fade{opacity:0}
+.no-js .frag-svg .draw,.static-page .frag-svg .draw{stroke-dashoffset:0}
+.no-js .frag-svg .fade,.static-page .frag-svg .fade{opacity:1}
+@media (max-width:899.98px){
+  .panel-meta,.panel-main,.panel-diagram{grid-column:1/-1}
+  .panel-inner{gap:1.1rem 0}
+}
+
+/* ============ MARQUEE — translucent so the glow shows through ============ */
+.marquee{
+  position:relative;z-index:1;overflow:hidden;padding:1rem 0;
+  border-block:1px solid rgba(124,196,255,.2);
+  background:rgba(2,8,18,.55);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  color:var(--glow);
+}
+.mq-track{display:flex;width:max-content;will-change:transform;animation:mq 38s linear infinite}
+.mq-track span{
+  white-space:nowrap;font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.25rem,2.6vw,2.1rem);letter-spacing:.08em;
+}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.mq-track{animation:none}}
+
+/* ============ MANIFESTO — dark, Swiss display scrub ============ */
+.manifesto{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--bp-black) 0%,var(--bp-dark) 30%,var(--navy) 100%);
+  padding:clamp(7rem,16vw,14rem) var(--pad);
+}
+.manifesto .cols{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:1rem 0}
+.manifesto .micro{grid-column:1/span 3;color:var(--micro-c)}
+.manifesto blockquote{
+  grid-column:4/span 9;
+  font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.9rem,1rem + 4vw,4.4rem);
+  line-height:1.04;letter-spacing:-.01em;
+}
+.manifesto-line .w{opacity:.14}
+.no-js .manifesto-line .w,.static-page .manifesto-line .w{opacity:1}
+@media (max-width:760px){.manifesto .micro,.manifesto blockquote{grid-column:1/-1}}
+
+/* ============ SERVICES — opaque navy, hard-cut blue inverts ============ */
+.services{position:relative;overflow:hidden;background:var(--navy);padding-top:clamp(4rem,10vh,7rem)}
+.services .sec-head{position:relative;z-index:1;padding:0 var(--pad) clamp(2rem,5vh,3.5rem)}
+.svc-list{position:relative;z-index:1;list-style:none;border-top:1px solid rgba(248,247,242,.25)}
+.svc{
+  display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;align-items:baseline;
+  padding:clamp(1.4rem,3.5vh,2.4rem) var(--pad);
+  border-bottom:1px solid rgba(248,247,242,.25);
+}
+.svc:hover{background:var(--blue);color:var(--paper)} /* hard cut — no transition, deliberately */
+.svc:hover p{color:var(--paper)}
+.svc .idx{grid-column:1/span 1;font-size:var(--micro);font-weight:500;letter-spacing:.22em;color:var(--micro-c)}
+.svc:hover .idx{color:var(--paper)}
+.svc h3{grid-column:2/span 5;font-weight:700;text-transform:uppercase;font-size:clamp(1.35rem,1rem + 2vw,2.6rem);line-height:1.02;letter-spacing:-.01em}
+.svc p{grid-column:8/span 5;font-size:clamp(.95rem,.9rem + .3vw,1.1rem);max-width:34em;color:var(--text-3)}
+@media (max-width:760px){
+  .svc{grid-template-columns:auto 1fr;gap:.35rem 1rem}
+  .svc .idx{grid-column:1;grid-row:1}
+  .svc h3{grid-column:2;grid-row:1}
+  .svc p{grid-column:1/-1;grid-row:2}
+}
+
+/* ============ FIELD NOTES — strict table on dark ============ */
+.notes{position:relative;overflow:hidden;background:var(--bp-dark);padding:clamp(4rem,10vh,7rem) var(--pad)}
+.notes .sec-head{position:relative;z-index:1;margin-bottom:clamp(2rem,5vh,3.5rem)}
+.notes table{position:relative;z-index:1;width:100%;border-collapse:collapse;border-top:1px solid rgba(248,247,242,.25)}
+.notes th{
+  text-align:left;font-size:var(--micro);font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--micro-c);
+  padding:.8rem .75rem .8rem 0;border-bottom:1px solid rgba(248,247,242,.25);
+}
+.notes td{
+  vertical-align:top;
+  padding:clamp(1rem,2.5vh,1.6rem) .75rem clamp(1rem,2.5vh,1.6rem) 0;
+  border-bottom:1px solid var(--hair);
+}
+.notes td.yr{font-weight:700;white-space:nowrap;width:10%}
+.notes td.cl{font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:.85rem;width:22%;color:var(--text-2)}
+.notes td.nt{font-size:clamp(1rem,.95rem + .3vw,1.2rem);max-width:46em;color:var(--text-2)}
+@media (max-width:640px){
+  .notes table,.notes tbody,.notes tr,.notes td{display:block;width:100%}
+  .notes thead{position:absolute;left:-9999px}
+  .notes td{border:0;padding:.25rem 0}
+  .notes tr{border-bottom:1px solid rgba(248,247,242,.25);padding:1.1rem 0}
+}
+
+/* ============ CTA — the blue shock panel ============ */
+.cta{
+  position:relative;overflow:hidden;background:var(--blue);color:var(--paper);
+  min-height:88svh;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(4rem,10vh,6rem) var(--pad);
+}
+.cta::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0,rgba(255,255,255,.14) 1px,transparent 1px,transparent calc(100%/12)),
+    linear-gradient(90deg,transparent calc(100% - 1px),rgba(255,255,255,.14) calc(100% - 1px));
+}
+.cta>*{position:relative;z-index:1}
+.cta .sec-num{color:var(--paper);opacity:.1}
+.cta h2{
+  font-weight:700;text-transform:uppercase;
+  font-size:clamp(2.4rem,9vw,8.6rem);line-height:.94;letter-spacing:-.01em;
+  margin-bottom:clamp(2rem,5vh,3.5rem);
+}
+.cta .btn-shock{
+  display:inline-block;border:2px solid var(--paper);color:var(--paper);
+  text-decoration:none;font-weight:700;font-size:clamp(1.25rem,1.1rem + .6vw,1.6rem);
+  letter-spacing:.04em;text-transform:uppercase;padding:1.1rem 2.2rem;
+}
+.cta .btn-shock:hover{background:var(--paper);color:var(--navy)} /* hard cut */
+.cta .fine{margin-top:clamp(2.5rem,6vh,4rem);display:flex;flex-wrap:wrap;gap:1rem 3rem}
+.cta .fine a{color:var(--paper);font-weight:500;text-decoration-thickness:1px;text-underline-offset:3px;font-size:.95rem;letter-spacing:.04em}
+
+/* ============ FOOTER — navy, giant cropped wordmark ============ */
+.foot{position:relative;overflow:hidden;background:var(--bp-dark);padding:clamp(3.5rem,9vh,6rem) var(--pad) 0}
+.foot-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(12,1fr);gap:2rem 0;
+  padding-bottom:clamp(3rem,8vh,5rem);border-bottom:1px solid var(--hair);
+}
+.foot-brand{grid-column:1/span 4;display:flex;align-items:flex-start;gap:1rem}
+.foot-brand img{width:44px;height:44px}
+.foot-brand .micro{color:var(--text-2)}
+.foot-col{grid-column:span 2}
+.foot-col:first-of-type{grid-column:7/span 2}
+.foot-col .micro{color:var(--micro-c)}
+.foot-col ul{list-style:none;margin-top:1rem}
+.foot-col li{margin-bottom:.6rem}
+.foot-col a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--text-2)}
+.foot-col a:hover{color:var(--glow)}
+.foot .legal{position:relative;z-index:1;padding:1.25rem 0;font-size:var(--micro);font-weight:500;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+.foot-mark-wrap{overflow:hidden}
+.foot-mark{
+  font-weight:700;text-transform:uppercase;white-space:nowrap;
+  font-size:clamp(4rem,11.5vw,12rem);line-height:.8;letter-spacing:-.02em;
+  transform:translateY(.28em);opacity:.92;user-select:none;
+}
+@media (max-width:760px){
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+  .foot-col,.foot-col:first-of-type{grid-column:auto}
+}
+
+/* ============ SECTION HEADS / REVEALS ============ */
+.sec-head .micro{color:var(--micro-c)}
+.js [data-reveal]{opacity:0;transform:translateY(36px)}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important}
+  #story-canvas{display:none}
+  .js .hero-display .ln{transform:none !important}
+  .js .hero-foot{opacity:1}
+  .js [data-reveal]{opacity:1;transform:none}
+  .frag-svg .draw{stroke-dashoffset:0 !important}
+  .frag-svg .fade{opacity:1 !important}
+  .manifesto-line .w{opacity:1 !important}
+}
+</style>
+<noscript><style>#preloader{display:none}</style></noscript>
+<script>document.documentElement.classList.replace('no-js','js');</script>
+</head>
+<body>
+<!-- Brand grain filter (used by the no-webgl fallback gradient) -->
+<svg class="kt-grain-filter" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
+    <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="3" result="grainNoise" />
+    <feDisplacementMap in="SourceGraphic" in2="grainNoise" scale="80" xChannelSelector="R" yChannelSelector="G" result="grainDisplacement" />
+    <feBlend in="grainDisplacement" in2="SourceGraphic" result="grainBase" />
+    <feColorMatrix in="grainNoise" type="matrix" values="0.95 0 0 0 0 0 0.97 0 0 0 0 0 1 0 0 0 0 0 0.28 0" result="grainSpeckle" />
+    <feBlend in="grainSpeckle" in2="grainBase" mode="overlay" />
+  </filter>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="preloader" aria-hidden="true">
+  <img class="pl-light" src="logo-light.svg" alt="" width="128" height="128">
+  <img class="pl-dark" src="logo-dark.svg" alt="" width="128" height="128">
+  <p class="pl-tag micro">Katy Technologies — Operations</p>
+</div>
+
+<header class="site-head">
+  <a class="brand" href="/" aria-label="Katy Technologies — home">
+    <img src="logo-light.svg" alt="" width="38" height="38">
+    <span class="micro">Katy Technologies</span>
+  </a>
+  <nav class="micro" aria-label="Site">
+    <a href="#method">Method</a>
+    <a href="#services">Services</a>
+    <a href="#notes">Notes</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============ STORY: fixed WebGL valley behind hero + method ============ -->
+  <div class="story">
+    <canvas id="story-canvas" aria-hidden="true"></canvas>
+
+    <!-- chapter rail (desktop) -->
+    <nav class="story-nav" aria-label="Method chapters">
+      <a href="#map" class="story-nav-link" data-chapter="map"><span class="story-nav-dot" aria-hidden="true"></span>Map</a>
+      <a href="#name" class="story-nav-link" data-chapter="name"><span class="story-nav-dot" aria-hidden="true"></span>Name</a>
+      <a href="#route" class="story-nav-link" data-chapter="route"><span class="story-nav-dot" aria-hidden="true"></span>Route</a>
+      <a href="#trust" class="story-nav-link" data-chapter="trust"><span class="story-nav-dot" aria-hidden="true"></span>Trust</a>
+    </nav>
+
+    <!-- 01 · HERO -->
+    <section class="hero sec-grid" id="method-intro" aria-label="Introduction">
+      <span class="sec-num" aria-hidden="true">01</span>
+      <h1 class="hero-display">
+        <span class="mask"><span class="ln">Automate</span></span>
+        <span class="mask"><span class="ln">The&nbsp;Work</span></span>
+        <span class="mask"><span class="ln">That&nbsp;Slows</span></span>
+        <span class="mask"><span class="ln">Your&nbsp;Team</span></span>
+        <span class="mask"><span class="ln">Down.</span></span>
+      </h1>
+      <div class="hero-foot">
+        <p class="micro">01 — What we do</p>
+        <p class="hero-sub prose">We help enterprise teams automate manual workflows with practical AI and custom software — governed by the reviews and approvals you already depend on.</p>
+        <div class="hero-cta">
+          <a href="/contact" class="btn btn-solid">Talk through a bottleneck</a>
+          <a href="#map" class="btn btn-line">Follow the path</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · METHOD — Swiss panels on the fly-through -->
+    <section class="chapter sec-grid" id="map" aria-label="Method step one">
+      <span class="step-num step-num--right" aria-hidden="true">01</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">02 — Method / Step 01</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Map the work<br>as it moves</h2>
+          <p class="panel-copy">We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
+        </div>
+        <div class="panel-diagram chapter-frag">
+          <svg class="frag-svg" viewBox="0 0 560 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: intake, triage and review nodes connected in sequence.">
+            <g stroke="#7F95AA" stroke-width="1.5">
+              <path class="draw" pathLength="1" d="M20 50 H150 V114 H20 Z"/>
+              <path class="draw" pathLength="1" d="M215 50 H345 V114 H215 Z"/>
+              <path class="draw" pathLength="1" d="M410 50 H540 V114 H410 Z"/>
+              <path class="draw" pathLength="1" d="M150 82 H215"/>
+              <path class="draw" pathLength="1" d="M345 82 H410"/>
+            </g>
+            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+              <text x="85" y="87">INTAKE</text>
+              <text x="280" y="87">TRIAGE</text>
+              <text x="475" y="87">REVIEW</text>
+            </g>
+            <g class="fade" stroke="#7F95AA" stroke-opacity="0.6" stroke-width="1">
+              <line x1="20" y1="22" x2="20" y2="32"/>
+              <line x1="280" y1="22" x2="280" y2="32"/>
+              <line x1="540" y1="22" x2="540" y2="32"/>
+              <line x1="20" y1="27" x2="540" y2="27" stroke-opacity="0.3"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter sec-grid" id="name" aria-label="Method step two">
+      <span class="step-num step-num--left" aria-hidden="true">02</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">02 — Method / Step 02</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Name the step<br>worth improving</h2>
+          <p class="panel-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly — the bottleneck, on the record.</p>
+        </div>
+        <div class="panel-diagram chapter-frag">
+          <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: the manual review node marked as the bottleneck.">
+            <g stroke="#7F95AA" stroke-width="1.5">
+              <path class="draw" pathLength="1" d="M215 96 H345 V160 H215 Z"/>
+            </g>
+            <g stroke="#AFA7A7" stroke-width="1.5">
+              <path class="draw" pathLength="1" d="M280 16 L297 42 L280 68 L263 42 Z"/>
+              <path class="draw" pathLength="1" d="M280 68 V96"/>
+            </g>
+            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+              <text x="280" y="125">MANUAL</text>
+              <text x="280" y="145">REVIEW</text>
+            </g>
+            <g class="fade" fill="#AFA7A7" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em">
+              <text x="312" y="47">BOTTLENECK</text>
+            </g>
+            <g class="fade" stroke="#AFA7A7" stroke-opacity="0.55" stroke-width="1">
+              <line x1="228" y1="172" x2="240" y2="184"/>
+              <line x1="252" y1="172" x2="264" y2="184"/>
+              <line x1="276" y1="172" x2="288" y2="184"/>
+              <line x1="300" y1="172" x2="312" y2="184"/>
+              <line x1="324" y1="172" x2="336" y2="184"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter sec-grid" id="route" aria-label="Method step three">
+      <span class="step-num step-num--right" aria-hidden="true">03</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">02 — Method / Step 03</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Route the repeat<br>work around it</h2>
+          <p class="panel-copy">Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the permissions and controls your team already trusts.</p>
+        </div>
+        <div class="panel-diagram chapter-frag">
+          <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: a dashed automation path routes repeat steps from triage to approval.">
+            <g stroke="#7F95AA" stroke-width="1.5">
+              <path class="draw" pathLength="1" d="M20 40 H150 V104 H20 Z"/>
+              <path class="draw" pathLength="1" d="M410 40 H540 V104 H410 Z"/>
+              <path class="draw" pathLength="1" d="M150 72 H410" stroke-opacity="0.4"/>
+            </g>
+            <path class="draw" pathLength="1" d="M85 104 V168 H475 V104" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
+            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+              <text x="85" y="77">TRIAGE</text>
+              <text x="475" y="77">APPROVAL</text>
+            </g>
+            <g class="fade" fill="#7CC4FF" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
+              <text x="280" y="196">REPEAT STEPS, AUTOMATED</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter sec-grid" id="trust" aria-label="Method step four">
+      <span class="step-num step-num--left" aria-hidden="true">04</span>
+      <div class="panel-inner">
+        <p class="panel-meta micro">02 — Method / Step 04</p>
+        <div class="panel-main">
+          <h2 class="panel-title">Keep review<br>visible</h2>
+          <p class="panel-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on. Results your team can explain.</p>
+        </div>
+        <div class="panel-diagram chapter-frag">
+          <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: human review stays tied into the automated path.">
+            <g stroke="#7F95AA" stroke-width="1.5">
+              <path class="draw" pathLength="1" d="M215 24 H345 V88 H215 Z"/>
+            </g>
+            <path class="draw" pathLength="1" d="M280 88 V160" stroke="#F8F7F2" stroke-width="1.5"/>
+            <path class="draw" pathLength="1" d="M85 160 H475" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
+            <circle class="fade" cx="280" cy="160" r="5.5" fill="#06192D" stroke="#F8F7F2" stroke-width="1.5"/>
+            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+              <text x="280" y="53">REVIEW</text>
+            </g>
+            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
+              <text x="280" y="194">HUMAN REVIEW STAYS IN THE LOOP</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </div>
+  <span id="method" aria-hidden="true"></span>
+
+  <!-- marquee: method → position -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+      <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- 03 · MANIFESTO -->
+  <section class="manifesto" aria-label="Position">
+    <span class="sec-num" aria-hidden="true">03</span>
+    <div class="cols">
+      <p class="micro" data-reveal>03 — Position</p>
+      <blockquote>
+        <p class="manifesto-line" data-manifesto>Automation should make work easier to trust, not harder to explain.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 04 · SERVICES -->
+  <section id="services" class="services" aria-label="Services">
+    <span class="sec-num" aria-hidden="true">04</span>
+    <div class="sec-head">
+      <p class="micro" data-reveal>04 — Services</p>
+    </div>
+    <ul class="svc-list">
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">01</span>
+        <h3>Internal systems foundations</h3>
+        <p>Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">02</span>
+        <h3>Practical AI support</h3>
+        <p>AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">03</span>
+        <h3>Custom workflow software</h3>
+        <p>Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">04</span>
+        <h3>Risk-aware automation</h3>
+        <p>Automation patterns that keep permissions, auditability, and human review visible.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">05</span>
+        <h3>Operational visibility</h3>
+        <p>Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
+      </li>
+      <li class="svc" data-reveal>
+        <span class="idx" aria-hidden="true">06</span>
+        <h3>Workflow modernization</h3>
+        <p>Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 05 · FIELD NOTES -->
+  <section id="notes" class="notes" aria-label="Field notes">
+    <span class="sec-num" aria-hidden="true">05</span>
+    <div class="sec-head">
+      <p class="micro" data-reveal>05 — Field notes</p>
+    </div>
+    <table data-reveal>
+      <thead>
+        <tr><th scope="col">Year</th><th scope="col">Client</th><th scope="col">Note</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="yr">2023</td>
+          <td class="cl">Economic consulting</td>
+          <td class="nt prose">Deployed an internal document-supported assistant for a Boston-area consulting firm that helped analysts move reports faster while protecting data privacy requirements.</td>
+        </tr>
+        <tr>
+          <td class="yr">2025</td>
+          <td class="cl">Ticket vendors</td>
+          <td class="nt prose">Worked with a California ticket vendor to create custom email annotation software that reduced repeat review work for management.</td>
+        </tr>
+        <tr>
+          <td class="yr">Now</td>
+          <td class="cl">Hospitality</td>
+          <td class="nt prose">Working with a high-end hotel chain based in Southern California to automate pricing, labor assignment, and reporting workflows.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 06 · CTA — shock panel -->
+  <section id="contact" class="cta" aria-label="Contact">
+    <span class="sec-num" aria-hidden="true">06</span>
+    <h2 data-reveal>Ready to find<br>the slow<br>handoff?</h2>
+    <p data-reveal><a class="btn-shock" href="/contact">Talk through a bottleneck</a></p>
+    <div class="fine" data-reveal>
+      <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+      <a href="tel:+12819613396">(281) 961-3396</a>
+      <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="logo-light.svg" alt="Katy Technologies logo" width="44" height="44">
+      <p class="micro">Katy Technologies<br>Enterprise workflow automation</p>
+    </div>
+    <nav class="foot-col" aria-label="Footer">
+      <p class="micro">Index</p>
+      <ul>
+        <li><a href="#map">Method</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#notes">Field notes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot-col">
+      <p class="micro">Reach</p>
+      <ul>
+        <li><a href="mailto:sales@katytechnologies.com">Email</a></li>
+        <li><a href="tel:+12819613396">(281) 961-3396</a></li>
+        <li><a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a></li>
+        <li><a href="/contact">Talk through a bottleneck</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="legal">© 2026 Katy Technologies. All rights reserved.</p>
+  <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true">Katy Technologies</p></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+  /* ---------- fallback: show everything, no choreography ---------- */
+  function showEverything() {
+    var pre = document.getElementById('preloader');
+    if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+    document.body.classList.add('static-page');
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    document.querySelectorAll('.hero-display .ln').forEach(function (el) {
+      el.style.transform = 'none';
+    });
+    var foot = document.querySelector('.hero-foot');
+    if (foot) foot.style.opacity = '1';
+  }
+
+  /* ---------- split helper (word scrub, no SplitText dependency) ---------- */
+  function splitWords(el) {
+    var words = el.textContent.trim().split(/\s+/);
+    el.textContent = '';
+    words.forEach(function (w, i) {
+      var span = document.createElement('span');
+      span.className = 'w';
+      span.textContent = w;
+      el.appendChild(span);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+    return el.querySelectorAll('.w');
+  }
+
+  /* ---------- hero intro: lines slide in from alternating sides ---------- */
+  function heroIntro() {
+    if (!hasGsap || reduced) return;
+    var tl = gsap.timeline();
+    tl.to('.hero-display .ln', {
+      xPercent: 0,
+      x: 0,
+      duration: 1.05,
+      ease: 'power4.out',
+      stagger: 0.09,
+      overwrite: 'auto'
+    });
+    tl.to('.hero-foot', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '-=0.45');
+  }
+
+  /* ---------- preloader: hard-cut flashes navy -> blue -> paper ---------- */
+  function initPreloader() {
+    var pre = document.getElementById('preloader');
+
+    if (hasGsap && !reduced) {
+      gsap.set('.hero-display .ln', {
+        xPercent: function (i) { return i % 2 === 0 ? -110 : 110; },
+        x: 0
+      });
+    }
+
+    function end() {
+      if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+      heroIntro();
+    }
+
+    if (!pre || reduced || !hasGsap) {
+      if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+      if (reduced || !hasGsap) showEverything(); else heroIntro();
+      return;
+    }
+
+    var stages = ['s-blue', 's-paper'];
+    var step = 0;
+    var timer = window.setInterval(function () {
+      if (step >= stages.length) {
+        window.clearInterval(timer);
+        end();
+        return;
+      }
+      pre.className = stages[step];
+      step += 1;
+    }, 150);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!hasGsap || reduced) {
+      showEverything();
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+    initPreloader();
+
+    /* ---------- Lenis smooth scroll ---------- */
+    var lenis = null;
+    if (typeof window.Lenis !== 'undefined') {
+      lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        var target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        if (lenis) lenis.scrollTo(target, { offset: 0 });
+        else target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    /* ---------- headline tracking tightens as the hero scrolls past ---------- */
+    gsap.fromTo('.hero-display',
+      { letterSpacing: '-0.01em' },
+      {
+        letterSpacing: '-0.045em',
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+
+    /* ---------- oversized numerals parallax at their own speed ---------- */
+    gsap.utils.toArray('.sec-num, .step-num').forEach(function (num) {
+      var host = num.closest('section, footer, article');
+      gsap.to(num, {
+        yPercent: -28,
+        ease: 'none',
+        scrollTrigger: { trigger: host, start: 'top bottom', end: 'bottom top', scrub: true }
+      });
+    });
+
+    /* ---------- generic reveals ---------- */
+    gsap.utils.toArray('[data-reveal]').forEach(function (el, i) {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        delay: (i % 3) * 0.07,
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+      });
+    });
+
+    /* ---------- manifesto: word-by-word opacity scrub ---------- */
+    var line = document.querySelector('[data-manifesto]');
+    if (line) {
+      var words = splitWords(line);
+      gsap.to(words, {
+        opacity: 1,
+        stagger: 0.06,
+        ease: 'none',
+        scrollTrigger: { trigger: line, start: 'top 78%', end: 'bottom 42%', scrub: 0.4 }
+      });
+    }
+
+    /* ---------- method panels: drift against the camera + frag draw ---------- */
+    gsap.utils.toArray('.chapter').forEach(function (chapter) {
+      var inner = chapter.querySelector('.panel-inner');
+
+      gsap.fromTo(inner,
+        { yPercent: 6, opacity: 0 },
+        {
+          yPercent: -6,
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: chapter, start: 'top 86%', end: 'bottom 30%', scrub: 0.4 }
+        });
+
+      var frag = chapter.querySelector('.frag-svg');
+      if (!frag) return;
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: frag, start: 'top 86%', once: true }
+      });
+      tl.to(frag.querySelectorAll('.draw'), {
+        strokeDashoffset: 0,
+        duration: 1.1,
+        ease: 'power1.inOut',
+        stagger: 0.18
+      })
+        .to(frag.querySelectorAll('.fade'), {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power1.out',
+          stagger: 0.1
+        }, '-=0.4');
+    });
+
+    /* ---------- story rail: visibility + active chapter ---------- */
+    var rail = document.querySelector('.story-nav');
+    var story = document.querySelector('.story');
+    if (rail && story) {
+      ScrollTrigger.create({
+        trigger: story,
+        start: 'top top-=1',
+        end: 'bottom 70%',
+        onToggle: function (self) { rail.classList.toggle('visible', self.isActive); }
+      });
+      gsap.utils.toArray('.chapter').forEach(function (chapter) {
+        var link = rail.querySelector('[data-chapter="' + chapter.id + '"]');
+        if (!link) return;
+        ScrollTrigger.create({
+          trigger: chapter,
+          start: 'top 55%',
+          end: 'bottom 45%',
+          onToggle: function (self) { link.classList.toggle('active', self.isActive); }
+        });
+      });
+    }
+
+    /* ---------- footer wordmark rise ---------- */
+    var word = document.querySelector('.foot-mark');
+    if (word) {
+      gsap.from(word, {
+        yPercent: 100,
+        duration: 1.1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.foot-mark-wrap', start: 'top 96%', once: true }
+      });
+    }
+
+    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  });
+}());
+</script>
+
+<!-- Three.js cinematic story background (unchanged from the V3 root site) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="story-field.js"></script>
+</body>
+</html>
