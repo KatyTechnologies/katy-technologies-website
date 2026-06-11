@@ -1,44 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Katy Technologies helps enterprise teams automate manual workflows with practical AI and custom software.">
     <meta name="keywords" content="workflow automation, practical AI, custom software, enterprise operations">
     <meta name="author" content="Katy Technologies">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://katytechnologies.com/">
     <meta property="og:title" content="Katy Technologies - Practical Workflow Automation">
     <meta property="og:description" content="Practical AI and custom software for enterprise workflows that still depend on manual review.">
     <meta property="og:image" content="https://katytechnologies.com/assets/og-image.jpg">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://katytechnologies.com/">
     <meta property="twitter:title" content="Katy Technologies - Practical Workflow Automation">
     <meta property="twitter:description" content="Practical AI and custom software for enterprise workflows that still depend on manual review.">
     <meta property="twitter:image" content="https://katytechnologies.com/assets/og-image.jpg">
-    
-    <title>Katy Technologies - Practical Workflow Automation</title>
-    
-    <!-- Preconnect to external domains -->
+
+    <title>Katy Technologies — Practical Workflow Automation</title>
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Work Sans from Google; Literata stays local (see landing.css) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700&family=Literata:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
-    <!-- Anime.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/landing.css">
+
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body>
+    <!-- Brand grain filter (used by the no-webgl fallback gradient) -->
     <svg class="kt-grain-filter" width="0" height="0" aria-hidden="true" focusable="false">
         <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
             <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="3" result="grainNoise" />
@@ -48,285 +49,341 @@
             <feBlend in="grainSpeckle" in2="grainBase" mode="overlay" />
         </filter>
     </svg>
-    
-    <!-- Skip to content link -->
-    <a href="#main" class="skip-to-content">Skip to content</a>
-    
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="/" class="logo">
-                <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" class="logo-mark">
-                <span>Katy Technologies</span>
-            </a>
-            
-            <nav class="nav" aria-label="Main navigation">
-                <ul class="nav-list">
-                    <li><a href="/" class="nav-link active">Home</a></li>
-                    <li><a href="/solutions" class="nav-link">Solutions</a></li>
-                    <li><a href="/contact" class="nav-link">Contact</a></li>
-                </ul>
-                <a href="/contact" class="btn">Let's Chat</a>
-            </nav>
-            
-            <button class="burger" aria-label="Menu" aria-expanded="false">
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-            </button>
-        </div>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="preloader" aria-hidden="true">
+        <img class="pl-light" src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" width="128" height="128">
+        <img class="pl-dark" src="assets/logos/brand-guide/2026-05-24-kt-logo-one-ink-navy-knockout-transparent.svg" alt="" width="128" height="128">
+        <p class="pl-tag micro">Katy Technologies — Operations</p>
+    </div>
+
+    <header class="site-head">
+        <a class="brand" href="/" aria-label="Katy Technologies — home">
+            <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" width="38" height="38">
+            <span class="micro">Katy Technologies</span>
+        </a>
+        <nav class="micro" aria-label="Main navigation">
+            <a href="/" aria-current="page">Home</a>
+            <a href="/solutions">Solutions</a>
+            <a href="/contact">Contact</a>
+        </nav>
     </header>
-    
-    <!-- Mobile Menu -->
-    <nav class="mobile-menu" aria-hidden="true">
-        <ul class="mobile-nav-list">
-            <li><a href="/" class="mobile-nav-link active">Home</a></li>
-            <li><a href="/solutions" class="mobile-nav-link">Solutions</a></li>
-            <li><a href="/contact" class="mobile-nav-link">Contact</a></li>
-        </ul>
-        <a href="/contact" class="btn" style="margin-top: 2rem;">Let's Chat</a>
-    </nav>
-    
-    <!-- Overlay -->
-    <div class="overlay"></div>
-    
-    <!-- Main Content -->
+
     <main id="main">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="container hero-content">
-                <h1 class="hero-title">Automate the work that slows your team down.</h1>
-                <p class="hero-subtitle">We help enterprise teams automate manual workflows with practical AI and custom software.</p>
-                <div class="hero-buttons">
-                    <a href="/solutions" class="btn">Map a Workflow</a>
-                    <a href="/contact" class="btn btn-outline">Let's Chat</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Features Section -->
-        <section class="section" id="features">
-            <div class="container">
-                <h2 class="text-center fade-up">Start with the bottleneck, not the tool.</h2>
-                
-                <div class="cards-grid" data-stagger="100">
-                    <div class="card">
-                        <div class="card-content">
-                            <h3 class="card-title">Plainspoken workflow mapping</h3>
-                            <p class="card-description">We start with how work actually moves through your organization, then name the manual steps worth improving.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-content">
-                            <h3 class="card-title">Governed by your process</h3>
-                            <p class="card-description">We design automation around the reviews, approvals, and risk controls your team already depends on.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-content">
-                            <h3 class="card-title">Practical systems experience</h3>
-                            <p class="card-description">Our work combines software engineering, operational analysis, and careful implementation for teams that need results they can explain.</p>
-                        </div>
+
+        <!-- ============ STORY: fixed WebGL valley behind hero + method ============ -->
+        <div class="story">
+            <canvas id="story-canvas" aria-hidden="true"></canvas>
+
+            <!-- chapter rail (desktop) -->
+            <nav class="story-nav" aria-label="Method chapters">
+                <a href="#map" class="story-nav-link" data-chapter="map"><span class="story-nav-dot" aria-hidden="true"></span>Map</a>
+                <a href="#name" class="story-nav-link" data-chapter="name"><span class="story-nav-dot" aria-hidden="true"></span>Name</a>
+                <a href="#route" class="story-nav-link" data-chapter="route"><span class="story-nav-dot" aria-hidden="true"></span>Route</a>
+                <a href="#trust" class="story-nav-link" data-chapter="trust"><span class="story-nav-dot" aria-hidden="true"></span>Trust</a>
+            </nav>
+
+            <!-- 01 · HERO -->
+            <section class="hero sec-grid" aria-label="Introduction">
+                <span class="sec-num" aria-hidden="true">01</span>
+                <h1 class="hero-display" data-skew>
+                    <span class="mask"><span class="ln">Automate</span></span>
+                    <span class="mask"><span class="ln">The&nbsp;Work</span></span>
+                    <span class="mask"><span class="ln">That&nbsp;Slows</span></span>
+                    <span class="mask"><span class="ln">Your&nbsp;Team</span></span>
+                    <span class="mask"><span class="ln">Down.</span></span>
+                </h1>
+                <div class="hero-foot">
+                    <p class="micro">01 — What we do</p>
+                    <p class="hero-sub prose">We help enterprise teams automate manual workflows with practical AI and custom software — governed by the reviews and approvals you already depend on.</p>
+                    <div class="hero-cta">
+                        <a href="/contact" class="btn btn-solid">Talk through a bottleneck</a>
+                        <a href="#map" class="btn btn-line">Follow the path</a>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <!-- CTA Section -->
-        <section class="section" style="background: var(--color-bg-secondary);">
-            <div class="container text-center">
-                <h2 class="fade-up">Ready to make manual work easier to trust?</h2>
-                <p class="fade-up" style="max-width: 600px; margin: 0 auto 2rem;">
-                    Talk with us about the handoffs, reviews, and repeat steps slowing your team down.
-                </p>
-                <div class="fade-up">
-                    <a href="/contact" class="btn">Let's Chat</a>
+            </section>
+
+            <!-- 02 · METHOD — Swiss panels pinned on the fly-through -->
+            <section class="chapter sec-grid" id="map" aria-label="Method step one">
+                <div class="chapter-pin">
+                <span class="step-num step-num--right" aria-hidden="true">01</span>
+                <div class="panel-inner">
+                    <p class="panel-meta micro">02 — Method / Step 01</p>
+                    <div class="panel-main">
+                        <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Map the work</span></span><span class="tmask"><span class="tline">as it moves</span></span></h2>
+                        <p class="panel-copy">We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
+                    </div>
+                    <div class="panel-diagram chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: intake, triage and review nodes connected in sequence.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M20 50 H150 V114 H20 Z"/>
+                                <path class="draw" pathLength="1" d="M215 50 H345 V114 H215 Z"/>
+                                <path class="draw" pathLength="1" d="M410 50 H540 V114 H410 Z"/>
+                                <path class="draw" pathLength="1" d="M150 82 H215"/>
+                                <path class="draw" pathLength="1" d="M345 82 H410"/>
+                            </g>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+                                <text x="85" y="87">INTAKE</text>
+                                <text x="280" y="87">TRIAGE</text>
+                                <text x="475" y="87">REVIEW</text>
+                            </g>
+                            <g class="fade" stroke="#7F95AA" stroke-opacity="0.6" stroke-width="1">
+                                <line x1="20" y1="22" x2="20" y2="32"/>
+                                <line x1="280" y1="22" x2="280" y2="32"/>
+                                <line x1="540" y1="22" x2="540" y2="32"/>
+                                <line x1="20" y1="27" x2="540" y2="27" stroke-opacity="0.3"/>
+                            </g>
+                        </svg>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Katy Technologies</h4>
-                    <p>Practical AI and custom software for workflows that still depend on manual review.</p>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="/solutions" class="footer-link">Solutions</a></li>
-                        <li><a href="/contact" class="footer-link">Contact</a></li>
-                    </ul>
+            </section>
+
+            <section class="chapter sec-grid" id="name" aria-label="Method step two">
+                <div class="chapter-pin">
+                <span class="step-num step-num--left" aria-hidden="true">02</span>
+                <div class="panel-inner">
+                    <p class="panel-meta micro">02 — Method / Step 02</p>
+                    <div class="panel-main">
+                        <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Name the step</span></span><span class="tmask"><span class="tline">worth improving</span></span></h2>
+                        <p class="panel-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly — the bottleneck, on the record.</p>
+                    </div>
+                    <div class="panel-diagram chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: the manual review node marked as the bottleneck.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M215 96 H345 V160 H215 Z"/>
+                            </g>
+                            <g stroke="#AFA7A7" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M280 16 L297 42 L280 68 L263 42 Z"/>
+                                <path class="draw" pathLength="1" d="M280 68 V96"/>
+                            </g>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+                                <text x="280" y="125">MANUAL</text>
+                                <text x="280" y="145">REVIEW</text>
+                            </g>
+                            <g class="fade" fill="#AFA7A7" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em">
+                                <text x="312" y="47">BOTTLENECK</text>
+                            </g>
+                            <g class="fade" stroke="#AFA7A7" stroke-opacity="0.55" stroke-width="1">
+                                <line x1="228" y1="172" x2="240" y2="184"/>
+                                <line x1="252" y1="172" x2="264" y2="184"/>
+                                <line x1="276" y1="172" x2="288" y2="184"/>
+                                <line x1="300" y1="172" x2="312" y2="184"/>
+                                <line x1="324" y1="172" x2="336" y2="184"/>
+                            </g>
+                        </svg>
+                    </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:sales@katytechnologies.com" class="footer-link">sales@katytechnologies.com</a></li>
-                        <li><a href="tel:+12819613396" class="footer-link">(281) 961-3396</a></li>
-                        <li><a href="https://www.linkedin.com/company/katy-technologies" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                    </ul>
                 </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2026 Katy Technologies. All rights reserved.</p>
+            </section>
+
+            <section class="chapter sec-grid" id="route" aria-label="Method step three">
+                <div class="chapter-pin">
+                <span class="step-num step-num--right" aria-hidden="true">03</span>
+                <div class="panel-inner">
+                    <p class="panel-meta micro">02 — Method / Step 03</p>
+                    <div class="panel-main">
+                        <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Route the repeat</span></span><span class="tmask"><span class="tline">work around it</span></span></h2>
+                        <p class="panel-copy">Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the permissions and controls your team already trusts.</p>
+                    </div>
+                    <div class="panel-diagram chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: a dashed automation path routes repeat steps from triage to approval.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M20 40 H150 V104 H20 Z"/>
+                                <path class="draw" pathLength="1" d="M410 40 H540 V104 H410 Z"/>
+                                <path class="draw" pathLength="1" d="M150 72 H410" stroke-opacity="0.4"/>
+                            </g>
+                            <path class="draw" pathLength="1" d="M85 104 V168 H475 V104" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+                                <text x="85" y="77">TRIAGE</text>
+                                <text x="475" y="77">APPROVAL</text>
+                            </g>
+                            <g class="fade" fill="#7CC4FF" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
+                                <text x="280" y="196">REPEAT STEPS, AUTOMATED</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <section class="chapter sec-grid" id="trust" aria-label="Method step four">
+                <div class="chapter-pin">
+                <span class="step-num step-num--left" aria-hidden="true">04</span>
+                <div class="panel-inner">
+                    <p class="panel-meta micro">02 — Method / Step 04</p>
+                    <div class="panel-main">
+                        <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Keep review</span></span><span class="tmask"><span class="tline">visible</span></span></h2>
+                        <p class="panel-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on. Results your team can explain.</p>
+                    </div>
+                    <div class="panel-diagram chapter-frag">
+                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: human review stays tied into the automated path.">
+                            <g stroke="#7F95AA" stroke-width="1.5">
+                                <path class="draw" pathLength="1" d="M215 24 H345 V88 H215 Z"/>
+                            </g>
+                            <path class="draw" pathLength="1" d="M280 88 V160" stroke="#F8F7F2" stroke-width="1.5"/>
+                            <path class="draw" pathLength="1" d="M85 160 H475" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
+                            <circle class="fade" cx="280" cy="160" r="5.5" fill="#06192D" stroke="#F8F7F2" stroke-width="1.5"/>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
+                                <text x="280" y="53">REVIEW</text>
+                            </g>
+                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
+                                <text x="280" y="194">HUMAN REVIEW STAYS IN THE LOOP</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- marquee: method → position -->
+        <div class="marquee" aria-hidden="true">
+            <div class="mq-track">
+                <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+                <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
             </div>
         </div>
+
+        <!-- 03 · MANIFESTO -->
+        <section class="manifesto" aria-label="Position">
+            <span class="sec-num" aria-hidden="true">03</span>
+            <div class="cols">
+                <p class="micro" data-reveal>03 — Position</p>
+                <blockquote>
+                    <p class="manifesto-line" data-manifesto>Automation should make work easier to trust, not harder to explain.</p>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 04 · SERVICES -->
+        <section id="services" class="services" aria-label="Services">
+            <span class="sec-num" aria-hidden="true">04</span>
+            <div class="sec-head">
+                <p class="micro" data-reveal>04 — Services</p>
+            </div>
+            <ul class="svc-list">
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">01</span>
+                    <h3>Internal systems foundations</h3>
+                    <p>Durable application and data foundations for teams that need automation to connect with existing internal systems.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">02</span>
+                    <h3>Practical AI support</h3>
+                    <p>AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">03</span>
+                    <h3>Custom workflow software</h3>
+                    <p>Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">04</span>
+                    <h3>Risk-aware automation</h3>
+                    <p>Automation patterns that keep permissions, auditability, and human review visible.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">05</span>
+                    <h3>Operational visibility</h3>
+                    <p>Dashboards and reporting that show where work stalls, repeats, or waits for review.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">06</span>
+                    <h3>Workflow modernization</h3>
+                    <p>Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 05 · FIELD NOTES -->
+        <section id="notes" class="notes" aria-label="Field notes">
+            <span class="sec-num" aria-hidden="true">05</span>
+            <div class="sec-head">
+                <p class="micro" data-reveal>05 — Field notes</p>
+            </div>
+            <table data-reveal>
+                <thead>
+                    <tr><th scope="col">Year</th><th scope="col">Client</th><th scope="col">Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="yr">2023</td>
+                        <td class="cl">Economic consulting</td>
+                        <td class="nt prose">Deployed an internal document-supported assistant for a Boston-area consulting firm that helped analysts move reports faster while protecting data privacy requirements.</td>
+                    </tr>
+                    <tr>
+                        <td class="yr">2025</td>
+                        <td class="cl">Ticket vendors</td>
+                        <td class="nt prose">Worked with a California ticket vendor to create custom email annotation software that reduced repeat review work for management.</td>
+                    </tr>
+                    <tr>
+                        <td class="yr">Now</td>
+                        <td class="cl">Hospitality</td>
+                        <td class="nt prose">Working with a high-end hotel chain based in Southern California to automate pricing, labor assignment, and reporting workflows.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 06 · CTA — shock panel -->
+        <section id="contact" class="cta" aria-label="Contact">
+            <span class="sec-num" aria-hidden="true">06</span>
+            <h2 data-skew><span class="tmask"><span class="tline">Ready to find</span></span><span class="tmask"><span class="tline">the slow</span></span><span class="tmask"><span class="tline">handoff?</span></span></h2>
+            <p data-reveal><a class="btn-shock" href="/contact">Talk through a bottleneck</a></p>
+            <div class="fine" data-reveal>
+                <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+                <a href="tel:+12819613396">(281) 961-3396</a>
+                <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="foot">
+        <div class="foot-grid">
+            <div class="foot-brand">
+                <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="Katy Technologies logo" width="44" height="44">
+                <p class="micro">Katy Technologies<br>Enterprise workflow automation</p>
+            </div>
+            <nav class="foot-col" aria-label="Footer">
+                <p class="micro">Site</p>
+                <ul>
+                    <li><a href="/solutions">Solutions</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="foot-col">
+                <p class="micro">Reach</p>
+                <ul>
+                    <li><a href="mailto:sales@katytechnologies.com">Email</a></li>
+                    <li><a href="tel:+12819613396">(281) 961-3396</a></li>
+                    <li><a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a></li>
+                    <li><a href="/contact">Talk through a bottleneck</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="legal">© 2026 Katy Technologies. All rights reserved.</p>
+        <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true" data-skew>Katy Technologies</p></div>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Fade-up animation handler
-        function initFadeUpAnimations() {
-          // Check if IntersectionObserver is supported
-          if (!('IntersectionObserver' in window)) {
-            // Fallback: show all elements immediately
-            document.querySelectorAll('.fade-up, .fade-in').forEach(el => {
-              el.classList.add('visible');
-            });
-            return;
-          }
-          
-          const fadeElements = document.querySelectorAll('.fade-up, .fade-in');
-          
-          const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                // Add delay if specified in data attribute
-                const delay = entry.target.dataset.delay || 0;
-                
-                setTimeout(() => {
-                  entry.target.classList.add('visible');
-                }, delay);
-                
-                // Unobserve after animation
-                fadeObserver.unobserve(entry.target);
-              }
-            });
-          }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-          });
-          
-          fadeElements.forEach(el => fadeObserver.observe(el));
+    <!-- GSAP + Lenis -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="js/landing.js"></script>
+
+    <!-- Three.js cinematic story background -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
         }
-        
-        // Initialize number counter animations
-        function initNumberCounters() {
-          const counters = document.querySelectorAll('[data-count]');
-          
-          const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = parseInt(counter.dataset.count);
-                const duration = parseInt(counter.dataset.duration) || 2000;
-                const suffix = counter.dataset.suffix || '';
-                
-                animateCounter(counter, 0, target, duration, suffix);
-                counterObserver.unobserve(counter);
-              }
-            });
-          }, {
-            threshold: 0.5
-          });
-          
-          counters.forEach(counter => counterObserver.observe(counter));
-        }
-        
-        // Animate counter function
-        function animateCounter(element, start, end, duration, suffix = '') {
-          const startTime = performance.now();
-          
-          function updateCounter(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const current = Math.floor(start + (end - start) * easeOutQuart);
-            
-            element.textContent = current.toLocaleString() + suffix;
-            
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter);
-            } else {
-              element.textContent = end.toLocaleString() + suffix;
-            }
-          }
-          
-          requestAnimationFrame(updateCounter);
-        }
-        
-        // Mobile menu functionality
-        function initMobileMenu() {
-          const burger = document.querySelector('.burger');
-          const mobileMenu = document.querySelector('.mobile-menu');
-          const overlay = document.querySelector('.overlay');
-          const body = document.body;
-          
-          if (!burger || !mobileMenu || !overlay) return;
-          
-          function toggleMenu() {
-            const isOpen = burger.classList.contains('active');
-            
-            burger.setAttribute('aria-expanded', !isOpen);
-            mobileMenu.setAttribute('aria-hidden', isOpen);
-            
-            if (!isOpen) {
-              burger.classList.add('active');
-              mobileMenu.classList.add('active');
-              overlay.classList.add('active');
-              body.classList.add('menu-open');
-            } else {
-              burger.classList.remove('active');
-              mobileMenu.classList.remove('active');
-              overlay.classList.remove('active');
-              body.classList.remove('menu-open');
-            }
-          }
-          
-          function closeMenu() {
-            burger.setAttribute('aria-expanded', 'false');
-            burger.classList.remove('active');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            body.classList.remove('menu-open');
-          }
-          
-          // Event listeners
-          burger.addEventListener('click', toggleMenu);
-          overlay.addEventListener('click', closeMenu);
-          
-          // Close menu when clicking on mobile nav links
-          const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-          mobileNavLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
-          });
-          
-          // Close menu on escape key
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && burger.classList.contains('active')) {
-              closeMenu();
-            }
-          });
-        }
-        
-        // Initialize everything when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-          initFadeUpAnimations();
-          initNumberCounters();
-          initMobileMenu();
-        });
+    }
     </script>
+    <script type="module" src="js/story-field.js"></script>
 </body>
-</html> 
+</html>

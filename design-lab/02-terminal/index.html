@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katy Technologies — Terminal</title>
+<meta name="description" content="We help enterprise teams automate manual workflows with practical AI and custom software.">
+<link rel="icon" href="logo-light.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050D1A;
+  --bg2:#06192D;
+  --bg3:#071A33;
+  --ink:#F8F7F2;
+  --mono:#7F95AA;
+  --dim:#536B80;
+  --blue:#7CC4FF;
+  --blue2:#2E7CFF;
+  --taupe:#AFA7A7;
+  --line:rgba(127,149,170,.16);
+  --ff-sans:'Work Sans',system-ui,sans-serif;
+  --ff-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --strip-h:30px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--ff-sans);
+  font-weight:300;
+  line-height:1.6;
+  padding-bottom:var(--strip-h);
+  overflow-x:hidden;
+}
+::selection{background:var(--blue2);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
+img{display:block}
+ul{list-style:none}
+
+/* ---------- CRT layer: scanlines + vignette ---------- */
+.crt{position:fixed;inset:0;z-index:60;pointer-events:none}
+.crt::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(248,247,242,.03) 0 1px,transparent 1px 3px);
+}
+.crt::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 50% 38%,transparent 55%,rgba(2,6,13,.5) 100%);
+}
+
+/* ---------- preloader ---------- */
+#preloader{
+  position:fixed;inset:0;z-index:200;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  clip-path:inset(0 0 0 0);
+}
+#preloader .boot{
+  font-family:var(--ff-mono);font-size:clamp(.72rem,1.6vw,.85rem);
+  color:var(--mono);width:min(560px,86vw);min-height:13em;
+}
+#preloader .boot-line{white-space:pre-wrap}
+#preloader .boot-line strong{color:var(--blue);font-weight:500}
+
+/* ---------- header ---------- */
+.site-head{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem clamp(1rem,3.5vw,2.5rem);
+  background:linear-gradient(rgba(5,13,26,.88),rgba(5,13,26,.62));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand img{width:32px;height:32px}
+.brand b{font-family:var(--ff-sans);font-weight:600;font-size:.95rem;letter-spacing:.01em}
+.site-nav{display:flex;gap:clamp(.9rem,2.4vw,2rem);font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.12em}
+.site-nav a{color:var(--mono);padding:.3rem 0;border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
+.site-nav a:hover{color:var(--blue);border-color:var(--blue)}
+.head-os{font-family:var(--ff-mono);font-size:.68rem;color:var(--dim);letter-spacing:.14em}
+@media (max-width:760px){
+  .site-nav a:not(.nav-contact){display:none}
+  .head-os{display:none}
+  .brand b{display:none}
+}
+
+/* ---------- status strip ---------- */
+.strip{
+  position:fixed;left:0;right:0;bottom:0;z-index:90;height:var(--strip-h);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:0 clamp(.8rem,3vw,2.2rem);
+  background:rgba(5,13,26,.92);border-top:1px solid var(--line);
+  font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.12em;color:var(--mono);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.strip .k{color:var(--dim)}
+.strip-mid{display:flex;align-items:center;gap:.6rem}
+#strip-progress{color:var(--blue);min-width:4ch;display:inline-block}
+.strip-track{width:90px;height:2px;background:rgba(127,149,170,.22);overflow:hidden;border-radius:1px}
+#strip-bar{display:block;height:100%;width:100%;background:var(--blue2);transform:scaleX(0);transform-origin:left}
+.badge{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(175,167,167,.4);color:var(--taupe);padding:.18rem .55rem;border-radius:2px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--taupe);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+@media (max-width:640px){.strip-mid .strip-track{display:none}.strip .strip-label{display:none}}
+
+/* ---------- shared section chrome ---------- */
+main{display:block}
+.sec{
+  position:relative;
+  padding:clamp(5rem,12vh,9rem) clamp(1rem,4.5vw,3.5rem);
+  border-top:1px solid var(--line);
+  max-width:1280px;margin:0 auto;
+}
+.sec-tag{
+  font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.18em;color:var(--dim);
+  display:block;margin-bottom:clamp(2rem,5vh,3.5rem);
+}
+.sec-tag i{font-style:normal;color:var(--blue)}
+h2.sec-h{
+  font-weight:600;letter-spacing:-.025em;line-height:1.06;
+  font-size:clamp(1.9rem,4.6vw,3.4rem);max-width:18ch;
+  margin-bottom:clamp(2.5rem,6vh,4.5rem);
+}
+
+/* ---------- terminal window ---------- */
+.term{
+  background:linear-gradient(180deg,var(--bg3),var(--bg2));
+  border:1px solid var(--line);border-radius:10px;
+  box-shadow:0 26px 70px rgba(1,5,12,.55),inset 0 0 0 1px rgba(124,196,255,.04);
+  overflow:hidden;
+}
+.term-bar{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.6rem .9rem;border-bottom:1px solid var(--line);
+  background:rgba(5,13,26,.45);
+}
+.term-bar .dot{width:9px;height:9px;border-radius:50%}
+.dot-1{background:var(--blue2)}.dot-2{background:var(--blue);opacity:.65}.dot-3{background:var(--dim)}
+.term-title{
+  margin-left:auto;margin-right:auto;
+  font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.14em;color:var(--dim);
+  transform:translateX(-14px);
+}
+.term-body{
+  padding:clamp(1rem,2.6vw,1.6rem) clamp(.9rem,2.6vw,1.6rem);
+  font-family:var(--ff-mono);font-size:clamp(.7rem,1.5vw,.82rem);
+  line-height:1.85;color:var(--mono);
+  overflow-x:auto;
+}
+.term-line{white-space:pre;color:var(--ink);font-weight:500}
+.prompt{color:var(--blue2);font-weight:600}
+.t-type{color:var(--ink)}
+.is-typing::after{content:'█';color:var(--blue);margin-left:1px}
+.cursor::after{content:'█';color:var(--blue);animation:blink 1.1s steps(1) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.out{white-space:pre;color:var(--mono)}
+.out .hi{color:var(--blue)}
+.out .mark{color:var(--taupe)}
+.out .dimt{color:var(--dim)}
+pre.diagram{font-family:var(--ff-mono);line-height:1.7;color:var(--mono);margin:.6rem 0}
+pre.diagram .d-line{display:block;white-space:pre}
+pre.diagram .hi{color:var(--blue)}
+pre.diagram .mark{color:var(--taupe)}
+html.js-anim .reveal-clip{clip-path:inset(0 100% 0 0)}
+
+/* ---------- hero ---------- */
+.hero{
+  border-top:none;
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:clamp(6.5rem,14vh,9rem);
+  background:
+    radial-gradient(60% 42% at 70% 62%,rgba(46,124,255,.10),transparent 70%),
+    radial-gradient(40% 30% at 22% 20%,rgba(124,196,255,.05),transparent 70%);
+}
+.hero-kicker{
+  font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.2em;color:var(--dim);
+  margin-bottom:1.4rem;
+}
+.hero-kicker i{font-style:normal;color:var(--taupe)}
+h1.hero-h{
+  font-weight:600;letter-spacing:-.032em;line-height:1.02;
+  font-size:clamp(2.5rem,7vw,5.6rem);
+  max-width:16ch;
+}
+h1.hero-h .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+h1.hero-h .wi{display:inline-block;will-change:transform}
+.hero-sub{
+  margin-top:1.8rem;max-width:52ch;
+  color:var(--mono);font-size:clamp(.95rem,1.7vw,1.12rem);font-weight:300;
+}
+.hero-term{margin-top:clamp(2.4rem,6vh,4rem);max-width:760px}
+.hero-meta{
+  display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:1.6rem;
+  font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.16em;color:var(--dim);
+}
+
+/* ---------- method steps ---------- */
+.step{
+  display:grid;grid-template-columns:minmax(250px,5fr) 7fr;
+  gap:clamp(1.8rem,4.5vw,4.5rem);align-items:start;
+  border-top:1px dashed var(--line);
+  padding:clamp(3rem,8vh,5.5rem) 0;
+}
+.steps-wrap .step:first-of-type{border-top:none;padding-top:0}
+.step-no{
+  font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.2em;color:var(--blue);
+  margin-bottom:1rem;
+}
+.step-no em{font-style:normal;color:var(--dim)}
+.step h3{font-weight:500;letter-spacing:-.02em;font-size:clamp(1.35rem,2.6vw,1.9rem);line-height:1.15;margin-bottom:1rem;max-width:16ch}
+.step p.body{color:var(--mono);font-size:clamp(.9rem,1.6vw,1rem);max-width:42ch}
+@media (max-width:880px){.step{grid-template-columns:1fr;gap:1.6rem}}
+
+/* analyze table */
+.tbl{margin:.7rem 0 .4rem;min-width:540px}
+.tbl-row{
+  display:grid;grid-template-columns:15ch 7ch 8ch 1fr;gap:1rem;align-items:center;
+  padding:.32rem .5rem;border-radius:3px;white-space:nowrap;
+}
+.tbl-head{color:var(--dim);font-size:.92em;letter-spacing:.08em;border-bottom:1px solid var(--line);margin-bottom:.3rem}
+.row-flag{background:rgba(175,167,167,.1);box-shadow:inset 2px 0 0 var(--taupe);transition:background .8s,box-shadow .8s}
+.row-flag,.row-flag .c{color:var(--taupe)}
+html.js-anim .row-flag:not(.on){background:transparent;box-shadow:inset 2px 0 0 transparent}
+html.js-anim .row-flag:not(.on),html.js-anim .row-flag:not(.on) .c{color:var(--mono)}
+.bar{position:relative;height:9px;background:rgba(127,149,170,.13);border-radius:2px;overflow:hidden;min-width:120px}
+.bar i{display:block;height:100%;width:var(--w);background:var(--blue2);transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+.bar.bar-flag i{background:var(--taupe)}
+html.js-anim .bar i{width:0}
+html.js-anim .bar i.on{width:var(--w)}
+.flagline{margin-top:.7rem;color:var(--taupe);white-space:pre}
+
+/* audit log */
+.audit .out{padding:.06rem 0}
+.audit .name{color:var(--blue)}
+.audit .ok{color:var(--blue);font-weight:600}
+
+/* ---------- statement ---------- */
+.statement{text-align:left;max-width:1280px}
+.statement blockquote{
+  font-weight:400;letter-spacing:-.02em;line-height:1.18;
+  font-size:clamp(1.7rem,4.2vw,3.2rem);max-width:24ch;color:var(--ink);
+}
+.statement blockquote .accent{color:var(--blue)}
+.statement footer{margin-top:2rem;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.16em;color:var(--dim)}
+
+/* ---------- capabilities ---------- */
+.caps-term .term-body{padding-bottom:.4rem}
+.cap-list{margin-top:.4rem}
+.cap-row{
+  display:grid;grid-template-columns:11ch minmax(20ch,28ch) 1fr;gap:1.2rem;align-items:baseline;
+  padding:.85rem .6rem;margin:0 -.6rem;border-top:1px solid var(--line);
+  font-family:var(--ff-mono);font-size:clamp(.7rem,1.5vw,.82rem);line-height:1.6;
+  transition:background .18s,color .18s;cursor:default;white-space:normal;
+}
+.cap-row:last-child{border-bottom:1px solid var(--line)}
+.cap-perm{color:var(--dim);font-size:.92em}
+.cap-name{color:var(--blue);font-weight:500}
+.cap-desc{color:var(--mono);font-family:var(--ff-sans);font-weight:300;font-size:clamp(.84rem,1.5vw,.95rem)}
+.cap-row:hover,.cap-row:focus-within{background:var(--ink)}
+.cap-row:hover .cap-name,.cap-row:focus-within .cap-name{color:var(--blue2)}
+.cap-row:hover .cap-desc,.cap-row:focus-within .cap-desc{color:#06192D}
+.cap-row:hover .cap-perm,.cap-row:focus-within .cap-perm{color:#536B80}
+@media (max-width:880px){
+  .cap-row{grid-template-columns:1fr;gap:.25rem}
+  .cap-perm{display:none}
+}
+
+/* ---------- history ---------- */
+.hist-entry{
+  display:grid;grid-template-columns:9ch 1fr;gap:1.4rem;align-items:baseline;
+  padding:1.3rem .2rem;border-top:1px solid var(--line);
+}
+.hist-entry:last-child{border-bottom:1px solid var(--line)}
+.hist-year{font-family:var(--ff-mono);font-size:.78rem;color:var(--taupe);letter-spacing:.1em}
+.hist-name{font-family:var(--ff-mono);font-size:.78rem;color:var(--blue);display:block;margin-bottom:.45rem;letter-spacing:.06em}
+.hist-body{font-family:var(--ff-sans);font-weight:300;color:var(--mono);font-size:clamp(.9rem,1.6vw,1rem);line-height:1.6;max-width:62ch;white-space:normal}
+@media (max-width:640px){.hist-entry{grid-template-columns:1fr;gap:.4rem}}
+
+/* ---------- CTA ---------- */
+.cta-term{max-width:760px}
+.btn{
+  display:inline-block;margin-top:1.1rem;
+  font-family:var(--ff-mono);font-size:.82rem;letter-spacing:.08em;font-weight:600;
+  color:var(--ink);background:var(--blue2);
+  padding:.95rem 1.7rem;border-radius:4px;border:1px solid transparent;
+  transition:background .2s,color .2s,transform .2s;
+}
+.btn:hover{background:var(--blue);color:#050D1A;transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.cta-contacts{
+  display:flex;flex-wrap:wrap;gap:1.4rem 2.4rem;margin-top:2.6rem;
+  font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.06em;
+}
+.cta-contacts a{color:var(--mono);border-bottom:1px solid var(--line);padding-bottom:.15rem;transition:color .2s,border-color .2s}
+.cta-contacts a:hover{color:var(--blue);border-color:var(--blue)}
+.cta-contacts .lbl{color:var(--dim);margin-right:.5rem}
+
+/* ---------- footer ---------- */
+.site-foot{border-top:1px solid var(--line);padding:clamp(3rem,8vh,5rem) clamp(1rem,4.5vw,3.5rem) 1.4rem;max-width:1280px;margin:0 auto}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.6rem;align-items:flex-start}
+.foot-brand{display:flex;align-items:center;gap:.8rem}
+.foot-brand img{width:40px;height:40px}
+.foot-cols{display:flex;gap:clamp(1.6rem,5vw,4rem);flex-wrap:wrap;font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.1em;color:var(--mono)}
+.foot-cols .h{color:var(--dim);display:block;margin-bottom:.55rem;letter-spacing:.18em}
+.foot-cols a{display:block;padding:.14rem 0;color:var(--mono)}
+.foot-cols a:hover{color:var(--blue)}
+.wordmark{
+  margin-top:clamp(2.5rem,7vh,4.5rem);
+  font-weight:700;letter-spacing:-.02em;line-height:.92;user-select:none;
+  font-size:clamp(3rem,11.4vw,10.5rem);
+  color:rgba(127,149,170,.06);
+  -webkit-text-stroke:1px rgba(124,196,255,.14);
+  white-space:nowrap;overflow:hidden;
+}
+.foot-legal{
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid var(--line);
+  font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.12em;color:var(--dim);
+}
+
+/* ---------- a11y helpers ---------- */
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{
+  position:fixed;top:-60px;left:1rem;z-index:300;background:var(--blue2);color:var(--ink);
+  font-family:var(--ff-mono);font-size:.74rem;padding:.6rem 1rem;border-radius:0 0 4px 4px;
+  transition:top .2s;
+}
+.skip:focus-visible{top:0}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  #preloader{display:none!important}
+  html.js-anim .reveal-clip{clip-path:none}
+}
+</style>
+<noscript><style>#preloader{display:none}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="preloader" aria-hidden="true">
+  <div class="boot" id="boot-lines"></div>
+</div>
+
+<div class="crt" aria-hidden="true"></div>
+
+<header class="site-head">
+  <a class="brand" href="#top" aria-label="Katy Technologies — home">
+    <img src="logo-light.svg" alt="" width="32" height="32">
+    <b>Katy Technologies</b>
+  </a>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="#method">METHOD</a>
+    <a href="#capabilities">CAPABILITIES</a>
+    <a href="#history">HISTORY</a>
+    <a class="nav-contact" href="#contact">CONTACT</a>
+  </nav>
+  <span class="head-os" aria-hidden="true">KT-OS&nbsp;v4.2</span>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="sec hero" id="top" data-section="01 · SESSION" aria-labelledby="hero-title">
+    <p class="hero-kicker">OPERATIONS CONSOLE — <i>REVIEW: HUMAN</i></p>
+    <h1 class="hero-h" id="hero-title">Automate the work that slows your team down.</h1>
+    <p class="hero-sub">We help enterprise teams automate manual workflows with practical AI and custom software.</p>
+
+    <div class="term hero-term">
+      <div class="term-bar" aria-hidden="true">
+        <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+        <span class="term-title">kt — session 01 — /org/yourco</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">$</span> <span class="t-type" id="hero-cmd">kt map --org yourco</span></div>
+        <div id="hero-out">
+          <div class="out out-reveal">scanning intake channels … <span class="hi">4 found</span></div>
+          <div class="out out-reveal">tracing handoffs … <span class="hi">23 routes</span></div>
+          <div class="out out-reveal">flagging repeat review … <span class="mark">1 hotspot: MANUAL REVIEW</span></div>
+          <div class="out out-reveal"><span class="dimt">map ready · run</span> kt analyze <span class="dimt">to inspect</span></div>
+        </div>
+        <div class="term-line out-reveal"><span class="prompt">$</span> <span class="cursor" id="hero-prompt"></span></div>
+      </div>
+    </div>
+
+    <p class="hero-meta" aria-hidden="true"><span>PRACTICAL AI</span><span>CUSTOM SOFTWARE</span><span>HUMAN REVIEW STAYS</span></p>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section class="sec" id="method" data-section="02 · METHOD" aria-labelledby="method-title">
+    <span class="sec-tag"><i>//</i> 02 — THE METHOD · four commands</span>
+    <h2 class="sec-h" id="method-title">Start with the bottleneck, not the tool.</h2>
+
+    <div class="steps-wrap">
+
+      <!-- 01 MAP -->
+      <article class="step cmd-block">
+        <div class="step-meta">
+          <p class="step-no reveal">01 <em>/</em> MAP</p>
+          <h3 class="reveal">Map the work as it moves</h3>
+          <p class="body reveal">We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
+        </div>
+        <div class="term">
+          <div class="term-bar" aria-hidden="true">
+            <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+            <span class="term-title">kt — map</span>
+          </div>
+          <div class="term-body">
+            <div class="term-line"><span class="prompt">$</span> <span class="t-type">kt map</span></div>
+            <p class="vh">Workflow diagram: intake, then triage, then manual review — where every request stops, with an average wait of 4.8 days and 3.4 review passes — then approval, then output.</p>
+            <pre class="diagram" aria-hidden="true"><span class="d-line reveal-clip">INTAKE ──▶ TRIAGE ──▶ <span class="hi">[ MANUAL REVIEW ]</span> ──▶ APPROVAL ──▶ OUTPUT</span><span class="d-line reveal-clip">                              │</span><span class="d-line reveal-clip">                              └─▶ <span class="mark">every request stops here</span></span><span class="d-line reveal-clip">                                  avg wait 4.8d · 3.4 review passes</span></pre>
+            <div class="out out-reveal"><span class="dimt">5 steps mapped · 1 step flagged for analysis</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 NAME -->
+      <article class="step cmd-block">
+        <div class="step-meta">
+          <p class="step-no reveal">02 <em>/</em> NAME</p>
+          <h3 class="reveal">Name the step worth improving</h3>
+          <p class="body reveal">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly.</p>
+        </div>
+        <div class="term">
+          <div class="term-bar" aria-hidden="true">
+            <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+            <span class="term-title">kt — analyze</span>
+          </div>
+          <div class="term-body">
+            <div class="term-line"><span class="prompt">$</span> <span class="t-type">kt analyze</span></div>
+            <div class="out out-reveal"><span class="dimt">wait-time by step · avg, last 90 days</span></div>
+            <div class="tbl" role="table" aria-label="Average wait time by workflow step">
+              <div class="tbl-row tbl-head" role="row">
+                <span class="c" role="columnheader">STEP</span><span class="c" role="columnheader">WAIT</span><span class="c" role="columnheader">PASSES</span><span class="c" role="columnheader">SHARE</span>
+              </div>
+              <div class="tbl-row out-reveal" role="row">
+                <span class="c" role="cell">intake</span><span class="c" role="cell">0.2d</span><span class="c" role="cell">—</span>
+                <span class="bar" role="cell" aria-label="3 percent of cycle time"><i style="--w:4%"></i></span>
+              </div>
+              <div class="tbl-row out-reveal" role="row">
+                <span class="c" role="cell">triage</span><span class="c" role="cell">0.5d</span><span class="c" role="cell">1.1×</span>
+                <span class="bar" role="cell" aria-label="8 percent of cycle time"><i style="--w:11%"></i></span>
+              </div>
+              <div class="tbl-row row-flag out-reveal" role="row">
+                <span class="c" role="cell">manual review</span><span class="c" role="cell">4.8d</span><span class="c" role="cell">3.4×</span>
+                <span class="bar bar-flag" role="cell" aria-label="76 percent of cycle time — the bottleneck"><i style="--w:100%"></i></span>
+              </div>
+              <div class="tbl-row out-reveal" role="row">
+                <span class="c" role="cell">approval</span><span class="c" role="cell">0.7d</span><span class="c" role="cell">1.0×</span>
+                <span class="bar" role="cell" aria-label="11 percent of cycle time"><i style="--w:15%"></i></span>
+              </div>
+              <div class="tbl-row out-reveal" role="row">
+                <span class="c" role="cell">output</span><span class="c" role="cell">0.1d</span><span class="c" role="cell">—</span>
+                <span class="bar" role="cell" aria-label="2 percent of cycle time"><i style="--w:2%"></i></span>
+              </div>
+            </div>
+            <div class="out flagline out-reveal">▲ bottleneck: manual review — 76% of total cycle time</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 ROUTE -->
+      <article class="step cmd-block">
+        <div class="step-meta">
+          <p class="step-no reveal">03 <em>/</em> ROUTE</p>
+          <h3 class="reveal">Route the repeat work around it</h3>
+          <p class="body reveal">Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the controls your team already trusts.</p>
+        </div>
+        <div class="term">
+          <div class="term-bar" aria-hidden="true">
+            <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+            <span class="term-title">kt — route</span>
+          </div>
+          <div class="term-body">
+            <div class="term-line"><span class="prompt">$</span> <span class="t-type">kt route --keep-review</span></div>
+            <p class="vh">Redrawn workflow: intake and triage feed a dashed bypass lane where a kt agent drafts, sorts, and reconciles the repeat steps automatically, then hands back to human review — which stays in place — before approval and output.</p>
+            <pre class="diagram" aria-hidden="true"><span class="d-line reveal-clip">INTAKE ──▶ TRIAGE ──┬──────────▶ <span class="hi">[ HUMAN REVIEW ]</span> ──▶ APPROVAL ──▶ OUTPUT</span><span class="d-line reveal-clip">                    ╎                   ▲</span><span class="d-line reveal-clip">                    └╌▶ <span class="hi">kt-agent</span> ╌╌╌╌╌╌╌┘</span><span class="d-line reveal-clip">                        drafts · sorts · reconciles</span><span class="d-line reveal-clip">                        <span class="mark">▸ repeat steps, automated</span>     <span class="mark">● human review stays</span></span></pre>
+            <div class="out out-reveal"><span class="dimt">route written · review step untouched · permissions inherited</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 TRUST -->
+      <article class="step cmd-block">
+        <div class="step-meta">
+          <p class="step-no reveal">04 <em>/</em> TRUST</p>
+          <h3 class="reveal">Keep review visible</h3>
+          <p class="body reveal">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on.</p>
+        </div>
+        <div class="term">
+          <div class="term-bar" aria-hidden="true">
+            <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+            <span class="term-title">kt — audit</span>
+          </div>
+          <div class="term-body audit">
+            <div class="term-line"><span class="prompt">$</span> <span class="t-type">kt audit --tail</span></div>
+            <div class="out out-reveal"><span class="dimt">2026-06-10 13:47</span>  drafted_by=<span class="name">kt-agent</span>     queue=invoice-review    conf=0.97</div>
+            <div class="out out-reveal"><span class="dimt">2026-06-10 13:51</span>  sorted_by=<span class="name">kt-agent</span>      rule=duplicate-intake   action=merge</div>
+            <div class="out out-reveal"><span class="dimt">2026-06-10 14:02</span>  drafted_by=<span class="name">kt-agent</span>     approved_by=<span class="name">j.alvarez</span>   <span class="ok">✓ released</span></div>
+            <div class="out out-reveal"><span class="dimt">2026-06-10 14:06</span>  reconciled_by=<span class="name">kt-agent</span>  ledger=ap-west          delta=0.00</div>
+            <div class="out out-reveal"><span class="dimt">2026-06-10 14:11</span>  escalated_by=<span class="name">kt-agent</span>   reason=low-confidence   → <span class="name">m.okafor</span></div>
+            <div class="out out-reveal"><span class="dimt">2026-06-10 14:13</span>  reviewed_by=<span class="name">m.okafor</span>    decision=approved       <span class="ok">✓ released</span></div>
+            <div class="out flagline out-reveal">─ audit trail complete · nothing ships without a name beside it</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ STATEMENT ============ -->
+  <section class="sec statement cmd-block" data-section="02 · METHOD" aria-label="Position statement">
+    <span class="sec-tag reveal"><i>//</i> POSITION</span>
+    <blockquote class="reveal">Automation should make work <span class="accent">easier to trust</span>, not harder to explain.</blockquote>
+    <footer class="reveal">— THE ONLY RULE WE SHIP BY</footer>
+  </section>
+
+  <!-- ============ CAPABILITIES ============ -->
+  <section class="sec" id="capabilities" data-section="03 · CAPABILITIES" aria-labelledby="caps-title">
+    <span class="sec-tag"><i>//</i> 03 — CAPABILITIES</span>
+    <h2 class="sec-h" id="caps-title">What ships from this console.</h2>
+
+    <div class="term caps-term cmd-block">
+      <div class="term-bar" aria-hidden="true">
+        <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+        <span class="term-title">kt — capabilities</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">$</span> <span class="t-type">ls capabilities/</span></div>
+        <div class="out out-reveal"><span class="dimt">total 6</span></div>
+        <ul class="cap-list">
+          <li class="cap-row out-reveal">
+            <span class="cap-perm" aria-hidden="true">drwxr-x---</span>
+            <span class="cap-name">internal-systems-foundations/</span>
+            <span class="cap-desc">Durable application and data foundations for teams that need automation to connect with existing internal systems.</span>
+          </li>
+          <li class="cap-row out-reveal">
+            <span class="cap-perm" aria-hidden="true">drwxr-x---</span>
+            <span class="cap-name">practical-ai-support/</span>
+            <span class="cap-desc">AI assistance for workflows that still depend on manual review, judgment, and clear accountability.</span>
+          </li>
+          <li class="cap-row out-reveal">
+            <span class="cap-perm" aria-hidden="true">drwxr-x---</span>
+            <span class="cap-name">custom-workflow-software/</span>
+            <span class="cap-desc">Focused tools built around the specific handoffs, approvals, and repeat steps inside your organization.</span>
+          </li>
+          <li class="cap-row out-reveal">
+            <span class="cap-perm" aria-hidden="true">drwxr-x---</span>
+            <span class="cap-name">risk-aware-automation/</span>
+            <span class="cap-desc">Automation patterns that keep permissions, auditability, and human review visible.</span>
+          </li>
+          <li class="cap-row out-reveal">
+            <span class="cap-perm" aria-hidden="true">drwxr-x---</span>
+            <span class="cap-name">operational-visibility/</span>
+            <span class="cap-desc">Dashboards and reporting that show where work stalls, repeats, or waits for review.</span>
+          </li>
+          <li class="cap-row out-reveal">
+            <span class="cap-perm" aria-hidden="true">drwxr-x---</span>
+            <span class="cap-name">workflow-modernization/</span>
+            <span class="cap-desc">Stepwise improvements to internal processes without forcing a broad platform change before the work is understood.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HISTORY / FIELD NOTES ============ -->
+  <section class="sec cmd-block" id="history" data-section="04 · HISTORY" aria-labelledby="hist-title">
+    <span class="sec-tag reveal"><i>//</i> 04 — FIELD NOTES</span>
+    <h2 class="sec-h reveal" id="hist-title">Recent entries from the log.</h2>
+
+    <div class="term">
+      <div class="term-bar" aria-hidden="true">
+        <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+        <span class="term-title">kt — history</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">$</span> <span class="t-type">kt history</span></div>
+        <ul style="margin-top:.4rem">
+          <li class="hist-entry out-reveal">
+            <span class="hist-year">[2023]</span>
+            <div>
+              <span class="hist-name">economic-consulting · Boston-area</span>
+              <p class="hist-body">Deployed an internal document-supported assistant for a Boston-area consulting firm that helped analysts move reports faster while protecting data privacy requirements.</p>
+            </div>
+          </li>
+          <li class="hist-entry out-reveal">
+            <span class="hist-year">[2025]</span>
+            <div>
+              <span class="hist-name">ticket-vendors · California</span>
+              <p class="hist-body">Worked with a California ticket vendor to create custom email annotation software that reduced repeat review work for management.</p>
+            </div>
+          </li>
+          <li class="hist-entry out-reveal">
+            <span class="hist-year">[now&nbsp;]</span>
+            <div>
+              <span class="hist-name">hospitality · Southern California</span>
+              <p class="hist-body">Working with a high-end hotel chain based in Southern California to automate pricing, labor assignment, and reporting workflows.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="sec cmd-block" id="contact" data-section="05 · SCHEDULE" aria-labelledby="cta-title">
+    <span class="sec-tag reveal"><i>//</i> 05 — SCHEDULE</span>
+    <h2 class="sec-h reveal" id="cta-title">Bring us the step everyone complains about.</h2>
+
+    <div class="term cta-term">
+      <div class="term-bar" aria-hidden="true">
+        <span class="dot dot-1"></span><span class="dot dot-2"></span><span class="dot dot-3"></span>
+        <span class="term-title">kt — schedule</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">$</span> <span class="t-type">kt schedule --topic bottleneck</span></div>
+        <div class="out out-reveal"><span class="dimt">scheduler ready · 30 minutes · no deck, just your workflow</span></div>
+        <div class="out-reveal">
+          <a class="btn" href="/contact">Talk through a bottleneck&nbsp;▸</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-contacts">
+      <span class="out-reveal"><span class="lbl" aria-hidden="true">MAIL</span><a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a></span>
+      <span class="out-reveal"><span class="lbl" aria-hidden="true">TEL</span><a href="tel:+12819613396">(281) 961-3396</a></span>
+      <span class="out-reveal"><span class="lbl" aria-hidden="true">NET</span><a href="https://www.linkedin.com/company/katy-technologies" rel="noopener" target="_blank">linkedin/katy-technologies</a></span>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-foot" data-section="06 · EOF">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <img src="logo-light.svg" alt="Katy Technologies logo" width="40" height="40">
+      <span style="font-weight:600">Katy Technologies</span>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <span class="h">CONTACT</span>
+        <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+        <a href="tel:+12819613396">(281) 961-3396</a>
+        <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener" target="_blank">LinkedIn</a>
+      </div>
+      <div>
+        <span class="h">INDEX</span>
+        <a href="#method">Method</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#history">History</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+  <p class="wordmark" aria-hidden="true">KATY&nbsp;TECHNOLOGIES</p>
+  <div class="foot-legal">
+    <span>© 2026 Katy Technologies. All rights reserved.</span>
+    <span aria-hidden="true">kt-os v4.2 — session closed · exit 0</span>
+  </div>
+</footer>
+
+<!-- ============ STATUS STRIP ============ -->
+<div class="strip" aria-hidden="true">
+  <span class="strip-left"><span class="k">KT-OS&nbsp;//&nbsp;</span><span id="strip-section">01 · SESSION</span></span>
+  <span class="strip-mid"><span class="strip-label k">SCROLL</span><span id="strip-progress">000%</span><span class="strip-track"><span id="strip-bar"></span></span></span>
+  <span class="badge"><span class="badge-dot"></span>REVIEW: HUMAN</span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var d = document;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+  /* ---------- status strip: runs in every mode ---------- */
+  var progEl = d.getElementById('strip-progress');
+  var progBar = d.getElementById('strip-bar');
+  var secEl = d.getElementById('strip-section');
+  var sections = Array.prototype.slice.call(d.querySelectorAll('[data-section]'));
+
+  function updateStrip() {
+    var doc = d.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, (window.scrollY || doc.scrollTop) / max)) : 0;
+    if (progEl) {
+      var pct = String(Math.round(p * 100));
+      while (pct.length < 3) { pct = '0' + pct; }
+      progEl.textContent = pct + '%';
+    }
+    if (progBar) { progBar.style.transform = 'scaleX(' + p + ')'; }
+    var mid = window.innerHeight * 0.5;
+    var current = sections.length ? sections[0] : null;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].getBoundingClientRect().top <= mid) { current = sections[i]; }
+    }
+    if (secEl && current) {
+      var label = current.getAttribute('data-section');
+      if (secEl.textContent !== label) { secEl.textContent = label; }
+    }
+  }
+  window.addEventListener('scroll', updateStrip, { passive: true });
+  window.addEventListener('resize', updateStrip);
+  updateStrip();
+
+  /* ---------- reduced motion / missing libs: show everything, stop here ---------- */
+  if (reduceMotion || !hasGsap) {
+    var pl = d.getElementById('preloader');
+    if (pl && pl.parentNode) { pl.parentNode.removeChild(pl); }
+    return;
+  }
+
+  d.documentElement.classList.add('js-anim');
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis smooth scroll + ScrollTrigger integration ---------- */
+  var lenis = null;
+  if (typeof window.Lenis !== 'undefined') {
+    lenis = new window.Lenis();
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* anchor links scroll smoothly through Lenis */
+  Array.prototype.forEach.call(d.querySelectorAll('a[href^="#"]'), function (a) {
+    a.addEventListener('click', function (e) {
+      var href = a.getAttribute('href');
+      if (!href || href.length < 2) { return; }
+      var target = d.getElementById(href.slice(1));
+      if (target && lenis) {
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -64, duration: 1.1 });
+      }
+    });
+  });
+
+  /* ---------- typewriter ---------- */
+  function typeTween(el, text, perChar) {
+    var state = { n: 0 };
+    return gsap.to(state, {
+      n: text.length,
+      duration: Math.max(0.18, text.length * perChar),
+      ease: 'none',
+      onStart: function () { el.classList.add('is-typing'); },
+      onUpdate: function () { el.textContent = text.slice(0, Math.round(state.n)); },
+      onComplete: function () {
+        el.textContent = text;
+        el.classList.remove('is-typing');
+      }
+    });
+  }
+
+  /* stash full text of every command, then empty it */
+  Array.prototype.forEach.call(d.querySelectorAll('.t-type'), function (el) {
+    el.setAttribute('data-full', el.textContent);
+    el.textContent = '';
+  });
+
+  /* initial hidden states (motion mode only — default HTML stays fully visible) */
+  gsap.set('.reveal, .out-reveal', { autoAlpha: 0, y: 8 });
+
+  /* ---------- generic command-block builder ---------- */
+  function playBlock(block, opts) {
+    opts = opts || {};
+    var tl = gsap.timeline(opts.scrollTrigger ? {
+      scrollTrigger: { trigger: block, start: 'top 72%', once: true }
+    } : { paused: true });
+
+    var metas = block.querySelectorAll('.reveal');
+    if (metas.length) {
+      tl.to(metas, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0);
+    }
+    var cmd = block.querySelector('.t-type');
+    if (cmd) {
+      tl.add(typeTween(cmd, cmd.getAttribute('data-full') || '', 0.032), metas.length ? 0.25 : 0);
+    }
+    var clips = block.querySelectorAll('.reveal-clip');
+    if (clips.length) {
+      tl.to(clips, { clipPath: 'inset(0 0% 0 0)', duration: 0.55, stagger: 0.16, ease: 'power1.out' }, '+=0.12');
+    }
+    var outs = block.querySelectorAll('.out-reveal');
+    if (outs.length) {
+      tl.to(outs, { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.13, ease: 'power1.out' }, clips.length ? '-=0.35' : '+=0.15');
+    }
+    tl.add(function () {
+      Array.prototype.forEach.call(block.querySelectorAll('.bar i'), function (b) { b.classList.add('on'); });
+      Array.prototype.forEach.call(block.querySelectorAll('.row-flag'), function (r) { r.classList.add('on'); });
+    }, '-=0.25');
+    return tl;
+  }
+
+  Array.prototype.forEach.call(d.querySelectorAll('.cmd-block'), function (block) {
+    playBlock(block, { scrollTrigger: true });
+  });
+
+  /* ---------- hero intro (plays after preloader) ---------- */
+  var heroH = d.querySelector('.hero-h');
+  if (heroH) {
+    var words = heroH.textContent.trim().split(/\s+/);
+    heroH.setAttribute('aria-label', words.join(' '));
+    heroH.textContent = '';
+    words.forEach(function (w, i) {
+      var outer = d.createElement('span');
+      outer.className = 'w';
+      outer.setAttribute('aria-hidden', 'true');
+      var inner = d.createElement('span');
+      inner.className = 'wi';
+      inner.textContent = w;
+      outer.appendChild(inner);
+      heroH.appendChild(outer);
+      if (i < words.length - 1) { heroH.appendChild(d.createTextNode(' ')); }
+    });
+  }
+  gsap.set('.hero-h .wi', { yPercent: 112 });
+  gsap.set('.hero-kicker, .hero-sub, .hero-meta', { autoAlpha: 0, y: 10 });
+  gsap.set('.hero-term', { autoAlpha: 0, y: 22 });
+
+  var heroTl = gsap.timeline({ paused: true });
+  heroTl.to('.hero-kicker', { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+  heroTl.to('.hero-h .wi', { yPercent: 0, duration: 0.9, ease: 'power4.out', stagger: 0.055 }, '-=0.25');
+  heroTl.to('.hero-sub', { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.55');
+  heroTl.to('.hero-term', { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.35');
+  var heroCmd = d.getElementById('hero-cmd');
+  if (heroCmd) {
+    heroTl.add(typeTween(heroCmd, heroCmd.getAttribute('data-full') || '', 0.045), '-=0.15');
+  }
+  heroTl.to('.hero-term .out-reveal', { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.22, ease: 'power1.out' }, '+=0.25');
+  heroTl.to('.hero-meta', { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4');
+
+  /* ---------- preloader boot log ---------- */
+  var bootHost = d.getElementById('boot-lines');
+  var preEl = d.getElementById('preloader');
+  var bootLines = [
+    'kt-os v4.2 — operations kernel',
+    'mounting workflows… done',
+    'attaching review queue… done',
+    'loading audit trail… done',
+    'verifying permissions… human-in-loop',
+    'review queue: attached',
+    'ready.'
+  ];
+
+  var boot = gsap.timeline({ delay: 0.15 });
+  if (bootHost && preEl) {
+    bootLines.forEach(function (line, i) {
+      var div = d.createElement('div');
+      div.className = 'boot-line';
+      bootHost.appendChild(div);
+      boot.add(typeTween(div, line, 0.012), i === 0 ? 0 : '+=0.07');
+    });
+    boot.to(preEl, {
+      clipPath: 'inset(0 0 100% 0)',
+      duration: 0.65,
+      ease: 'power3.inOut',
+      delay: 0.4
+    });
+    boot.set(preEl, { display: 'none' });
+    boot.add(function () { heroTl.play(); }, '-=0.45');
+  } else {
+    heroTl.play();
+  }
+
+  window.addEventListener('load', function () {
+    ScrollTrigger.refresh();
+    updateStrip();
+  });
+})();
+</script>
+</body>
+</html>
