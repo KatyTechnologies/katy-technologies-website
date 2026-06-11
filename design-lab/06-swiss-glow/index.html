@@ -154,7 +154,7 @@ a{color:inherit}
 .story-nav-dot{width:7px;height:7px;border:1px solid currentColor;transition:background-color .3s}
 .story-nav-link:hover{color:rgba(248,247,242,.75)}
 .story-nav-link.active{color:var(--paper)}
-.story-nav-link.active .story-nav-dot{background:var(--glow);border-color:var(--glow)}
+.story-nav-link.active .story-nav-dot{background:var(--glow);border-color:var(--glow);box-shadow:0 0 12px rgba(124,196,255,.9)}
 @media (max-width:1100px){.story-nav{display:none}}
 
 /* ============ HERO — Swiss display over the valley ============ */
@@ -205,15 +205,18 @@ a{color:inherit}
 .btn-line:hover{border-color:var(--paper);background:rgba(248,247,242,.08)}
 
 /* ============ METHOD PANELS — Swiss type in the fly-through ============ */
-.chapter{
-  position:relative;min-height:100svh;
+/* each chapter is taller than the viewport; the words pin (sticky) and hold
+   while the next chapter's words scroll up underneath */
+.chapter{position:relative;min-height:180svh}
+.chapter-pin{
+  position:sticky;top:0;min-height:100svh;
   display:flex;align-items:center;
   padding:clamp(5rem,9vw,8rem) var(--pad);
   overflow:hidden;
 }
 /* readability veil: dims the scene behind the copy, clears at edges
    so the path shows clean between chapters */
-.chapter::before{
+.chapter-pin::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,
     rgba(2,8,18,0) 0%,
@@ -221,6 +224,11 @@ a{color:inherit}
     rgba(2,8,18,.66) 72%,
     rgba(2,8,18,0) 100%);
 }
+/* masked line-rise for the big words */
+.tmask{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.tline{display:block;will-change:transform}
+.static-page .chapter{min-height:100svh}
+.static-page .chapter-pin{position:static}
 .panel-inner{
   position:relative;z-index:1;
   display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem 0;width:100%;
@@ -273,6 +281,7 @@ a{color:inherit}
   font-size:clamp(1.25rem,2.6vw,2.1rem);letter-spacing:.08em;
 }
 @keyframes mq{to{transform:translateX(-50%)}}
+.mq-track.gs{animation:none} /* gsap drives it when motion is on */
 @media (prefers-reduced-motion:reduce){.mq-track{animation:none}}
 
 /* ============ MANIFESTO — dark, Swiss display scrub ============ */
@@ -289,7 +298,7 @@ a{color:inherit}
   font-size:clamp(1.9rem,1rem + 4vw,4.4rem);
   line-height:1.04;letter-spacing:-.01em;
 }
-.manifesto-line .w{opacity:.14}
+.manifesto-line .w{opacity:.14;display:inline-block}
 .no-js .manifesto-line .w,.static-page .manifesto-line .w{opacity:1}
 @media (max-width:760px){.manifesto .micro,.manifesto blockquote{grid-column:1/-1}}
 
@@ -411,6 +420,8 @@ a{color:inherit}
   .frag-svg .draw{stroke-dashoffset:0 !important}
   .frag-svg .fade{opacity:1 !important}
   .manifesto-line .w{opacity:1 !important}
+  .chapter{min-height:auto}
+  .chapter-pin{position:static}
 }
 </style>
 <noscript><style>#preloader{display:none}</style></noscript>
@@ -466,7 +477,7 @@ a{color:inherit}
     <!-- 01 · HERO -->
     <section class="hero sec-grid" id="method-intro" aria-label="Introduction">
       <span class="sec-num" aria-hidden="true">01</span>
-      <h1 class="hero-display">
+      <h1 class="hero-display" data-skew>
         <span class="mask"><span class="ln">Automate</span></span>
         <span class="mask"><span class="ln">The&nbsp;Work</span></span>
         <span class="mask"><span class="ln">That&nbsp;Slows</span></span>
@@ -485,11 +496,12 @@ a{color:inherit}
 
     <!-- 02 · METHOD — Swiss panels on the fly-through -->
     <section class="chapter sec-grid" id="map" aria-label="Method step one">
+      <div class="chapter-pin">
       <span class="step-num step-num--right" aria-hidden="true">01</span>
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 01</p>
         <div class="panel-main">
-          <h2 class="panel-title">Map the work<br>as it moves</h2>
+          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Map the work</span></span><span class="tmask"><span class="tline">as it moves</span></span></h2>
           <p class="panel-copy">We chart how requests actually travel through your organization — intake, triage, review, approval — before any tool enters the conversation.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -515,14 +527,16 @@ a{color:inherit}
           </svg>
         </div>
       </div>
+      </div>
     </section>
 
     <section class="chapter sec-grid" id="name" aria-label="Method step two">
+      <div class="chapter-pin">
       <span class="step-num step-num--left" aria-hidden="true">02</span>
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 02</p>
         <div class="panel-main">
-          <h2 class="panel-title">Name the step<br>worth improving</h2>
+          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Name the step</span></span><span class="tmask"><span class="tline">worth improving</span></span></h2>
           <p class="panel-copy">Usually one step absorbs the delay: a manual review that repeats, waits, and wears people down. We name it plainly — the bottleneck, on the record.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -551,14 +565,16 @@ a{color:inherit}
           </svg>
         </div>
       </div>
+      </div>
     </section>
 
     <section class="chapter sec-grid" id="route" aria-label="Method step three">
+      <div class="chapter-pin">
       <span class="step-num step-num--right" aria-hidden="true">03</span>
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 03</p>
         <div class="panel-main">
-          <h2 class="panel-title">Route the repeat<br>work around it</h2>
+          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Route the repeat</span></span><span class="tmask"><span class="tline">work around it</span></span></h2>
           <p class="panel-copy">Software and practical AI take on the repeat steps — drafting, sorting, reconciling — under the permissions and controls your team already trusts.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -579,14 +595,16 @@ a{color:inherit}
           </svg>
         </div>
       </div>
+      </div>
     </section>
 
     <section class="chapter sec-grid" id="trust" aria-label="Method step four">
+      <div class="chapter-pin">
       <span class="step-num step-num--left" aria-hidden="true">04</span>
       <div class="panel-inner">
         <p class="panel-meta micro">02 — Method / Step 04</p>
         <div class="panel-main">
-          <h2 class="panel-title">Keep review<br>visible</h2>
+          <h2 class="panel-title" data-skew><span class="tmask"><span class="tline">Keep review</span></span><span class="tmask"><span class="tline">visible</span></span></h2>
           <p class="panel-copy">Human judgment stays in the loop, with a clear record of what was automated and why it is safe to rely on. Results your team can explain.</p>
         </div>
         <div class="panel-diagram chapter-frag">
@@ -605,6 +623,7 @@ a{color:inherit}
             </g>
           </svg>
         </div>
+      </div>
       </div>
     </section>
   </div>
@@ -702,7 +721,7 @@ a{color:inherit}
   <!-- 06 · CTA — shock panel -->
   <section id="contact" class="cta" aria-label="Contact">
     <span class="sec-num" aria-hidden="true">06</span>
-    <h2 data-reveal>Ready to find<br>the slow<br>handoff?</h2>
+    <h2 data-skew><span class="tmask"><span class="tline">Ready to find</span></span><span class="tmask"><span class="tline">the slow</span></span><span class="tmask"><span class="tline">handoff?</span></span></h2>
     <p data-reveal><a class="btn-shock" href="/contact">Talk through a bottleneck</a></p>
     <div class="fine" data-reveal>
       <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
@@ -739,7 +758,7 @@ a{color:inherit}
     </div>
   </div>
   <p class="legal">© 2026 Katy Technologies. All rights reserved.</p>
-  <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true">Katy Technologies</p></div>
+  <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true" data-skew>Katy Technologies</p></div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -789,12 +808,13 @@ a{color:inherit}
     tl.to('.hero-display .ln', {
       xPercent: 0,
       x: 0,
-      duration: 1.05,
+      skewX: 0,
+      duration: 1.15,
       ease: 'power4.out',
       stagger: 0.09,
       overwrite: 'auto'
     });
-    tl.to('.hero-foot', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '-=0.45');
+    tl.to('.hero-foot', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '-=0.5');
   }
 
   /* ---------- preloader: hard-cut flashes navy -> blue -> paper ---------- */
@@ -804,6 +824,7 @@ a{color:inherit}
     if (hasGsap && !reduced) {
       gsap.set('.hero-display .ln', {
         xPercent: function (i) { return i % 2 === 0 ? -110 : 110; },
+        skewX: function (i) { return i % 2 === 0 ? 8 : -8; },
         x: 0
       });
     }
@@ -871,15 +892,60 @@ a{color:inherit}
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
       });
 
+    /* ---------- hero words hold, then lift away as MAP slides in ---------- */
+    gsap.fromTo('.hero-display',
+      { yPercent: 0, autoAlpha: 1 },
+      {
+        yPercent: -16,
+        autoAlpha: 0,
+        immediateRender: false,
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: '15% top', end: 'bottom 35%', scrub: true }
+      });
+
     /* ---------- oversized numerals parallax at their own speed ---------- */
     gsap.utils.toArray('.sec-num, .step-num').forEach(function (num) {
       var host = num.closest('section, footer, article');
       gsap.to(num, {
-        yPercent: -28,
+        yPercent: -42,
         ease: 'none',
         scrollTrigger: { trigger: host, start: 'top bottom', end: 'bottom top', scrub: true }
       });
     });
+
+    /* ---------- scroll-velocity skew on the big type ---------- */
+    gsap.set('[data-skew]', { transformOrigin: 'center center', force3D: true });
+    var skewSetter = gsap.quickSetter('[data-skew]', 'skewY', 'deg');
+    var skewClamp = gsap.utils.clamp(-4, 4);
+    var skewProxy = { v: 0 };
+    ScrollTrigger.create({
+      onUpdate: function (self) {
+        var s = skewClamp(self.getVelocity() / -400);
+        if (Math.abs(s) > Math.abs(skewProxy.v)) {
+          skewProxy.v = s;
+          gsap.to(skewProxy, {
+            v: 0,
+            duration: 0.9,
+            ease: 'power3',
+            overwrite: true,
+            onUpdate: function () { skewSetter(skewProxy.v); }
+          });
+        }
+      }
+    });
+
+    /* ---------- marquee rushes with scroll velocity ---------- */
+    var track = document.querySelector('.mq-track');
+    if (track) {
+      track.classList.add('gs');
+      var mqTl = gsap.to(track, { xPercent: -50, repeat: -1, ease: 'none', duration: 26 });
+      ScrollTrigger.create({
+        onUpdate: function (self) {
+          var ts = gsap.utils.clamp(1, 6, 1 + Math.abs(self.getVelocity()) / 700);
+          gsap.to(mqTl, { timeScale: ts, duration: 0.4, overwrite: true });
+        }
+      });
+    }
 
     /* ---------- generic reveals ---------- */
     gsap.utils.toArray('[data-reveal]').forEach(function (el, i) {
@@ -893,35 +959,56 @@ a{color:inherit}
       });
     });
 
-    /* ---------- manifesto: word-by-word opacity scrub ---------- */
+    /* ---------- manifesto: word-by-word rise + opacity scrub ---------- */
     var line = document.querySelector('[data-manifesto]');
     if (line) {
       var words = splitWords(line);
-      gsap.to(words, {
-        opacity: 1,
-        stagger: 0.06,
-        ease: 'none',
-        scrollTrigger: { trigger: line, start: 'top 78%', end: 'bottom 42%', scrub: 0.4 }
-      });
+      gsap.fromTo(words,
+        { opacity: 0.14, y: '0.35em' },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.06,
+          ease: 'none',
+          scrollTrigger: { trigger: line, start: 'top 78%', end: 'bottom 42%', scrub: 0.4 }
+        });
     }
 
-    /* ---------- method panels: drift against the camera + frag draw ---------- */
+    /* ---------- method panels: pinned words hold while the next set
+         rises in from below, then compress away ---------- */
     gsap.utils.toArray('.chapter').forEach(function (chapter) {
       var inner = chapter.querySelector('.panel-inner');
+      var lines = chapter.querySelectorAll('.panel-title .tline');
+      var aux = chapter.querySelectorAll('.panel-meta, .panel-copy, .panel-diagram');
 
+      // entrance: big words rise out of their masks while the previous
+      // chapter's words are still pinned above
+      var inTl = gsap.timeline({
+        scrollTrigger: { trigger: chapter, start: 'top 85%', end: 'top 20%', scrub: 0.5 }
+      });
+      inTl.fromTo(lines,
+        { yPercent: 120, skewY: 7 },
+        { yPercent: 0, skewY: 0, stagger: 0.12, ease: 'power2.out' }, 0)
+        .fromTo(aux,
+          { y: 70, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, stagger: 0.1, ease: 'power2.out' }, 0.15);
+
+      // exit: the pinned words hold, then lift away as the next set arrives
       gsap.fromTo(inner,
-        { yPercent: 6, opacity: 0 },
+        { yPercent: 0, autoAlpha: 1, scale: 1 },
         {
-          yPercent: -6,
-          opacity: 1,
-          ease: 'none',
-          scrollTrigger: { trigger: chapter, start: 'top 86%', end: 'bottom 30%', scrub: 0.4 }
+          yPercent: -10,
+          autoAlpha: 0,
+          scale: 0.97,
+          immediateRender: false,
+          ease: 'power1.in',
+          scrollTrigger: { trigger: chapter, start: 'bottom 92%', end: 'bottom 52%', scrub: 0.4 }
         });
 
       var frag = chapter.querySelector('.frag-svg');
       if (!frag) return;
       var tl = gsap.timeline({
-        scrollTrigger: { trigger: frag, start: 'top 86%', once: true }
+        scrollTrigger: { trigger: frag, start: 'top 90%', once: true }
       });
       tl.to(frag.querySelectorAll('.draw'), {
         strokeDashoffset: 0,
@@ -935,6 +1022,16 @@ a{color:inherit}
           ease: 'power1.out',
           stagger: 0.1
         }, '-=0.4');
+    });
+
+    /* ---------- CTA: shock-panel words rise once ---------- */
+    gsap.from('#contact .tline', {
+      yPercent: 120,
+      skewY: 6,
+      duration: 1.0,
+      ease: 'power4.out',
+      stagger: 0.1,
+      scrollTrigger: { trigger: '#contact', start: 'top 70%', once: true }
     });
 
     /* ---------- story rail: visibility + active chapter ---------- */
