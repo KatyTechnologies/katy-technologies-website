@@ -36,6 +36,128 @@
     return el.querySelectorAll('.w');
   }
 
+  /* ---------- hero static: discrete random dots with Brownian coloring ---------- */
+  function initHeroStatic() {
+    var canvas = document.querySelector('.hero-static-canvas');
+    var gradient = document.querySelector('.story-gradient');
+    var stopSection = document.querySelector('.manifesto');
+    if (!canvas) return;
+
+    var ctx = canvas.getContext('2d', { alpha: true });
+    var dots = [];
+    var timer = null;
+    var resizeTimer = null;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var width = 0;
+    var height = 0;
+    var frameMs = 125;
+    var active = false;
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function startTimer() {
+      if (!reduced && !timer && !document.hidden) timer = window.setInterval(step, frameMs);
+    }
+
+    function stopTimer() {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function updateVisibility() {
+      active = !stopSection || stopSection.getBoundingClientRect().top > window.innerHeight;
+      if (gradient) gradient.classList.toggle('is-visible', active);
+      canvas.classList.toggle('is-visible', active);
+      if (active) startTimer();
+      else stopTimer();
+    }
+
+    function resetDots() {
+      width = Math.max(1, Math.round(window.innerWidth));
+      height = Math.max(1, Math.round(window.innerHeight));
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      var count = Math.round((width * height) / 115);
+      dots = Array.from({ length: count }, function () {
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          a: 0.018 + Math.random() * 0.055,
+          va: (Math.random() - 0.5) * 0.012,
+          c: Math.random(),
+          vc: (Math.random() - 0.5) * 0.08,
+          r: 0.8 + Math.random() * 1.35,
+          warm: Math.random() < 0.18
+        };
+      });
+      draw();
+      updateVisibility();
+    }
+
+    function step() {
+      dots.forEach(function (dot) {
+        dot.x = Math.random() * width;
+        dot.y = Math.random() * height;
+
+        dot.va = clamp(dot.va + (Math.random() - 0.5) * 0.008, -0.026, 0.026);
+        dot.a += dot.va;
+        if (dot.a < 0.01 || dot.a > 0.105) {
+          dot.a = clamp(dot.a, 0.01, 0.105);
+          dot.va *= -0.58;
+        }
+
+        dot.vc = clamp(dot.vc + (Math.random() - 0.5) * 0.035, -0.12, 0.12);
+        dot.c += dot.vc;
+        if (dot.c < 0 || dot.c > 1) {
+          dot.c = clamp(dot.c, 0, 1);
+          dot.vc *= -0.55;
+        }
+      });
+      draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      dots.forEach(function (dot) {
+        var c = dot.c;
+        var red = Math.round(dot.warm ? 180 + c * 68 : 72 + c * 86);
+        var green = Math.round(dot.warm ? 178 + c * 69 : 122 + c * 86);
+        var blue = Math.round(dot.warm ? 174 + c * 68 : 170 + c * 85);
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + dot.a.toFixed(3) + ')';
+        ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function queueResize() {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(resetDots, 120);
+    }
+
+    resetDots();
+    updateVisibility();
+    window.requestAnimationFrame(updateVisibility);
+    window.setTimeout(updateVisibility, 300);
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('load', updateVisibility);
+    window.addEventListener('hashchange', updateVisibility);
+    window.addEventListener('resize', queueResize);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopTimer();
+      else updateVisibility();
+    });
+  }
+
   /* ---------- hero intro: lines slide in from alternating sides ---------- */
   function heroIntro() {
     if (!hasGsap || reduced) return;
@@ -87,6 +209,8 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    initHeroStatic();
+
     if (!hasGsap || reduced) {
       showEverything();
       return;
