@@ -478,9 +478,15 @@ body.menu-open{overflow:hidden}
   display:grid;grid-template-columns:repeat(12,1fr);gap:2rem 0;
   padding-bottom:clamp(3rem,8vh,5rem);border-bottom:1px solid var(--hair);
 }
-.foot-brand{grid-column:1/span 4;display:flex;align-items:flex-start;gap:1rem}
+.foot-brand{grid-column:1/span 4;display:flex;align-items:center;gap:1rem}
 .foot-brand img{width:44px;height:44px}
-.foot-brand .micro{color:var(--text-2)}
+.foot-brand .micro{
+  color:var(--text-2);
+  min-height:44px;
+  display:flex;align-items:center;
+  font-size:clamp(1.25rem,1rem + 1.2vw,2rem);
+  line-height:1;
+}
 .foot-col{grid-column:span 2}
 .foot-col:first-of-type{grid-column:7/span 2}
 .foot-col .micro{color:var(--micro-c)}
