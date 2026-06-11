@@ -25,15 +25,16 @@ async function init() {
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 1.75));
-  renderer.setClearColor(0x020812, 1);
+  const fogColor = new THREE.Color(0x020812);
+  renderer.setClearColor(fogColor, 1);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x020812, 0.016);
+  scene.fog = new THREE.FogExp2(fogColor, isMobile ? 0.022 : 0.02);
 
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 240);
 
   /* ---------- the glowing path ---------- */
-  const curve = new THREE.CatmullRomCurve3([
+  const cameraPathPoints = [
     new THREE.Vector3(0, 1.2, 34),
     new THREE.Vector3(5, 1.0, 10),
     new THREE.Vector3(-6, 0.9, -14),
@@ -42,12 +43,18 @@ async function init() {
     new THREE.Vector3(3.5, 0.7, -86),
     new THREE.Vector3(-2.5, 0.8, -110),
     new THREE.Vector3(0, 0.4, -138)
-  ]);
+  ];
+  const cameraCurve = new THREE.CatmullRomCurve3(cameraPathPoints);
+  const pathCurve = new THREE.CatmullRomCurve3(cameraPathPoints.concat([
+    new THREE.Vector3(4, 0.25, -180),
+    new THREE.Vector3(-2, 0.15, -230),
+    new THREE.Vector3(3, 0.05, -285)
+  ]));
 
   // bright core — fog on, so the path fades into the dark instead of
   // streaking white to the horizon
   const core = new THREE.Mesh(
-    new THREE.TubeGeometry(curve, 360, 0.11, 12, false),
+    new THREE.TubeGeometry(pathCurve, 460, 0.11, 12, false),
     new THREE.MeshBasicMaterial({
       color: 0x6fb7ff,
       transparent: true,
@@ -61,7 +68,7 @@ async function init() {
 
   // soft halo
   const halo = new THREE.Mesh(
-    new THREE.TubeGeometry(curve, 360, 0.42, 12, false),
+    new THREE.TubeGeometry(pathCurve, 460, 0.42, 12, false),
     new THREE.MeshBasicMaterial({
       color: 0x2e7cff,
       transparent: true,
@@ -151,9 +158,9 @@ async function init() {
     return t * t * (3 - 2 * t);
   }
 
-  const terrGeo = new THREE.PlaneGeometry(300, 230, 160, 110);
+  const terrGeo = new THREE.PlaneGeometry(360, 390, 190, 150);
   terrGeo.rotateX(-Math.PI / 2);
-  terrGeo.translate(0, 0, -55);
+  terrGeo.translate(0, 0, -105);
   const tp = terrGeo.attributes.position;
   const colors = new Float32Array(tp.count * 3);
   const cLow = new THREE.Color(0x040b18);
@@ -163,18 +170,22 @@ async function init() {
     const x = tp.getX(i);
     const z = tp.getZ(i);
     const edge = smoothstep(5, 26, Math.abs(x));
+    const farSoft = 1 - smoothstep(-120, -265, z);
+    const sideSoft = 1 - smoothstep(138, 180, Math.abs(x));
+    const terrainSoft = Math.min(farSoft, sideSoft);
     const n = (ridgeNoise(x, z) + 1.6) / 3.2; // 0..1ish
-    const h = -2.2 + edge * (n * 13 + 1.5);
+    const h = -2.2 + edge * terrainSoft * (n * 13 + 1.5);
     tp.setY(i, h);
     const k = Math.min(1, Math.max(0, (h + 2.2) / 13));
     tmp.copy(cLow).lerp(cHigh, k * k);
+    tmp.lerp(fogColor, (1 - terrainSoft) * 0.9);
     colors[i * 3] = tmp.r;
     colors[i * 3 + 1] = tmp.g;
     colors[i * 3 + 2] = tmp.b;
   }
   terrGeo.computeVertexNormals();
   terrGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-  const terrain = new THREE.Mesh(terrGeo, new THREE.MeshBasicMaterial({ vertexColors: true }));
+  const terrain = new THREE.Mesh(terrGeo, new THREE.MeshBasicMaterial({ vertexColors: true, fog: true }));
   scene.add(terrain);
 
   /* ---------- post-processing: bloom ---------- */
@@ -246,12 +257,12 @@ async function init() {
     // the path leaves the frame entirely
     const side = camera.aspect < 1 ? 1.0 : 3.4;
     const ct = THREE.MathUtils.clamp(progress * 0.86, 0, 0.86);
-    curve.getPointAt(ct, camPos);
+    cameraCurve.getPointAt(ct, camPos);
     camPos.x += side + px * 1.4;
     camPos.y += 3.0 + Math.sin(t * 0.5) * 0.08;
     camera.position.copy(camPos);
 
-    curve.getPointAt(Math.min(ct + 0.07, 1), lookAt);
+    cameraCurve.getPointAt(Math.min(ct + 0.07, 1), lookAt);
     lookAt.y += 0.6 - py * 0.8;
     camera.lookAt(lookAt);
 
@@ -260,7 +271,7 @@ async function init() {
     for (let i = 0; i < FLOW; i++) {
       flowT[i] += dt * 0.012 * (0.6 + (i % 5) * 0.2);
       if (flowT[i] > 1) flowT[i] -= 1;
-      curve.getPointAt(flowT[i], camPos); // reuse vector
+      pathCurve.getPointAt(flowT[i], camPos); // reuse vector
       const o = flowOff[i];
       pos.array[i * 3] = camPos.x + o.x;
       pos.array[i * 3 + 1] = camPos.y + o.y * (0.6 + 0.4 * Math.sin(t + i));
@@ -269,7 +280,7 @@ async function init() {
     pos.needsUpdate = true;
 
     // restore camera position (camPos was reused for particle math)
-    curve.getPointAt(ct, camPos);
+    cameraCurve.getPointAt(ct, camPos);
     camPos.x += side + px * 1.4;
     camPos.y += 3.0 + Math.sin(t * 0.5) * 0.08;
     camera.position.copy(camPos);

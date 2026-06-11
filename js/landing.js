@@ -141,8 +141,9 @@
     /* ---------- oversized numerals parallax at their own speed ---------- */
     gsap.utils.toArray('.sec-num, .step-num').forEach(function (num) {
       var host = num.closest('section, footer, article');
+      var isMethodNum = num.classList.contains('step-num');
       gsap.to(num, {
-        yPercent: -42,
+        yPercent: isMethodNum ? -10 : -14,
         ease: 'none',
         scrollTrigger: { trigger: host, start: 'top bottom', end: 'bottom top', scrub: true }
       });
