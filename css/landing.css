@@ -270,7 +270,7 @@ body.menu-open{overflow:hidden}
   font-size:clamp(2.6rem,11.6vw,11.6rem);
   line-height:.92;letter-spacing:-.01em;
   margin-bottom:clamp(1.5rem,4vh,3rem);
-  text-shadow:0 2px 44px rgba(2,8,18,.85);
+  filter:drop-shadow(0 10px 88px rgba(2,8,18,.62));
 }
 .hero-display .mask{display:block;overflow:hidden}
 .hero-display .ln{display:inline-block;will-change:transform}
