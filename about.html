@@ -1,44 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how Katy Technologies maps manual workflows and builds practical AI and custom software around trust, risk, and throughput.">
     <meta name="keywords" content="workflow automation, practical AI, custom software, enterprise operations">
     <meta name="author" content="Katy Technologies">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://katytechnologies.com/about.html">
     <meta property="og:title" content="About Katy Technologies - Practical Workflow Automation">
     <meta property="og:description" content="Katy Technologies builds practical AI and custom software around the way enterprise work actually moves.">
     <meta property="og:image" content="https://katytechnologies.com/assets/og-image.jpg">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://katytechnologies.com/about.html">
     <meta property="twitter:title" content="About Katy Technologies - Practical Workflow Automation">
     <meta property="twitter:description" content="Katy Technologies builds practical AI and custom software around the way enterprise work actually moves.">
     <meta property="twitter:image" content="https://katytechnologies.com/assets/og-image.jpg">
-    
+
     <title>About Katy Technologies - Practical Workflow Automation</title>
-    
-    <!-- Preconnect to external domains -->
+
+    <!-- Work Sans from Google; Literata stays local (see landing.css) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700&family=Literata:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
-    <!-- Anime.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/subpage.css">
+
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
 <body>
+    <!-- Brand grain filter (page-hero atmosphere) -->
     <svg class="kt-grain-filter" width="0" height="0" aria-hidden="true" focusable="false">
         <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
             <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="3" result="grainNoise" />
@@ -48,296 +44,150 @@
             <feBlend in="grainSpeckle" in2="grainBase" mode="overlay" />
         </filter>
     </svg>
-    
-    <!-- Skip to content link -->
-    <a href="#main" class="skip-to-content">Skip to content</a>
-    
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="/" class="logo">
-                <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" class="logo-mark">
-                <span>Katy Technologies</span>
-            </a>
-            
-            <nav class="nav" aria-label="Main navigation">
-                <ul class="nav-list">
-                    <li><a href="/" class="nav-link">Home</a></li>
-                    <li><a href="/solutions" class="nav-link">Solutions</a></li>
-                    <li><a href="/contact" class="nav-link">Contact</a></li>
-                </ul>
-                <a href="/contact" class="btn">Let's Chat</a>
-            </nav>
-            
-            <button class="burger" aria-label="Menu" aria-expanded="false">
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-            </button>
-        </div>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-head">
+        <a class="brand" href="/" aria-label="Katy Technologies — home">
+            <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" width="38" height="38">
+            <span class="micro">Katy Technologies</span>
+        </a>
+        <nav class="micro" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/solutions">Solutions</a>
+            <a href="/contact">Contact</a>
+        </nav>
     </header>
-    
-    <!-- Mobile Menu -->
-    <nav class="mobile-menu" aria-hidden="true">
-        <ul class="mobile-nav-list">
-            <li><a href="/" class="mobile-nav-link">Home</a></li>
-            <li><a href="/solutions" class="mobile-nav-link">Solutions</a></li>
-            <li><a href="/contact" class="mobile-nav-link">Contact</a></li>
-        </ul>
-        <a href="/contact" class="btn" style="margin-top: 2rem;">Let's Chat</a>
-    </nav>
-    
-    <!-- Overlay -->
-    <div class="overlay"></div>
-    
-    <!-- Main Content -->
+
     <main id="main">
-        <!-- Page Hero -->
-        <section class="page-hero">
-            <div class="container">
-                <h1 class="page-title fade-up">About <span class="gradient-text">Katy Technologies</span></h1>
-                <p class="page-subtitle fade-up">Practical, governed automation for teams that need trust as much as speed.</p>
-            </div>
-        </section>
-        
-        <!-- Mission Section -->
-        <section class="section">
-            <div class="container">
-                <div class="content-grid">
-                    <div class="content-text fade-up">
-                        <h2>How We Work</h2>
-                        <p>We map how work actually moves through your organization, then build the software and AI support that removes repeat manual steps without creating new risk.</p>
-                        <p>Katy Technologies partners with operational leaders who need automation to feel practical, explainable, and human.</p>
-                    </div>
-                    <div class="content-visual fade-up" data-delay="200">
-                        <div class="visual-placeholder" data-parallax="0.1">
-                            <div class="gradient-box">
-                                <h3>Workflow First</h3>
-                                <p>Tool Second</p>
-                            </div>
-                        </div>
-                    </div>
+
+        <!-- 01 · PAGE HERO -->
+        <section class="page-hero sec-grid" aria-label="About">
+            <div class="page-atmo" aria-hidden="true"></div>
+            <span class="sec-num" aria-hidden="true">01</span>
+            <h1 class="hero-display" data-skew>
+                <span class="mask"><span class="ln">About</span></span>
+                <span class="mask"><span class="ln">Katy</span></span>
+                <span class="mask"><span class="ln">Technologies.</span></span>
+            </h1>
+            <div class="hero-foot">
+                <p class="micro">01 — About</p>
+                <p class="hero-sub prose">Practical, governed automation for teams that need trust as much as speed.</p>
+                <div class="hero-cta">
+                    <a href="/contact" class="btn btn-solid">Talk through a bottleneck</a>
+                    <a href="#how" class="btn btn-line">How we work</a>
                 </div>
             </div>
         </section>
-        
-        <!-- Values Section -->
-        <section class="section" style="background: var(--color-bg-secondary);">
-            <div class="container">
-                <h2 class="text-center fade-up">What Guides the Work</h2>
-                <div class="values-grid" data-stagger="100">
-                    <div class="value-card">
-                        <h3>Clarity</h3>
-                        <p>We make the current workflow visible before recommending a tool.</p>
-                    </div>
-                    <div class="value-card">
-                        <h3>Practicality</h3>
-                        <p>We use AI and software where they remove repeat work without adding confusion.</p>
-                    </div>
-                    <div class="value-card">
-                        <h3>Integrity</h3>
-                        <p>We design around governance, handoffs, and the people responsible for the outcome.</p>
-                    </div>
-                    <div class="value-card">
-                        <h3>Throughput</h3>
-                        <p>We measure success by the manual steps removed and the decisions made easier to explain.</p>
-                    </div>
+
+        <!-- 02 · POSITION — pull-quote -->
+        <section class="manifesto" aria-label="Position">
+            <span class="sec-num" aria-hidden="true">02</span>
+            <div class="cols">
+                <p class="micro" data-reveal>02 — Position</p>
+                <blockquote>
+                    <p class="manifesto-line" data-manifesto>Workflow first. Tool second.</p>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 03 · HOW WE WORK -->
+        <section id="how" class="duo" aria-label="How we work">
+            <span class="sec-num" aria-hidden="true">03</span>
+            <div class="cols">
+                <p class="micro" data-reveal>03 — How we work</p>
+                <div class="duo-body" data-reveal>
+                    <p>We map how work actually moves through your organization, then build the software and AI support that removes repeat manual steps without creating new risk.</p>
+                    <p>Katy Technologies partners with operational leaders who need automation to feel practical, explainable, and human.</p>
                 </div>
             </div>
         </section>
-        
-        <!-- CTA Section -->
-        <section class="section">
-            <div class="container text-center">
-                <h2 class="fade-up">Talk through the workflow in front of you</h2>
-                <p class="fade-up" style="max-width: 600px; margin: 0 auto 2rem;">
-                    Bring us the manual handoff, review queue, or internal system that is slowing your team down.
-                </p>
-                <div class="fade-up">
-                    <a href="/contact" class="btn">Let's Chat</a>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Katy Technologies</h4>
-                    <p>Practical AI and custom software for workflows that still depend on manual review.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="/solutions" class="footer-link">Solutions</a></li>
-                        <li><a href="/contact" class="footer-link">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:sales@katytechnologies.com" class="footer-link">sales@katytechnologies.com</a></li>
-                        <li><a href="tel:+12819613396" class="footer-link">(281) 961-3396</a></li>
-                        <li><a href="https://www.linkedin.com/company/katy-technologies" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2026 Katy Technologies. All rights reserved.</p>
+
+        <!-- marquee -->
+        <div class="marquee" aria-hidden="true">
+            <div class="mq-track">
+                <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
+                <span>MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;MAP&nbsp;·&nbsp;NAME&nbsp;·&nbsp;ROUTE&nbsp;·&nbsp;TRUST&nbsp;·&nbsp;</span>
             </div>
         </div>
+
+        <!-- 04 · WHAT GUIDES THE WORK -->
+        <section id="values" class="services" aria-label="What guides the work">
+            <span class="sec-num" aria-hidden="true">04</span>
+            <div class="sec-head">
+                <p class="micro" data-reveal>04 — What guides the work</p>
+            </div>
+            <ul class="svc-list">
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">01</span>
+                    <h3>Clarity</h3>
+                    <p>We make the current workflow visible before recommending a tool.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">02</span>
+                    <h3>Practicality</h3>
+                    <p>We use AI and software where they remove repeat work without adding confusion.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">03</span>
+                    <h3>Integrity</h3>
+                    <p>We design around governance, handoffs, and the people responsible for the outcome.</p>
+                </li>
+                <li class="svc" data-reveal>
+                    <span class="idx" aria-hidden="true">04</span>
+                    <h3>Throughput</h3>
+                    <p>We measure success by the manual steps removed and the decisions made easier to explain.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 05 · CTA — shock panel -->
+        <section class="cta" aria-label="Contact">
+            <span class="sec-num" aria-hidden="true">05</span>
+            <h2 data-skew><span class="tmask"><span class="tline">Talk through</span></span><span class="tmask"><span class="tline">the workflow</span></span><span class="tmask"><span class="tline">in front of you.</span></span></h2>
+            <p class="duo-body prose" data-reveal style="max-width:34em;margin-bottom:clamp(2rem,5vh,3.5rem)">Bring us the manual handoff, review queue, or internal system that is slowing your team down.</p>
+            <p data-reveal><a class="btn-shock" href="/contact">Talk through a bottleneck</a></p>
+            <div class="fine" data-reveal>
+                <a href="mailto:sales@katytechnologies.com">sales@katytechnologies.com</a>
+                <a href="tel:+12819613396">(281) 961-3396</a>
+                <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="foot">
+        <div class="foot-grid">
+            <div class="foot-brand">
+                <img src="assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="Katy Technologies logo" width="44" height="44">
+                <p class="micro">Katy Technologies<br>Enterprise workflow automation</p>
+            </div>
+            <nav class="foot-col" aria-label="Footer">
+                <p class="micro">Site</p>
+                <ul>
+                    <li><a href="/solutions">Solutions</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="foot-col">
+                <p class="micro">Reach</p>
+                <ul>
+                    <li><a href="mailto:sales@katytechnologies.com">Email</a></li>
+                    <li><a href="tel:+12819613396">(281) 961-3396</a></li>
+                    <li><a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a></li>
+                    <li><a href="/contact">Talk through a bottleneck</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="legal">© 2026 Katy Technologies. All rights reserved.</p>
+        <div class="foot-mark-wrap"><p class="foot-mark" aria-hidden="true" data-skew>Katy Technologies</p></div>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Fade-up animation handler
-        function initFadeUpAnimations() {
-          // Check if IntersectionObserver is supported
-          if (!('IntersectionObserver' in window)) {
-            // Fallback: show all elements immediately
-            document.querySelectorAll('.fade-up, .fade-in').forEach(el => {
-              el.classList.add('visible');
-            });
-            return;
-          }
-          
-          const fadeElements = document.querySelectorAll('.fade-up, .fade-in');
-          
-          const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                // Add delay if specified in data attribute
-                const delay = entry.target.dataset.delay || 0;
-                
-                setTimeout(() => {
-                  entry.target.classList.add('visible');
-                }, delay);
-                
-                // Unobserve after animation
-                fadeObserver.unobserve(entry.target);
-              }
-            });
-          }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-          });
-          
-          fadeElements.forEach(el => fadeObserver.observe(el));
-        }
-        
-        // Initialize number counter animations
-        function initNumberCounters() {
-          const counters = document.querySelectorAll('[data-count]');
-          
-          const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = parseInt(counter.dataset.count);
-                const duration = parseInt(counter.dataset.duration) || 2000;
-                const suffix = counter.dataset.suffix || '';
-                
-                animateCounter(counter, 0, target, duration, suffix);
-                counterObserver.unobserve(counter);
-              }
-            });
-          }, {
-            threshold: 0.5
-          });
-          
-          counters.forEach(counter => counterObserver.observe(counter));
-        }
-        
-        // Animate counter function
-        function animateCounter(element, start, end, duration, suffix = '') {
-          const startTime = performance.now();
-          
-          function updateCounter(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const current = Math.floor(start + (end - start) * easeOutQuart);
-            
-            element.textContent = current.toLocaleString() + suffix;
-            
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter);
-            } else {
-              element.textContent = end.toLocaleString() + suffix;
-            }
-          }
-          
-          requestAnimationFrame(updateCounter);
-        }
-        
-        // Mobile menu functionality
-        function initMobileMenu() {
-          const burger = document.querySelector('.burger');
-          const mobileMenu = document.querySelector('.mobile-menu');
-          const overlay = document.querySelector('.overlay');
-          const body = document.body;
-          
-          if (!burger || !mobileMenu || !overlay) return;
-          
-          function toggleMenu() {
-            const isOpen = burger.classList.contains('active');
-            
-            burger.setAttribute('aria-expanded', !isOpen);
-            mobileMenu.setAttribute('aria-hidden', isOpen);
-            
-            if (!isOpen) {
-              burger.classList.add('active');
-              mobileMenu.classList.add('active');
-              overlay.classList.add('active');
-              body.classList.add('menu-open');
-            } else {
-              burger.classList.remove('active');
-              mobileMenu.classList.remove('active');
-              overlay.classList.remove('active');
-              body.classList.remove('menu-open');
-            }
-          }
-          
-          function closeMenu() {
-            burger.setAttribute('aria-expanded', 'false');
-            burger.classList.remove('active');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            body.classList.remove('menu-open');
-          }
-          
-          // Event listeners
-          burger.addEventListener('click', toggleMenu);
-          overlay.addEventListener('click', closeMenu);
-          
-          // Close menu when clicking on mobile nav links
-          const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-          mobileNavLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
-          });
-          
-          // Close menu on escape key
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && burger.classList.contains('active')) {
-              closeMenu();
-            }
-          });
-        }
-        
-        // Initialize everything when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-          initFadeUpAnimations();
-          initNumberCounters();
-          initMobileMenu();
-        });
-    </script>
+    <!-- GSAP + Lenis -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="js/site.js"></script>
 </body>
-</html> 
+</html>
