@@ -399,6 +399,12 @@ a{color:inherit}
 .foot-col li{margin-bottom:.6rem}
 .foot-col a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--text-2)}
 .foot-col a:hover{color:var(--glow)}
+.foot-contact-list{display:flex;align-items:center;gap:.9rem}
+.foot-contact-list li{margin-bottom:0}
+.foot-icon-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:1.05rem;line-height:1;color:var(--text-2);
+}
 .foot .legal{position:relative;z-index:1;padding:1.25rem 0;font-size:var(--micro);font-weight:500;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
 .foot-mark-wrap{
   overflow:visible;
