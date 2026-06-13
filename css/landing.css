@@ -436,7 +436,7 @@ body.menu-open{overflow:hidden}
 .notes .sec-head{position:relative;z-index:1;margin-bottom:clamp(2rem,5vh,3.5rem)}
 .notes table{position:relative;z-index:1;width:100%;border-collapse:collapse;border-top:1px solid rgba(248,247,242,.25)}
 .notes th{
-  text-align:left;font-size:var(--micro);font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  text-align:left;font-size:var(--micro);font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   color:var(--micro-c);
   padding:.8rem .75rem .8rem 0;border-bottom:1px solid rgba(248,247,242,.25);
 }
@@ -446,8 +446,8 @@ body.menu-open{overflow:hidden}
   padding:clamp(1rem,2.5vh,1.6rem) .75rem clamp(1rem,2.5vh,1.6rem) 0;
   border-bottom:1px solid var(--hair);
 }
-.notes td.yr{font-weight:700;white-space:nowrap;width:10%}
-.notes td.cl{font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:.85rem;width:22%;color:var(--text-2)}
+.notes td.yr{font-family:"Work Sans",system-ui,sans-serif;font-weight:700;white-space:nowrap;width:10%}
+.notes td.cl{font-family:"Work Sans",system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.85rem;width:22%;color:var(--text-2)}
 .notes td.nt{font-size:clamp(1rem,.95rem + .3vw,1.2rem);max-width:46em;color:var(--text-2)}
 @media (max-width:640px){
   .notes table,.notes tbody,.notes tr,.notes td{display:block;width:100%}

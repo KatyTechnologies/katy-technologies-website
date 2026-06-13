@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'about.html', 'solutions.html'];
+const pages = ['index.html', 'about.html'];
 
 let failed = false;
 

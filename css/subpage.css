@@ -32,6 +32,10 @@
 .page-static-canvas.is-visible{
   opacity:.38;visibility:visible;
 }
+/* The fixed hero grain stays put; each block after the hero scrolls up
+   and covers it (opaque backgrounds + a stacking context above z-index:1). */
+.page-hero ~ section,
+.page-hero ~ .marquee{position:relative;z-index:2}
 .page-hero .hero-display{font-size:clamp(2.4rem,10.8vw,10.4rem)}
 .page-hero .hero-display,.page-hero .hero-foot{position:relative;z-index:2}
 
