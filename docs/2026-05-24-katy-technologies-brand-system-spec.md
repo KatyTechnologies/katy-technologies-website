@@ -49,6 +49,12 @@ Writing principles:
 - Make risk and trust visible.
 - Sound like an experienced advisor talking through the problem with the client.
 
+Readability and sentence rules:
+
+- Target a Flesch-Kincaid grade level of 8 or lower for headlines, body copy, and marketing copy.
+- Prefer short sentences and common words; split long sentences instead of stacking clauses.
+- Do not begin two consecutive sentences with the same word. Vary the opening word of each successive sentence, including within a single paragraph and across adjacent short lines.
+
 Primary CTA:
 
 > Talk through a bottleneck

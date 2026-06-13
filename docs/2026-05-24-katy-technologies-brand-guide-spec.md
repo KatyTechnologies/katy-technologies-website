@@ -673,6 +673,19 @@ Do not write:
 - "Unlock innovation with next-generation automation."
 - "Leverage our advanced technology stack to optimize synergies."
 
+### 9.4 Readability and Sentence Construction
+
+Readability target:
+
+- Target a Flesch-Kincaid grade level of 8 or lower for headlines, body copy, and marketing copy.
+- Prefer short sentences and plain, common words.
+- Split long sentences instead of stacking multiple clauses with em dashes.
+
+Sentence variety rule:
+
+- Do not begin two consecutive sentences with the same word.
+- Vary the first word of each successive sentence, including within a single paragraph and across adjacent short lines.
+
 ## 10. Imagery and Media
 
 ### 10.1 Photography

@@ -393,7 +393,7 @@ def page_components_voice(c: canvas.Canvas) -> None:
     draw_module(c, MARGIN, y, 248, 124, "Buttons", "Use precise CTAs: Talk through a bottleneck, Map a workflow, Find the slow handoff, Talk with us.")
     draw_module(c, MARGIN + 270, y, 248, 124, "Forms", "Ask what workflow is slowing the team down and what systems are involved. Avoid long sales qualification forms.")
     y -= 164
-    draw_module(c, MARGIN, y, 248, 142, "Voice Do", "Warm, advisory, humanistic, plainspoken, and specific. Start with the bottleneck, not the tool.")
+    draw_module(c, MARGIN, y, 248, 142, "Voice Do", "Warm, advisory, humanistic, plainspoken, and specific. Start with the bottleneck, not the tool. Keep copy at an eighth-grade reading level. Never begin two sentences in a row with the same word.")
     draw_module(c, MARGIN + 270, y, 248, 142, "Voice Don't", "Avoid digital transformation, cutting-edge, innovation, synergy, leverage, seamless, future-proof, and AI-powered everything.")
     finish_page(c)
 
