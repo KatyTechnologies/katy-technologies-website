@@ -418,15 +418,14 @@ body.menu-open{overflow:hidden}
 .services .sec-head{position:relative;z-index:1;padding:0 var(--pad) clamp(2rem,5vh,3.5rem)}
 .svc-list{position:relative;z-index:1;list-style:none;border-top:1px solid rgba(248,247,242,.25)}
 .svc{
-  display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;align-items:baseline;
+  display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;align-items:center;
   padding:clamp(1.4rem,3.5vh,2.4rem) var(--pad);
   border-bottom:1px solid rgba(248,247,242,.25);
 }
 .svc:hover{background:var(--blue);color:var(--paper)} /* hard cut — no transition, deliberately */
 .svc:hover p{color:var(--paper)}
 .svc h3{grid-column:1/span 6;font-weight:700;text-transform:uppercase;font-size:clamp(1.35rem,1rem + 2vw,2.6rem);line-height:1.02;letter-spacing:-.01em}
-.svc p{grid-column:8/span 5;font-size:clamp(.95rem,.9rem + .3vw,1.1rem);max-width:34em;color:var(--text-3)}
-#values .svc p{font-family:"Literata",Georgia,serif}
+.svc p{grid-column:8/span 5;font-family:"Literata",Georgia,serif;font-size:clamp(.95rem,.9rem + .3vw,1.1rem);max-width:34em;color:var(--text-3)}
 @media (max-width:760px){
   .svc{grid-template-columns:1fr;gap:.6rem}
   .svc h3,.svc p{grid-column:1/-1}
@@ -442,7 +441,8 @@ body.menu-open{overflow:hidden}
   padding:.8rem .75rem .8rem 0;border-bottom:1px solid rgba(248,247,242,.25);
 }
 .notes td{
-  vertical-align:top;
+  vertical-align:middle;
+  font-family:"Literata",Georgia,serif;
   padding:clamp(1rem,2.5vh,1.6rem) .75rem clamp(1rem,2.5vh,1.6rem) 0;
   border-bottom:1px solid var(--hair);
 }
