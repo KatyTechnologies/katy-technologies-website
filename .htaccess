@@ -1,6 +1,7 @@
 RewriteEngine On
 
-# Redirect removed careers/contact routes to email
+# Redirect removed routes
+RewriteRule ^about/?$ / [R=301,L]
 RewriteRule ^(careers|contact)/?$ mailto:tedkb@sas.upenn.edu [R=302,L]
 
 # Remove .html extension from URLs

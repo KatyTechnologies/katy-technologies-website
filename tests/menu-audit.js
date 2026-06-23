@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'about.html'];
+const pages = ['index.html'];
 
 let failed = false;
 
@@ -23,6 +23,9 @@ for (const page of pages) {
   assert(html.includes('<span class="menu-toggle-label">Menu</span>'), `${page}: missing toggle label`);
   assert(html.includes('<span class="menu-toggle-lines" aria-hidden="true">'), `${page}: missing decorative hamburger lines`);
   assert(/src="js\/nav\.js(?:\?[^"]*)?"/.test(html), `${page}: missing shared nav script`);
+  const links = html.match(/<nav[^>]*id="site-menu"[\s\S]*?<\/nav>/)[0].match(/<a\b/g) || [];
+  assert(links.length === 1, `${page}: header menu should only contain the email CTA`);
+  assert(html.includes('href="mailto:tedkb@sas.upenn.edu" class="nav-email"'), `${page}: missing header email CTA`);
 }
 
 const css = fs.readFileSync(path.join(root, 'css', 'landing.css'), 'utf8');
