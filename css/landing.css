@@ -220,27 +220,22 @@ body.menu-open{overflow:hidden}
   clip-path:inset(0);
   filter:url('#kt-grain');
 }
+#main{position:relative}
+#main::before{
+  content:"";position:absolute;left:0;right:0;top:100svh;bottom:0;
+  z-index:2;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 23% 17%,rgba(248,247,242,.055) 0 1px,transparent 1.35px),
+    radial-gradient(circle at 71% 63%,rgba(127,149,170,.06) 0 1px,transparent 1.45px),
+    linear-gradient(180deg,
+      rgba(2,8,18,.08) 0%,
+      rgba(6,25,45,.2) 22%,
+      rgba(7,26,51,.4) 48%,
+      rgba(10,33,58,.66) 72%,
+      rgba(7,26,51,1) 100%);
+  background-size:3px 3px,4px 4px,100% 100%;
+}
 
-/* chapter rail */
-.story-nav{
-  position:fixed;left:clamp(1.1rem,2.4vw,2.2rem);top:50%;
-  transform:translateY(-50%);z-index:60;
-  display:flex;flex-direction:column;gap:1.1rem;
-  opacity:0;pointer-events:none;
-  transition:opacity .5s var(--ease-out);
-}
-.story-nav.visible{opacity:1;pointer-events:auto}
-.story-nav-link{
-  display:flex;align-items:center;gap:.7rem;
-  font-size:.6875rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
-  text-decoration:none;color:rgba(248,247,242,.38);
-  transition:color .3s var(--ease-out);
-}
-.story-nav-dot{width:7px;height:7px;border:1px solid currentColor;transition:background-color .3s}
-.story-nav-link:hover{color:rgba(248,247,242,.75)}
-.story-nav-link.active{color:var(--paper)}
-.story-nav-link.active .story-nav-dot{background:var(--glow);border-color:var(--glow);box-shadow:0 0 12px rgba(124,196,255,.9)}
-@media (max-width:1100px){.story-nav{display:none}}
 
 /* ============ HERO — Swiss display over the valley ============ */
 .hero{
@@ -248,6 +243,12 @@ body.menu-open{overflow:hidden}
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:calc(var(--pad)*3) var(--pad) var(--pad);
   overflow:hidden;
+}
+.what-we-do{
+  position:relative;z-index:3;
+  min-height:42svh;
+  display:flex;align-items:center;
+  padding:clamp(2.75rem,7vh,5rem) var(--pad);
 }
 .story-gradient{
   position:fixed;inset:0;z-index:1;
@@ -315,73 +316,15 @@ body.menu-open{overflow:hidden}
 .btn-line{border:2px solid rgba(248,247,242,.45);color:var(--paper)}
 .btn-line:hover{border-color:var(--paper);background:rgba(248,247,242,.08)}
 
-/* ============ METHOD PANELS — Swiss type in the fly-through ============ */
-/* each chapter is taller than the viewport; the words pin (sticky) and hold
-   while the next chapter's words scroll up underneath */
-.chapter{position:relative;min-height:180svh}
-.chapter-pin{
-  position:sticky;top:0;min-height:100svh;
-  display:flex;align-items:center;
-  padding:clamp(5rem,9vw,8rem) var(--pad);
-  overflow:hidden;
-}
-/* readability veil: dims the scene behind the copy, clears at edges
-   so the path shows clean between chapters */
-.chapter-pin::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,
-    rgba(2,8,18,0) 0%,
-    rgba(2,8,18,.66) 28%,
-    rgba(2,8,18,.66) 72%,
-    rgba(2,8,18,0) 100%);
-}
 /* masked line-rise for the big words */
 .tmask{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
 .tline{display:block;will-change:transform}
-.static-page .chapter{min-height:100svh}
-.static-page .chapter-pin{position:static}
-.panel-inner{
-  position:relative;z-index:1;
-  display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem 0;width:100%;
-}
-.panel-meta{grid-column:2/span 3;color:var(--micro-c)}
-.panel-main{grid-column:5/span 7}
-.panel-diagram{grid-column:5/span 6;margin-top:clamp(1.25rem,3.5vh,2.5rem)}
-.panel-title{
-  font-weight:700;text-transform:uppercase;
-  font-size:clamp(2.2rem,1rem + 5.6vw,5.8rem);
-  line-height:.95;letter-spacing:-.01em;margin-bottom:1.25rem;
-  text-shadow:0 2px 36px rgba(2,8,18,.9);
-}
-.panel-copy{
-  font-family:"Literata",Georgia,serif;
-  font-size:clamp(1rem,.95rem + .4vw,1.25rem);
-  line-height:1.6;max-width:32em;color:var(--text-2);
-  text-shadow:0 1px 22px rgba(2,8,18,.95);
-}
-.chapter-frag{
-  border:1px solid rgba(124,196,255,.22);
-  background:rgba(4,13,26,.72);
-  -webkit-backdrop-filter:blur(10px);
-  backdrop-filter:blur(10px);
-  padding:clamp(1.2rem,2.4vw,2rem);
-  max-width:30rem;
-}
-.frag-svg{width:100%;height:auto}
-.frag-svg .draw{stroke-dasharray:1;stroke-dashoffset:1}
-.frag-svg .fade{opacity:0}
-.no-js .frag-svg .draw,.static-page .frag-svg .draw{stroke-dashoffset:0}
-.no-js .frag-svg .fade,.static-page .frag-svg .fade{opacity:1}
-@media (max-width:899.98px){
-  .panel-meta,.panel-main,.panel-diagram{grid-column:1/-1}
-  .panel-inner{gap:1.1rem 0}
-}
 
 /* ============ MARQUEE — translucent so the glow shows through ============ */
 .marquee{
-  position:relative;z-index:1;overflow:hidden;padding:1rem 0;
+  position:relative;z-index:3;overflow:hidden;padding:1rem 0;
   border-block:1px solid rgba(124,196,255,.2);
-  background:rgba(2,8,18,.55);
+  background:transparent;
   -webkit-backdrop-filter:blur(6px);
   backdrop-filter:blur(6px);
   color:var(--glow);
@@ -395,26 +338,29 @@ body.menu-open{overflow:hidden}
 .mq-track.gs{animation:none} /* gsap drives it when motion is on */
 @media (prefers-reduced-motion:reduce){.mq-track{animation:none}}
 
-/* ============ MANIFESTO — dark, Swiss display scrub ============ */
+/* ============ MANIFESTO — translucent grain veil over the path ============ */
 .manifesto{
-  position:relative;overflow:hidden;
-  background:linear-gradient(180deg,var(--bp-black) 0%,var(--bp-dark) 30%,var(--navy) 100%);
-  padding:clamp(7rem,16vw,14rem) var(--pad);
+  position:relative;z-index:3;overflow:hidden;
+  background:transparent;
+  padding:clamp(4.5rem,11vw,8rem) var(--pad);
 }
+.manifesto::before,
+.notes::before,
+.services::before,
+.cta::before{content:none}
 .manifesto .cols{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:1rem 0}
-.manifesto .micro{grid-column:1/span 3;color:var(--micro-c)}
 .manifesto blockquote{
-  grid-column:4/span 9;
+  grid-column:2/span 10;
   font-weight:700;text-transform:uppercase;
   font-size:clamp(1.9rem,1rem + 4vw,4.4rem);
   line-height:1.04;letter-spacing:-.01em;
 }
 .manifesto-line .w{opacity:.14;display:inline-block}
 .no-js .manifesto-line .w,.static-page .manifesto-line .w{opacity:1}
-@media (max-width:760px){.manifesto .micro,.manifesto blockquote{grid-column:1/-1}}
+@media (max-width:760px){.manifesto blockquote{grid-column:1/-1}}
 
-/* ============ SERVICES — opaque navy, hard-cut blue inverts ============ */
-.services{position:relative;overflow:hidden;background:var(--navy);padding-top:clamp(4rem,10vh,7rem)}
+/* ============ SERVICES — translucent navy, hard-cut blue inverts ============ */
+.services{position:relative;z-index:3;overflow:hidden;background:transparent;padding-top:clamp(4rem,10vh,7rem)}
 .services .sec-head{position:relative;z-index:1;padding:0 var(--pad) clamp(2rem,5vh,3.5rem)}
 .svc-list{position:relative;z-index:1;list-style:none;border-top:1px solid rgba(248,247,242,.25)}
 .svc{
@@ -422,7 +368,7 @@ body.menu-open{overflow:hidden}
   padding:clamp(1.4rem,3.5vh,2.4rem) var(--pad);
   border-bottom:1px solid rgba(248,247,242,.25);
 }
-.svc:hover{background:var(--blue);color:var(--paper)} /* hard cut — no transition, deliberately */
+.svc:hover{background:rgba(46,124,255,.72);color:var(--paper);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)} /* hard cut — no transition, deliberately */
 .svc:hover p{color:var(--paper)}
 .svc h3{grid-column:1/span 6;font-weight:700;text-transform:uppercase;font-size:clamp(1.35rem,1rem + 2vw,2.6rem);line-height:1.02;letter-spacing:-.01em}
 .svc p{grid-column:8/span 5;font-family:"Literata",Georgia,serif;font-size:clamp(.95rem,.9rem + .3vw,1.1rem);max-width:34em;color:var(--text-3)}
@@ -431,9 +377,8 @@ body.menu-open{overflow:hidden}
   .svc h3,.svc p{grid-column:1/-1}
 }
 
-/* ============ FIELD NOTES — strict table on dark ============ */
-.notes{position:relative;overflow:hidden;background:var(--bp-dark);padding:clamp(4rem,10vh,7rem) var(--pad)}
-.notes .sec-head{position:relative;z-index:1;margin-bottom:clamp(2rem,5vh,3.5rem)}
+/* ============ WORK EXAMPLES — strict table on translucent dark ============ */
+.notes{position:relative;z-index:3;overflow:hidden;background:transparent;padding:0 var(--pad)}
 .notes table{position:relative;z-index:1;width:100%;border-collapse:collapse;border-top:1px solid rgba(248,247,242,.25)}
 .notes th{
   text-align:left;font-size:var(--micro);font-weight:700;letter-spacing:.22em;text-transform:uppercase;
@@ -443,7 +388,7 @@ body.menu-open{overflow:hidden}
 .notes td{
   vertical-align:middle;
   font-family:"Literata",Georgia,serif;
-  padding:clamp(1rem,2.5vh,1.6rem) .75rem clamp(1rem,2.5vh,1.6rem) 0;
+  padding:clamp(.8rem,2vh,1.25rem) .75rem clamp(.8rem,2vh,1.25rem) 0;
   border-bottom:1px solid var(--hair);
 }
 .notes td.yr{font-family:"Work Sans",system-ui,sans-serif;font-weight:700;white-space:nowrap;width:10%}
@@ -456,19 +401,21 @@ body.menu-open{overflow:hidden}
   .notes tr{border-bottom:1px solid rgba(248,247,242,.25);padding:1.1rem 0}
 }
 
-/* ============ CTA — the blue shock panel ============ */
+/* ============ CTA — translucent shock panel ============ */
 .cta{
-  position:relative;overflow:hidden;background:var(--blue);color:var(--paper);
+  position:relative;z-index:3;overflow:hidden;background:rgba(46,124,255,.72);color:var(--paper);
   min-height:88svh;display:flex;flex-direction:column;justify-content:center;
   padding:clamp(4rem,10vh,6rem) var(--pad);
 }
 .cta::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
   background-image:
+    linear-gradient(180deg,rgba(46,124,255,.38) 0%,rgba(46,124,255,.2) 100%),
     repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0,rgba(255,255,255,.14) 1px,transparent 1px,transparent calc(100%/12)),
     repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0,rgba(255,255,255,.14) 1px,transparent 1px,transparent 8rem),
     linear-gradient(90deg,transparent calc(100% - 1px),rgba(255,255,255,.14) calc(100% - 1px));
 }
+.cta::before{content:none}
 .cta>*{position:relative;z-index:1}
 .cta h2{
   font-weight:700;text-transform:uppercase;
@@ -484,8 +431,8 @@ body.menu-open{overflow:hidden}
 .cta .fine{margin-top:clamp(2.5rem,6vh,4rem);display:flex;flex-wrap:wrap;gap:1rem 3rem}
 .cta .fine a{color:var(--paper);font-weight:500;text-decoration-thickness:1px;text-underline-offset:3px;font-size:.95rem;letter-spacing:.04em}
 
-/* ============ FOOTER — navy, giant cropped wordmark ============ */
-.foot{position:relative;overflow:hidden;background:var(--bp-dark);padding:clamp(3.5rem,9vh,6rem) var(--pad) 0}
+/* ============ FOOTER — opaque navy, giant cropped wordmark ============ */
+.foot{position:relative;z-index:3;overflow:hidden;background-color:var(--bp-dark);background-image:linear-gradient(180deg,var(--navy) 0%,var(--bp-dark) 100%);padding:clamp(3.5rem,9vh,6rem) var(--pad) 0}
 .foot-grid{
   position:relative;z-index:1;
   display:grid;grid-template-columns:repeat(12,1fr);gap:2rem 0;
@@ -555,9 +502,5 @@ body.menu-open{overflow:hidden}
   .js .hero-display .ln{transform:none !important}
   .js .hero-foot{opacity:1}
   .js [data-reveal]{opacity:1;transform:none}
-  .frag-svg .draw{stroke-dashoffset:0 !important}
-  .frag-svg .fade{opacity:1 !important}
   .manifesto-line .w{opacity:1 !important}
-  .chapter{min-height:auto}
-  .chapter-pin{position:static}
 }

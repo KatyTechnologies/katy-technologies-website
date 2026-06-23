@@ -35,7 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="css/landing.css?v=hero-entry-directions">
+    <link rel="stylesheet" href="css/landing.css?v=zero-notes-padding">
 
     <script>document.documentElement.classList.replace('no-js', 'js');</script>
 </head>
@@ -76,20 +76,11 @@
 
     <main id="main">
 
-        <!-- ============ STORY: fixed WebGL valley behind hero + method ============ -->
+        <!-- ============ STORY: fixed WebGL valley behind hero ============ -->
         <div class="story">
             <canvas id="story-canvas" aria-hidden="true"></canvas>
             <div class="story-gradient" aria-hidden="true"></div>
             <canvas class="hero-static-canvas" aria-hidden="true"></canvas>
-
-            <!-- chapter rail (desktop) -->
-            <nav class="story-nav" aria-label="Method chapters">
-                <a href="#map" class="story-nav-link" data-chapter="map"><span class="story-nav-dot" aria-hidden="true"></span>Map</a>
-                <a href="#name" class="story-nav-link" data-chapter="name"><span class="story-nav-dot" aria-hidden="true"></span>Name</a>
-                <a href="#route" class="story-nav-link" data-chapter="route"><span class="story-nav-dot" aria-hidden="true"></span>Route</a>
-                <a href="#trust" class="story-nav-link" data-chapter="trust"><span class="story-nav-dot" aria-hidden="true"></span>Trust</a>
-            </nav>
-
             <!-- 01 · HERO -->
             <section class="hero sec-grid" aria-label="Introduction">
                 <h1 class="hero-display">
@@ -99,143 +90,17 @@
                     <span class="mask"><span class="ln">Your&nbsp;Team</span></span>
                     <span class="mask"><span class="ln">Down.</span></span>
                 </h1>
+            </section>
+            <section class="what-we-do sec-grid" aria-label="What we do">
                 <div class="hero-foot">
                     <p class="micro">What we do</p>
                     <p class="hero-sub prose">We help companies speed up slow, manual work. Practical AI and custom software do the heavy lifting. Both stay inside the reviews and approvals you already trust.</p>
                 </div>
             </section>
 
-            <!-- 02 · METHOD — Swiss panels pinned on the fly-through -->
-            <section class="chapter sec-grid" id="map" aria-label="Method: map the work">
-                <div class="chapter-pin">
-                <div class="panel-inner">
-                    <p class="panel-meta micro">Map</p>
-                    <div class="panel-main">
-                        <h2 class="panel-title"><span class="tmask"><span class="tline">Map how</span></span><span class="tmask"><span class="tline">work moves</span></span></h2>
-                        <p class="panel-copy">We follow how work really moves: intake, triage, review, approval. This happens before we name a single tool.</p>
-                    </div>
-                    <div class="panel-diagram chapter-frag">
-                        <svg class="frag-svg" viewBox="0 0 560 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: intake, triage and review nodes connected in sequence.">
-                            <g stroke="#7F95AA" stroke-width="1.5">
-                                <path class="draw" pathLength="1" d="M20 50 H150 V114 H20 Z"/>
-                                <path class="draw" pathLength="1" d="M215 50 H345 V114 H215 Z"/>
-                                <path class="draw" pathLength="1" d="M410 50 H540 V114 H410 Z"/>
-                                <path class="draw" pathLength="1" d="M150 82 H215"/>
-                                <path class="draw" pathLength="1" d="M345 82 H410"/>
-                            </g>
-                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
-                                <text x="85" y="87">INTAKE</text>
-                                <text x="280" y="87">TRIAGE</text>
-                                <text x="475" y="87">REVIEW</text>
-                            </g>
-                            <g class="fade" stroke="#7F95AA" stroke-opacity="0.6" stroke-width="1">
-                                <line x1="20" y1="22" x2="20" y2="32"/>
-                                <line x1="280" y1="22" x2="280" y2="32"/>
-                                <line x1="540" y1="22" x2="540" y2="32"/>
-                                <line x1="20" y1="27" x2="540" y2="27" stroke-opacity="0.3"/>
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-                </div>
-            </section>
-
-            <section class="chapter sec-grid" id="name" aria-label="Method: name the step worth improving">
-                <div class="chapter-pin">
-                <div class="panel-inner">
-                    <p class="panel-meta micro">Name</p>
-                    <div class="panel-main">
-                        <h2 class="panel-title"><span class="tmask"><span class="tline">Name the</span></span><span class="tmask"><span class="tline">slow step</span></span></h2>
-                        <p class="panel-copy">Usually one step holds everything up. It is a manual review that repeats and wears people down. We name it plainly: the bottleneck.</p>
-                    </div>
-                    <div class="panel-diagram chapter-frag">
-                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: the manual review node marked as the bottleneck.">
-                            <g stroke="#7F95AA" stroke-width="1.5">
-                                <path class="draw" pathLength="1" d="M215 96 H345 V160 H215 Z"/>
-                            </g>
-                            <g stroke="#AFA7A7" stroke-width="1.5">
-                                <path class="draw" pathLength="1" d="M280 16 L297 42 L280 68 L263 42 Z"/>
-                                <path class="draw" pathLength="1" d="M280 68 V96"/>
-                            </g>
-                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
-                                <text x="280" y="125">MANUAL</text>
-                                <text x="280" y="145">REVIEW</text>
-                            </g>
-                            <g class="fade" fill="#AFA7A7" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em">
-                                <text x="312" y="47">BOTTLENECK</text>
-                            </g>
-                            <g class="fade" stroke="#AFA7A7" stroke-opacity="0.55" stroke-width="1">
-                                <line x1="228" y1="172" x2="240" y2="184"/>
-                                <line x1="252" y1="172" x2="264" y2="184"/>
-                                <line x1="276" y1="172" x2="288" y2="184"/>
-                                <line x1="300" y1="172" x2="312" y2="184"/>
-                                <line x1="324" y1="172" x2="336" y2="184"/>
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-                </div>
-            </section>
-
-            <section class="chapter sec-grid" id="route" aria-label="Method: route repeat work">
-                <div class="chapter-pin">
-                <div class="panel-inner">
-                    <p class="panel-meta micro">Route</p>
-                    <div class="panel-main">
-                        <h2 class="panel-title"><span class="tmask"><span class="tline">Route repeat</span></span><span class="tmask"><span class="tline">work around it</span></span></h2>
-                        <p class="panel-copy">Software and practical AI take the repeat steps. That means drafting, sorting, and reconciling. They run inside the controls your team already trusts.</p>
-                    </div>
-                    <div class="panel-diagram chapter-frag">
-                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: a dashed automation path routes repeat steps from triage to approval.">
-                            <g stroke="#7F95AA" stroke-width="1.5">
-                                <path class="draw" pathLength="1" d="M20 40 H150 V104 H20 Z"/>
-                                <path class="draw" pathLength="1" d="M410 40 H540 V104 H410 Z"/>
-                                <path class="draw" pathLength="1" d="M150 72 H410" stroke-opacity="0.4"/>
-                            </g>
-                            <path class="draw" pathLength="1" d="M85 104 V168 H475 V104" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
-                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
-                                <text x="85" y="77">TRIAGE</text>
-                                <text x="475" y="77">APPROVAL</text>
-                            </g>
-                            <g class="fade" fill="#7CC4FF" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
-                                <text x="280" y="196">REPEAT STEPS, SPED UP</text>
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-                </div>
-            </section>
-
-            <section class="chapter sec-grid" id="trust" aria-label="Method: keep review visible">
-                <div class="chapter-pin">
-                <div class="panel-inner">
-                    <p class="panel-meta micro">Trust</p>
-                    <div class="panel-main">
-                        <h2 class="panel-title"><span class="tmask"><span class="tline">Keep review</span></span><span class="tmask"><span class="tline">visible</span></span></h2>
-                        <p class="panel-copy">People stay in the loop. You get a clear record of what we sped up and why. Results your team can explain.</p>
-                    </div>
-                    <div class="panel-diagram chapter-frag">
-                        <svg class="frag-svg" viewBox="0 0 560 210" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram fragment: human review stays tied into the automated path.">
-                            <g stroke="#7F95AA" stroke-width="1.5">
-                                <path class="draw" pathLength="1" d="M215 24 H345 V88 H215 Z"/>
-                            </g>
-                            <path class="draw" pathLength="1" d="M280 88 V160" stroke="#F8F7F2" stroke-width="1.5"/>
-                            <path class="draw" pathLength="1" d="M85 160 H475" stroke="#7CC4FF" stroke-width="1.5" stroke-dasharray="6 5"/>
-                            <circle class="fade" cx="280" cy="160" r="5.5" fill="#06192D" stroke="#F8F7F2" stroke-width="1.5"/>
-                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="17" font-weight="600" letter-spacing="0.08em" text-anchor="middle">
-                                <text x="280" y="53">REVIEW</text>
-                            </g>
-                            <g class="fade" fill="#F8F7F2" font-family="'Work Sans', sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
-                                <text x="280" y="194">HUMAN REVIEW STAYS IN THE LOOP</text>
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-                </div>
-            </section>
         </div>
 
-        <!-- marquee: method → position -->
+        <!-- marquee: position -->
         <div class="marquee" aria-hidden="true">
             <div class="mq-track">
                 <span>SCOPE&nbsp;·&nbsp;IMPLEMENT&nbsp;·&nbsp;ITERATE&nbsp;·&nbsp;DEPLOY&nbsp;·&nbsp;SCOPE&nbsp;·&nbsp;IMPLEMENT&nbsp;·&nbsp;ITERATE&nbsp;·&nbsp;DEPLOY&nbsp;·&nbsp;SCOPE&nbsp;·&nbsp;IMPLEMENT&nbsp;·&nbsp;ITERATE&nbsp;·&nbsp;DEPLOY&nbsp;·&nbsp;SCOPE&nbsp;·&nbsp;IMPLEMENT&nbsp;·&nbsp;ITERATE&nbsp;·&nbsp;DEPLOY&nbsp;·&nbsp;</span>
@@ -246,21 +111,17 @@
         <!-- 06 · MANIFESTO -->
         <section class="manifesto" aria-label="Our belief">
             <div class="cols">
-                <p class="micro" data-reveal>Our belief</p>
                 <blockquote>
                     <p class="manifesto-line" data-manifesto>Automation should make work easier to trust, not harder to explain.</p>
                 </blockquote>
             </div>
         </section>
 
-        <!-- 07 · FIELD NOTES -->
-        <section id="notes" class="notes" aria-label="Field notes">
-            <div class="sec-head">
-                <p class="micro" data-reveal>Field notes</p>
-            </div>
+        <!-- 07 · WORK EXAMPLES -->
+        <section id="notes" class="notes" aria-label="Work examples">
             <table data-reveal>
                 <thead>
-                    <tr><th scope="col">Year</th><th scope="col">Client</th><th scope="col">Note</th></tr>
+                    <tr><th scope="col">Year</th><th scope="col">Client</th><th scope="col">What we did</th></tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -347,7 +208,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
     <script src="js/nav.js?v=animated-menu"></script>
-    <script src="js/landing.js?v=fixed-story-overlay"></script>
+    <script src="js/landing.js?v=translucent-sections"></script>
 
     <!-- Three.js cinematic story background -->
     <script type="importmap">
@@ -358,6 +219,6 @@
         }
     }
     </script>
-    <script type="module" src="js/story-field.js"></script>
+    <script type="module" src="js/story-field.js?v=sitewide-path"></script>
 </body>
 </html>

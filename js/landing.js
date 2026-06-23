@@ -40,7 +40,7 @@
   function initHeroStatic() {
     var canvas = document.querySelector('.hero-static-canvas');
     var gradient = document.querySelector('.story-gradient');
-    var stopSection = document.querySelector('.manifesto');
+    var stopSection = null;
     if (!canvas) return;
 
     var ctx = canvas.getContext('2d', { alpha: true });
@@ -300,55 +300,6 @@
         });
     }
 
-    /* ---------- method panels: pinned words hold while the next set
-         rises in from below, then compress away ---------- */
-    gsap.utils.toArray('.chapter').forEach(function (chapter) {
-      var inner = chapter.querySelector('.panel-inner');
-      var lines = chapter.querySelectorAll('.panel-title .tline');
-      var aux = chapter.querySelectorAll('.panel-meta, .panel-copy, .panel-diagram');
-
-      // entrance: big words rise out of their masks while the previous
-      // chapter's words are still pinned above
-      var inTl = gsap.timeline({
-        scrollTrigger: { trigger: chapter, start: 'top 85%', end: 'top 20%', scrub: 0.5 }
-      });
-      inTl.fromTo(lines,
-        { yPercent: 120 },
-        { yPercent: 0, stagger: 0.12, ease: 'power2.out' }, 0)
-        .fromTo(aux,
-          { y: 70, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, stagger: 0.1, ease: 'power2.out' }, 0.15);
-
-      // exit: the pinned words hold, then lift away as the next set arrives
-      gsap.fromTo(inner,
-        { yPercent: 0, autoAlpha: 1, scale: 1 },
-        {
-          yPercent: -10,
-          autoAlpha: 0,
-          scale: 0.97,
-          immediateRender: false,
-          ease: 'power1.in',
-          scrollTrigger: { trigger: chapter, start: 'bottom 92%', end: 'bottom 52%', scrub: 0.4 }
-        });
-
-      var frag = chapter.querySelector('.frag-svg');
-      if (!frag) return;
-      var tl = gsap.timeline({
-        scrollTrigger: { trigger: frag, start: 'top 90%', once: true }
-      });
-      tl.to(frag.querySelectorAll('.draw'), {
-        strokeDashoffset: 0,
-        duration: 1.1,
-        ease: 'power1.inOut',
-        stagger: 0.18
-      })
-        .to(frag.querySelectorAll('.fade'), {
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power1.out',
-          stagger: 0.1
-        }, '-=0.4');
-    });
 
     /* ---------- CTA: shock-panel words rise once ---------- */
     gsap.from('#contact .tline', {
@@ -359,27 +310,6 @@
       scrollTrigger: { trigger: '#contact', start: 'top 70%', once: true }
     });
 
-    /* ---------- story rail: visibility + active chapter ---------- */
-    var rail = document.querySelector('.story-nav');
-    var story = document.querySelector('.story');
-    if (rail && story) {
-      ScrollTrigger.create({
-        trigger: story,
-        start: 'top top-=1',
-        end: 'bottom 70%',
-        onToggle: function (self) { rail.classList.toggle('visible', self.isActive); }
-      });
-      gsap.utils.toArray('.chapter').forEach(function (chapter) {
-        var link = rail.querySelector('[data-chapter="' + chapter.id + '"]');
-        if (!link) return;
-        ScrollTrigger.create({
-          trigger: chapter,
-          start: 'top 55%',
-          end: 'bottom 45%',
-          onToggle: function (self) { link.classList.toggle('active', self.isActive); }
-        });
-      });
-    }
 
     /* ---------- footer wordmark rise ---------- */
     var word = document.querySelector('.foot-mark');
