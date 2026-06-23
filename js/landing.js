@@ -36,6 +36,10 @@
     return el.querySelectorAll('.w');
   }
 
+  function clearWillChange(targets) {
+    gsap.set(targets, { clearProps: 'willChange' });
+  }
+
   /* ---------- hero static: discrete random dots with Brownian coloring ---------- */
   function initHeroStatic() {
     var canvas = document.querySelector('.hero-static-canvas');
@@ -162,13 +166,15 @@
   function heroIntro() {
     if (!hasGsap || reduced) return;
     var tl = gsap.timeline();
+    gsap.set('.hero-display .ln', { willChange: 'transform' });
     tl.to('.hero-display .ln', {
       xPercent: 0,
       x: 0,
       duration: 1.15,
       ease: 'power4.out',
       stagger: 0.09,
-      overwrite: 'auto'
+      overwrite: 'auto',
+      onComplete: function () { clearWillChange('.hero-display .ln'); }
     });
     tl.to('.hero-foot', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '-=0.5');
   }
@@ -302,12 +308,14 @@
 
 
     /* ---------- CTA: shock-panel words rise once ---------- */
+    gsap.set('#contact .tline', { willChange: 'transform' });
     gsap.from('#contact .tline', {
       yPercent: 120,
       duration: 1.0,
       ease: 'power4.out',
       stagger: 0.1,
-      scrollTrigger: { trigger: '#contact', start: 'top 70%', once: true }
+      scrollTrigger: { trigger: '#contact', start: 'top 70%', once: true },
+      onComplete: function () { clearWillChange('#contact .tline'); }
     });
 
 
