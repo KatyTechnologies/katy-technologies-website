@@ -21,7 +21,10 @@ async function init() {
   const { OutputPass } = await import('three/addons/postprocessing/OutputPass.js');
 
   const isMobile = window.matchMedia('(max-width: 900px)').matches;
+  const CAMERA_SCROLL_SCALE = 0.46;
+  const PARTICLE_FLOW_SPEED = 0.006;
   const story = document.querySelector('.story');
+  const pathScrollRange = document.getElementById('main') || story;
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 1.75));
@@ -207,12 +210,12 @@ async function init() {
   resize();
   window.addEventListener('resize', resize);
 
-  /* ---------- scroll progress over .story ---------- */
+  /* ---------- scroll progress over the full landing page ---------- */
   let target = 0;
   let progress = 0;
-  if (story && window.gsap && window.ScrollTrigger) {
+  if (pathScrollRange && window.gsap && window.ScrollTrigger) {
     ScrollTrigger.create({
-      trigger: story,
+      trigger: pathScrollRange,
       start: 'top top',
       end: 'bottom bottom',
       onUpdate: function (self) { target = self.progress; }
@@ -229,12 +232,13 @@ async function init() {
   }
 
   /* ---------- visibility gating ---------- */
+  const pathVisibilityRange = pathScrollRange || story;
   let inView = true;
-  if (story) {
+  if (pathVisibilityRange) {
     new IntersectionObserver((entries) => {
       inView = entries[0].isIntersecting;
       canvas.style.visibility = inView ? 'visible' : 'hidden';
-    }).observe(story);
+    }).observe(pathVisibilityRange);
   }
 
   /* ---------- animate ---------- */
@@ -256,7 +260,7 @@ async function init() {
     // underfoot; on narrow (portrait) viewports keep it nearly centered or
     // the path leaves the frame entirely
     const side = camera.aspect < 1 ? 1.0 : 3.4;
-    const ct = THREE.MathUtils.clamp(progress * 0.86, 0, 0.86);
+    const ct = THREE.MathUtils.clamp(progress * CAMERA_SCROLL_SCALE, 0, CAMERA_SCROLL_SCALE);
     cameraCurve.getPointAt(ct, camPos);
     camPos.x += side + px * 1.4;
     camPos.y += 3.0 + Math.sin(t * 0.5) * 0.08;
@@ -269,7 +273,7 @@ async function init() {
     // flow particles ride the path
     const pos = flowGeo.attributes.position;
     for (let i = 0; i < FLOW; i++) {
-      flowT[i] += dt * 0.012 * (0.6 + (i % 5) * 0.2);
+      flowT[i] += dt * PARTICLE_FLOW_SPEED * (0.6 + (i % 5) * 0.2);
       if (flowT[i] > 1) flowT[i] -= 1;
       pathCurve.getPointAt(flowT[i], camPos); // reuse vector
       const o = flowOff[i];
