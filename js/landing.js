@@ -346,6 +346,17 @@
       });
     }
 
+    /* ---------- footer bleed: arm the fixed continuation only near the footer ---------- */
+    var bleed = document.querySelector('.foot-bleed');
+    if (bleed) {
+      ScrollTrigger.create({
+        trigger: '.foot',
+        start: 'top 50%',
+        end: 'bottom top',
+        onToggle: function (self) { bleed.classList.toggle('is-on', self.isActive); }
+      });
+    }
+
     window.addEventListener('load', function () { ScrollTrigger.refresh(); });
   });
 }());

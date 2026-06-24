@@ -406,6 +406,15 @@ a{color:inherit}
   transform:translateY(.2em);opacity:.92;user-select:none;
 }
 .foot-mark-y{display:inline-block;margin-left:.055em}
+/* fixed panel that continues the footer into the overscroll/rubber-band area
+   without adding any scrollable height; revealed only when the footer lifts */
+.foot-bleed{
+  position:fixed;left:0;right:0;bottom:0;height:75vh;
+  z-index:1;pointer-events:none;opacity:0;
+  background-color:var(--bp-dark);
+  background-image:linear-gradient(180deg,var(--navy) 0%,var(--bp-dark) 55%);
+}
+.foot-bleed.is-on{opacity:1}
 @media (max-width:760px){
   .foot-grid{grid-template-columns:1fr 1fr}
   .foot-brand{grid-column:1/-1}
