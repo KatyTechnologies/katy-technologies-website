@@ -34,7 +34,7 @@
   --micro:clamp(.625rem,.55rem + .25vw,.75rem);
   --ease-out:cubic-bezier(.22,1,.36,1);
 }
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;background-color:var(--bp-dark)}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto !important}
 body{
