@@ -255,16 +255,32 @@
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
       });
 
-    /* ---------- hero words hold, then lift away as MAP slides in ---------- */
+    /* ---------- hero words hold, then lift away and fade out one word at a time ---------- */
+    var heroLift = { trigger: '.hero', start: '15% top', end: 'bottom 35%', scrub: true };
     gsap.fromTo('.hero-display',
-      { yPercent: 0, autoAlpha: 1 },
+      { yPercent: 0 },
       {
         yPercent: -16,
-        autoAlpha: 0,
         immediateRender: false,
         ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: '15% top', end: 'bottom 35%', scrub: true }
+        scrollTrigger: heroLift
       });
+
+    var heroWords = [];
+    document.querySelectorAll('.hero-display .ln').forEach(function (ln) {
+      heroWords = heroWords.concat(Array.prototype.slice.call(splitWords(ln)));
+    });
+    if (heroWords.length) {
+      gsap.fromTo(heroWords,
+        { autoAlpha: 1 },
+        {
+          autoAlpha: 0,
+          stagger: 0.08,
+          ease: 'none',
+          immediateRender: false,
+          scrollTrigger: { trigger: '.hero', start: '15% top', end: 'bottom 40%', scrub: true }
+        });
+    }
 
     /* ---------- marquee rushes with scroll velocity ---------- */
     var track = document.querySelector('.mq-track');
