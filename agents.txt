@@ -1,0 +1,5 @@
+# agents.txt
+# Standard: https://agents-txt.com
+# JSON: https://katytechnologies.com/agents.json
+# LLM Content: https://katytechnologies.com/llms.txt
+# Site Note: Includes travel operations hotel-sourcing work for touring production room blocks.

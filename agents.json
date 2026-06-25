@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agents-txt.com/schema/agents-json/v1.0.json",
+  "version": "1.0",
+  "standard": "https://agents-txt.com",
+  "site": {
+    "name": "Katy Technologies",
+    "url": "https://katytechnologies.com",
+    "description": "Katy Technologies helps companies speed up manual workflows with practical AI and custom software, including travel operations hotel-sourcing systems for touring production room blocks."
+  },
+  "llms": {
+    "url": "https://katytechnologies.com/llms.txt",
+    "description": "full public text of the Katy Technologies website for LLM inference use, including the latest travel operations hotel-sourcing work."
+  }
+}

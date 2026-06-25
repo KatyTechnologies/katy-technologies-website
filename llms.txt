@@ -1,0 +1,79 @@
+# Katy Technologies
+
+> Katy Technologies helps companies speed up manual workflows with practical AI and custom software.
+
+This file follows the /llms.txt proposal at https://llmstxt.org/.
+
+This file contains the full public text of the Katy Technologies website for LLM inference use.
+
+The site is a static marketing site; it does not expose a public product API, login flow, checkout, MCP server, or self-service documentation portal.
+
+## Website text
+
+Katy Technologies
+
+Email us
+
+Speed Up The Work That Slows Your Team Down.
+
+What we do
+
+We help companies speed up slow, manual work. Practical AI and custom software do the heavy lifting. Both stay inside the reviews and approvals you already trust.
+
+Scope · Implement · Iterate · Deploy
+
+Automation should make work easier to trust, not harder to explain.
+
+Year / Client / What we did
+
+2023
+
+Economic consulting: We built an internal assistant for a Boston-area economic consulting firm. It searches their own case files, financial data, and research to answer analyst questions and draft the first cut of reports. Confidentiality stayed the priority, so sensitive data never left the firm's control.
+
+2025
+
+Ticket vendors: We built custom email annotation software for a California ticket vendor. It reads each incoming message, tags it by type, and pulls out the order and ticket details staff used to copy by hand. That replaced the repeat review work managers did message by message.
+
+NOW
+
+Hospitality: Currently, we're helping a luxury hotel chain based in Southern California. We're speeding up three workflows at once: room pricing, staff scheduling, and the daily operational reports managers depend on. People still approve the calls that affect guests and budgets.
+
+NOW
+
+Travel operations: We're building a hotel-sourcing operating system for a travel operations team that manages room blocks for touring productions. It helps operators compare hotel rates, manage sales contacts, generate RFP drafts, track negotiations, and capture written commission agreements before a booking moves forward. Practical AI extracts hotel replies and drafts follow-ups, while humans stay in control of every send, review, and approval.
+
+NOW
+
+Smart glasses: We're building the memory layer for a heads-up assistant on Meta Ray-Ban Display glasses. It surfaces forgotten threads mid-conversation (open promises, things to pick back up) and captures follow-ups afterward so nobody re-types them. It stays quiet unless the moment really fits: wrong memory beats missing memory, and the wearer controls every saved note.
+
+Services
+
+Internal systems: We connect automation to the systems you already run, like your CRM, ticketing queue, and shared spreadsheets. Nothing has to be rebuilt. The data stays where your team expects to find it.
+
+Practical AI support: AI drafts, summarizes, and routes the work that used to pile up in someone's inbox. People still review, judge, and sign off on anything that carries risk. You decide where that line sits.
+
+Custom workflow software: We build software around your real handoffs and approvals, not a generic template. Think intake forms that route themselves, or an approval step that chases its own sign-offs. It fits the way your team already works.
+
+Risk-aware automation: Every automated step keeps a record: who approved it, what changed, and when. Permissions match the roles your team already has. If something looks off, a person gets pulled in before it ships.
+
+Operational visibility: A dashboard flags the exact step where work waits longest, whether that is intake, review, or approval. You see the bottleneck before the month-end scramble. Numbers update as the work moves.
+
+Workflow improvement: We improve one workflow at a time and measure the result before moving on. No company-wide platform switch, and no rip-and-replace. Each change has to earn the next one.
+
+You think, we build.
+
+Talk through a bottleneck
+
+Contact: tedkb@sas.upenn.edu
+
+Phone: +1 281 961 3396
+
+LinkedIn: https://www.linkedin.com/company/katy-technologies
+
+© 2026 Katy Technologies
+
+## Discovery notes
+
+The same website text is available at https://katytechnologies.com/llms.txt.
+
+Agent capability discovery is available at https://katytechnologies.com/agents.txt and https://katytechnologies.com/agents.json.
