@@ -2,7 +2,7 @@ RewriteEngine On
 
 # Redirect removed routes
 RewriteRule ^about/?$ / [R=301,L]
-RewriteRule ^(careers|contact)/?$ mailto:tedkb@sas.upenn.edu [R=302,L]
+RewriteRule ^(careers|contact)/?$ mailto:info@katytechnologies.com [R=302,L]
 
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -58,4 +58,4 @@ ErrorDocument 404 /404.html
     ExpiresByType image/ico "access plus 1 year"
     ExpiresByType image/icon "access plus 1 year"
     ExpiresByType image/x-icon "access plus 1 year"
-</IfModule> 
+</IfModule>
