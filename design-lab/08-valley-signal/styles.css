@@ -83,6 +83,32 @@ a {
 .kt-grain-filter {
   position: absolute;
 }
+.skill-badge {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  pointer-events: none;
+}
+.skill-badge-without {
+  background: rgba(248, 247, 242, 0.12);
+  color: var(--paper);
+  border: 1px solid rgba(248, 247, 242, 0.28);
+  backdrop-filter: blur(8px);
+}
+@media (max-width: 640px) {
+  .skill-badge {
+    top: auto;
+    bottom: 0.75rem;
+    font-size: 0.58rem;
+  }
+}
 .skip-link {
   position: absolute;
   left: -9999px;

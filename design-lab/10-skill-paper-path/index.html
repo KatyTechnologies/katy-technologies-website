@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Katy Technologies — practical workflow automation." />
+    <title>Katy Technologies — Skill: Paper Path</title>
+    <meta name="kt-design-label" content="WITH frontend-design skill" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+  </head>
+  <body>
+    <div class="skill-badge" aria-hidden="true">WITH skill · frontend design</div>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-head">
+      <a class="brand" href="../../" aria-label="Katy Technologies home">
+        <img src="../../assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" width="38" height="38" />
+        <span>Katy Technologies</span>
+      </a>
+      <a class="mail" href="mailto:info@katytechnologies.com">Email</a>
+    </header>
+
+    <main id="main">
+      <div class="story">
+        <canvas id="story-canvas" aria-hidden="true"></canvas>
+        <div class="story-veil" aria-hidden="true"></div>
+
+        <section class="hero" aria-label="Introduction">
+          <h1 class="brand-display" data-in>
+            <span class="line">Katy</span>
+            <span class="line">Technologies</span>
+          </h1>
+          <p class="headline" data-in>Start with the bottleneck, not the tool.</p>
+          <p class="sub prose" data-in>
+            We help companies speed up slow, manual work — and keep the approvals that matter.
+          </p>
+          <a class="btn" data-in href="#contact">Talk through a bottleneck</a>
+        </section>
+      </div>
+
+      <section class="strip" aria-label="Position">
+        <p data-reveal>
+          Practical AI. Custom software. Human review stays visible.
+        </p>
+      </section>
+
+      <section class="proof" aria-label="Work examples">
+        <p class="label" data-reveal>Where the work already moved</p>
+        <div class="proof-list">
+          <article data-reveal>
+            <time>2023</time>
+            <h2>Economic consulting</h2>
+            <p class="prose">An internal assistant over case files and research. Confidential data never left the firm.</p>
+          </article>
+          <article data-reveal>
+            <time>2025</time>
+            <h2>Ticket vendors</h2>
+            <p class="prose">Annotation software that tags email and extracts order details — ending the copy-paste loop.</p>
+          </article>
+          <article data-reveal>
+            <time>Now</time>
+            <h2>Hospitality &amp; travel ops</h2>
+            <p class="prose">Pricing, scheduling, and hotel sourcing with people still on every guest-facing call.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="help" aria-label="Services">
+        <p class="label" data-reveal>What we build</p>
+        <ul>
+          <li data-reveal>Internal systems wired to the tools you already run</li>
+          <li data-reveal>Practical AI that drafts and routes — people still sign off</li>
+          <li data-reveal>Custom workflow software shaped to your handoffs</li>
+          <li data-reveal>Risk-aware automation with a clear approval record</li>
+        </ul>
+      </section>
+
+      <section id="contact" class="contact" aria-label="Contact">
+        <h2 data-reveal>You think, we build.</h2>
+        <p class="prose" data-reveal>Bring the slowest handoff. We will map it with you.</p>
+        <a class="btn btn-navy" data-reveal href="mailto:info@katytechnologies.com">Talk through a bottleneck</a>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>© 2026 Katy Technologies</span>
+      <a href="https://www.linkedin.com/company/katy-technologies" rel="noopener">LinkedIn</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="motion.js"></script>
+    <script type="importmap">
+      {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+    </script>
+    <script type="module" src="../../js/story-field.js"></script>
+  </body>
+</html>
