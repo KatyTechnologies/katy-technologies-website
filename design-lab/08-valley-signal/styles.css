@@ -262,11 +262,12 @@ a {
 }
 .brand-display {
   font-weight: 700;
-  font-size: clamp(3.4rem, 13vw, 10.5rem);
-  line-height: 0.88;
+  font-size: clamp(3.1rem, 11.5vw, 8.75rem);
+  line-height: 0.9;
   letter-spacing: -0.035em;
   text-transform: none;
   margin-bottom: clamp(1.2rem, 3vh, 2rem);
+  max-width: 100%;
   filter: drop-shadow(0 14px 70px rgba(2, 8, 18, 0.7));
 }
 .brand-display .mask {
@@ -528,13 +529,26 @@ a {
 
 /* CTA — warm paper shock */
 .cta {
+  position: relative;
   padding: clamp(4.5rem, 12vh, 8rem) var(--pad);
   background: var(--paper);
   color: var(--navy);
+  overflow: hidden;
+}
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, #f8f7f2 0%, #d1cccc 100%);
   clip-path: inset(0);
   filter: url("#kt-grain");
+  opacity: 0.55;
 }
 .cta-inner {
+  position: relative;
+  z-index: 1;
   max-width: 42rem;
 }
 .cta .micro {

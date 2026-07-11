@@ -513,13 +513,26 @@ a {
 }
 
 .cta {
+  position: relative;
   padding: clamp(4.5rem, 12vh, 8rem) var(--pad);
   text-align: left;
-  background:
-    linear-gradient(135deg, rgba(46, 124, 255, 0.18), transparent 55%),
-    linear-gradient(180deg, #0a213a 0%, #071a33 100%);
+  background: linear-gradient(180deg, #0a213a 0%, #071a33 100%);
+  overflow: hidden;
+}
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(46, 124, 255, 0.22), transparent 55%);
   clip-path: inset(0);
   filter: url("#kt-grain");
+  opacity: 0.7;
+}
+.cta > * {
+  position: relative;
+  z-index: 1;
 }
 .cta .micro {
   color: var(--glow);
