@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Katy Technologies helps companies speed up manual workflows with practical AI and custom software."
+    />
+    <title>Katy Technologies — Valley Signal (redesign)</title>
+    <link rel="icon" href="../../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      document.documentElement.classList.replace("no-js", "js");
+    </script>
+  </head>
+  <body>
+    <svg class="kt-grain-filter" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="kt-grain" color-interpolation-filters="sRGB" x="0" y="0" width="1" height="1">
+        <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="3" result="grainNoise" />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="grainNoise"
+          scale="80"
+          xChannelSelector="R"
+          yChannelSelector="G"
+          result="grainDisplacement"
+        />
+        <feBlend in="grainDisplacement" in2="SourceGraphic" result="grainBase" />
+        <feColorMatrix
+          in="grainNoise"
+          type="matrix"
+          values="0.95 0 0 0 0 0 0.97 0 0 0 0 0 1 0 0 0 0 0 0.28 0"
+          result="grainSpeckle"
+        />
+        <feBlend in="grainSpeckle" in2="grainBase" mode="overlay" />
+      </filter>
+    </svg>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="preloader" aria-hidden="true">
+      <div class="pl-bar" aria-hidden="true"><span></span></div>
+      <img
+        class="pl-logo"
+        src="../../assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg"
+        alt=""
+        width="88"
+        height="88"
+      />
+    </div>
+
+    <header class="site-head">
+      <a class="brand" href="../../" aria-label="Katy Technologies, home">
+        <img
+          src="../../assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg"
+          alt=""
+          width="36"
+          height="36"
+        />
+      </a>
+      <div class="head-meta micro" aria-hidden="true">
+        <span>Practical automation</span>
+        <span class="dot"></span>
+        <span>Human review kept</span>
+      </div>
+      <a class="nav-email micro" href="mailto:info@katytechnologies.com">Email us</a>
+    </header>
+
+    <main id="main">
+      <div class="story">
+        <canvas id="story-canvas" aria-hidden="true"></canvas>
+        <div class="story-veil" aria-hidden="true"></div>
+
+        <section class="hero" aria-label="Introduction">
+          <div class="hero-frame">
+            <p class="hero-kicker micro" data-rise>Workflow automation</p>
+            <h1 class="brand-display" aria-label="Katy Technologies">
+              <span class="mask"><span class="ln">Katy</span></span>
+              <span class="mask"><span class="ln">Technologies</span></span>
+            </h1>
+            <p class="hero-line" data-rise>
+              Speed up the work that slows your team down.
+            </p>
+            <p class="prose hero-sub" data-rise>
+              We build practical AI and custom software around the reviews and
+              approvals you already trust.
+            </p>
+            <div class="hero-cta" data-rise>
+              <a class="btn btn-solid" href="#contact">Talk through a bottleneck</a>
+              <a class="btn btn-line" href="#signal">See the signal</a>
+            </div>
+          </div>
+          <div class="hero-meter" aria-hidden="true" data-rise>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </section>
+
+        <section id="signal" class="signal" aria-label="The idea">
+          <div class="signal-rail">
+            <article class="signal-card" data-reveal>
+              <p class="micro">Signal</p>
+              <h2>Automation should make work easier to trust, not harder to explain.</h2>
+            </article>
+            <article class="signal-card" data-reveal>
+              <p class="micro">Method</p>
+              <h2>Find the slow handoff. Route the repeat steps. Leave judgment with people.</h2>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <section class="ledger" aria-label="Work examples">
+        <div class="ledger-head">
+          <p class="micro" data-reveal>Selected work</p>
+          <h2 data-reveal>Where the path already runs.</h2>
+        </div>
+        <div class="ledger-grid">
+          <article data-reveal>
+            <span class="micro">2023 · Boston</span>
+            <h3>Economic consulting</h3>
+            <p class="prose">
+              Internal assistant over case files and research. First-cut reports
+              without letting confidential data leave the firm.
+            </p>
+          </article>
+          <article data-reveal>
+            <span class="micro">2025 · California</span>
+            <h3>Ticket vendors</h3>
+            <p class="prose">
+              Email annotation that tags messages and extracts order details —
+              replacing the copy-paste review loop.
+            </p>
+          </article>
+          <article data-reveal>
+            <span class="micro">Now · Hospitality</span>
+            <h3>Luxury hotel ops</h3>
+            <p class="prose">
+              Pricing, scheduling, and daily reports sped up while guest-facing
+              calls stay human-approved.
+            </p>
+          </article>
+          <article data-reveal>
+            <span class="micro">Now · Travel</span>
+            <h3>Touring productions</h3>
+            <p class="prose">
+              Hotel-sourcing OS for room blocks: rates, RFPs, negotiations, and
+              commission records with AI drafts under human send control.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="index" aria-label="Services">
+        <p class="micro index-label" data-reveal>Capabilities</p>
+        <ol class="index-list">
+          <li data-reveal>
+            <span class="num">01</span>
+            <div>
+              <h3>Internal systems</h3>
+              <p class="prose">Automation wired into the CRM, ticketing, and sheets you already run.</p>
+            </div>
+          </li>
+          <li data-reveal>
+            <span class="num">02</span>
+            <div>
+              <h3>Practical AI support</h3>
+              <p class="prose">Drafts, summaries, and routing — people still own the risky sign-off.</p>
+            </div>
+          </li>
+          <li data-reveal>
+            <span class="num">03</span>
+            <div>
+              <h3>Custom workflow software</h3>
+              <p class="prose">Software shaped to your handoffs, not a generic intake template.</p>
+            </div>
+          </li>
+          <li data-reveal>
+            <span class="num">04</span>
+            <div>
+              <h3>Risk-aware automation</h3>
+              <p class="prose">A clear record of who approved what, and when it changed.</p>
+            </div>
+          </li>
+          <li data-reveal>
+            <span class="num">05</span>
+            <div>
+              <h3>Operational visibility</h3>
+              <p class="prose">See the exact step where work waits longest before month-end scramble.</p>
+            </div>
+          </li>
+          <li data-reveal>
+            <span class="num">06</span>
+            <div>
+              <h3>Workflow improvement</h3>
+              <p class="prose">One workflow at a time. Measure it. Then earn the next change.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="contact" class="cta" aria-label="Contact">
+        <div class="cta-inner">
+          <p class="micro" data-reveal>Contact</p>
+          <h2 data-reveal>You think, we build.</h2>
+          <p class="prose" data-reveal>
+            Bring the bottleneck. We will walk the path with you.
+          </p>
+          <a class="btn btn-paper" data-reveal href="mailto:info@katytechnologies.com"
+            >Talk through a bottleneck</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <img
+        src="../../assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg"
+        alt=""
+        width="36"
+        height="36"
+      />
+      <p class="micro">© 2026 Katy Technologies</p>
+      <a class="micro" href="https://www.linkedin.com/company/katy-technologies" rel="noopener"
+        >LinkedIn</a
+      >
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="motion.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="../../js/story-field.js"></script>
+  </body>
+</html>

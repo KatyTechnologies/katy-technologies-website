@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Katy Technologies — Design Lab</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f8f7f2;
+        --navy: #071a33;
+        --blue: #2e7cff;
+        --glow: #7cc4ff;
+        --hair: rgba(248, 247, 242, 0.14);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Work Sans", system-ui, sans-serif;
+        background: #020812;
+        color: var(--paper);
+        min-height: 100svh;
+        padding: clamp(1.5rem, 4vw, 3rem);
+        line-height: 1.45;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: -0.02em;
+        margin: 1rem 0 0.5rem;
+      }
+      .micro {
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(127, 149, 170, 0.9);
+        font-weight: 500;
+      }
+      .lead {
+        max-width: 36em;
+        color: rgba(248, 247, 242, 0.78);
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+      }
+      ul {
+        list-style: none;
+        border-top: 1px solid var(--hair);
+        max-width: 48rem;
+      }
+      li a {
+        display: grid;
+        grid-template-columns: 3.5rem 1fr auto;
+        gap: 1rem;
+        align-items: baseline;
+        padding: 1.15rem 0;
+        border-bottom: 1px solid var(--hair);
+      }
+      li a:hover {
+        color: var(--glow);
+      }
+      .num {
+        color: var(--glow);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .tag {
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(127, 149, 170, 0.85);
+      }
+      .new {
+        color: var(--glow);
+      }
+      .back {
+        display: inline-block;
+        margin-top: 2.5rem;
+        color: var(--glow);
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="micro">Katy Technologies</p>
+    <h1>Design Lab</h1>
+    <p class="lead">
+      Exploratory landing directions. Production site stays at the root. New
+      redesigns with the 3D valley path are marked below.
+    </p>
+    <ul>
+      <li>
+        <a href="07-path-chapters/"
+          ><span class="num">07</span><span>Path Chapters</span
+          ><span class="tag new">New · 3D</span></a
+        >
+      </li>
+      <li>
+        <a href="08-valley-signal/"
+          ><span class="num">08</span><span>Valley Signal</span
+          ><span class="tag new">New · 3D</span></a
+        >
+      </li>
+      <li>
+        <a href="06-swiss-glow/"
+          ><span class="num">06</span><span>Swiss Glow</span
+          ><span class="tag">Prior</span></a
+        >
+      </li>
+      <li>
+        <a href="05-swiss-ops/"
+          ><span class="num">05</span><span>Swiss Ops</span
+          ><span class="tag">Prior</span></a
+        >
+      </li>
+      <li>
+        <a href="04-flow-field/"
+          ><span class="num">04</span><span>Flow Field</span
+          ><span class="tag">Prior</span></a
+        >
+      </li>
+      <li>
+        <a href="03-paper-trail/"
+          ><span class="num">03</span><span>Paper Trail</span
+          ><span class="tag">Prior</span></a
+        >
+      </li>
+      <li>
+        <a href="02-terminal/"
+          ><span class="num">02</span><span>Terminal</span
+          ><span class="tag">Prior</span></a
+        >
+      </li>
+      <li>
+        <a href="01-assembly-line/"
+          ><span class="num">01</span><span>Assembly Line</span
+          ><span class="tag">Prior</span></a
+        >
+      </li>
+    </ul>
+    <a class="back" href="../">← Production landing</a>
+  </body>
+</html>
