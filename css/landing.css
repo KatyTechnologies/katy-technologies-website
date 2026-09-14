@@ -120,6 +120,7 @@ a{color:inherit}
 @media (max-width:760px){
   .site-head{align-items:center}
   .brand span{display:none}
+  .site-head nav a.nav-email{border:0;padding:0 .25rem;font-size:.625rem;letter-spacing:.14em}
 }
 
 /* ============ STORY: fixed canvas + transparent sections ============ */
@@ -160,12 +161,6 @@ a{color:inherit}
   padding:calc(var(--pad)*3) var(--pad) var(--pad);
   overflow:hidden;
 }
-.what-we-do{
-  position:relative;z-index:3;
-  min-height:42svh;
-  display:flex;align-items:center;
-  padding:clamp(2.75rem,7vh,5rem) var(--pad);
-}
 .story-gradient{
   position:fixed;inset:0;z-index:1;
   pointer-events:none;
@@ -195,6 +190,13 @@ a{color:inherit}
   margin-bottom:clamp(1.5rem,4vh,3rem);
   filter:drop-shadow(0 10px 88px rgba(2,8,18,.62));
   text-wrap:balance;
+}
+.story .hero{
+  --hero-top:max(calc(var(--pad)*3),calc(44px + var(--pad)*2 + 1rem));
+  padding-top:var(--hero-top);
+}
+.story .hero-display{
+  font-size:min(clamp(2.6rem,11.6vw,11.6rem),calc((100svh - var(--hero-top) - var(--pad) - clamp(1.5rem,4vh,3rem))/3.68));
 }
 .hero-display .mask{display:block;overflow:hidden}
 .hero-display .ln{display:inline-block}
@@ -263,7 +265,6 @@ a{color:inherit}
 }
 .manifesto::before,
 .notes::before,
-.services::before,
 .cta::before{content:none}
 .manifesto .cols{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,1fr);gap:1rem 0}
 .manifesto blockquote{
@@ -273,30 +274,14 @@ a{color:inherit}
   line-height:1.04;letter-spacing:-.01em;
   text-wrap:balance;
 }
+.manifesto-intro{font-weight:300;margin-bottom:.8em}
 .manifesto-line .w{opacity:.14;display:inline-block}
 .no-js .manifesto-line .w,.static-page .manifesto-line .w{opacity:1}
 @media (max-width:760px){.manifesto blockquote{grid-column:1/-1}}
 
-/* ============ SERVICES — translucent navy, hard-cut blue inverts ============ */
-.services{position:relative;z-index:3;overflow:hidden;background:transparent;padding-top:clamp(4rem,10vh,7rem)}
-.services .sec-head{position:relative;z-index:1;padding:0 var(--pad) clamp(2rem,5vh,3.5rem)}
-.svc-list{position:relative;z-index:1;list-style:none;border-top:1px solid rgba(248,247,242,.25)}
-.svc{
-  display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;align-items:center;
-  padding:clamp(1.4rem,3.5vh,2.4rem) var(--pad);
-  border-bottom:1px solid rgba(248,247,242,.25);
-}
-.svc:hover{background:rgba(46,124,255,.72);color:var(--paper);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)} /* hard cut — no transition, deliberately */
-.svc:hover p{color:var(--paper)}
-.svc h3{grid-column:1/span 6;font-weight:700;text-transform:uppercase;font-size:clamp(1.35rem,1rem + 2vw,2.6rem);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
-.svc p{grid-column:8/span 5;font-family:"Literata",Georgia,serif;font-size:clamp(.95rem,.9rem + .3vw,1.1rem);max-width:34em;color:var(--text-3);text-wrap:pretty}
-@media (max-width:760px){
-  .svc{grid-template-columns:1fr;gap:.6rem}
-  .svc h3,.svc p{grid-column:1/-1}
-}
 
 /* ============ WORK EXAMPLES — strict table on translucent dark ============ */
-.notes{position:relative;z-index:3;overflow:hidden;background:transparent;padding:0 var(--pad)}
+.notes{position:relative;z-index:3;overflow:hidden;background:transparent;padding:0 var(--pad) clamp(4.5rem,11vw,8rem)}
 .notes table{position:relative;z-index:1;width:100%;border-collapse:collapse;border-top:1px solid rgba(248,247,242,.25)}
 .notes th{
   text-align:left;font-size:var(--micro);font-weight:700;letter-spacing:.22em;text-transform:uppercase;
@@ -351,6 +336,10 @@ a{color:inherit}
 .cta .btn-shock:hover{background:var(--paper);color:var(--navy)} /* hard cut */
 .cta .fine{margin-top:clamp(2.5rem,6vh,4rem);display:flex;flex-wrap:wrap;gap:1rem 3rem}
 .cta .fine a{color:var(--paper);font-weight:500;text-decoration-thickness:1px;text-underline-offset:3px;font-size:.95rem;letter-spacing:.04em}
+@media (max-width:760px){
+  .cta{min-height:0;padding-block:5rem 3rem}
+  .cta .btn-shock{display:inline-flex;align-items:center;min-height:44px;max-width:100%;font-size:.75rem;line-height:1.4;padding:.75rem 1rem}
+}
 
 /* ============ 404 — old About static recovery page ============ */
 .page-hero{
@@ -490,9 +479,11 @@ a{color:inherit}
 }
 .foot-bleed.is-on{opacity:1}
 @media (max-width:760px){
-  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot{padding-top:1.5rem}
+  .foot-grid{grid-template-columns:1fr 1fr;padding-bottom:1.5rem}
   .foot-brand{grid-column:1/-1}
   .foot-col,.foot-col:first-of-type{grid-column:auto}
+  .foot-mark-wrap{margin-inline:0;padding:1.5rem 0 0}
 }
 
 /* ============ SECTION HEADS / REVEALS ============ */
