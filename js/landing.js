@@ -349,7 +349,7 @@
         yPercent: 100,
         duration: 1.1,
         ease: 'power3.out',
-        scrollTrigger: { trigger: '.foot-mark-wrap', start: 'top 96%', once: true }
+        scrollTrigger: { trigger: '.foot', start: 'top 90%', once: true }
       });
     }
 
