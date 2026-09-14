@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Katy Technologies — practical workflow automation." />
+    <title>Katy Technologies — Skill: One Shot</title>
+    <meta name="kt-design-label" content="WITH frontend-design skill" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+  </head>
+  <body>
+    <div class="skill-badge" aria-hidden="true">WITH skill · frontend design</div>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-head">
+      <a class="brand" href="../../" aria-label="Katy Technologies home">
+        <img src="../../assets/logos/brand-guide/2026-05-24-kt-logo-dark-surface-white-slate-transparent.svg" alt="" width="40" height="40" />
+      </a>
+      <a class="cta-link" href="mailto:info@katytechnologies.com">Talk through a bottleneck</a>
+    </header>
+
+    <main id="main">
+      <div class="story">
+        <canvas id="story-canvas" aria-hidden="true"></canvas>
+        <div class="story-veil" aria-hidden="true"></div>
+
+        <!-- Hero budget: brand + one headline + one sentence + one CTA + full-bleed 3D -->
+        <section class="hero" aria-label="Introduction">
+          <p class="brand-name" data-in>Katy Technologies</p>
+          <h1 data-in>Automate the work that slows your team down.</h1>
+          <p class="lede prose" data-in>
+            Practical AI and custom software for manual workflows — with human review kept in place.
+          </p>
+          <a class="btn" data-in href="mailto:info@katytechnologies.com">Talk through a bottleneck</a>
+        </section>
+      </div>
+
+      <section class="belief" aria-label="Belief">
+        <h2 data-reveal>Automation should make work easier to trust, not harder to explain.</h2>
+      </section>
+
+      <section class="method" aria-label="Method">
+        <p class="eyebrow" data-reveal>How it works</p>
+        <ol>
+          <li data-reveal><span>01</span><p>Find the handoff that stalls the week.</p></li>
+          <li data-reveal><span>02</span><p>Route the repeat steps. Leave judgment with people.</p></li>
+          <li data-reveal><span>03</span><p>Measure one workflow before starting the next.</p></li>
+        </ol>
+      </section>
+
+      <section class="work" aria-label="Work">
+        <p class="eyebrow" data-reveal>Selected work</p>
+        <ul>
+          <li data-reveal>
+            <h3>Economic consulting</h3>
+            <p class="prose">Internal assistant over case files. First-cut reports. Data stays inside the firm.</p>
+          </li>
+          <li data-reveal>
+            <h3>Ticket vendors</h3>
+            <p class="prose">Email annotation that tags messages and pulls order details staff used to copy by hand.</p>
+          </li>
+          <li data-reveal>
+            <h3>Hospitality &amp; travel</h3>
+            <p class="prose">Pricing, scheduling, and hotel sourcing — guest-facing calls still need a person.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="close" aria-label="Contact">
+        <h2 data-reveal>You think, we build.</h2>
+        <a class="btn btn-dark" data-reveal href="mailto:info@katytechnologies.com">Talk through a bottleneck</a>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>© 2026 Katy Technologies</p>
+      <a href="mailto:info@katytechnologies.com">info@katytechnologies.com</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="motion.js"></script>
+    <script type="importmap">
+      {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+    </script>
+    <script type="module" src="../../js/story-field.js"></script>
+  </body>
+</html>
