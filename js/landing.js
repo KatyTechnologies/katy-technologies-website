@@ -187,7 +187,12 @@
 
     if (hasGsap && !reduced) {
       gsap.set('.hero-display .ln', {
-        xPercent: function (i) { return i % 2 === 0 ? -110 : 110; },
+        xPercent: function (i, el) {
+          var mask = el.parentElement;
+          if (mask.classList.contains('enter-right')) return 110;
+          if (mask.classList.contains('enter-left')) return -110;
+          return i % 2 === 0 ? -110 : 110;
+        },
         x: 0
       });
     }
