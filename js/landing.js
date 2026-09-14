@@ -176,7 +176,9 @@
       overwrite: 'auto',
       onComplete: function () { clearWillChange('.hero-display .ln'); }
     });
-    tl.to('.hero-foot', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '-=0.5');
+    if (document.querySelector('.hero-foot')) {
+      tl.to('.hero-foot', { opacity: 1, duration: 0.8, ease: 'power1.out' }, '-=0.5');
+    }
   }
 
   /* ---------- preloader: hard-cut flashes navy -> blue -> paper ---------- */
